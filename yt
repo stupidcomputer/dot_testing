@@ -1,0 +1,35 @@
+#!/bin/sh
+
+DATFILE="~/.config/youtube"
+CACHEDIR="~/.config/youtube/cache"
+tmp1=$(mktemp)
+tmp2=$(mktemp)
+
+mkdir -p $DATFILE
+mkdir -p $CACHEDIR
+
+sync () {
+    for i in $(cat $DATFILE | tr '\n' ' '); do
+        curl -s \
+        https://www.youtube.com/feeds/videos.xml?channel_id=$i\
+        > ${CACHEDIR}/$i
+    done
+}
+display () {
+    for i in $(ls $CACHEDIR | tr '\n' ' '); do
+        grep \<media:title\> ${CACHEDIR}/$i | cut -c 17- | \
+        rev | cut -c 15- | rev >> $tmp1
+        grep 'link rel' ${CACHEDIR}/$i | grep 'watch' | \
+        cut -c31- | rev | cut -c4- | rev >> $tmp2
+    done
+    cat $tmp1 $tmp2 | pr -2t -s" | "
+}
+case $1 in
+    *"sync"*)
+        sync
+        ;;
+    *)
+        display
+        ;;
+esac
+exit 0
