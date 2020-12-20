@@ -35,8 +35,8 @@ case $0 in
         exit 0
         ;;
     *"verbosewatch"*)
-        min=59
-        sec=55
+        min=0
+        sec=0
         while true; do
             printf "%02d:%02d\r" $min $sec
             sleep 1
