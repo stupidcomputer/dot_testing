@@ -1,11 +1,11 @@
 #!/bin/sh
 
-DATFILE="~/.config/youtube"
+DATFILE="~/.config/youtube/dat"
 CACHEDIR="~/.config/youtube/cache"
 tmp1=$(mktemp)
 tmp2=$(mktemp)
 
-mkdir -p $DATFILE
+touch $DATFILE
 mkdir -p $CACHEDIR
 
 sync () {
@@ -24,9 +24,21 @@ display () {
     done
     cat $tmp1 $tmp2 | pr -2t -s" | "
 }
+add () { # $1: name of channel id
+    printf "%s\n" $1 >> $DATFILE
+}
+del () { # $1: line number of channel id
+    sed -i "${1}d" $DATFILE
+}
 case $1 in
     *"sync"*)
         sync
+        ;;
+    *"add"*)
+        [ $# -eq 2 ] && add $2
+        ;;
+    *"del"*)
+        [ $# -eq 2 ] && del $2
         ;;
     *)
         display
