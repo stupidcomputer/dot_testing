@@ -1,0 +1,29 @@
+#!/bin/sh
+
+exists() {
+  xrandr | grep ' connected' | grep "${1}" | wc -l
+}
+
+# usual setup: thinkpad x220 on dock connected to external
+# monitor
+
+[ $(exists "HDMI2") -gt 0 ] && \
+  [ $(exists "LVDS1") -gt 0 ] && \
+  xrandr --output LVDS1 --below HDMI2 --auto && \
+  exit 0 || exit 1
+
+# thinkpad x220 connected to display on local port
+
+[ $(exists "HDMI1") -gt 0 ] && \
+  [ $(exists "LVDS1") -gt 0 ] && \
+  xrandr --output LVDS1 --below HDMI1 --auto && \
+  exit 0 || exit 1
+
+# only the thinkpad
+
+[ $(exists "HDMI2") -eq 0 ] && \
+  [ $(exists "LVDS1") -gt 0 ] && \
+  xrandr --output LVDS1 --auto && \
+  exit 0 || exit 1
+
+exit 1

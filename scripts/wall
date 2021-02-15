@@ -1,0 +1,42 @@
+#!/bin/sh
+
+WALLDIR="${HOME}/.share/wallpapers"
+BASECMD="feh --bg-fill"
+
+generate_wall () {
+  GENWALL=$( \
+    ls $WALLDIR | \
+    shuf -n 1
+  )
+  GENWALL="${WALLDIR}/${GENWALL}"
+}
+wall () {
+  generate_wall
+  while [ "${GENWALL}" = "${1}" ]; do
+    generate_wall
+  done
+}
+displays () {
+  displays=$(xrandr | grep ' connected' | wc -l)
+}
+check () {
+  which $1 &>/dev/null
+}
+
+cmd=""
+check "feh" || exit 1
+if check "xrandr"; then
+  displays
+  for i in $(seq 1 $displays); do
+    wall ${tmp}
+    tmp=${GENWALL}
+    echo ${GENWALL} ${i}
+    cmd="${cmd} ${GENWALL}"
+  done
+  eval ${BASECMD} ${cmd}
+else
+  generate_wall
+  eval ${BASECMD} ${GENWALL}
+fi
+unset GENWALL BASECMD tmp cmd displays i
+exit 0

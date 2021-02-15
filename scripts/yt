@@ -1,25 +1,41 @@
 #!/bin/sh
 
-DATFILE="${HOME}/.config/youtube/dat"
-CACHEDIR="${HOME}/.config/youtube/cache"
-tmp1=$(mktemp)
-tmp2=$(mktemp)
+[ -z "${YT_DATFILE}" ] && YT_DATFILE="${HOME}/.local/share/ytdat"
+[ -z "${YT_CACHEDIR}" ] && YT_CACHEDIR="${HOME}/.local/share/ytcache"
+ver=0.1
 
 touch $DATFILE
 mkdir -p $CACHEDIR
 
+info () {
+  printf %s "\
+yt - youtube tool
+
+=> [s]ync         - Sync RSS feeds
+=> [a]dd   [id]   - Add a channel to the list
+=> [d]el   [id]   - Remove a channel from the list
+=> [h]elp         - Show this help
+
+List file:          export DATFILE=<your file here>
+Cache directory:    export CACHEDIR=<your dir here>
+
+see yt(1) for more information on usage
+"
+}
 sync () {
-    for i in $(cat $DATFILE | tr '\n' ' '); do
+    for i in $(cat $YT_DATFILE | tr '\n' ' '); do
         torify curl -s \
         https://www.youtube.com/feeds/videos.xml?channel_id=$i\
-        > ${CACHEDIR}/$i
+        > ${YT_CACHEDIR}/$i
     done
 }
 display () {
-    for i in $(ls $CACHEDIR | tr '\n' ' '); do
-        grep \<media:title\> ${CACHEDIR}/$i | cut -c 17- | \
+    tmp1=$(mktemp)
+    tmp2=$(mktemp)
+    for i in $(ls $YT_CACHEDIR | tr '\n' ' '); do
+        grep \<media:title\> ${YT_CACHEDIR}/$i | cut -c 17- | \
         rev | cut -c 15- | rev >> $tmp1
-        grep 'link rel' ${CACHEDIR}/$i | grep 'watch' | \
+        grep 'link rel' ${YT_CACHEDIR}/$i | grep 'watch' | \
         cut -c31- | rev | cut -c4- | rev >> $tmp2
     done
     cat $tmp1 $tmp2 | pr -2t -s" | "
@@ -31,14 +47,17 @@ del () { # $1: line number of channel id
     sed -i "${1}d" $DATFILE
 }
 case $1 in
-    *"sync"*)
+    *"s"*)
         sync
         ;;
-    *"add"*)
+    *"a"*)
         [ $# -eq 2 ] && add $2
         ;;
-    *"del"*)
+    *"d"*)
         [ $# -eq 2 ] && del $2
+        ;;
+    *"h"*)
+        info
         ;;
     *)
         display
