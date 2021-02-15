@@ -1,11 +1,13 @@
 #!/bin/sh
 
 WALLDIR="${HOME}/.share/wallpapers"
+TEEFILE="${WALLDIR}/hist"
 BASECMD="feh --bg-fill"
 
 generate_wall () {
   GENWALL=$( \
     ls $WALLDIR | \
+    grep "." | \
     shuf -n 1
   )
   GENWALL="${WALLDIR}/${GENWALL}"
@@ -30,7 +32,7 @@ if check "xrandr"; then
   for i in $(seq 1 $displays); do
     wall ${tmp}
     tmp=${GENWALL}
-    echo ${GENWALL} ${i}
+    echo ${GENWALL} ${i} | tee $TEEFILE
     cmd="${cmd} ${GENWALL}"
   done
   eval ${BASECMD} ${cmd}
