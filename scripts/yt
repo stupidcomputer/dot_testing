@@ -23,44 +23,44 @@ see yt(1) for more information on usage
 "
 }
 sync () {
-    for i in $(cat $YT_DATFILE | tr '\n' ' '); do
-        torify curl -s \
-        https://www.youtube.com/feeds/videos.xml?channel_id=$i\
-        > ${YT_CACHEDIR}/$i
-    done
+  for i in $(cat $YT_DATFILE | tr '\n' ' '); do
+    torify curl -s \
+    https://www.youtube.com/feeds/videos.xml?channel_id=$i\
+    > ${YT_CACHEDIR}/$i
+  done
 }
 display () {
-    tmp1=$(mktemp)
-    tmp2=$(mktemp)
-    for i in $(ls $YT_CACHEDIR | tr '\n' ' '); do
-        grep \<media:title\> ${YT_CACHEDIR}/$i | cut -c 17- | \
-        rev | cut -c 15- | rev >> $tmp1
-        grep 'link rel' ${YT_CACHEDIR}/$i | grep 'watch' | \
-        cut -c31- | rev | cut -c4- | rev >> $tmp2
-    done
-    cat $tmp1 $tmp2 | pr -2t -s" | "
+  tmp1=$(mktemp)
+  tmp2=$(mktemp)
+  for i in $(ls $YT_CACHEDIR | tr '\n' ' '); do
+    grep \<media:title\> ${YT_CACHEDIR}/$i | cut -c 17- | \
+    rev | cut -c 15- | rev >> $tmp1
+    grep 'link rel' ${YT_CACHEDIR}/$i | grep 'watch' | \
+    cut -c31- | rev | cut -c4- | rev >> $tmp2
+  done
+  cat $tmp1 $tmp2 | pr -2t -s" | "
 }
 add () { # $1: name of channel id
-    printf "%s\n" $1 >> $DATFILE
+  printf "%s\n" $1 >> $DATFILE
 }
 del () { # $1: line number of channel id
-    sed -i "${1}d" $DATFILE
+  sed -i "${1}d" $DATFILE
 }
 case $1 in
-    *"s"*)
-        sync
-        ;;
-    *"a"*)
-        [ $# -eq 2 ] && add $2
-        ;;
-    *"d"*)
-        [ $# -eq 2 ] && del $2
-        ;;
-    *"h"*)
-        info
-        ;;
-    *)
-        display
-        ;;
+  *"s"*)
+    sync
+    ;;
+  *"a"*)
+    [ $# -eq 2 ] && add $2
+    ;;
+  *"d"*)
+    [ $# -eq 2 ] && del $2
+    ;;
+  *"h"*)
+    info
+    ;;
+  *)
+    display
+    ;;
 esac
 exit 0

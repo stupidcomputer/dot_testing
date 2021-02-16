@@ -4,16 +4,6 @@ exists() {
   xrandr | grep ' connected' | grep "${1}" | wc -l
 }
 
-# commands
-
-[ "$1" = "big" ] && \
-  xrandr --output LVDS1 --off && \
-  exit 0 || exit 1
-
-[ "$1" = "small" ] && \
-  xrandr --output HDMI2 --off && \
-  exit 0 || exit 1
-
 # usual setup: thinkpad x220 on dock connected to external
 # monitor
 
