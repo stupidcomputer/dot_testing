@@ -2,10 +2,8 @@
 
 [ -z "${YT_DATFILE}" ] && YT_DATFILE="${HOME}/.local/share/ytdat"
 [ -z "${YT_CACHEDIR}" ] && YT_CACHEDIR="${HOME}/.local/share/ytcache"
+[ -z "${YT_TORIFY}" ] && YT_TORIFY="torify"
 ver=0.1
-
-touch $DATFILE
-mkdir -p $CACHEDIR
 
 info () {
   printf %s "\
@@ -15,21 +13,38 @@ yt - youtube tool
 => [a]dd   [id]   - Add a channel to the list
 => [d]el   [id]   - Remove a channel from the list
 => [h]elp         - Show this help
+=> [i]d    [url]  - Show internal channel id
 
-List file:          export DATFILE=<your file here>
-Cache directory:    export CACHEDIR=<your dir here>
-
-see yt(1) for more information on usage
+List file:          export YT_DATFILE=<your file here>
+Cache directory:    export YT_CACHEDIR=<your dir here>
+Torify wrapper:     export YT_TORIFY=<your torify here>
 "
 }
+cache () {
+  touch ${YT_DATFILE}
+  mkdir -p ${YT_CACHEDIR}
+}
+err () {
+  printf "err: %s\n" ${1}
+  [ -z ${2} ] 2=1
+  exit ${2}
+}
 sync () {
+  cache
   for i in $(cat $YT_DATFILE | tr '\n' ' '); do
-    torify curl -s \
+    ${YT_TORIFY} curl -s \
     https://www.youtube.com/feeds/videos.xml?channel_id=$i\
     > ${YT_CACHEDIR}/$i
   done
 }
+id () {
+  ${YT_TORIFY} curl "${1}" -s | \
+    grep 'youtube/www\.youtube\.com/channel/.\{24\}' -o | \
+    awk -F'/' '{print $NF}' | \
+    sed 1q
+}
 display () {
+  cache
   tmp1=$(mktemp)
   tmp2=$(mktemp)
   for i in $(ls $YT_CACHEDIR | tr '\n' ' '); do
@@ -41,26 +56,40 @@ display () {
   cat $tmp1 $tmp2 | pr -2t -s" | "
 }
 add () { # $1: name of channel id
-  printf "%s\n" $1 >> $DATFILE
+  cache
+  printf "%s\n" $1 >> ${YT_DATFILE}
 }
 del () { # $1: line number of channel id
-  sed -i "${1}d" $DATFILE
+  cache
+  sed -i "${1}d" ${YT_DATFILE}
 }
 case $1 in
-  *"s"*)
+  "s"*)
     sync
+    exit 0
     ;;
-  *"a"*)
-    [ $# -eq 2 ] && add $2
+  "a"*)
+    [ $# -eq 2 ] && add $2 || \
+      err "two args required"
+    exit 0
     ;;
-  *"d"*)
-    [ $# -eq 2 ] && del $2
+  "d"*)
+    [ $# -eq 2 ] && del $2 || \
+      err "two args required"
+    exit 0
     ;;
-  *"h"*)
+  "h"*)
     info
+    exit 0
+    ;;
+  "i"*)
+    [ $# -eq 2 ] && id $2 || \
+      err "two args required"
+    exit 0
     ;;
   *)
     display
+    exit 0
     ;;
 esac
 exit 0
