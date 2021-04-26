@@ -17,3 +17,5 @@ mkc:
 	cc progs/scream.c -o progs/scream
 c:
 	cp -f progs/scream $(DESTDIR)$(PREFIX)/bin
+clean:
+	rm progs/scream
