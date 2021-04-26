@@ -2,7 +2,7 @@
 
 [ -z "${YT_DATFILE}" ] && YT_DATFILE="${HOME}/.local/share/ytdat"
 [ -z "${YT_CACHEDIR}" ] && YT_CACHEDIR="${HOME}/.local/share/ytcache"
-[ -z "${YT_TORIFY}" ] && YT_TORIFY="torify"
+[ -z "${YT_TORIFY}" ] && YT_TORIFY=""
 ver=0.1
 
 info () {
@@ -14,6 +14,7 @@ yt - youtube tool
 => [d]el   [id]   - Remove a channel from the list
 => [h]elp         - Show this help
 => [i]d    [url]  - Show internal channel id
+=> [c]lear        - Clear cache
 
 List file:          export YT_DATFILE=<your file here>
 Cache directory:    export YT_CACHEDIR=<your dir here>
@@ -63,6 +64,9 @@ del () { # $1: line number of channel id
   cache
   sed -i "${1}d" ${YT_DATFILE}
 }
+cclear () {
+  rm -r ${YT_CACHEDIR}
+}
 case $1 in
   "s"*)
     sync
@@ -85,6 +89,10 @@ case $1 in
   "i"*)
     [ $# -eq 2 ] && id $2 || \
       err "two args required"
+    exit 0
+    ;;
+  "c"*)
+    cclear
     exit 0
     ;;
   *)
