@@ -4,31 +4,19 @@ exists() {
   xrandr | grep ' connected' | grep "${1}" | wc -l
 }
 
-# usual setup: thinkpad x220 on dock connected to external
-# monitor
+if [ $(exists "HDMI2") -eq 1 ] && [ $(exists "LVDS1") -eq 1 ]; then
+  xrandr --output LVDS1 --below HDMI2 --auto
+  bspc monitor LVDS1 I II III IV V
+  bspc monitor HDMI2 VI VII VIII IX
+  exit 0
+fi
 
-[ $(exists "HDMI2") -eq 1 ] && \
-  [ $(exists "LVDS1") -eq 1 ] && \
-  xrandr --output LVDS1 --below HDMI2 --auto && \
-  bspc monitor LVDS1 I II III IV V && \
-  bspc monitor HDMI2 VI VII VIII IX X && \
-  exit 0 || exit 1
+if [ $(exists "HDMI1") -eq 1 ] && [ $(exists "LVDS1") -eq 1 ]; then
+  xrandr --output LVDS1 --below HDMI1 --auto
+  bspc monitor LVDS1 I II III IV V
+  bspc monitor HDMI1 VI VII VIII IX
+  exit 0
+fi
 
-# thinkpad x220 connected to display on local port
-
-[ $(exists "HDMI1") -eq 1 ] && \
-  [ $(exists "LVDS1") -eq 1 ] && \
-  xrandr --output LVDS1 --below HDMI1 --auto && \
-  bspc monitor LVDS1 I II III IV V && \
-  bspc monitor HDMI1 VI VII VIII IX X && \
-  exit 0 || exit 1
-
-# only the thinkpad
-
-[ $(exists "HDMI2") -eq 0 ] && \
-  [ $(exists "LVDS1") -eq 1 ] && \
-  xrandr --output HDMI2 --off && \
-  bspc monitor -d I II III IV V VI VII VIII IX X && \
-  exit 0 || exit 1
-
-exit 1
+bspc monitor -d I II III IV V VI VII VIII IX X
+exit 0
