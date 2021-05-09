@@ -1,0 +1,13 @@
+#!/bin/sh
+# rndusr's bspwmrc
+
+# monitor configuration
+disp
+
+# set a wallpaper
+wall
+
+# set up the color scheme
+bspc config normal_border_color "#161510"
+bspc config active_border_color "#727A18"
+bspc config focused_border_color "#727A18"
