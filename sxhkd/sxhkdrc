@@ -5,6 +5,9 @@
 super + Return
   st
 
+super + {_,shift + } b
+  {xclip -selection primary -o | xargs vimb,vimb}
+
 super + d
   dmenu_run
 
