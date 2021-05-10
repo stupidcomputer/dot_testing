@@ -13,6 +13,7 @@ sh:
 	cp -f scripts/shime $(DESTDIR)$(PREFIX)/bin
 	cp -f scripts/wall $(DESTDIR)$(PREFIX)/bin
 	cp -f scripts/yt $(DESTDIR)$(PREFIX)/bin
+	cp -f scripts/urlhandle $(DESTDIR)$(PREFIX)/bin
 mkc:
 	cc progs/scream.c -o progs/scream
 c:
