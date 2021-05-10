@@ -1,0 +1,33 @@
+# rndusr's sxhkdrc
+
+# program launching + sxhkd reload
+
+super + Return
+  st
+
+super + d
+  dmenu_run
+
+super + r
+  pkill -USR1 -x sxhkd
+  bspc wm -r
+
+super + w
+  wall
+
+# bspwm
+
+super + q
+  bspc node -c
+
+super + e
+  bspc quit 0
+
+super + {_,shift + }{h,j,k,l}
+  bspc node -{f,s} {west,south,north,east}
+
+super + {_,shift + } {1-9,0}
+  bspc {desktop -f,node -d} '^{1-9,10}'
+
+super + {t,f,s}
+  bspc node -t {tiled,floating,fullscreen}

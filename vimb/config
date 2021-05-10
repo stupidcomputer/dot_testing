@@ -1,0 +1,71 @@
+# general settings
+set cookie-accept=never
+set header=DNT=1,User-Agent
+set hint-keys=asdfhjkl
+set hint-keys-same-length=true
+set html5-database=false
+set html5-local-storage=false
+set offline-cache=false
+set prevent-newwindow=true
+set plugins=false
+set media-playback-requires-user-gesture=true
+set geolocation=never
+set hardware-acceleration-policy=always
+set scripts=false
+set webinspector=true
+set xss-auditor=true
+set strict-ssl=off
+set incsearch=true
+set javascript-can-access-clipboard=false
+set javascript-can-open-windows-automatically=false
+set stylesheet=true
+set input-autohide=true
+
+# keybinds
+nnoremap : ;
+nnoremap ; :
+
+nmap je ;set scripts=on<CR>
+nmap jd ;set scripts=off<CR>
+nmap jt ;set scripts!<CR>
+
+nmap se ;source ~/.config/vimb/school
+nmap sd ;source ~/.config/vimb/config
+
+# browser themeing
+set status-css=color: #ccbc8e; background-color: #161510; font: Fantasque Sans Mono; font-size: 14px;
+set status-ssl-css=color: #727a18; background-color: #161510; font: Fantasque Sans Mono; font-size: 14px;
+set status-ssl-invalid-css=color: #8e8463; background-color: #161510; font: Fantasque Sans Mono; font-size: 14px;
+
+set input-css=color: #ccbc8e; background-color: #161510; font: Fantasque Sans Mono; font-size: 14px;
+set input-error-css=color: #8e8463; background-color: #161510; font: Fantasque Sans Mono; font-size: 14px;
+
+set completion-css=color: #ccbc8e; background-color: #161510; font: Fantasque Sans Mono; font-size: 14px;
+set completion-selected-css=color: #161510; background-color: #ccbc8e; font: Fantasque Sans Mono; font-size: 14px;
+set completion-hover-css=color: #161510; background-color: #ccbc8e; font: Fantasque Sans Mono; font-size: 14px;
+
+# webpage css and stuff (monospace, monospace everywhere!)
+set dark-mode=true
+set default-font=Fantasque Sans Mono
+set font-size=14
+
+set monospace-font=Fantasque Sans Mono
+set monospace-font-size=14
+
+set sans-serif-font=Fantasque Sans Mono
+set serif-font=Fantasque Sans Mono
+
+# autocommands
+aug tilde
+  au LoadCommitted http{s,}://tildegit.org/*,http{s,}://tilde.zone/* set html5-database=true|set html5-local-storage=true|set scripts=true|set cookie-accept=always
+aug end
+aug site
+  au LoadCommitted http{s,}://{www.,}vultr.com/*,http{s,}://{www.,}namecheap.com/* set html5-database=true|set html5-local-storage=false|set scripts=true|set cookie-accept=always
+aug end
+
+# automatic gemini/gopher -> http handling
+# be forewarned: veyr hacky
+
+aug underground
+  au LoadStarting {gemini,gopher}://* :shellcmd! urlhandle $VIMB_URI
+aug end

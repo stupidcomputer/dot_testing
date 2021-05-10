@@ -1,0 +1,12 @@
+set adjust-open "best-fit"
+set pages-per-row 1
+
+set scroll-page-aware "true"
+set zoom-min 10
+
+set font "Fantasque Sans Mono 11"
+
+set recolor "true"
+set recolor-reverse-video "true"
+set recolor-lightcolor "#161510"
+set recolor-darkcolor "#ccbc8e"
