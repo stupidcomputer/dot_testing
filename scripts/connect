@@ -20,5 +20,6 @@ ${0} restart to restart wifi
 ${0} disconnect to disconnect
 ${0} connect to connect to network
 "
-easc
+    ;;
+esac
 exit 0
