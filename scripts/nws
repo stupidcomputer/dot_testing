@@ -1,0 +1,88 @@
+#!/bin/sh
+
+set -x
+
+[ -z "${XDG_CONFIG_DIR}" ] && XDG_CONFIG_DIR="${HOME}/.config"
+[ -z "${NWS_CONFIG}" ] && NWS_CONFIG="${XDG_CONFIG_DIR}/nws"
+[ -n "${NWS_ZONE}" ] || \
+  [ -e ${NWS_CONFIG} ] && NWS_ZONE=$(cat ${NWS_CONFIG}) || \
+  NWS_ZONE="KGYX"
+[ -z "${NWS_GIF}" ] && NWS_GIF="mpv --loop"
+[ -z "${NWS_TORIFY}" ] && NWS_TORIFY=""
+
+
+info () {
+  printf %s "\
+nws - wrapper for the National Weather Service's website
+
+=> [n]ational     - View national weather mosaic
+=> [l]ocal        - View local weather mosaic
+=> [r]ivers       - View local river conditions
+=> [w]eather      - View local weather observations          [!]
+=> [m]osaic  [id] - View a given area's weather mosaic       [!]
+=> [z]ones        - List internal zone names                 [!]
+=> [s]et     [id] - Set local zone                           [!]
+=> [o]bservations - View observations in specific catagories [!]
+
+Default zone:       export NWS_ZONE=<zone>
+GIF player:         export NWS_GIF=<command>
+Configuration:      export NWS_CONFIG=<file>
+Torify wrapper:     export NWS_TORIFY=<command>
+"
+}
+err () {
+  printf "err: %s\n" ${1}
+  [ -z "${2}" ] && exit 1
+  exit ${2}
+}
+national () {
+  ${NWS_GIF} 'https://radar.weather.gov/ridge/lite/CONUS-LARGE_loop.gif'
+}
+# name interestingly to avoid keyword collision
+localradar () {
+  ${NWS_GIF} "https://radar.weather.gov/ridge/lite/${NWS_ZONE}_loop.gif"
+}
+setzone () {
+  printf "%s" "${1}" > ${NWS_CONFIG}
+}
+river () {
+  curl "https://forecast.weather.gov/product.php?site=NWS&issuedby=${NWS_ZONE}&product=RVA&format=TXT&version=1" | \
+    sed -n '/<!-- \/\/ CONTENT STARTS HERE -->/,/<\/pre>/p' | \
+    grep -v "a href" | \
+    grep -v '<!-- // CONTENT STARTS HERE -->' | \
+    grep -v '<\/pre>' || \
+    printf "river data not found for zone %s" ${NWS_ZONE}
+}
+
+case $1 in
+  "n"*)
+    national
+    exit 0
+    ;;
+  "l"*)
+    localradar
+    exit 0
+    ;;
+  "r"*)
+    river
+    exit 0
+    ;;
+  "w"*)
+    ;;
+  "m"*)
+    ;;
+  "z"*)
+    ;;
+  "s"*)
+    [ $# -eq 2 ] && setzone $2 || \
+      err "two args required"
+    exit 0
+    ;;
+  "o"*)
+    ;;
+  *)
+    info
+    exit 0
+    ;;
+esac
+exit 0
