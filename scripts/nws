@@ -55,7 +55,7 @@ weather () {
   textmessage "ZFP"
 }
 textmessage () {
-  curl --fail "https://forecast.weather.gov/product.php?site=NWS&issuedby=$(kstrip ${NWS_ZONE})&product=${1}&format=TXT&version=1" | \
+  curl --silent --fail "https://forecast.weather.gov/product.php?site=NWS&issuedby=$(kstrip ${NWS_ZONE})&product=${1}&format=TXT&version=1" | \
     sed -n '/<!-- \/\/ CONTENT STARTS HERE -->/,/<\/pre>/p' | \
     grep -v "a href" | \
     grep -v '<!-- // CONTENT STARTS HERE -->' | \
@@ -83,8 +83,6 @@ case $1 in
   "m"*)
     [ $# -eq 2 ] && mosaid $2 || \
       err "two args required"
-    ;;
-  "z"*)
     ;;
   "s"*)
     [ $# -eq 2 ] && setzone $2 || \
