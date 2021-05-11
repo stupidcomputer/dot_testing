@@ -5,11 +5,14 @@ case $1 in
     wpa_supplicant -iwlp3s0 -c/etc/wpa_supplicant/wpa_supplicant.conf -B
     dhcpcd wlp3s0
     tor & disown
+    ;;
   "d"*)
     killall -15 wpa_supplicant dhcpcd tor
+    ;;
   "r"*)
     sh $0 d
     sh $0 c
+    ;;
   *)
     printf "\
 simple wrapper for connecting to a network
