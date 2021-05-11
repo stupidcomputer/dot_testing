@@ -1,7 +1,5 @@
 #!/bin/sh
 
-set -x
-
 [ -z "${XDG_CONFIG_DIR}" ] && XDG_CONFIG_DIR="${HOME}/.config"
 [ -z "${NWS_CONFIG}" ] && NWS_CONFIG="${XDG_CONFIG_DIR}/nws"
 [ -n "${NWS_ZONE}" ] || \
@@ -18,11 +16,10 @@ nws - wrapper for the National Weather Service's website
 => [n]ational     - View national weather mosaic
 => [l]ocal        - View local weather mosaic
 => [r]ivers       - View local river conditions
-=> [w]eather      - View local weather observations          [!]
-=> [m]osaic  [id] - View a given area's weather mosaic       [!]
-=> [z]ones        - List internal zone names                 [!]
-=> [s]et     [id] - Set local zone                           [!]
-=> [o]bservations - View observations in specific catagories [!]
+=> [w]eather      - View local weather observations
+=> [m]osaic  [id] - View a given area's weather mosaic
+=> [s]et     [id] - Set local zone
+=> [t]ext    [id] - View text messages by catagory
 
 Default zone:       export NWS_ZONE=<zone>
 GIF player:         export NWS_GIF=<command>
@@ -35,23 +32,35 @@ err () {
   [ -z "${2}" ] && exit 1
   exit ${2}
 }
+kstrip () {
+  printf %s "$1" | sed 's/^K\(.*\)/\1/'
+}
 national () {
-  ${NWS_GIF} 'https://radar.weather.gov/ridge/lite/CONUS-LARGE_loop.gif'
+  mosaic CONUS-LARGE
 }
 # name interestingly to avoid keyword collision
 localradar () {
-  ${NWS_GIF} "https://radar.weather.gov/ridge/lite/${NWS_ZONE}_loop.gif"
+  mosaic ${NWS_ZONE}
+}
+mosaic () { 
+  ${NWS_GIF} "https://radar.weather.gov/ridge/lite/${1}_loop.gif"
 }
 setzone () {
   printf "%s" "${1}" > ${NWS_CONFIG}
 }
 river () {
-  curl "https://forecast.weather.gov/product.php?site=NWS&issuedby=${NWS_ZONE}&product=RVA&format=TXT&version=1" | \
+  textmessage "RVA"
+}
+weather () {
+  textmessage "ZFP"
+}
+textmessage () {
+  curl --fail "https://forecast.weather.gov/product.php?site=NWS&issuedby=$(kstrip ${NWS_ZONE})&product=${1}&format=TXT&version=1" | \
     sed -n '/<!-- \/\/ CONTENT STARTS HERE -->/,/<\/pre>/p' | \
     grep -v "a href" | \
     grep -v '<!-- // CONTENT STARTS HERE -->' | \
     grep -v '<\/pre>' || \
-    printf "river data not found for zone %s" ${NWS_ZONE}
+    printf "${1} data not found for zone %s" ${NWS_ZONE}
 }
 
 case $1 in
@@ -68,8 +77,12 @@ case $1 in
     exit 0
     ;;
   "w"*)
+    weather
+    exit 0
     ;;
   "m"*)
+    [ $# -eq 2 ] && mosaid $2 || \
+      err "two args required"
     ;;
   "z"*)
     ;;
@@ -78,7 +91,9 @@ case $1 in
       err "two args required"
     exit 0
     ;;
-  "o"*)
+  "t"*)
+    [ $# -eq 2 ] && textmessage $2 || \
+      err "two args required"
     ;;
   *)
     info
