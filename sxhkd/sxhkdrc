@@ -8,6 +8,9 @@ super + Return
 super + {_,shift + } b
   {xclip -selection primary -o | xargs vimb,vimb}
 
+super + m
+  xclip -selection primary -o | xargs mpv
+
 super + d
   dmenu_run
 
@@ -17,6 +20,18 @@ super + r
 
 super + w
   wall
+
+XF86Display
+  disp
+
+XF86Battery
+  indicate
+
+XF86ScreenSaver
+  slock
+
+{_,shift + }{XF86AudioRaiseVolume,XF86AudioLowerVolume}
+  amixer sset Master {5,1}%{+,-}
 
 # bspwm
 
