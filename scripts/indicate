@@ -2,4 +2,5 @@
 
 i=$(date '+%H:%M:%S %m/%d (%h)')
 j=$(bat)
-printf "%s | %s\n" "$i" "$j" | nenu
+k=$(vol)
+printf "%s | %s\% | %s\n" "$i" "$j" "$k" | nenu

@@ -1,0 +1,3 @@
+#!/bin/sh
+
+amixer sset Master 0amixer sset Master 0%+ | tail -1 | awk -F'[' '{print }' | awk -F']' '{print }'
