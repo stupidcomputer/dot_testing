@@ -21,6 +21,9 @@ super + r
 super + w
   wall
 
+super + {_,shift + }n
+  nws {local,national}
+
 {XF86Display,super + d}
   disp
 
