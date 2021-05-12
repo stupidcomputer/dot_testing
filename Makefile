@@ -16,6 +16,7 @@ sh:
 	cp -f scripts/connect $(DESTDIR)$(PREFIX)/bin
 	cp -f scripts/nws $(DESTDIR)$(PREFIX)/bin
 	cp -f scripts/urlhandle $(DESTDIR)$(PREFIX)/bin
+	cp -f scripts/indicate $(DESTDIR)$(PREFIX)/bin
 mkc:
 	cc progs/scream.c -o progs/scream
 c:

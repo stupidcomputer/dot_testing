@@ -6,20 +6,22 @@ exists() {
 
 if [ $(exists "HDMI2") -eq 1 ] && [ $(exists "LVDS1") -eq 1 ]; then
   printf "HDMI2, LVDS1 exists\n"
-  xrandr --output LVDS1 --below HDMI2 --auto
-  bspc monitor LVDS1 I II III IV V
-  bspc monitor HDMI2 VI VII VIII IX
+  xrandr --output HDMI2 --above LVDS1 --auto
+  bspc monitor LVDS1 -a I II III IV V
+  bspc monitor HDMI2 -a VI VII VIII IX
   exit 0
 fi
 
 if [ $(exists "HDMI1") -eq 1 ] && [ $(exists "LVDS1") -eq 1 ]; then
   printf "HDMI1, LVDS1 exists\n"
-  xrandr --output LVDS1 --below HDMI1 --auto
-  bspc monitor LVDS1 I II III IV V
-  bspc monitor HDMI1 VI VII VIII IX
+  xrandr --output HDMI1 --above LVDS1 --auto
+  bspc monitor LVDS1 -a I II III IV V
+  bspc monitor HDMI1 -a VI VII VIII IX
   exit 0
 fi
 
 printf "defaulting to default configuration\n"
+xrandr --output HDMI1 --off
+xrandr --output HDMI2 --off
 bspc monitor -d I II III IV V VI VII VIII IX X
 exit 0
