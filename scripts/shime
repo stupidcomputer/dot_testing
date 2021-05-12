@@ -3,7 +3,7 @@
 case $0 in
   *"timer"*)
     [ $# -ne 2 ] && printf "specify minutes and \
-      seconds\n" && exit 1
+seconds\n" && exit 1
     sleep $(($1 * 60 + $2))
     printf "your timer is done\a\n"
     exit 0
