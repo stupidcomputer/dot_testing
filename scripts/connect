@@ -13,9 +13,14 @@ case $1 in
     sh $0 d
     sh $0 c
     ;;
+  "t"*)
+    [ $(ps aux | grep wpa_supplicant | wc -l) -eq 2 ] && sh $0 d && exit
+    sh $0 c
+    ;;
   *)
     printf "\
 simple wrapper for connecting to a network
+${0} toggle to toggle wifi connection
 ${0} restart to restart wifi
 ${0} disconnect to disconnect
 ${0} connect to connect to network
