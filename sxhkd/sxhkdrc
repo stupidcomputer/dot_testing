@@ -21,7 +21,7 @@ super + r
 super + w
   wall
 
-XF86Display
+{XF86Display,super + d}
   disp
 
 XF86Battery
@@ -29,6 +29,9 @@ XF86Battery
 
 XF86ScreenSaver
   slock
+
+XF86AudioMute
+  amixer sset Master 0%
 
 {_,shift + }{XF86AudioRaiseVolume,XF86AudioLowerVolume}
   amixer sset Master {5,1}%{+,-}
