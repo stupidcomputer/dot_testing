@@ -27,7 +27,7 @@ cache () {
 }
 err () {
   printf "err: %s\n" ${1}
-  [ -z "${2}" ] && 2=1
+  [ -z "${2}" ] && exit 1
   exit ${2}
 }
 sync () {
