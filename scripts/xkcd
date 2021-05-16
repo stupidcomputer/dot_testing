@@ -1,0 +1,40 @@
+#!/bin/sh
+
+set -x
+err () {
+  printf "err: %s\n" ${1}
+  [ -z "${2}" ] && exit 1
+  exit ${2}
+}
+getImageForComic() {
+  [ -z ${1} ] && a="" || a="$1/"
+  curl --silent https://xkcd.com/${a} | grep 'imgs.xkcd.com/comics/' | sed 1q | grep -o 'https://imgs\.xkcd\.com/comics/.*\....'
+}
+viewImage() {
+  a=$(mktemp)
+  curl --silent $(getImageForComic ${1}) -o $a
+  feh $a
+}
+proghelp() {
+  printf "\
+xkcd - view xkcd comics
+
+=> [v]iew  [id]    - View comic with id [id]
+=> [g]et   [id]    - Get url for comic [id]
+"
+}
+case $1 in
+  'v'*)
+    viewImage $2
+    exit 0
+    ;;
+  'g'*)
+    getImageForComic $2
+    exit 0
+    ;;
+  *)
+    proghelp
+    exit 0
+    ;;
+esac
+exit 0
