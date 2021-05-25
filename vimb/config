@@ -35,16 +35,16 @@ nmap se ;source ~/.config/vimb/school
 nmap sd ;source ~/.config/vimb/config
 
 # browser themeing
-set status-css=color: #ccbc8e; background-color: #161510; font: Fantasque Sans Mono; font-size: 14px;
-set status-ssl-css=color: #727a18; background-color: #161510; font: Fantasque Sans Mono; font-size: 14px;
-set status-ssl-invalid-css=color: #8e8463; background-color: #161510; font: Fantasque Sans Mono; font-size: 14px;
+set status-css=color: #e8d815; background-color: #202020; font: Fantasque Sans Mono; font-size: 14px;
+set status-ssl-css=color: #5d7557; background-color: #202020; font: Fantasque Sans Mono; font-size: 14px;
+set status-ssl-invalid-css=color: #e55d4d; background-color: #202020; font: Fantasque Sans Mono; font-size: 14px;
 
-set input-css=color: #ccbc8e; background-color: #161510; font: Fantasque Sans Mono; font-size: 14px;
-set input-error-css=color: #8e8463; background-color: #161510; font: Fantasque Sans Mono; font-size: 14px;
+set input-css=color: #ccbc8e; background-color: #202020; font: Fantasque Sans Mono; font-size: 14px;
+set input-error-css=color: #e55d4d; background-color: #202020; font: Fantasque Sans Mono; font-size: 14px;
 
-set completion-css=color: #ccbc8e; background-color: #161510; font: Fantasque Sans Mono; font-size: 14px;
-set completion-selected-css=color: #161510; background-color: #ccbc8e; font: Fantasque Sans Mono; font-size: 14px;
-set completion-hover-css=color: #161510; background-color: #ccbc8e; font: Fantasque Sans Mono; font-size: 14px;
+set completion-css=color: #ccbc8e; background-color: #202020; font: Fantasque Sans Mono; font-size: 14px;
+set completion-selected-css=color: #202020; background-color: #e8d815; font: Fantasque Sans Mono; font-size: 14px;
+set completion-hover-css=color: #202020; background-color: #2d211e; font: Fantasque Sans Mono; font-size: 14px;
 
 # webpage css and stuff (monospace, monospace everywhere!)
 set dark-mode=true
