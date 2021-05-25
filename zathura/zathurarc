@@ -6,7 +6,53 @@ set zoom-min 10
 
 set font "Fantasque Sans Mono 11"
 
+set show-scrollbars "false"
+set database "plain"
+set dbus-service "false"
+set filemonitor "signal"
+set synctex "false"
+
+map ; feedkeys :
+
+# themes
+
 set recolor "true"
 set recolor-reverse-video "true"
 set recolor-lightcolor "#161510"
 set recolor-darkcolor "#ccbc8e"
+
+set completion-bg "#161510"
+set completion-fg "#ccbc8e"
+set completion-group-bg "#161510"
+set completion-group-fg "#ccbc8e"
+set completion-highlight-bg "#ccbc8e"
+set completion-highlight-fg "#161510"
+
+set default-bg "#161510"
+set default-fg "#ccbc8e"
+set inputbar-bg "#161510"
+set inputbar-fg "#ccbc8e"
+set statusbar-bg "#161510"
+set statusbar-fg "#ccbc8e"
+set index-bg "#161510"
+set index-fg "#ccbc8e"
+set index-active-bg "#ccbc8e"
+set index-active-fg "#161510"
+set tabbar-bg "#161510"
+set tabbar-fg "#ccbc8e"
+set tabbar-focus-bg "#ccbc8e"
+set tabbar-focus-fg "#161510"
+
+set notification-bg "#161510"
+set notification-fg "#ccbc8e"
+set notification-warning-bg "#161510"
+set notification-warning-fg "#cc9528"
+set notification-error-bg "#161510"
+set notification-error-fg "#cc3214"
+
+set highlight-color "#a37720"
+set highlight-active-color "#727a18"
+set highlight-transparency 0.25
+
+set render-loading-bg "#161510"
+set render-loading-fg "#ccbc8e"
