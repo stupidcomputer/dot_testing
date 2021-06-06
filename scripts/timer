@@ -15,7 +15,7 @@ seconds\n" && exit 1
     printf "your alarm is done\a\n"
     exit 0
     ;;
-    *"tomato"*)
+  *"tomato"*)
     [ $# -ne 2 ] && \
       printf "specify work and rest time\n" && exit 1
   counter=0
