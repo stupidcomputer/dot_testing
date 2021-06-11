@@ -39,6 +39,22 @@ int timerzero(struct timer *t) {
   return 0;
 }
 
+int seconds(int t) {
+  return t % 60;
+}
+
+int minutes(int t) {
+  return (t / 60) % 60;
+}
+
+int minute(int t) {
+  return t / 60;
+}
+
+int hours(int t) {
+  return (t / 60) / 60;
+}
+
 struct timer *timerinit(void) {
   struct timer *t = malloc(sizeof *t);
   t->s = 0;

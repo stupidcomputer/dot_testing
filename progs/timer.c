@@ -31,8 +31,9 @@ int timerissettings(struct timer *t) {
 char *timerdisp(struct timer *t) {
   char *str = malloc(20);
   if(s.f) snprintf(str, 20, "%02i:%02i:%02i",
-    ((t->s / 60) / 60), (t->s / 60) % 60, t->s % 60);
-  else snprintf(str, 20, "%02i:%02i", t->s / 60, t->s % 60);
+    hours(t->s), minutes(t->s), seconds(t->s));
+  /* TODO: give minute(...) and minutes(...) better names */
+  else snprintf(str, 20, "%02i:%02i", minute(t->s), seconds(t->s));
   return str;
 }
 
