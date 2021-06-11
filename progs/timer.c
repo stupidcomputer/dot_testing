@@ -4,12 +4,7 @@
 #include <poll.h>
 #include <string.h>
 
-struct timer {
-  int m;
-  int s;
-  void (*u)(struct timer *t);
-  int (*c)(struct timer *t);
-};
+#include "timerlib.h"
 
 struct settings {
   int e:1; /* use escape (v assumed) */
@@ -29,39 +24,6 @@ struct settings {
   .s = 0
 };
 
-void timerdec(struct timer *t) {
-  if(t->s > 0) t->s--;
-  else if(t->s == 0) {
-    t->s = 59;
-    t->m--;
-  }
-}
-
-void timerinc(struct timer *t) {
-  if(t->s < 59) t->s++;
-  else if(t->s == 59) {
-    t->s = 0;
-    t->m++;
-  }
-}
-
-void timerupdate(struct timer *t) {
-  if(t->u != NULL) t->u(t);
-}
-
-int timerstate(struct timer *t) {
-  if(t->c != NULL) {
-    if(t->c(t)) return 1;
-    else return 0;
-  }
-  return 0;
-}
-
-int timerzero(struct timer *t) {
-  if(t->m == 0 && t->s == 0) return 1;
-  return 0;
-}
-
 int timerissettings(struct timer *t) {
   if(t->m == 0 && t->s == 0) return 0;
   if(t->m == settings.m &&
@@ -75,15 +37,6 @@ char *timerdisp(struct timer *t) {
     (t->m / 60), (t->m % 60), t->s);
   else snprintf(str, 20, "%02i:%02i", t->m, t->s);
   return str;
-}
-
-struct timer *timerinit(void) {
-  struct timer *t = malloc(sizeof t);
-  t->m = 0;
-  t->s = 0;
-  t->u = NULL;
-  t->c = NULL;
-  return t;
 }
 
 void timerloop() {
