@@ -87,6 +87,7 @@ int main(int argc, char **argv) {
       break; case 'd': s.d = 1;
       break; case 'b': s.b = 1;
       break; case 'f': s.f = 1;
+      break; case 'h': s.s = s.s + (atoi(optarg) * 3600);
       break; case 'm': s.s = s.s + (atoi(optarg) * 60);
       break; case 's': s.s = s.s + atoi(optarg);
       break; case '?': return 1;
