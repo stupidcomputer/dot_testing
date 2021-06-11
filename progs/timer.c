@@ -4,7 +4,7 @@
 #include <poll.h>
 #include <string.h>
 
-#include "timerlib.h"
+#include "timerlib.c"
 
 struct settings {
   int e:1; /* use escape (v assumed) */
@@ -51,12 +51,10 @@ void timerloop() {
     t->c = timerissettings;
   }
   char *c;
-  struct pollfd *p = malloc(sizeof p);
-  p->fd = STDIN_FILENO;
-  p->events = POLLIN;
+  struct pollfd p = { .fd = STDIN_FILENO, .events = POLLIN };
   for(;;) {
-    poll(p, 1, 60);
-    if(p->revents == POLLIN) {
+    poll(&p, 1, 60);
+    if(p.revents == POLLIN) {
       /* TODO: make this nicer */
       getchar();
       if(settings.e) {
@@ -73,7 +71,7 @@ void timerloop() {
       fflush(stdout);
     }
     else if(settings.v) printf("%s\n", c);
-    if(timerstate(t)) break;
+    if(timerstop(t)) break;
     timerupdate(t);
     sleep(1);
   }
