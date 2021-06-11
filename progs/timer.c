@@ -25,17 +25,16 @@ struct settings {
 };
 
 int timerissettings(struct timer *t) {
-  if(t->m == 0 && t->s == 0) return 0;
-  if(t->m == settings.m &&
-    t->s == settings.s) return 1;
+  if(t->s == 0) return 0;
+  if(settings.m * 60 + settings.s == t->s) return 1;
   return 0;
 }
 
 char *timerdisp(struct timer *t) {
   char *str = malloc(20);
   if(settings.f) snprintf(str, 20, "%02i:%02i:%02i",
-    (t->m / 60), (t->m % 60), t->s);
-  else snprintf(str, 20, "%02i:%02i", t->m, t->s);
+    ((t->s / 60) / 60), (t->s / 60) % 60, t->s % 60);
+  else snprintf(str, 20, "%02i:%02i", t->s / 60, t->s % 60);
   return str;
 }
 
@@ -43,8 +42,7 @@ void timerloop() {
   struct timer *t = timerinit();
   if(settings.d) {
     t->u = timerdec;
-    t->m = settings.m;
-    t->s = settings.s;
+    t->s = settings.s + (settings.m * 60);
     t->c = timerzero;
   } else {
     t->u = timerinc;
@@ -72,10 +70,13 @@ void timerloop() {
     }
     else if(settings.v) printf("%s\n", c);
     if(timerstop(t)) break;
+    free(c);
     timerupdate(t);
     sleep(1);
   }
   if(settings.b) putchar('\a');
+  free(t);
+  free(c);
 }
 
 int main(int argc, char **argv) {

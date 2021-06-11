@@ -1,5 +1,4 @@
 struct timer {
-  int m; /* minutes */
   int s; /* seconds */
   int d; /* data storage */
   void (*u)(struct timer *t); /* update function */
@@ -8,19 +7,11 @@ struct timer {
 };
 
 void timerdec(struct timer *t) {
-  if(t->s > 0) t->s--;
-  else if(t->s == 0) {
-    t->s = 59;
-    t->m--;
-  }
+  if (t->s != 0) t->s--;
 }
 
 void timerinc(struct timer *t) {
-  if(t->s < 59) t->s++;
-  else if(t->s == 59) {
-    t->s = 0;
-    t->m++;
-  }
+  t->s++;
 }
 
 void timerupdate(struct timer *t) {
@@ -44,13 +35,12 @@ int timerpause(struct timer *t) {
 }
 
 int timerzero(struct timer *t) {
-  if(t->m == 0 && t->s == 0) return 1;
+  if(t->s == 0) return 1;
   return 0;
 }
 
 struct timer *timerinit(void) {
   struct timer *t = malloc(sizeof *t);
-  t->m = 0;
   t->s = 0;
   t->d = 0;
   t->u = NULL;
