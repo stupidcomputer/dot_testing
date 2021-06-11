@@ -84,32 +84,15 @@ int main(int argc, char **argv) {
   char c;
   while((c = getopt (argc, argv, "evdbfm:s:")) != -1) {
     switch(c) {
-      case 'e':
-        settings.e = 1;
-        break;
-      case 'v':
-        settings.v = 1;
-        break;
-      case 'd':
-        settings.d = 1;
-        break;
-      case 'b':
-        settings.b = 1;
-        break;
-      case 'f':
-        settings.f = 1;
-        break;
-      case 'm':
-        settings.m = atoi(optarg);
-        break;
-      case 's':
-        settings.s = atoi(optarg);
-        break;
-      case '?':
-        return 1;
-      default:
-        abort();
-        break;
+      break; case 'e': settings.e = 1;
+      break; case 'v': settings.v = 1;
+      break; case 'd': settings.d = 1;
+      break; case 'b': settings.b = 1;
+      break; case 'f': settings.f = 1;
+      break; case 'm': settings.m = atoi(optarg);
+      break; case 's': settings.s = atoi(optarg);
+      break; case '?': return 1;
+      break; default: abort();
     }
   }
   timerloop();
