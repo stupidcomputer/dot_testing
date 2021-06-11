@@ -14,7 +14,7 @@ struct settings {
   int f:1; /* display hours */
   int m; /* minutes */
   int s; /* seconds */
-} settings = {
+} s = {
   .e = 0,
   .v = 0,
   .d = 0,
@@ -26,13 +26,13 @@ struct settings {
 
 int timerissettings(struct timer *t) {
   if(t->s == 0) return 0;
-  if(settings.m * 60 + settings.s == t->s) return 1;
+  if(s.m * 60 + s.s == t->s) return 1;
   return 0;
 }
 
 char *timerdisp(struct timer *t) {
   char *str = malloc(20);
-  if(settings.f) snprintf(str, 20, "%02i:%02i:%02i",
+  if(s.f) snprintf(str, 20, "%02i:%02i:%02i",
     ((t->s / 60) / 60), (t->s / 60) % 60, t->s % 60);
   else snprintf(str, 20, "%02i:%02i", t->s / 60, t->s % 60);
   return str;
@@ -40,9 +40,9 @@ char *timerdisp(struct timer *t) {
 
 void timerloop() {
   struct timer *t = timerinit();
-  if(settings.d) {
+  if(s.d) {
     t->u = timerdec;
-    t->s = settings.s + (settings.m * 60);
+    t->s = s.s + (s.m * 60);
     t->c = timerzero;
   } else {
     t->u = timerinc;
@@ -55,26 +55,26 @@ void timerloop() {
     if(p.revents == POLLIN) {
       /* TODO: make this nicer */
       getchar();
-      if(settings.e) {
+      if(s.e) {
         c = timerdisp(t);
         printf("\r\e[1A* %s", c);
       }
       getchar();
       /* TODO: stop relying on hard assumptions */
-      if(settings.e) printf("\r\e[1A           \r", c);
+      if(s.e) printf("\r\e[1A           \r", c);
     }
     c = timerdisp(t);
-    if(settings.e) {
+    if(s.e) {
       printf("%s\r", c);
       fflush(stdout);
     }
-    else if(settings.v) printf("%s\n", c);
+    else if(s.v) printf("%s\n", c);
     if(timerstop(t)) break;
     free(c);
     timerupdate(t);
     sleep(1);
   }
-  if(settings.b) putchar('\a');
+  if(s.b) putchar('\a');
   free(t);
   free(c);
 }
@@ -83,13 +83,13 @@ int main(int argc, char **argv) {
   char c;
   while((c = getopt (argc, argv, "evdbfm:s:")) != -1) {
     switch(c) {
-      break; case 'e': settings.e = 1;
-      break; case 'v': settings.v = 1;
-      break; case 'd': settings.d = 1;
-      break; case 'b': settings.b = 1;
-      break; case 'f': settings.f = 1;
-      break; case 'm': settings.m = atoi(optarg);
-      break; case 's': settings.s = atoi(optarg);
+      break; case 'e': s.e = 1;
+      break; case 'v': s.v = 1;
+      break; case 'd': s.d = 1;
+      break; case 'b': s.b = 1;
+      break; case 'f': s.f = 1;
+      break; case 'm': s.m = atoi(optarg);
+      break; case 's': s.s = atoi(optarg);
       break; case '?': return 1;
       break; default: abort();
     }
