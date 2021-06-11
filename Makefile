@@ -18,11 +18,12 @@ sh:
 	cp -f scripts/urlhandle $(DESTDIR)$(PREFIX)/bin
 	cp -f scripts/indicate $(DESTDIR)$(PREFIX)/bin
 	cp -f scripts/vol $(DESTDIR)$(PREFIX)/bin
-	cp -f scripts/timer $(DESTDIR)$(PREFIX)/bin
-	ln -sf $(DESTDIR)$(PREFIX)/bin/timer $(DESTDIR)$(PREFIX)/bin/alarm
-	ln -sf $(DESTDIR)$(PREFIX)/bin/timer $(DESTDIR)$(PREFIX)/bin/tomato
-	ln -sf $(DESTDIR)$(PREFIX)/bin/timer $(DESTDIR)$(PREFIX)/bin/stopwatch
-	ln -sf $(DESTDIR)$(PREFIX)/bin/timer $(DESTDIR)$(PREFIX)/bin/verbosewatch
+	cp -f scripts/shime $(DESTDIR)$(PREFIX)/bin
+	ln -sf $(DESTDIR)$(PREFIX)/bin/shime $(DESTDIR)$(PREFIX)/bin/timer
+	ln -sf $(DESTDIR)$(PREFIX)/bin/shime $(DESTDIR)$(PREFIX)/bin/alarm
+	ln -sf $(DESTDIR)$(PREFIX)/bin/shime $(DESTDIR)$(PREFIX)/bin/tomato
+	ln -sf $(DESTDIR)$(PREFIX)/bin/shime $(DESTDIR)$(PREFIX)/bin/stopwatch
+	ln -sf $(DESTDIR)$(PREFIX)/bin/shime $(DESTDIR)$(PREFIX)/bin/verbosewatch
 
 mkc:
 	cc progs/scream.c -o progs/scream
