@@ -4,7 +4,7 @@ install: man sh mkc c
 
 man:
 	mkdir -p $(DESTDIR)$(PREFIX)/man1
-	cp -f *.1 $(DESTDIR)$(PREFIX)/man1
+	cp -f man/* $(DESTDIR)$(PREFIX)/man1
 sh:
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp -f scripts/paste $(DESTDIR)$(PREFIX)/bin
@@ -26,7 +26,9 @@ sh:
 
 mkc:
 	cc progs/scream.c -o progs/scream
+	cc progs/timer.c -o progs/timer
 c:
 	cp -f progs/scream $(DESTDIR)$(PREFIX)/bin
+	cp -f progs/timer $(DESTDIR)$(PREFIX)/bin
 clean:
 	rm progs/scream
