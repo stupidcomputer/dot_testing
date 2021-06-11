@@ -61,7 +61,7 @@ void timerloop() {
       }
       getchar();
       /* TODO: stop relying on hard assumptions */
-      if(s.e) printf("\r\e[1A           \r", c);
+      if(s.e) printf("\r\e[1A           \r");
     }
     c = timerdisp(t);
     if(s.e) {
