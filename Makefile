@@ -19,6 +19,7 @@ sh:
 	cp -f scripts/indicate $(DESTDIR)$(PREFIX)/bin
 	cp -f scripts/vol $(DESTDIR)$(PREFIX)/bin
 	cp -f scripts/shime $(DESTDIR)$(PREFIX)/bin
+	cp -f scripts/josm_launch $(DESTDIR)$(PREFIX)/bin
 	ln -sf $(DESTDIR)$(PREFIX)/bin/shime $(DESTDIR)$(PREFIX)/bin/timer
 	ln -sf $(DESTDIR)$(PREFIX)/bin/shime $(DESTDIR)$(PREFIX)/bin/alarm
 	ln -sf $(DESTDIR)$(PREFIX)/bin/shime $(DESTDIR)$(PREFIX)/bin/tomato
