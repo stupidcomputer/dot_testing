@@ -12,6 +12,24 @@ struct timer {
   int (*p)(struct timer *t); /* pause check function */
 };
 
+struct settings {
+  int e:1; /* use escape (v assumed) */
+  int v:1; /* verbose */
+  int d:1; /* count down/up (1/0) */
+  int b:1; /* ascii bel when done */
+  int f:1; /* display hours */
+  int t:1; /* tomato timer */
+  int s; /* seconds */
+} s = {
+  .e = 0,
+  .v = 0,
+  .d = 0,
+  .b = 0,
+  .f = 0,
+  .t = 0,
+  .s = 0
+};
+
 void timerdec(struct timer *t) { if (t->s != 0) t->s--; }
 void timerinc(struct timer *t) { t->s++; }
 void timerupdate(struct timer *t) { if(t->u != NULL) t->u(t); }
@@ -46,24 +64,6 @@ struct timer *timerinit(void) {
   t->p = NULL;
   return t;
 }
-
-struct settings {
-  int e:1; /* use escape (v assumed) */
-  int v:1; /* verbose */
-  int d:1; /* count down/up (1/0) */
-  int b:1; /* ascii bel when done */
-  int f:1; /* display hours */
-  int t:1; /* tomato timer */
-  int s; /* seconds */
-} s = {
-  .e = 0,
-  .v = 0,
-  .d = 0,
-  .b = 0,
-  .f = 0,
-  .t = 0,
-  .s = 0
-};
 
 int timerissettings(struct timer *t) {
   if(t->s == 0) return 0;
