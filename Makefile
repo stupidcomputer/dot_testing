@@ -20,8 +20,8 @@ sh:
 	cp -f sh/josm_launch $(DESTDIR)$(PREFIX)/bin
 
 mkc:
-	cc c/scream.c -o progs/scream
-	cc c/timer.c -o progs/timer
+	cc c/scream.c -o c/scream
+	cc c/timer.c -o c/timer
 c:
 	cp -f c/scream $(DESTDIR)$(PREFIX)/bin
 	cp -f c/timer $(DESTDIR)$(PREFIX)/bin
