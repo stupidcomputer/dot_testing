@@ -7,23 +7,23 @@ man:
 	cp -f man/* $(DESTDIR)$(PREFIX)/man1
 sh:
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
-	cp -f scripts/paste $(DESTDIR)$(PREFIX)/bin
-	cp -f scripts/bat $(DESTDIR)$(PREFIX)/bin
-	cp -f scripts/disp $(DESTDIR)$(PREFIX)/bin
-	cp -f scripts/wal $(DESTDIR)$(PREFIX)/bin
-	cp -f scripts/yt $(DESTDIR)$(PREFIX)/bin
-	cp -f scripts/connect $(DESTDIR)$(PREFIX)/bin
-	cp -f scripts/nws $(DESTDIR)$(PREFIX)/bin
-	cp -f scripts/urlhandle $(DESTDIR)$(PREFIX)/bin
-	cp -f scripts/indicate $(DESTDIR)$(PREFIX)/bin
-	cp -f scripts/vol $(DESTDIR)$(PREFIX)/bin
-	cp -f scripts/josm_launch $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/paste $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/bat $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/disp $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/wal $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/yt $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/connect $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/nws $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/urlhandle $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/indicate $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/vol $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/josm_launch $(DESTDIR)$(PREFIX)/bin
 
 mkc:
-	cc progs/scream.c -o progs/scream
-	cc progs/timer.c -o progs/timer
+	cc c/scream.c -o progs/scream
+	cc c/timer.c -o progs/timer
 c:
-	cp -f progs/scream $(DESTDIR)$(PREFIX)/bin
-	cp -f progs/timer $(DESTDIR)$(PREFIX)/bin
+	cp -f c/scream $(DESTDIR)$(PREFIX)/bin
+	cp -f c/timer $(DESTDIR)$(PREFIX)/bin
 clean:
-	rm progs/scream
+	rm c/scream

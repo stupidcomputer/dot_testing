@@ -1,5 +1,5 @@
 *.swp
 *.tmp
-progs/scream
-progs/timer
-progs/a.out
+c/scream
+c/timer
+c/a.out
