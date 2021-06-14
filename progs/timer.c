@@ -80,7 +80,7 @@ void timerloop() {
 
 int main(int argc, char **argv) {
   char c;
-  while((c = getopt(argc, argv, "evdbfm:s:")) != -1) {
+  while((c = getopt(argc, argv, "evdbfh:m:s:")) != -1) {
     switch(c) {
       break; case 'e': s.e = 1;
       break; case 'v': s.v = 1;
