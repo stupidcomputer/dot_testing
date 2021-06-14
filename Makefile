@@ -10,7 +10,6 @@ sh:
 	cp -f scripts/paste $(DESTDIR)$(PREFIX)/bin
 	cp -f scripts/bat $(DESTDIR)$(PREFIX)/bin
 	cp -f scripts/disp $(DESTDIR)$(PREFIX)/bin
-	cp -f scripts/shime $(DESTDIR)$(PREFIX)/bin
 	cp -f scripts/wal $(DESTDIR)$(PREFIX)/bin
 	cp -f scripts/yt $(DESTDIR)$(PREFIX)/bin
 	cp -f scripts/connect $(DESTDIR)$(PREFIX)/bin
