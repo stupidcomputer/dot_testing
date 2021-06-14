@@ -19,6 +19,7 @@ struct settings {
   int b:1; /* ascii bel when done */
   int f:1; /* display hours */
   int t:1; /* tomato timer */
+  int p:1; /* stop after tomato timer cycle finished */
   int s; /* seconds */
 } s = {
   .e = 0,
@@ -27,6 +28,7 @@ struct settings {
   .b = 0,
   .f = 0,
   .t = 0,
+  .p = 0,
   .s = 0
 };
 
@@ -76,6 +78,8 @@ int tomatotimer(struct timer *t) {
   if(t->d % 2) t->s = s.s / 2;
   else t->s = s.s;
   t->d++;
+  if(s.b) putchar('\a');
+  if(s.p) return 0;
   return 1;
 }
 
@@ -142,7 +146,7 @@ void timerloop() {
 
 int main(int argc, char **argv) {
   char c;
-  while((c = getopt(argc, argv, "evdbfth:m:s:")) != -1) {
+  while((c = getopt(argc, argv, "evdbftph:m:s:")) != -1) {
     switch(c) {
       break; case 'e': s.e = 1;
       break; case 'v': s.v = 1;
@@ -150,6 +154,7 @@ int main(int argc, char **argv) {
       break; case 'b': s.b = 1;
       break; case 'f': s.f = 1;
       break; case 't': s.t = 1;
+      break; case 'p': s.p = 1;
       break; case 'h': s.s = s.s + (atoi(optarg) * 3600);
       break; case 'm': s.s = s.s + (atoi(optarg) * 60);
       break; case 's': s.s = s.s + atoi(optarg);

@@ -23,6 +23,9 @@ timer display contains hour slot
 .B -t
 use a tomato timer (use -h, -m, -s to set work cycle time, rest cycle time is assumed to be half of the working time)
 .TP
+.B -p
+disable pausing after finishing tomato timer cycle (required -t to work)
+.TP
 .B "-h int"
 specify number of hours for timer parameters
 .TP
@@ -75,7 +78,7 @@ $ timer -etm 40
 #include <string.h>
 .fi
 .SH BUGS
+- when passing -p each tomato timer cycle is cut short one second
 send email to random user at-sign tilde dot club
 .SH AUTHOR
 randomuser
-
