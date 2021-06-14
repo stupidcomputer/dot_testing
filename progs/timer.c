@@ -12,6 +12,7 @@ struct settings {
   int d:1; /* count down/up (1/0) */
   int b:1; /* ascii bel when done */
   int f:1; /* display hours */
+  int t:1; /* tomato timer */
   int s; /* seconds */
 } s = {
   .e = 0,
@@ -19,6 +20,7 @@ struct settings {
   .d = 0,
   .b = 0,
   .f = 0,
+  .t = 0,
   .s = 0
 };
 
@@ -26,6 +28,14 @@ int timerissettings(struct timer *t) {
   if(t->s == 0) return 0;
   if(s.s == t->s) return 1;
   return 0;
+}
+
+int tomatotimer(struct timer *t) {
+  if(t->s != 0) return 0;
+  if(t->d % 2) t->s = s.s / 2;
+  else t->s = s.s;
+  t->d++;
+  return 1;
 }
 
 char *timerdisp(struct timer *t) {
@@ -47,16 +57,27 @@ void timerloop() {
     t->u = timerinc;
     t->c = timerissettings;
   }
+  if(s.t) {
+    t->u = timerdec;
+    if(s.s == 0) s.s = 20 * 60;
+    t->s = s.s;
+    t->d = 1;
+    t->p = tomatotimer;
+    t->c = NULL;
+  }
+
   char *c;
+  int e;
   struct pollfd p = { .fd = STDIN_FILENO, .events = POLLIN };
   for(;;) {
     poll(&p, 1, 60);
-    if(p.revents == POLLIN) {
+    if((e = (p.revents == POLLIN)) || timerpause(t)) {
       /* TODO: make this nicer */
-      getchar();
+      if(e) getchar();
       if(s.e) {
         c = timerdisp(t);
-        printf("\r\e[1A* %s", c);
+        if(e) printf("\r\e[1A* %s", c);
+        else printf("\r* %s", c);
       }
       getchar();
       /* TODO: stop relying on hard assumptions */
@@ -80,13 +101,14 @@ void timerloop() {
 
 int main(int argc, char **argv) {
   char c;
-  while((c = getopt(argc, argv, "evdbfh:m:s:")) != -1) {
+  while((c = getopt(argc, argv, "evdbfth:m:s:")) != -1) {
     switch(c) {
       break; case 'e': s.e = 1;
       break; case 'v': s.v = 1;
       break; case 'd': s.d = 1;
       break; case 'b': s.b = 1;
       break; case 'f': s.f = 1;
+      break; case 't': s.t = 1;
       break; case 'h': s.s = s.s + (atoi(optarg) * 3600);
       break; case 'm': s.s = s.s + (atoi(optarg) * 60);
       break; case 's': s.s = s.s + atoi(optarg);
