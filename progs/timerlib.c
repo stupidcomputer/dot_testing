@@ -6,17 +6,9 @@ struct timer {
   int (*p)(struct timer *t); /* pause check function */
 };
 
-void timerdec(struct timer *t) {
-  if (t->s != 0) t->s--;
-}
-
-void timerinc(struct timer *t) {
-  t->s++;
-}
-
-void timerupdate(struct timer *t) {
-  if(t->u != NULL) t->u(t);
-}
+void timerdec(struct timer *t) { if (t->s != 0) t->s--; }
+void timerinc(struct timer *t) { t->s++; }
+void timerupdate(struct timer *t) { if(t->u != NULL) t->u(t); }
 
 int timerstate(int (*f)(struct timer *t), struct timer *t) {
   if(f != NULL) {
@@ -26,34 +18,18 @@ int timerstate(int (*f)(struct timer *t), struct timer *t) {
   return 0;
 }
 
-int timerstop(struct timer *t) {
-  return timerstate(t->c, t);
-}
-
-int timerpause(struct timer *t) {
-  return timerstate(t->p, t);
-}
+int timerstop(struct timer *t) { return timerstate(t->c, t); }
+int timerpause(struct timer *t) { return timerstate(t->p, t); }
 
 int timerzero(struct timer *t) {
   if(t->s == 0) return 1;
   return 0;
 }
 
-int seconds(int t) {
-  return t % 60;
-}
-
-int minutes(int t) {
-  return (t / 60) % 60;
-}
-
-int minute(int t) {
-  return t / 60;
-}
-
-int hours(int t) {
-  return (t / 60) / 60;
-}
+int seconds(int t) { return t % 60; }
+int minutes(int t) { return (t / 60) % 60; }
+int minute(int t) { return t / 60; }
+int hours(int t) { return (t / 60) / 60; }
 
 struct timer *timerinit(void) {
   struct timer *t = malloc(sizeof *t);
