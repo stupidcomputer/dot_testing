@@ -1,0 +1,81 @@
+.TH TIMER 1 timer
+.SH NAME
+timer \- simple command line timer program
+.SH SYNOPSIS
+.B timer [-evdbft] [-h int] [-m int] [-s int]
+.SH OPTIONS
+.TP
+.B -e
+enable usage of vt100 escape sequences for timer rendering (overrides -v)
+.TP
+.B -v
+enable printing of timer status
+.TP
+.B -d
+count down; when timer reaches 00:00, finish (use -h, -m, -s to set ending time)
+.TP
+.B -b
+ASCII BEL when timer finish state reached
+.TP
+.B -f
+timer display contains hour slot
+.TP
+.B -t
+use a tomato timer (use -h, -m, -s to set work cycle time, rest cycle time is assumed to be half of the working time)
+.TP
+.B "-h int"
+specify number of hours for timer parameters
+.TP
+.B "-m int"
+specify number of minutes for timer parameters
+.TP
+.B "-s int"
+specify number of seconds for timer parameters
+.SH INTERACTIVE USAGE
+.TP
+.B pausing
+a timer is paused when an astrisk prefixes the display (with -e) and/or when the timer ceases to update, e.g. count up or down. you can use the enter key to pause/unpause it (refer to the below example)
+.nf
+$ timer -e
+* 05:45
+.fi
+.TP
+.B stopping a timer
+should you wish to stop a timer prematurely, or a timer which has no specified end condition, you may press the key combination that sends a killing signal to the program (e.g. a la SIGTERM) in your shell, which is usually ^C. the timer has no major places to clean up. however, memory leaks might occur on some operating systems due to no free()ing of resources.
+.SH EXIT CODES/TERMINATION SIGNALS
+.TP
+.B 0
+timer finished successfully
+.TP
+.B 1 / SIGABRT
+error parsing arguments
+.SH EXAMPLES
+.B start a ten minute timer, counting up:
+.nf
+$ timer -m 10
+.fi
+.B show the vt100 interface, too:
+.nf
+$ timer -em 10
+.fi
+.B start a one hour sixty-two minute fourty-nine second timer counting down (with vt100 interface):
+.nf
+$ timer -edh 1 -m 62 -s 49
+.fi
+.B start a tomato timer with a work interval of fourty minutes and a rest interval of twenty minutes:
+.nf
+$ timer -etm 40
+.fi
+.SH REQUIRED HEADERS
+.nf
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <poll.h>
+#include <string.h>
+.fi
+.SH BUGS
+send email to random user at-sign tilde dot club
+.SH AUTHOR
+randomuser
+
