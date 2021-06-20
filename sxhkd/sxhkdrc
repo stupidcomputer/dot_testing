@@ -19,7 +19,7 @@ super + r
   bspc wm -r
 
 super + w
-  wall
+  wal
 
 super + {_,shift + }n
   nws {local,national}

@@ -5,7 +5,7 @@
 disp
 
 # set a wallpaper
-wall
+wal
 
 # set up the color scheme
 bspc config normal_border_color "#161510"
