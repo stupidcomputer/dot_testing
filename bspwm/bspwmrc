@@ -7,6 +7,9 @@ disp
 # set a wallpaper
 wal
 
+# get the battery indicator
+xbattmon &
+
 # set up the color scheme
 bspc config normal_border_color "#161510"
 bspc config active_border_color "#727A18"
