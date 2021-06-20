@@ -17,6 +17,13 @@ case $1 in
     [ $(ps aux | grep wpa_supplicant | wc -l) -eq 2 ] && sh $0 d && exit
     sh $0 c
     ;;
+  "l"*)
+    iw dev wlp3s0 scan | \
+      grep 'SSID\|signal' | \
+      grep -v '* SSID List' | \
+      awk -F': ' '{print $2}' | \
+      sed 'N;s/\n/ /' | \
+      grep -v '\x00'
   *)
     printf "\
 simple wrapper for connecting to a network
@@ -24,6 +31,7 @@ ${0} toggle to toggle wifi connection
 ${0} restart to restart wifi
 ${0} disconnect to disconnect
 ${0} connect to connect to network
+${0} list to list networks
 "
     ;;
 esac
