@@ -24,6 +24,7 @@ case $1 in
       awk -F': ' '{print $2}' | \
       sed 'N;s/\n/ /' | \
       grep -v '\x00'
+    ;;
   *)
     printf "\
 simple wrapper for connecting to a network
