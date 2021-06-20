@@ -2,7 +2,7 @@
 
 WALLDIR="${HOME}/.local/share/wallpapers"
 TEEFILE="${WALLDIR}/.hist"
-BASECMD="feh --bg-fill"
+BASECMD="feh --no-fehbg --bg-fill"
 
 generate_wall () {
   GENWALL=$( \
