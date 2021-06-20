@@ -3,8 +3,8 @@ install: man sh mkc c
 .PHONY: man sh mkc c
 
 man:
-	mkdir -p $(DESTDIR)$(PREFIX)/man1
-	cp -f man/* $(DESTDIR)$(PREFIX)/man1
+	mkdir -p /usr/local/man/man1
+	cp -f man/* /usr/local/man/man1
 sh:
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/paste $(DESTDIR)$(PREFIX)/bin
