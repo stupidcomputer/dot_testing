@@ -92,6 +92,12 @@ char *timerdisp(struct timer *t) {
   return str;
 }
 
+void defaultSettings(struct settings s) {
+  s.e = 1;
+  s.b = 1;
+  s.f = 1;
+}
+
 void timerloop() {
   struct timer *t = timerinit();
   if(s.d) {
@@ -146,7 +152,7 @@ void timerloop() {
 
 int main(int argc, char **argv) {
   char c;
-  while((c = getopt(argc, argv, "evdbftph:m:s:")) != -1) {
+  while((c = getopt(argc, argv, "evdbftpzh:m:s:")) != -1) {
     switch(c) {
       break; case 'e': s.e = 1;
       break; case 'v': s.v = 1;
@@ -155,6 +161,7 @@ int main(int argc, char **argv) {
       break; case 'f': s.f = 1;
       break; case 't': s.t = 1;
       break; case 'p': s.p = 1;
+      break; case 'z': s.e = 1; s.b = 1; s.f = 1;
       break; case 'h': s.s = s.s + (atoi(optarg) * 3600);
       break; case 'm': s.s = s.s + (atoi(optarg) * 60);
       break; case 's': s.s = s.s + atoi(optarg);
