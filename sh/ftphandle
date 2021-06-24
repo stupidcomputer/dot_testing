@@ -3,4 +3,4 @@
 # This one is relatively simple. Relay the first argument to
 # ncftp and then you're done.
 
-ncftp $1
+st -e ncftp $1
