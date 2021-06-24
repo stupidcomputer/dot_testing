@@ -71,3 +71,6 @@ aug end
 aug underground
   au LoadStarting {gemini,gopher}://* :shellcmd! urlhandle $VIMB_URI
 aug end
+aug ftp
+  au LoadStarting ftp://* :shellcmd! ftphandle $VIMB_URI
+aug end
