@@ -15,6 +15,7 @@ sh:
 	cp -f sh/connect $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/nws $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/urlhandle $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/ftphandle $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/indicate $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/vol $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/josm_launch $(DESTDIR)$(PREFIX)/bin
