@@ -3,6 +3,8 @@ install: man sh mkc c
 .PHONY: man sh mkc c
 
 man:
+	# this used to be {command} $(DESTDIR)$(PREFIX)/man/man1
+	# this did not work on my computer, but might be needed in other computers
 	mkdir -p /usr/local/man/man1
 	cp -f man/* /usr/local/man/man1
 sh:
