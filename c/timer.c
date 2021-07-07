@@ -13,13 +13,13 @@ struct timer {
 };
 
 struct settings {
-  int e:1; /* use escape (v assumed) */
-  int v:1; /* verbose */
-  int d:1; /* count down/up (1/0) */
-  int b:1; /* ascii bel when done */
-  int f:1; /* display hours */
-  int t:1; /* tomato timer */
-  int p:1; /* stop after tomato timer cycle finished */
+  unsigned int e:1; /* use escape (v assumed) */
+  unsigned int v:1; /* verbose */
+  unsigned int d:1; /* count down/up (1/0) */
+  unsigned int b:1; /* ascii bel when done */
+  unsigned int f:1; /* display hours */
+  unsigned int t:1; /* tomato timer */
+  unsigned int p:1; /* stop after tomato timer cycle finished */
   int s; /* seconds */
 } s = {
   .e = 0,
