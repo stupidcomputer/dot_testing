@@ -30,7 +30,7 @@ super + {_,shift + }n
 {XF86Display,super + o}
   disp
 
-{XF86ScreenSaver,super + l}
+{XF86ScreenSaver,super + shift + l}
   slock
 
 XF86AudioMute
