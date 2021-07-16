@@ -1,0 +1,8 @@
+#!/bin/sh
+
+# this is pashmenu. this program will only work if gpg's
+# gui password dialog is enabled. i'm not why it's enabled,
+# but it's required for this to work.
+
+choice=$(pash l | nenu)
+pash c $choice

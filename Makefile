@@ -16,6 +16,7 @@ sh:
 	cp -f sh/yt $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/connect $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/nws $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/pashmenu $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/urlhandle $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/ftphandle $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/indicate $(DESTDIR)$(PREFIX)/bin
