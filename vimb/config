@@ -26,9 +26,10 @@ set input-autohide=true
 nnoremap : ;
 nnoremap ; :
 
-nmap je ;set scripts=on<CR>
-nmap jd ;set scripts=off<CR>
-nmap jt ;set scripts!<CR>
+# disable/enable/toggle js
+nmap sje ;set scripts=on<CR>
+nmap sjd ;set scripts=off<CR>
+nmap sjt ;set scripts!<CR>
 
 # start a "less protected" school version of the browser
 nmap se ;source ~/.config/vimb/school
