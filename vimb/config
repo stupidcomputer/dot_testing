@@ -47,9 +47,9 @@ set completion-css=color: #ccbc8e; background-color: #161510; font: Fantasque Sa
 set completion-selected-css=color: #161510; background-color: #ccbc8e; font: Fantasque Sans Mono; font-size: 14px;
 set completion-hover-css=color: #161510; background-color: #ccbc8e; font: Fantasque Sans Mono; font-size: 14px;
 
-# webpage css and stuff (monospace, monospace everywhere!)
+# webpage css and stuff
 set dark-mode=true
-set default-font=Fantasque Sans Mono
+set default-font=Noto Sans
 set font-size=14
 
 set monospace-font=Fantasque Sans Mono
