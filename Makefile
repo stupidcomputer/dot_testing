@@ -22,6 +22,7 @@ sh:
 	cp -f sh/indicate $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/vol $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/josm_launch $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/start $(DESTDIR)$(PREFIX)/bin
 
 mkc:
 	cc c/scream.c -o c/scream
