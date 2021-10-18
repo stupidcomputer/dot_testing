@@ -32,5 +32,7 @@ mkc:
 c:
 	cp -f c/scream $(DESTDIR)$(PREFIX)/bin
 	cp -f c/timer $(DESTDIR)$(PREFIX)/bin
+	cp -f c/boid $(DESTDIR)$(PREFIX)/bin
+	cp -f c/anaconda $(DESTDIR)$(PREFIX)/bin
 clean:
 	rm c/scream
