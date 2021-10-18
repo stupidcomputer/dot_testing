@@ -73,7 +73,7 @@ void appendPoint(point *dest, point *origin) {
   dest->next = origin;
 }
 
-void updateAnaconda(anaconda *anaconda) {
+int updateAnaconda(anaconda *anaconda) {
   point *prev = anaconda->chain;
   point *temp = rotate(mkPoint(10, 0), anaconda->rot);
   point *new = mkPoint(
@@ -96,6 +96,19 @@ void updateAnaconda(anaconda *anaconda) {
   }
   free(traverser->next);
   traverser->next = NULL;
+
+  point *top = anaconda->chain;
+  point *ptr = top;
+  for(int i = 0; i < 3; i++) {
+    if(ptr->next) ptr = ptr->next;
+    else return 1; /* we're fine, the snake is too short to intersect itself */
+  }
+
+  while(ptr->next) {
+    if(intersect(top, top->next, ptr, ptr->next)) return 0;
+    ptr = ptr->next;
+  }
+  return 1;
 }
 
 point *generateChain(int length) {
@@ -124,10 +137,12 @@ anaconda *mkAnaconda(point *point, double rot) {
 }
 
 int main(void) {
-  anaconda *anaconda = mkAnaconda(generateChain(10), 0);
+  anaconda *anaconda = mkAnaconda(generateChain(30), 0);
   xinit();
   while(1) {
-    updateAnaconda(anaconda);
+    if(!updateAnaconda(anaconda)) {
+      return 0;
+    }
     XClearWindow(d, w);
     point *ptr = anaconda->chain;
     while(ptr->next) {
