@@ -28,6 +28,7 @@ mkc:
 	cc c/scream.c -o c/scream
 	cc c/timer.c -o c/timer
 	cc c/boid.c -o c/boid -lm -lX11
+	cc c/anaconda.c -o c/anaconda -lm -lX11
 c:
 	cp -f c/scream $(DESTDIR)$(PREFIX)/bin
 	cp -f c/timer $(DESTDIR)$(PREFIX)/bin
