@@ -156,9 +156,6 @@ void updateBoid(boid *b, boid *chain, int id, double average) {
   boid *c = chain;
   while(c) {
     if(c->id != id) {
-//      printf("boid %i is being pinged by boid %i\n", c->id, b->id);
-//      printf("boid %i is %f units away from boid %i\n", c->id,
-//        distance(c->p, b->p), b->id);
       int dist = distance(c->p, b->p);
       if(dist < 50) toTurn += dist / 75;
     }
@@ -167,7 +164,6 @@ void updateBoid(boid *b, boid *chain, int id, double average) {
     int centerw = w / 2 - b->p->x;
     int centerh = h / 2 - b->p->y;
     double deg = atan((double)centerh / (double)centerw) * 180/M_PI;
-//    printf("%f %i %i %i: degrees\n", deg, centerw, centerh, sign(deg));
     toTurn += sign(deg) * 0.5;
     toTurn += (average - c->rot) * 0.4;
     if(b->p->x > w) b->p->x = 0;
@@ -189,20 +185,6 @@ int main() {
   boid *b = mkBoid(100, 100, 0);
   randomBoids(b, 100);
   while(1) {
-/*
-    while(XPending(d)) {
-      XNextEvent(d, &e);
-      if(e.type == MotionNotify) {
-        XClearWindow(d, w);
-        boid *ptr = b;
-        while(ptr) {
-          updateBoid(ptr, b, ptr->id, averageHeading(b));
-          renderBoid(ptr);
-          ptr = ptr->next;
-        }
-      }
-    }
-*/
     XClearWindow(d, w);
     boid *ptr = b;
     while(ptr) {
