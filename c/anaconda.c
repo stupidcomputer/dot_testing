@@ -93,17 +93,23 @@ int updateAnaconda(anaconda *anaconda, int w, int h, point *apple) {
 
   free(temp);
 
-  point *traverser = new;
+  if(eucliddist(new, apple) <= 30) {
+    anaconda->score += 30;
+    apple->x = randrange(20, w / 2);
+    apple->y = randrange(20, h / 2);
+  } else {
+    point *traverser = new;
 
-  while(1) {
-    if(traverser->next) {
-      if(traverser->next->next) {
-        traverser = traverser->next;
+    while(1) {
+      if(traverser->next) {
+        if(traverser->next->next) {
+          traverser = traverser->next;
+        } else break;
       } else break;
-    } else break;
+    }
+    free(traverser->next);
+    traverser->next = NULL;
   }
-  free(traverser->next);
-  traverser->next = NULL;
 
   point *top = anaconda->chain;
   point *ptr = top;
@@ -124,8 +130,8 @@ int updateAnaconda(anaconda *anaconda, int w, int h, point *apple) {
 
   if(eucliddist(new, apple) <= 30) {
     anaconda->score += 30;
-    apple->x = randrange(20, w);
-    apple->y = randrange(20, h);
+    apple->x = randrange(20, w / 2);
+    apple->y = randrange(20, h / 2);
   }
 
   return 1;
@@ -159,10 +165,10 @@ anaconda *mkAnaconda(point *point, double rot) {
 int main(void) {
   anaconda *anaconda = mkAnaconda(generateChain(30), 0);
   xinit();
+  srand(time(0));
   int width = DisplayWidth(d, s);
   int height = DisplayHeight(d, s);
-  point *apple = mkPoint(randrange(20, width), randrange(20, height));
-  srand(time(0));
+  point *apple = mkPoint(randrange(20, width / 2 - 20), randrange(20, height / 2 - 20));
   while(1) {
     if(!updateAnaconda(anaconda, width, height, apple)) {
       return 0;
@@ -173,6 +179,7 @@ int main(void) {
       XDrawLine(d, w, gc, ptr->x, ptr->y, ptr->next->x, ptr->next->y);
       ptr = ptr->next;
     }
+    printf("%f %f\n", apple->x, apple->y);
     XDrawArc(d, w, gc, apple->x - (5/2), apple->y - (5/2), 5, 5, 0, 360*64);
     while(XPending(d)) {
       XNextEvent(d, &e);
