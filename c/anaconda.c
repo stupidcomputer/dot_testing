@@ -49,8 +49,16 @@ int intersect(point *a, point *b, point *c, point *d) {
   return (ccw(a, c, d) != ccw(b, c, d)) && (ccw(a, b, c) != ccw(a, b, d));
 }
 
+int randrange(int b, int s) {
+  return rand() % (b - s + 1) + s;
+}
+
+int eucliddist(point *a, point *b) {
+  return sqrt(pow(a->x - b->x, 2) + pow(a->y - b->y, 2));
+}
+
 point *mkPoint(double x, double y) {
-  point *ret = malloc(sizeof ret);
+  point *ret = malloc(sizeof *ret);
 
   ret->x = x;
   ret->y = y;
@@ -73,7 +81,7 @@ void appendPoint(point *dest, point *origin) {
   dest->next = origin;
 }
 
-int updateAnaconda(anaconda *anaconda) {
+int updateAnaconda(anaconda *anaconda, int w, int h, point *apple) {
   point *prev = anaconda->chain;
   point *temp = rotate(mkPoint(10, 0), anaconda->rot);
   point *new = mkPoint(
@@ -108,6 +116,18 @@ int updateAnaconda(anaconda *anaconda) {
     if(intersect(top, top->next, ptr, ptr->next)) return 0;
     ptr = ptr->next;
   }
+
+  if(
+    new->x >= w || new->x <= 0 ||
+    new->y >= h || new->y <= 0
+  ) return 0;
+
+  if(eucliddist(new, apple) <= 30) {
+    anaconda->score += 30;
+    apple->x = randrange(20, w);
+    apple->y = randrange(20, h);
+  }
+
   return 1;
 }
 
@@ -127,7 +147,7 @@ point *generateChain(int length) {
 }
 
 anaconda *mkAnaconda(point *point, double rot) {
-  anaconda *ret = malloc(sizeof ret);
+  anaconda *ret = malloc(sizeof *ret);
 
   ret->chain = point;
   ret->rot = rot;
@@ -139,8 +159,12 @@ anaconda *mkAnaconda(point *point, double rot) {
 int main(void) {
   anaconda *anaconda = mkAnaconda(generateChain(30), 0);
   xinit();
+  int width = DisplayWidth(d, s);
+  int height = DisplayHeight(d, s);
+  point *apple = mkPoint(randrange(20, width), randrange(20, height));
+  srand(time(0));
   while(1) {
-    if(!updateAnaconda(anaconda)) {
+    if(!updateAnaconda(anaconda, width, height, apple)) {
       return 0;
     }
     XClearWindow(d, w);
@@ -149,6 +173,7 @@ int main(void) {
       XDrawLine(d, w, gc, ptr->x, ptr->y, ptr->next->x, ptr->next->y);
       ptr = ptr->next;
     }
+    XDrawArc(d, w, gc, apple->x - (5/2), apple->y - (5/2), 5, 5, 0, 360*64);
     while(XPending(d)) {
       XNextEvent(d, &e);
       switch(e.type) {
