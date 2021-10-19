@@ -82,13 +82,14 @@ void appendPoint(point *dest, point *origin) {
 }
 
 int updateAnaconda(anaconda *anaconda, int w, int h, point *apple) {
-  point *prev = anaconda->chain;
-  point *temp = rotate(mkPoint(10, 0), anaconda->rot);
-  point *new = mkPoint(
-    prev->x + temp->x,
-    prev->y + temp->y
+  point *temp, *new, *ptr;
+  new = anaconda->chain;
+  temp = rotate(mkPoint(10, 0), anaconda->rot);
+  new = mkPoint(
+    new->x + temp->x,
+    new->y + temp->y
   );
-  new->next = prev;
+  new->next = anaconda->chain;
   anaconda->chain = new;
 
   free(temp);
@@ -98,28 +99,26 @@ int updateAnaconda(anaconda *anaconda, int w, int h, point *apple) {
     apple->x = randrange(20, w / 2);
     apple->y = randrange(20, h / 2);
   } else {
-    point *traverser = new;
+    ptr = new;
 
     while(1) {
-      if(traverser->next) {
-        if(traverser->next->next) {
-          traverser = traverser->next;
-        } else break;
+      if(ptr->next) {
+        if(ptr->next->next) ptr = ptr->next;
+        else break;
       } else break;
     }
-    free(traverser->next);
-    traverser->next = NULL;
+    free(ptr->next);
+    ptr->next = NULL;
   }
 
-  point *top = anaconda->chain;
-  point *ptr = top;
+  ptr = anaconda->chain;
   for(int i = 0; i < 3; i++) {
     if(ptr->next) ptr = ptr->next;
     else return 1; /* we're fine, the snake is too short to intersect itself */
   }
 
   while(ptr->next) {
-    if(intersect(top, top->next, ptr, ptr->next)) return 0;
+    if(intersect(new, new->next, ptr, ptr->next)) return 0;
     ptr = ptr->next;
   }
 
