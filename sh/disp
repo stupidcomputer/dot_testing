@@ -4,33 +4,26 @@ exists() {
   xrandr | grep ' connected' | grep "${1}" | wc -l
 }
 
-if [ $(exists "HDMI-2") -eq 1 ] && [ $(exists "VGA-1") -eq 1 ]; then
-  printf "HDMI-2, VGA-1 exists\n"
-  xrandr --output HDMI-2 --right-of VGA-1 --auto
+if [ $(exists "HDMI-2") -eq 1 ]; then
+  printf "one"
   xrandr --output LVDS-1 --off --auto
-  bspc monitor HDMI-2 -a I II III IV V
-  bspc monitor VGA-1 -a VI VII VIII IX
+  xrandr --output VGA-1 --off --auto
+  bspc monitor -d I II III IV V VI VII VIII IX X
+  bspc monitor -g 1680x1050+0+0
+  exit 0
+fi
+
+if [ $(exists "LVDS-1") -eq 1 ]; then
+  bspc monitor -d I II III IV V VI VII VIII IX X
+  bspc monitor LVDS-1 -a I II III IV V VI VII VIII IX
   exit 0
 fi
 
 if [ $(exists "HDMI-2") -eq 1 ] && [ $(exists "LVDS-1") -eq 1 ]; then
-  printf "HDMI-2, LVDS-1 exists\n"
+  printf "two"
   xrandr --output HDMI-2 --above LVDS-1 --auto
-  bspc monitor LVDS-1 -a I II III IV V
-  bspc monitor HDMI-2 -a VI VII VIII IX
+  xrandr --output VGA-1 --off --auto
+  bspc monitor LVDS-1 -a I III V VII IX
+  bspc monitor HDMI-2 -a II IV VI VIII
   exit 0
 fi
-
-if [ $(exists "HDMI-1") -eq 1 ] && [ $(exists "LVDS-1") -eq 1 ]; then
-  printf "HDMI-1, LVDS-1 exists\n"
-  xrandr --output HDMI-1 --above LVDS-1 --auto
-  bspc monitor LVDS-1 -a I II III IV V
-  bspc monitor HDMI-1 -a VI VII VIII IX
-  exit 0
-fi
-
-printf "defaulting to default configuration\n"
-xrandr --output HDMI-1 --off
-xrandr --output HDMI-2 --off
-bspc monitor -d I II III IV V VI VII VIII IX X
-exit 0
