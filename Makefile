@@ -29,10 +29,12 @@ mkc:
 	cc c/timer.c -o c/timer
 	cc c/boid.c -o c/boid -lm -lX11
 	cc c/anaconda.c -o c/anaconda -lm -lX11
+	cc c/simplestatus.c -o c/simplestatus
 c:
 	cp -f c/scream $(DESTDIR)$(PREFIX)/bin
 	cp -f c/timer $(DESTDIR)$(PREFIX)/bin
 	cp -f c/boid $(DESTDIR)$(PREFIX)/bin
 	cp -f c/anaconda $(DESTDIR)$(PREFIX)/bin
+	cp -f c/simplestatus $(DESTDIR)$(PREFIX)/bin
 clean:
 	rm c/scream

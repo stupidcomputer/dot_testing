@@ -1,0 +1,87 @@
+'\" t
+.TH SIMPLESTATUS 1 simplestatus
+.SH NAME
+simplestatus \- simple, lightweight status bar content generator
+.SH SYNOPSIS
+.B simplestatus
+.SH DESCRIPTION
+simplestatus is a simple status bar content generator for statusbars which accept their input via standard input (such as lemonbar), or can be used in conjunction with other utilities to set their statusbars (e.g. dwm's statusbar). simplestatus is configured via a configuration file.
+
+simplestatus works on the premise of each component in the statusbar being a module; in this case, simplestatus represents them in shell scripts residing in the configuration directory. When a module needs to be updated, the cooresponding shell script is executed and its stdout read as the output of the module. Modules can be updated via signals send to the process or via timers, all specified in the configuration file.
+.SH CONFIGURATION
+The configuration file resides in the configuration directory. The configuration file location is determined via checking the following places:
+.IP
+o $XDG_CONFIG_DIR/simplestatus/config
+.IP
+o $HOME/.config/simplestatus/config
+.P
+If after these two steps the configuration cannot be found, simplestatus exits.
+
+Once the configuration file location is determined, the configuration file is read and parsed. There are three main directives in the configuration file:
+.IP
+o module
+.IP
+o order
+.IP
+o format
+.SS module
+This directive takes three arguments: the module name, the signal trigger number, and the timer trigger. For example
+.IP
+.B module power 7 30
+.P
+defines a module named ``power'', which is updated when signal 7 is recieved (SIGBUS) or every thirty seconds. ``power'' must be an executable placed in the configuration directory (e.g. the directory in which the configuration file resides) and must have the executable flag set for the current user. Note that entering the signals' symbolic name (SIGBUS) instead of the number (7) is not supported at this time.
+.SS order
+The ``order'' directive specifies in what order the modules will be placed in the format string, defined by the directive ``format''. For example,
+.IP
+.B order power time date wm
+.P
+specifies the order in which the modules will be inserted in the format string, starting with ``power'' and ending with ``wm''.
+.SS format
+``format'' specifies the format string that the output of the modules will be inserted into. Below is an example command:
+.IP
+.B format %{l}&%{c}&%{r}&
+.SH CONFIGURATION EXAMPLE
+Assume we have the following modules, who output the following values:
+.TS
+tab(@) allbox;
+l|l .
+MODULE@EVALUATED VALUE
+foo@bar
+ping@pong
+a@b
+.TE
+.P
+and this configuration:
+.IP
+module foo 7 30
+
+module ping 10 30
+
+module a 12 120
+
+order foo ping a
+
+format output of foo: &; output of ping: &; output of a: &
+.P
+we will get the output:
+.IP
+.B output of foo: bar; output of ping: pong; output of a: b
+.P
+Should you wish to make comments, prefix lines with ``#''. If you wish to make spaces between instructions, make an empty line.
+.SH COMMON PITFALLS
+.IP
+o Don't assign SIGINT (2) to a module unless you want it to update when you ^C!
+.SH PLANNED FEATURES
+.IP
+o If the configuration file is marked +x, execute and read contents from the script's stdout to be parsed.
+o free(...) memory when finished.
+o Add ability to export environment variables to scripts via configuration file.
+o Add signal to force re-parsing of configuration file.
+.SH KNOWN BUGS
+o Lack of use of free(...), causing potential for memory leaks.
+.SH SEE ALSO
+.BR lemonbar (1),
+.BR slstatus (1)
+
+.SH AUTHOR
+randomuser <randomuser at tilde dot club>
