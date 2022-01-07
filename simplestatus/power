@@ -1,0 +1,11 @@
+#!/bin/sh
+
+battery="sbs-20-000b"
+perc=$(cat /sys/class/power_supply/$battery/capacity)
+state=$(
+  cat /sys/class/power_supply/$battery/status | \
+  sed 's/Discharging/↓/g;s/Charging/↑/g'
+)
+printf "%s %s" "$perc" "$state"
+
+exit

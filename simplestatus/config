@@ -1,0 +1,8 @@
+module power 7 30
+module time 7 30
+module date 7 30
+module bspwm 10 1000000
+
+order bspwm date time power
+
+format %{l}&%{c}& &%{r}&
