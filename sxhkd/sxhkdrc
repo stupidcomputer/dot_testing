@@ -18,7 +18,7 @@ super + d
   dmenu_run
 
 super + r
-  pkill -USR1 -x sxhkd
+  pkill -USR1 -x sxhkd; \
   bspc wm -r
 
 super + w
@@ -47,12 +47,12 @@ super + q
 super + e
   bspc quit 0
 
-# ignore this
 super + {_,ctrl +,shift + }{h,j,k,l}
   bspc node -{f,p,s} {west,south,north,east}
 
 super + {_,shift + } {1-9,0}
-  bspc {desktop -f,node -d} '^{1-9,10}'
+  bspc {desktop -f,node -d} '^{1-9,10}'; \
+  {killall -10 simplestatus,_}
 
 super + {t,f,s}
   bspc node -t {tiled,floating,fullscreen}
