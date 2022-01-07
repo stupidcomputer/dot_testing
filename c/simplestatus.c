@@ -128,6 +128,7 @@ char *execstdout(char *file, char *arg[], char *env[]) {
       return buf;
     }
     close(pfds[0]);
+    close(pfds[1]);
   }
 }
 
@@ -238,6 +239,8 @@ module *parse_file(char *file) {
       format_string = strdup(pattern);
     }
   }
+
+  fclose(fp);
 
   return head;
 }
