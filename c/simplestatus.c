@@ -107,6 +107,8 @@ char *execstdout(char *file, char *arg[], char *env[]) {
           continue;
         } else {
           free(buf);
+          close(pfds[0]);
+          close(pfds[1]);
           return NULL;
         }
       }
@@ -125,10 +127,10 @@ char *execstdout(char *file, char *arg[], char *env[]) {
       buf[total] = '\0';
       buf = realloc(buf, strlen(buf));
 
+      close(pfds[0]);
+      close(pfds[1]);
       return buf;
     }
-    close(pfds[0]);
-    close(pfds[1]);
   }
 }
 
