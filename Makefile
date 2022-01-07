@@ -4,7 +4,7 @@ install: man sh mkc c
 
 man:
 	# this used to be {command} $(DESTDIR)$(PREFIX)/man/man1
-	# this did not work on my computer, but might be needed in other computers
+	# this did not work on my computer, but might be needed on other installations
 	mkdir -p /usr/local/man/man1
 	cp -f man/* /usr/local/man/man1
 sh:
@@ -38,3 +38,7 @@ c:
 	cp -f c/simplestatus $(DESTDIR)$(PREFIX)/bin
 clean:
 	rm c/scream
+	rm c/timer
+	rm c/boid
+	rm c/anaconda
+	rm c/simplestatus
