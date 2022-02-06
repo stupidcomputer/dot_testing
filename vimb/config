@@ -22,6 +22,8 @@ set javascript-can-open-windows-automatically=false
 set stylesheet=true
 set input-autohide=true
 
+set download-path=~/down
+
 # keybinds
 nnoremap : ;
 nnoremap ; :
