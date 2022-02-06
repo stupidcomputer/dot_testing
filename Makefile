@@ -23,6 +23,7 @@ sh:
 	cp -f sh/vol $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/josm_launch $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/start $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/proxtest $(DESTDIR)$(PREFIX)/bin
 
 mkc:
 	cc c/scream.c -o c/scream
@@ -30,6 +31,7 @@ mkc:
 	cc c/boid.c -o c/boid -lm -lX11
 	cc c/anaconda.c -o c/anaconda -lm -lX11
 	cc c/simplestatus.c -o c/simplestatus
+
 c:
 	cp -f c/scream $(DESTDIR)$(PREFIX)/bin
 	cp -f c/timer $(DESTDIR)$(PREFIX)/bin
