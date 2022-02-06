@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# program exports to keep the $HOME neat and tidy
+# bash
+export HISTFILE="$HOME/.config/bash/hist"
+export HISTFILESIZE=3000
+
+# less
+export LESSHISTFILE="-"
+
+# source the bashrc(s)
+[ -f $HOME/.config/bash/bashrc ] && . $HOME/.config/bash/bashrc
+[ -f $HOME/.bashrc ] && . $HOME/.bashrc
