@@ -3,7 +3,7 @@ disp
 wal
 
 # statusbar
-simplestatus | lemonbar -f 'Fantasque Sans Mono' &
+simplestatus | lemonbar -f 'Fantasque Sans Mono' -B "#161510" -F "#4c4635" &
 
 # start the wm
 sxhkd &
