@@ -1,5 +1,5 @@
 LOCATION="$(HOME)/.config"
-install: install_bspwm install_nvim install_sx install_sxhkd install_vimb install_zathura install_wyebadblock install_simplestatus
+install: install_bspwm install_nvim install_sx install_sxhkd install_vimb install_zathura install_wyebadblock install_simplestatus environment
 install_bspwm:
 	cp -r bspwm $(LOCATION)
 install_nvim:
@@ -16,3 +16,5 @@ install_wyebadblock:
 	cp -r wyebadblock $(LOCATION)
 install_simplestatus:
 	cp -r simplestatus $(LOCATION)
+environment:
+	sh environ

@@ -4,3 +4,6 @@ dot
 dotfiles for randomuser
 if they work, great
 if they don't, I don't care
+
+there's now a hack that allows you to have your bashrc
+and profile in your $XDG_CONFIG_DIR, or ~/.config

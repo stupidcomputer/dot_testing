@@ -1,0 +1,12 @@
+#!/bin/sh
+
+set -x
+
+[ -w /etc/bash.bashrc ] || exit 1
+[ -w /etc/profile ] || exit 1
+
+printf '[ -f $HOME/.config/bash/bashrc ] && . $HOME/.config/bash/bashrc\n' >> /etc/bash.bashrc
+printf '[ -f $HOME/.config/bash/profile ] && . $HOME/.config/bash/profile\n' >> /etc/profile
+touch environment
+
+set +x
