@@ -1,14 +1,8 @@
 #!/bin/sh
 # rndusr's bspwmrc
 
-# monitor configuration
-disp
-
-# set a wallpaper
-wal
-
-# get the battery indicator
-xbattmon &
+# get the monitors up and running
+bspc monitor -d 1 2 3 4 5 6 7 8 9
 
 # set up the color scheme
 bspc config normal_border_color "#161510"

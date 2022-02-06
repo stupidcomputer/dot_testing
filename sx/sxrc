@@ -1,2 +1,10 @@
+# pre-wm boilerplate
+disp
+wal
+
+# statusbar
+simplestatus | lemonbar -f 'Fantasque Sans Mono' &
+
+# start the wm
 sxhkd &
 bspwm
