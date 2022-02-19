@@ -8,6 +8,9 @@ export HISTFILESIZE=3000
 # less
 export LESSHISTFILE="-"
 
+# remind
+export DOTREMINDERS="$HOME/git/calendar/reminders"
+
 # source the bashrc(s)
 [ -f $HOME/.config/bash/bashrc ] && . $HOME/.config/bash/bashrc
 [ -f $HOME/.bashrc ] && . $HOME/.bashrc
