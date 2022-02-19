@@ -6,3 +6,6 @@ shopt -s autocd
 
 # ssh keeping tidy
 alias ssh="ssh -F $HOME/.config/ssh/config"
+
+# remind alias
+alias sched="nvim $DOTREMINDERS"
