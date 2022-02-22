@@ -12,7 +12,7 @@ sh:
 	cp -f sh/paste $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/bat $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/disp $(DESTDIR)$(PREFIX)/bin
-	cp -f sh/wal $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/wallpaper $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/yt $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/connect $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/nws $(DESTDIR)$(PREFIX)/bin
