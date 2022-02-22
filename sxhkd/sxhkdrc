@@ -22,7 +22,7 @@ super + r
   bspc wm -r
 
 super + w
-  wal
+  wallpaper
 
 super + {_,shift + }n
   nws {local,national}
