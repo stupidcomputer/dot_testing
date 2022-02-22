@@ -1,6 +1,6 @@
 # pre-wm boilerplate
 disp
-wal
+wallpaper
 
 # statusbar
 simplestatus | lemonbar -f 'Fantasque Sans Mono' -B "#161510" -F "#4c4635" &
