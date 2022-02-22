@@ -9,3 +9,4 @@ alias ssh="ssh -F $HOME/.config/ssh/config"
 
 # remind alias
 alias sched="nvim $DOTREMINDERS"
+alias cal="rem -cl"
