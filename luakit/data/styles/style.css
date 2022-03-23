@@ -1,0 +1,41 @@
+@-moz-document domain('stackoverflow.com'), domain('stackexchange.com') {
+  .bg-black-025.bc-black-100.js-dismissable-hero {
+    display: none;
+  }
+  noscript {
+    display: none;
+  }
+  body, .top-bar__network {
+    margin-top: 0em !important;
+  }
+  ol.list-reset {
+    display: none;
+  }
+  li.d-flex.ml8.mt16.mb4.jc-space-between {
+    display: none !important;
+  }
+  a#nav-collective-discover {
+    display: none !important;
+  }
+  li.fs-fine.tt-uppercase.ml8.mt16.mb4.fc-light {
+    display: none !important;
+  }
+  div.js-freemium-cta {
+    display: none !important;
+  }
+  a#nav-jobs, a#nav-companies, footer {
+    display: none !important;
+  }
+  div#content {
+    width: calc(100% - 110px) !important;
+  }
+  div#left-sidebar {
+    width: 110px !important;
+  }
+  div.s-btn-group, form#post-form {
+    display: none !important;
+  }
+  div.js-consent-banner {
+    display: none !important;
+  }
+}

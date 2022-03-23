@@ -1,0 +1,17 @@
+{{
+["domain"]={2},
+},
+{
+[""]={3},
+},
+{
+["webview.enable_javascript"]=false,
+["webview.enable_html5_local_storage"]=false,
+["webview.enable_offline_web_application_cache"]=false,
+["webview.enable_fullscreen"]=false,
+["webview.enable_html5_database"]=false,
+["webview.user_agent"]="Mozilla/5.0 (Windows NT 5.1; rv:7.0.1) Gecko/20100101 Firefox/7.0.1",
+["webview.enable_plugins"]=true,
+["webview.enable_java"]=false,
+},
+}

@@ -1,5 +1,6 @@
 LOCATION="$(HOME)/.config"
-install: install_bspwm install_nvim install_sx install_sxhkd install_vimb install_zathura install_wyebadblock install_simplestatus install_bash install_ssh install_git environment
+DATA="$(HOME)/.local/share"
+install: install_bspwm install_nvim install_sx install_sxhkd install_vimb install_zathura install_wyebadblock install_simplestatus install_bash install_ssh install_git install_luakit environment
 install_bspwm:
 	cp -r bspwm $(LOCATION)
 install_nvim:
@@ -22,5 +23,8 @@ install_ssh:
 	cp -r ssh $(LOCATION)
 install_git:
 	cp -r git $(LOCATION)
+install_luakit:
+	cp -r luakit/config $(LOCATION)
+	cp -r luakit/data $(DATA)
 environment:
 	sh environ
