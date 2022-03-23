@@ -1,0 +1,13 @@
+#!/bin/sh
+
+for i in $(ls); do
+	cd $i
+	exists=$(
+		git status |\
+		grep 'Your branch is ahead of ' |\
+		wc -l
+	)
+
+	[ "$exists" -eq 0 ] || printf "> %s\n" "$i"
+	cd ..
+done

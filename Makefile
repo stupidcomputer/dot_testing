@@ -25,6 +25,7 @@ sh:
 	cp -f sh/start $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/proxtest $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/pco $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/git-survey $(DESTDIR)$(PREFIX)/bin
 
 mkc:
 	cc c/scream.c -o c/scream
