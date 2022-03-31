@@ -1,11 +1,21 @@
 " randomuser's vimrc
+" vim-plug {{{
+call plug#begin()
+Plug 'honza/vim-snippets'
+Plug 'sirver/ultisnips'
+cal plug#end()
+" }}}
 
+" misc {{{
 nnoremap ; :
 nnoremap : ;
 let mapleader = " "
+set nocompatible
+" }}}
 
-" defined settings
+" defined settings {{{
 set number
+set foldmethod=marker
 set encoding=utf8
 set list
 set lcs=tab:->,trail:_,eol:^
@@ -13,6 +23,7 @@ set clipboard=unnamedplus
 set spell
 set spelllang=en_us
 colorscheme earth
+" }}}
 
 " shortcuts {{{
 " toggle line numbers and listchars
@@ -25,7 +36,7 @@ nnoremap <Leader>re :edit ~/.config/nvim/init.vim<CR>
 " show the file explorer
 nnoremap <Leader>fs :Lexplore<CR>
 " show the shortcuts in the vimrc
-nnoremap <Leader>ke :e ~/.config/nvim/init.vim <CR>gg/" shortcuts<CR>zt
+nnoremap <Leader>ke :e ~/.config/nvim/init.vim <CR>ggzR/shortcuts<CR>z<CR>
 " jk to escape insert mode
 inoremap jk <esc>
 inoremap <esc> <esc>:echo "use jk instead!"<CR>2gsi
@@ -36,16 +47,24 @@ nnoremap <C-s> zg
 
 " }}}
 
-" autocmds
+" autocmds {{{
 au Filetype python setl et ts=4 sw=4
+" }}}
 
-" statusline
-
+" statusline {{{
 set statusline=%f
 set statusline+=\ 
 set statusline+=%r%m%q
 set statusline+=%=
 set statusline+=%y\ %B\ %l:%c:%p
+" }}}
 
-" netrw
+" netrw {{{
 let g:netrw_banner=0 
+" }}}
+
+" ultisnips {{{
+let g:UltiSnipsExpandTrigger = '<tab>'
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+" }}}
