@@ -41,3 +41,5 @@ hi VertSplit ctermbg=NONE ctermfg=white cterm=NONE
 
 hi StatusLine ctermbg=black ctermfg=white cterm=NONE gui=NONE
 hi StatusLineNC ctermbg=white ctermfg=black cterm=NONE gui=NONE
+
+hi SpellBad ctermbg=NONE ctermfg=red cterm=NONE
