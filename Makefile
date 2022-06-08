@@ -1,6 +1,6 @@
 LOCATION="$(HOME)/.config"
 DATA="$(HOME)/.local/share"
-install_local: install_bspwm install_nvim install_sx install_sxhkd install_zathura install_simplestatus install_bash install_ssh install_git
+install_local: install_bspwm install_nvim install_sx install_sxhkd install_zathura install_simplestatus install_bash install_ssh install_git install_tridactyl
 install: .environment
 install_bspwm:
 	ln -sf $(CURDIR)/bspwm $(LOCATION)/bspwm
@@ -20,5 +20,7 @@ install_ssh:
 	ln -sf $(CURDIR)/ssh $(LOCATION)/ssh
 install_git:
 	ln -sf $(CURDIR)/git $(LOCATION)/git
+install_tridactyl:
+	ln -sf $(CURDIR)/tridactyl $(LOCATION)/tridactyl
 .environment:
 	sh environ
