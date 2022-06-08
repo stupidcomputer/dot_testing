@@ -3,6 +3,9 @@
 call plug#begin()
 Plug 'honza/vim-snippets'
 Plug 'sirver/ultisnips'
+Plug 'tridactyl/vim-tridactyl'
+Plug 'chrisbra/csv.vim'
+Plug 'trapd00r/vimpoint'
 cal plug#end()
 " }}}
 
@@ -22,6 +25,7 @@ set lcs=tab:->,trail:_,eol:^
 set clipboard=unnamedplus
 set spell
 set spelllang=en_us
+set title
 colorscheme earth
 " }}}
 
