@@ -3,24 +3,22 @@ DATA="$(HOME)/.local/share"
 install_local: install_bspwm install_nvim install_sx install_sxhkd install_zathura install_simplestatus install_bash install_ssh install_git
 install: .environment
 install_bspwm:
-	cp -r bspwm $(LOCATION)
+	ln -sf $(CURDIR)/bspwm $(LOCATION)/bspwm
 install_nvim:
-	cp -r nvim $(LOCATION)
+	ln -sf $(CURDIR)/nvim $(LOCATION)/nvim
 install_sx:
-	cp -r sx $(LOCATION)
+	ln -sf $(CURDIR)/sx $(LOCATION)/sx
 install_sxhkd:
-	cp -r sxhkd $(LOCATION)
-install_vimb:
-	cp -r vimb $(LOCATION)
+	ln -sf $(CURDIR)/sxhkd $(LOCATION)/sxhkd
 install_zathura:
-	cp -r zathura $(LOCATION)
+	ln -sf $(CURDIR)/zathura $(LOCATION)/zathura
 install_simplestatus:
-	cp -r simplestatus $(LOCATION)
+	ln -sf $(CURDIR)/simplestatus $(LOCATION)/simplestatus
 install_bash:
-	cp -r bash $(LOCATION)
+	ln -sf $(CURDIR)/bash $(LOCATION)/bash
 install_ssh:
-	cp -r ssh $(LOCATION)
+	ln -sf $(CURDIR)/ssh $(LOCATION)/ssh
 install_git:
-	cp -r git $(LOCATION)
+	ln -sf $(CURDIR)/git $(LOCATION)/git
 .environment:
 	sh environ
