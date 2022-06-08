@@ -1,6 +1,7 @@
 LOCATION="$(HOME)/.config"
 DATA="$(HOME)/.local/share"
-install: install_bspwm install_nvim install_sx install_sxhkd install_zathura install_simplestatus install_bash install_ssh install_git environment
+install_local: install_bspwm install_nvim install_sx install_sxhkd install_zathura install_simplestatus install_bash install_ssh install_git
+install: .environment
 install_bspwm:
 	cp -r bspwm $(LOCATION)
 install_nvim:
@@ -21,5 +22,5 @@ install_ssh:
 	cp -r ssh $(LOCATION)
 install_git:
 	cp -r git $(LOCATION)
-environment:
+.environment:
 	sh environ

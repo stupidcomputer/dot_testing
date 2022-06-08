@@ -2,11 +2,12 @@
 
 set -x
 
+[ -f .environment ] && exit 2
 [ -w /etc/bash.bashrc ] || exit 1
 [ -w /etc/profile ] || exit 1
 
 printf '[ -f $HOME/.config/bash/bashrc ] && . $HOME/.config/bash/bashrc\n' >> /etc/bash.bashrc
 printf '[ -f $HOME/.config/bash/profile ] && . $HOME/.config/bash/profile\n' >> /etc/profile
-touch environment
+touch .environment
 
 set +x
