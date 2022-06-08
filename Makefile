@@ -10,19 +10,12 @@ man:
 sh:
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/paste $(DESTDIR)$(PREFIX)/bin
-	cp -f sh/bat $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/disp $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/wallpaper $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/yt $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/connect $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/nws $(DESTDIR)$(PREFIX)/bin
-	cp -f sh/pashmenu $(DESTDIR)$(PREFIX)/bin
-	cp -f sh/urlhandle $(DESTDIR)$(PREFIX)/bin
-	cp -f sh/ftphandle $(DESTDIR)$(PREFIX)/bin
-	cp -f sh/indicate $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/vol $(DESTDIR)$(PREFIX)/bin
-	cp -f sh/josm_launch $(DESTDIR)$(PREFIX)/bin
-	cp -f sh/start $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/proxtest $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/pco $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/git-survey $(DESTDIR)$(PREFIX)/bin
@@ -40,6 +33,7 @@ c:
 	cp -f c/boid $(DESTDIR)$(PREFIX)/bin
 	cp -f c/anaconda $(DESTDIR)$(PREFIX)/bin
 	cp -f c/simplestatus $(DESTDIR)$(PREFIX)/bin
+
 clean:
 	rm c/scream
 	rm c/timer

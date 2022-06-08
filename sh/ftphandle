@@ -1,6 +1,0 @@
-#!/bin/sh
-
-# This one is relatively simple. Relay the first argument to
-# ncftp and then you're done.
-
-st -e ncftp $1

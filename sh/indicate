@@ -1,6 +1,0 @@
-#!/bin/sh
-
-i=$(date '+%H:%M:%S %m/%d (%h)')
-j=$(bat)
-k=$(vol)
-printf "%s | %s | %s\n" "$i" "$j" "$k" | nenu
