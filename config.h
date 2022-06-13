@@ -1,8 +1,6 @@
 /* See LICENSE file for copyright and license details. */
 
 /*
- * appearance
- *
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
 static char *font = "Fantasque Sans Mono:pixelsize=14:antialias=true:autohint=true";
@@ -190,8 +188,8 @@ static Shortcut shortcuts[] = {
 	{ XK_ANY_MOD,           XK_Break,       sendbreak,      {.i =  0} },
 	{ MODKEY,               XK_h,           zoom,           {.f = +1} },
 	{ MODKEY,               XK_l,           zoom,           {.f = -1} },
-	{ MODKEY,               XK_C,           clipcopy,       {.i =  0} },
-	{ MODKEY,               XK_V,           clippaste,      {.i =  0} },
+	{ MODKEY,               XK_c,           clipcopy,       {.i =  0} },
+	{ MODKEY,               XK_v,           clippaste,      {.i =  0} },
 	{ MODKEY,               XK_k,           kscrollup,      {.i = -1} },
 	{ MODKEY,               XK_j,           kscrolldown,    {.i = -1} },
 };
