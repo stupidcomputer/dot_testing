@@ -28,74 +28,74 @@ Torify wrapper:     export NWS_TORIFY=<command>
 "
 }
 err () {
-  printf "err: %s\n" ${1}
-  [ -z "${2}" ] && exit 1
-  exit ${2}
+	printf "err: %s\n" ${1}
+	[ -z "${2}" ] && exit 1
+	exit ${2}
 }
 kstrip () {
-  printf %s "$1" | sed 's/^K\(.*\)/\1/'
+	printf %s "$1" | sed 's/^K\(.*\)/\1/'
 }
 national () {
-  mosaic CONUS-LARGE
+	mosaic CONUS-LARGE
 }
 # name interestingly to avoid keyword collision
 localradar () {
-  mosaic ${NWS_ZONE}
+	mosaic ${NWS_ZONE}
 }
 mosaic () { 
-  ${NWS_GIF} "https://radar.weather.gov/ridge/lite/${1}_loop.gif"
+	${NWS_GIF} "https://radar.weather.gov/ridge/lite/${1}_loop.gif"
 }
 setzone () {
-  printf "%s" "${1}" > ${NWS_CONFIG}
+	printf "%s" "${1}" > ${NWS_CONFIG}
 }
 river () {
-  textmessage "RVA"
+	textmessage "RVA"
 }
 weather () {
-  textmessage "ZFP"
+	textmessage "ZFP"
 }
 textmessage () {
-  curl --silent --fail "https://forecast.weather.gov/product.php?site=NWS&issuedby=$(kstrip ${NWS_ZONE})&product=${1}&format=TXT&version=1" | \
-    sed -n '/<!-- \/\/ CONTENT STARTS HERE -->/,/<\/pre>/p' | \
-    grep -v "a href" | \
-    grep -v '<!-- // CONTENT STARTS HERE -->' | \
-    grep -v '<\/pre>' || \
-    printf "${1} data not found for zone %s" ${NWS_ZONE}
+	curl --silent --fail "https://forecast.weather.gov/product.php?site=NWS&issuedby=$(kstrip ${NWS_ZONE})&product=${1}&format=TXT&version=1" | \
+		sed -n '/<!-- \/\/ CONTENT STARTS HERE -->/,/<\/pre>/p' | \
+		grep -v "a href" | \
+		grep -v '<!-- // CONTENT STARTS HERE -->' | \
+		grep -v '<\/pre>' || \
+		printf "${1} data not found for zone %s" ${NWS_ZONE}
 }
 
 case $1 in
-  "n"*)
-    national
-    exit 0
-    ;;
-  "l"*)
-    localradar
-    exit 0
-    ;;
-  "r"*)
-    river
-    exit 0
-    ;;
-  "w"*)
-    weather
-    exit 0
-    ;;
-  "m"*)
-    [ $# -eq 2 ] && mosaid $2 || \
-      err "two args required"
-    ;;
-  "s"*)
-    [ $# -eq 2 ] && setzone $2 || \
-      err "two args required"
-    exit 0
-    ;;
-  "t"*)
-    [ $# -eq 2 ] && textmessage $2 || \
-      err "two args required"
-    ;;
-  *)
-    info
-    exit 0
-    ;;
+	"n"*)
+		national
+		exit 0
+		;;
+	"l"*)
+		localradar
+		exit 0
+		;;
+	"r"*)
+		river
+		exit 0
+		;;
+	"w"*)
+		weather
+		exit 0
+		;;
+	"m"*)
+		[ $# -eq 2 ] && mosaid $2 || \
+		  err "two args required"
+		;;
+	"s"*)
+		[ $# -eq 2 ] && setzone $2 || \
+		  err "two args required"
+		exit 0
+		;;
+	"t"*)
+		[ $# -eq 2 ] && textmessage $2 || \
+		  err "two args required"
+		;;
+	*)
+		info
+		exit 0
+		;;
 esac
 exit 0
