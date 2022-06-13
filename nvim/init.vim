@@ -6,6 +6,7 @@ Plug 'sirver/ultisnips'
 Plug 'tridactyl/vim-tridactyl'
 Plug 'chrisbra/csv.vim'
 Plug 'trapd00r/vimpoint'
+Plug 'vimwiki/vimwiki'
 cal plug#end()
 " }}}
 
@@ -26,14 +27,19 @@ set clipboard=unnamedplus
 set spell
 set spelllang=en_us
 set title
+set ts=2
+set sw=2
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
 colorscheme earth
 " }}}
 
 " shortcuts {{{
 " toggle line numbers and listchars
 nnoremap <Leader>ym :set number!<CR>:set list!<CR>
-" weather
-nnoremap <Leader>w :!curl -s wttr.in/?0T<CR>
 " vimrc thing
 nnoremap <Leader>rr :source ~/.config/nvim/init.vim<CR>
 nnoremap <Leader>re :edit ~/.config/nvim/init.vim<CR>
@@ -53,14 +59,36 @@ nnoremap <C-s> zg
 
 " autocmds {{{
 au Filetype python setl et ts=4 sw=4
+
+function SwapExistsHandler()
+	silent !vim-swap-handler "%:p"
+	if v:shell_error == 0
+		let v:swapchoice='o'
+		return
+	elseif v:shell_error == 1
+		let v:swapchoice='o'
+		echom "The file has been opened read-only, as there is not another vim instance editing this file."
+	elseif v:shell_error == 127
+		echom "The vim-swap-handler command doesn't exist."
+	else
+		echom "An unknown error occurred."
+	endif
+endfunction
+
+autocmd SwapExists * call SwapExistsHandler()
+	
 " }}}
 
 " statusline {{{
 set statusline=%f
 set statusline+=\ 
-set statusline+=%r%m%q
+set statusline+=%r%m%q%h
 set statusline+=%=
-set statusline+=%y\ %B\ %l:%c:%p
+set statusline+=%y\ 0x%02B\ %04l:%03c:%03p
+" }}}
+
+" titlebar {{{
+let &titlestring='%{expand("%:p")}'
 " }}}
 
 " netrw {{{
