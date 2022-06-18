@@ -1,5 +1,5 @@
 #!/bin/sh
 
-printf "%s" $(date '+%Y-%m-%d')
+printf "%s" $(date '+%m-%d')
 
 exit
