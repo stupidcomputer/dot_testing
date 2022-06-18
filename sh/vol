@@ -1,3 +1,19 @@
 #!/bin/sh
 
-amixer sset Master 0%+ | tail -1 | awk -F'[' '{print $2}' | awk -F']' '{print $1}'
+pulse=$(ps aux | grep pulseaudio | wc -l)
+
+[ "$1" = "inc" ] && sign="+"
+[ "$1" = "dec" ] && sign="-"
+
+[ "$#" -eq 0 ] && exit 1
+
+if [ "$pulse" -eq 2 ]; then
+	for SINK in `pacmd list-sinks | grep 'index:' | cut -b12-`
+	do
+		pactl set-sink-volume $SINK "${sign}5%"
+	done
+else
+	amixer -c 0 set Master "5%${sign}"
+fi
+
+killall -12 simplestatus
