@@ -33,8 +33,11 @@ super + {_,shift + }n
 XF86AudioMute
   amixer sset Master 0%
 
-{_,shift + }{XF86AudioRaiseVolume,XF86AudioLowerVolume}
-  amixer sset Master {5,1}%{+,-}
+{XF86AudioRaiseVolume,XF86AudioLowerVolume}
+  vol {inc,dec}
+
+super + {_,shift + }v
+  vol {inc,dec}
 
 # mouse movement
 super + u
