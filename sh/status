@@ -1,0 +1,5 @@
+#!/bin/sh
+
+[ "$(ps aux | grep simplestatus | wc -l)" -eq 2 ] && killall simplestatus && killall lemonbar
+
+simplestatus | lemonbar -f 'Fantasque Sans Mono' -B "#161510" -F "#4c4635"

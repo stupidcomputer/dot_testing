@@ -20,6 +20,7 @@ sh:
 	cp -f sh/pco $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/git-survey $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/vim-swap-handler $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/status $(DESTDIR)$(PREFIX)/bin
 
 mkc:
 	cc c/scream.c -o c/scream
