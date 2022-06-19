@@ -1,9 +1,7 @@
 #!/bin/sh
 
-printf "%s\n" "$1" >> /home/usr/aaaaaaaa
-
-tube="$(printf "%s\n" "$1" | grep "watch?v=" | wc -l)"
-[ "$tube" -eq 1 ] && mpv "$1" && exit
+# tube="$(printf "%s\n" "$1" | grep "watch?v=" | wc -l)"
+# [ "$tube" -eq 1 ] && mpv -v --video-sync=display-resample "$1" && exit
 
 firefox $1
 killall -10 simplestatus
