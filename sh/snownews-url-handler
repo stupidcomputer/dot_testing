@@ -3,4 +3,4 @@
 tube="$(printf "%s\n" "$1" | grep "watch?v=" | wc -l)"
 [ "$tube" -eq 1 ] && mpv "$1" && exit
 
-firefox -P $1
+firefox $1
