@@ -167,6 +167,7 @@ module *parse_file(char *file) {
   module *current = NULL, *head = NULL;
   int linenumber = 0;
   while((cline = read_line(fp)) != NULL) {
+		printf("debug: %s\n", cline);
     linenumber++;
     /* free the string up here */
     if(strlen(cline) == 0) {
@@ -178,8 +179,10 @@ module *parse_file(char *file) {
       continue;
     }
 
-    char *command = strdup(strtok(cline, " "));
-    if(!memcmp(command, module_text, sizeof module_text)) {
+		char *res = strtok(cline, " ");
+		if(!res) printf("strtok returned NULL!\n");
+
+    if(!memcmp(res, module_text, sizeof module_text)) {
       if(current == NULL) {
         current = malloc(sizeof *current);
         head = current;
@@ -216,7 +219,7 @@ module *parse_file(char *file) {
 
       free(cline);
       continue;
-    } else if(!memcmp(command, order_text, sizeof order_text)) {
+    } else if(!memcmp(res, order_text, sizeof order_text)) {
       if(mcache) {
         fprintf(stderr, "syntax error at line %i: you can't issue the order command twice\n", linenumber);
         return NULL;
@@ -236,7 +239,7 @@ module *parse_file(char *file) {
         ptr->data = NULL;
         ptr->next = NULL;
       }
-    } else if(!memcmp(command, format_text, sizeof format_text)) {
+    } else if(!memcmp(res, format_text, sizeof format_text)) {
       char *pattern = cline + sizeof format_text;
       format_string = strdup(pattern);
     }
