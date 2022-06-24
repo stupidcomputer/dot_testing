@@ -13,8 +13,7 @@ char newchar(char c, int i) {
 }
 int main(void) {
   char c;
-  int i;
-  i = 0;
+  int i = 0;
   while((c = getchar()) != EOF) {
     putchar(newchar(c, i));
     i++;
