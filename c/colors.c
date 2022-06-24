@@ -116,7 +116,7 @@ void adjust_colors(struct color *colors) {
 int check_colors(struct color *colors) {
 	int j = 0;
 	for(int i = 0; i < 16; i++) {
-		if(colors[i].r == colors[i].g == colors[i].b) j++;
+		if(colors[i].r + colors[i].g + colors[i].b == 0) j++;
 	}
 	if(j > 0) return 0;
 	return 1;
@@ -138,7 +138,6 @@ struct color *get_colors(char *filename) {
 /* generalized function ,
  * used by get_conf_file and get_wal_dir */
 char *get_file_gen(char *initvar, char *backvar, char *postfix, char *file) {
-	printf("%s %s %s %s\n", initvar, backvar, postfix, file);
 	static char buffer[256];
 	int extension = 0;
 	char *path = getenv(initvar);
@@ -166,8 +165,7 @@ char *get_wal_dir(char *file) {
 	return get_file_gen("XDG_DATA_HOME", "HOME", "/.local/share/wallpapers", file);
 }
 
-char *select_random(void) {
-	printf("%s\n", get_wal_dir(NULL));
+char *select_random_rel(void) {
 	DIR *dir = opendir(get_wal_dir(NULL));
 	struct dirent *file;
 	/* probably should move hardcoded constants somewhere that makes sense */
@@ -195,7 +193,7 @@ void print_color(struct color *color) {
 
 void run_handler(struct color *colors, char *wal) {
 	char chars[16][8];
-	char *argv[18];
+	char *argv[19];
 
 	for(int i = 0; i < 16; i++) {
 		snprintf(&chars[i], 8, "#%02x%02x%02x", colors[i].r, colors[i].g, colors[i].b);
@@ -203,9 +201,9 @@ void run_handler(struct color *colors, char *wal) {
 	for(int i = 0; i < 16; i++) {
 		argv[i + 1] = &chars[i];
 	}
-	argv[17] = NULL;
+	argv[17] = wal;
+	argv[18] = NULL;
 
-	printf("envp[0] = %s\n", argv[1]);
 	char *conf = get_conf_file("handler");
 	argv[0] = "handler";
 
@@ -225,11 +223,17 @@ struct settings {
 	.r = 1,
 };
 
-int main(void) {
-	char *file = select_random();
-	printf("%s\n", file);
+char *select_random_file(void) {
+	char *file = select_random_rel();
+	static char ret[256];
 	file = get_wal_dir(file);
-	printf("%s\n", file);
+	memcpy(&ret, file, 256);
+
+	return ret;
+}
+
+int main(void) {
+	char *file = select_random_file();
 	struct color *colors = get_colors(file);
 	printf("%i\n", check_colors(colors));
 
