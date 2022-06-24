@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <dirent.h>
 #include <errno.h>
+#include <time.h>
 #include <stddef.h>
 #include <sys/types.h>
 #include <sys/wait.h>
@@ -13,6 +15,14 @@ struct color {
 	int g;
 	int b;
 };
+
+void init_random(void) {
+	srand(time(0));
+}
+
+int rand_range(int u, int l) {
+	return (rand() % (u - l + 1)) + l;
+}
 
 void exec_with_stdout(char *file, char *args[], char *buf, int length) {
 	int pfds[2];
@@ -103,6 +113,15 @@ void adjust_colors(struct color *colors) {
 	blend_color(&colors[15], &e, &colors[15]);
 }
 
+int check_colors(struct color *colors) {
+	int j = 0;
+	for(int i = 0; i < 16; i++) {
+		if(colors[i].r == colors[i].g == colors[i].b) j++;
+	}
+	if(j > 0) return 0;
+	return 1;
+}
+
 struct color *get_colors(char *filename) {
 	/* check for permission */
 	if(access(filename, F_OK | R_OK) != 0) {
@@ -116,33 +135,70 @@ struct color *get_colors(char *filename) {
 	return col;
 }
 
-char *get_conf_file(char *file) {
-	static char buffer[128];
+/* generalized function ,
+ * used by get_conf_file and get_wal_dir */
+char *get_file_gen(char *initvar, char *backvar, char *postfix, char *file) {
+	printf("%s %s %s %s\n", initvar, backvar, postfix, file);
+	static char buffer[256];
 	int extension = 0;
-	char *path = getenv("XDG_CONFIG_HOME");
+	char *path = getenv(initvar);
 	if(!path) {
-		path = getenv("HOME");
+		path = getenv(backvar);
 		extension = 1;
 	}
 	if(!path) {
-		printf("do you have a $HOME?\n");
+		fprintf(stderr, "error: both initvar and backvar are undefined.\n");
 		exit(1);
 	}
 
-	snprintf(buffer, 128, "%s%s/%s", path, extension ? "/.config/cwal" : "", file);
+	snprintf(buffer, 256, "%s%s/%s", path, extension ? postfix : "", file);
 	return buffer;
 }
 
-void print_color(struct color *color) {
-	printf("#%x%x%x\n", color->r, color->g, color->b);
+char *get_conf_file(char *file) {
+	return get_file_gen("XDG_CONFIG_HOME", "HOME", "/.config/cwal", file);
 }
 
-void run_handler(struct color *colors) {
+/* pass NULL to get the base dir name, not specific file */
+char *get_wal_dir(char *file) {
+	if(!file) file = "";
+
+	return get_file_gen("XDG_DATA_HOME", "HOME", "/.local/share/wallpapers", file);
+}
+
+char *select_random(void) {
+	printf("%s\n", get_wal_dir(NULL));
+	DIR *dir = opendir(get_wal_dir(NULL));
+	struct dirent *file;
+	/* probably should move hardcoded constants somewhere that makes sense */
+	static char names[50][256];
+	int i = 0, random;
+
+	init_random();
+
+	while(file = readdir(dir)) {
+		if(i == 50) break;
+		if(file->d_type != DT_REG) continue;
+
+		memcpy(&names[i], file->d_name, 256);
+		i++;
+	}
+
+	random = rand_range(i - 1, 0);
+
+	return names[random];
+}
+
+void print_color(struct color *color) {
+	printf("#%02x%02x%02x\n", color->r, color->g, color->b);
+}
+
+void run_handler(struct color *colors, char *wal) {
 	char chars[16][8];
 	char *argv[18];
 
 	for(int i = 0; i < 16; i++) {
-		snprintf(&chars[i], 8, "#%x%x%x", colors[i].r, colors[i].g, colors[i].b);
+		snprintf(&chars[i], 8, "#%02x%02x%02x", colors[i].r, colors[i].g, colors[i].b);
 	}
 	for(int i = 0; i < 16; i++) {
 		argv[i + 1] = &chars[i];
@@ -170,13 +226,18 @@ struct settings {
 };
 
 int main(void) {
-	struct color *colors = get_colors("/home/usr/.local/share/wallpapers/forest-steps.jpg");
+	char *file = select_random();
+	printf("%s\n", file);
+	file = get_wal_dir(file);
+	printf("%s\n", file);
+	struct color *colors = get_colors(file);
+	printf("%i\n", check_colors(colors));
 
 	for(int i = 0; i < 16; i++) {
 		print_color(&colors[i]);
 	}
 
-	run_handler(colors);
+	run_handler(colors, file);
 
 	get_conf_file("hello");
 
