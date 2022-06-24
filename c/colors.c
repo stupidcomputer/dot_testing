@@ -217,14 +217,20 @@ void run_handler(struct color *colors, char *wal) {
 
 struct settings {
 	int h:1; /* running hooks or not */
-	int r:1; /* pick a random wallpaper */
+	int e:1; /* echo colors */
+	int c:1; /* enable color check */
+	int f:1; /* print filename used */
+	char *wal; /* custom file if provided */
 } settings = {
 	.h = 1,
-	.r = 1,
+	.e = 0,
+	.c = 0,
+	.f = 0,
+	.wal = NULL,
 };
 
-char *select_random_file(void) {
-	char *file = select_random_rel();
+char *select_random_file(char *file) {
+	if(!file) file = select_random_rel();
 	static char ret[256];
 	file = get_wal_dir(file);
 	memcpy(&ret, file, 256);
@@ -232,18 +238,49 @@ char *select_random_file(void) {
 	return ret;
 }
 
-int main(void) {
-	char *file = select_random_file();
-	struct color *colors = get_colors(file);
-	printf("%i\n", check_colors(colors));
-
-	for(int i = 0; i < 16; i++) {
-		print_color(&colors[i]);
+int main(int argc, char **argv) {
+	int c;
+	while((c = getopt(argc, argv, "hefcw:")) != -1) {
+		switch(c) {
+			case 'h':
+				settings.h = 0;
+				break;
+			case 'w':
+				settings.wal = optarg;
+				break;
+			case 'e':
+				settings.e = 1;
+				break;
+			case 'c':
+				settings.c = 1;
+				break;
+			case 'f':
+				settings.f = 1;
+				break;
+		}
 	}
 
-	run_handler(colors, file);
+	if(settings.h == 0) settings.e = 1;
 
-	get_conf_file("hello");
+	char *file = select_random_file(settings.wal);
+	struct color *colors = get_colors(file);
+
+	if(settings.f) printf("%s\n", file);
+
+	if(settings.e) {
+		for(int i = 0; i < 16; i++) {
+			print_color(&colors[i]);
+		}
+	}
+
+	if(settings.c) {
+		c = check_colors(colors);
+		if(c == 0) {
+			return 2;
+		}
+	}
+
+	if(settings.h) run_handler(colors, file);
 
 	return 0;
 }
