@@ -1,5 +1,5 @@
 all: mkc
-install: man sh mkc c
+install: man sh c all
 .PHONY: man sh mkc c
 
 man:
@@ -25,13 +25,13 @@ sh:
 	cp -f sh/status $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/cfg $(DESTDIR)$(PREFIX)/bin
 
-mkc:
-	cc c/scream.c -o c/scream
-	cc c/timer.c -o c/timer
+mkc: c/scream c/timer c/boid c/anaconda c/simplestatus c/colors
+
+c/boid:
 	cc c/boid.c -o c/boid -lm -lX11
+
+c/anaconda:
 	cc c/anaconda.c -o c/anaconda -lm -lX11
-	cc c/simplestatus.c -o c/simplestatus
-	cc c/colors.c -o c/colors
 
 c:
 	cp -f c/scream $(DESTDIR)$(PREFIX)/bin
