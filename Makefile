@@ -22,6 +22,7 @@ sh:
 	cp -f sh/vim-swap-handler $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/snownews-url-handler $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/status $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/cfg $(DESTDIR)$(PREFIX)/bin
 
 mkc:
 	cc c/scream.c -o c/scream
