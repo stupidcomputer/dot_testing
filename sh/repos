@@ -1,0 +1,6 @@
+#!/bin/sh
+
+sel="$(ls ~/git | fzy)"
+[ "$?" -eq 1 ] && exit 1
+
+nvim ~/git/"$sel"

@@ -24,6 +24,7 @@ sh:
 	cp -f sh/snownews-url-handler $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/status $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/cfg $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/repos $(DESTDIR)$(PREFIX)/bin
 
 mkc: c/scream c/timer c/boid c/anaconda c/simplestatus c/colors
 
