@@ -276,7 +276,7 @@ int main(int argc, char **argv) {
 	if(settings.c) {
 		c = check_colors(colors);
 		if(c == 0) {
-			return 2;
+			return 1;
 		}
 	}
 
