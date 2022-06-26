@@ -7,6 +7,7 @@ man:
 	# this did not work on my computer, but might be needed on other installations
 	mkdir -p /usr/local/man/man1
 	cp -f man/* /usr/local/man/man1
+
 sh:
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/paste $(DESTDIR)$(PREFIX)/bin
@@ -30,6 +31,7 @@ mkc:
 	cc c/boid.c -o c/boid -lm -lX11
 	cc c/anaconda.c -o c/anaconda -lm -lX11
 	cc c/simplestatus.c -o c/simplestatus
+	cc c/colors.c -o c/colors
 
 c:
 	cp -f c/scream $(DESTDIR)$(PREFIX)/bin
@@ -37,6 +39,7 @@ c:
 	cp -f c/boid $(DESTDIR)$(PREFIX)/bin
 	cp -f c/anaconda $(DESTDIR)$(PREFIX)/bin
 	cp -f c/simplestatus $(DESTDIR)$(PREFIX)/bin
+	cp -f c/colors $(DESTDIR)$(PREFIX)/bin
 
 clean:
 	rm c/scream
