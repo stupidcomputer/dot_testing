@@ -11,6 +11,9 @@ super + m
 super + d
   dmenu_run
 
+super + z
+	pash-dmenu
+
 super + r
   pkill -USR1 -x sxhkd; \
   bspc wm -r

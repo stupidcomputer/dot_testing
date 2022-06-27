@@ -3,6 +3,7 @@
 # some housekeeping
 set -o vi
 shopt -s autocd
+alias rc=". .config/bash/bashrc"
 
 # ssh keeping tidy
 alias ssh="ssh -F $HOME/.config/ssh/config"

@@ -12,3 +12,5 @@ bspc config focused_border_color "#727A18"
 bspc config pointer_follows_focus true
 bspc config pointer_follows_monitor true
 bspc config focus_follows_pointer true
+
+bspc rule -a st-gpg-menu state=floating
