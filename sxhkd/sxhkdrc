@@ -5,9 +5,6 @@
 super + Return
   st
 
-super + {_,shift + } b
-  {xclip -selection primary -o | xargs vimb,vimb}
-
 super + m
   xclip -selection primary -o | xargs mpv
 
@@ -36,16 +33,25 @@ XF86AudioMute
 {XF86AudioRaiseVolume,XF86AudioLowerVolume}
   vol {inc,dec}
 
+super + b
+	fire
+
+super + shift + b
+	fire -P
+
 super + {_,shift + }v
   vol {inc,dec}
 
 # mouse movement
 super + u
 	xdotool mousemove_relative -- -10 0
+
 super + i
 	xdotool mousemove_relative -- 0 10
+
 super + o
 	xdotool mousemove_relative -- 0 -10
+
 super + p
 	xdotool mousemove_relative -- 10 0
 
