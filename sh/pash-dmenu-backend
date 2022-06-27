@@ -1,0 +1,5 @@
+#!/bin/sh
+
+pash c "$1"
+bspc node -d '^9'
+sleep 15
