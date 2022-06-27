@@ -10,3 +10,13 @@ alias ssh="ssh -F $HOME/.config/ssh/config"
 # remind alias
 alias sched="nvim $DOTREMINDERS"
 alias cal="rem -cl"
+
+PS1="\w\$ "
+
+# repos func
+repos() {
+	sel="$(ls ~/git | fzy | awk '{print "/home/usr/git/"$1}')"
+	[ "$?" -eq 1 ] && exit
+
+	cd "$sel"
+}
