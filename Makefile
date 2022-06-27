@@ -25,6 +25,7 @@ sh:
 	cp -f sh/status $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/cfg $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/fire $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/pash-dmenu $(DESTDIR)$(PREFIX)/bin
 
 mkc: c/scream c/timer c/boid c/anaconda c/simplestatus c/colors
 
