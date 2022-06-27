@@ -14,6 +14,12 @@ export LESSHISTFILE="-"
 # remind
 export DOTREMINDERS="$HOME/git/calendar/reminders"
 
+# XDG config
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_STATE_HOME="$HOME/.local/state"
+
 # source the bashrc(s)
 [ -f $HOME/.config/bash/bashrc ] && . $HOME/.config/bash/bashrc
 [ -f $HOME/.bashrc ] && . $HOME/.bashrc
