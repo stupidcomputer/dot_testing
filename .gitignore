@@ -1,4 +1,5 @@
 .environment
+.firefox_env
 bash/hist
 nvim/.netrwhist
 bash/bash

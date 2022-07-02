@@ -1,7 +1,8 @@
 LOCATION="$(HOME)/.config"
 DATA="$(HOME)/.local/share"
-install_local: install_bspwm install_nvim install_sx install_sxhkd install_zathura install_simplestatus install_bash install_ssh install_git install_tridactyl install_htop install_python
+install_local: install_bspwm install_nvim install_sx install_sxhkd install_zathura install_simplestatus install_bash install_ssh install_git install_tridactyl install_htop install_python .firefox_env
 install: .environment
+
 install_bspwm:
 	ln -sf $(CURDIR)/bspwm $(LOCATION)/bspwm
 install_nvim:
@@ -28,3 +29,5 @@ install_python:
 	ln -sf $(CURDIR)/python $(LOCATION)/python
 .environment:
 	sh environ
+.firefox_env:
+	sh firefox_setup
