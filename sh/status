@@ -33,8 +33,8 @@ mod_vol () {
 	[ "$ss" = "alsa" ] && amixer | grep '^  Front' | awk -F'[' '{ORS = ""; print "av" substr($2, 1, 3); exit}'
 }
 
-mod_hello () {
-	printf "HJi there"
+mod_date_time () {
+	date '+%m%d-%H:%M' | tr '\n' ' '
 }
 
 update_mod () {
@@ -47,8 +47,8 @@ get_mod () {
 }
 
 echo_bar () {
-	left="$(get_mod "power") $(get_mod "vol") $(get_mod "bspwm")"
-	right="$(get_mod "hello")"
+	left="$(get_mod "bspwm")"
+	right="$(get_mod "date_time") $(get_mod "power") $(get_mod "vol")"
 
 	width="$(tput cols)"
 	rightwidth="${#right}"
@@ -69,20 +69,18 @@ update_all () {
 	update_mod power
 	update_mod vol
 	update_mod bspwm
+	update_mod date_time
 }
 
 tput civis
 
 register_sigs
-
-update_mod power
-update_mod vol
-update_mod hello
-update_mod bspwm
+update_all
 
 i=0
 while true; do
-	sleep 1
-	[ "$i" -eq 29 ] && update_all && i=0
+	sleep 0.25
+	[ "$i" -eq $((29 * 4)) ] && update_all && i=0
 	echo_bar
+	i="$(($i + 1))"
 done
