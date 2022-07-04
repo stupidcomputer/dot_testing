@@ -3,7 +3,7 @@ disp
 wallpaper
 
 # statusbar
-status
+statusbar &
 
 # start the wm
 sxhkd &

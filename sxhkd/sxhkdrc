@@ -71,7 +71,7 @@ super + {_,ctrl +,shift + }{h,j,k,l}
 
 super + {_,shift + } {1-9,0}
   bspc {desktop -f,node -d} '^{1-9,10}'; \
-  {killall -10 simplestatus,_}
+  {killall -10 status,_}
 
 super + {t,f,s}
   bspc node -t {tiled,floating,fullscreen}

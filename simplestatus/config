@@ -1,9 +1,0 @@
-module power 7 30
-module time 7 30
-module date 7 30
-module volume 12 30
-module bspwm 10 30
-
-order bspwm date time volume power
-
-format %{l}&%{r}& & & &
