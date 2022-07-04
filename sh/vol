@@ -16,4 +16,4 @@ else
 	amixer -c 0 set Master "5%${sign}"
 fi
 
-killall -12 simplestatus
+killall -12 status

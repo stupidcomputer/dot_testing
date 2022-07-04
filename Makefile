@@ -23,12 +23,13 @@ sh:
 	cp -f sh/vim-swap-handler $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/snownews-url-handler $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/status $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/statusbar $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/cfg $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/fire $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/pash-dmenu $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/pash-dmenu-backend $(DESTDIR)$(PREFIX)/bin
 
-mkc: c/scream c/timer c/boid c/anaconda c/simplestatus c/colors
+mkc: c/scream c/timer c/boid c/anaconda c/colors
 
 c/boid:
 	cc c/boid.c -o c/boid -lm -lX11
@@ -41,7 +42,6 @@ c:
 	cp -f c/timer $(DESTDIR)$(PREFIX)/bin
 	cp -f c/boid $(DESTDIR)$(PREFIX)/bin
 	cp -f c/anaconda $(DESTDIR)$(PREFIX)/bin
-	cp -f c/simplestatus $(DESTDIR)$(PREFIX)/bin
 	cp -f c/colors $(DESTDIR)$(PREFIX)/bin
 
 clean:
