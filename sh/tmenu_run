@@ -1,0 +1,12 @@
+#!/bin/sh
+
+tmenu_path () {
+    IFS=" :"
+    for i in $PATH; do
+        for j in "$i"/*; do
+            [ -f $j ] && [ -x $j ] && printf "%s\n" $j
+        done
+    done
+}
+
+tmenu_path | tmenu "$@" | ${SHELL:-"/bin/sh"} &

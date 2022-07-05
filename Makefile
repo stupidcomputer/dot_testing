@@ -28,6 +28,9 @@ sh:
 	cp -f sh/fire $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/pash-dmenu $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/pash-dmenu-backend $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/tmenu $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/tmenu-backend $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/tmenu_run $(DESTDIR)$(PREFIX)/bin
 
 mkc: c/scream c/timer c/boid c/anaconda c/colors
 
