@@ -32,6 +32,7 @@ sh:
 	cp -f sh/tmenu-backend $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/tmenu_run $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/ss $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/net $(DESTDIR)$(PREFIX)/bin
 
 mkc: c/scream c/timer c/boid c/anaconda c/colors
 
