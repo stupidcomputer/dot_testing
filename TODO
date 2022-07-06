@@ -2,4 +2,5 @@ TODO LIST
 ---------
 
 - change statusbar program so it uses static allocations instead of dynamic ones
+- fix paste
 - make the c programs less buggy and let them not suck as much
