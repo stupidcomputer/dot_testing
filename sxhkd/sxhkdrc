@@ -9,7 +9,7 @@ super + m
   xclip -selection primary -o | xargs mpv
 
 super + d
-  dmenu_run
+  tmenu_run
 
 super + z
 	pash-dmenu

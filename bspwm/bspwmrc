@@ -17,3 +17,4 @@ bspc config top_padding 20
 
 bspc rule -a st-gpg-menu state=floating
 bspc rule -a statusbar border=off sticky=on state=floating manage=off
+bspc rule -a tmenu-prompt border=on sticky=on state=floating
