@@ -2,6 +2,7 @@
 
 power_prefix="/sys/class/power_supply/"
 [ -d "${power_prefix}sbs-20-000b" ] && bat="sbs-20-000b"
+[ -d "${power_prefix}BAT0" ] && bat="BAT0"
 
 [ "$(ps aux | grep pulseaudio | wc -l)" -eq 2 ] && ss="pulse" || ss="alsa"
 
@@ -25,6 +26,7 @@ mod_bspwm () {
 }
 
 mod_power () {
+	[ -z "$bat" ] ||
 	tr -d '\n' < /sys/class/power_supply/$bat/capacity
 }
 
