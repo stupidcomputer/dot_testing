@@ -5,9 +5,6 @@
 super + Return
   st
 
-super + m
-  xclip -selection primary -o | xargs mpv
-
 super + d
   tmenu_run
 
@@ -27,7 +24,7 @@ super + {_,shift + }n
 super + ctrl + n
 	net
 
-super + ctrl + h
+super + t
 	st -e htop
 
 {XF86Display,super + }
