@@ -35,6 +35,7 @@ sh:
 	cp -f sh/net $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/bspwm-toggle-gaps $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/machine $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/brightness $(DESTDIR)$(PREFIX)/bin
 
 check:
 	shellcheck sh/*
