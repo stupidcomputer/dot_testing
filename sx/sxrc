@@ -5,6 +5,12 @@ wallpaper
 # statusbar
 statusbar &
 
+# adjust some keybindings
+setxkbmap -option caps:super
+killall xcape
+xcape -e 'Super_L=Escape'
+xset -q | grep "Caps Lock:\s*on" && xdotool key Caps_Lock
+
 # start the wm
 sxhkd &
 bspwm
