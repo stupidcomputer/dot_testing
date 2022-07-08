@@ -76,7 +76,8 @@ function SwapExistsHandler()
 endfunction
 
 autocmd SwapExists * call SwapExistsHandler()
-	
+au BufWrite bspwmrc !bspc wm -r
+au BufWrite sxhkdrc !killall sxhkd -USR1
 " }}}
 
 " statusline {{{
