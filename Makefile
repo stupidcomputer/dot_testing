@@ -29,6 +29,9 @@ sh:
 	cp -f sh/pash-dmenu $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/pash-dmenu-backend $(DESTDIR)$(PREFIX)/bin
 
+check:
+	shellcheck sh/*
+
 mkc: c/scream c/timer c/boid c/anaconda c/simplestatus c/colors
 
 c/boid:
