@@ -22,7 +22,6 @@ sh:
 	cp -f sh/pco $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/git-survey $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/vim-swap-handler $(DESTDIR)$(PREFIX)/bin
-	cp -f sh/snownews-url-handler $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/status $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/cfg $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/fire $(DESTDIR)$(PREFIX)/bin
