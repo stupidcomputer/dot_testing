@@ -1,0 +1,39 @@
+#!/bin/sh
+
+# get configuration & data directories
+DATA="$HOME/.cache/trss"
+CONFIG="$HOME/.config/trss"
+
+# make sure these directories are in place
+mkdir -p "$DATA"
+mkdir -p "$CONFIG"
+
+import_information () {
+	FEEDS=""
+	for i in "$CONFIG"/*; do
+		. "$i"
+		[ -z "$FEEDS" ] && FEEDS="$NAME" || FEEDS="$FEEDS $NAME"
+	done
+}
+
+synchronize () {
+	for i in $FEEDS; do
+		url="$(get_feed_attr "$i" feed)"
+		printf "> synchronizing feed %s via url %s\n" "$i" "$url"
+		curl "$url" -so "$DATA/${i}.xml"
+
+		# generate sfeed formatted file
+		printf "> creating sfeed compound feed file for feed %s\n" "$i"
+		cat "$DATA/${i}.xml" | sfeed | cat - "$DATA/${i}.sfeed" | uniq >> "$DATA/${i}.tmp.sfeed"
+		mv "$DATA/${i}.tmp.sfeed" "${DATA}/${i}.sfeed"
+	done
+}
+
+get_feed_attr () {
+	eval "printf '%s' \${$1_$2}"
+}
+
+import_information
+synchronize
+printf "%s\n" "$FEEDS"
+get_feed_attr seirdy humanname
