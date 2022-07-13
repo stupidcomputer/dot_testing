@@ -33,6 +33,7 @@ sh:
 	cp -f sh/tmenu_run $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/ss $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/net $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/bspwm-toggle-gaps $(DESTDIR)$(PREFIX)/bin
 
 check:
 	shellcheck sh/*
