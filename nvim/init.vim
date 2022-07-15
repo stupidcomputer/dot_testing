@@ -7,6 +7,7 @@ Plug 'tridactyl/vim-tridactyl'
 Plug 'chrisbra/csv.vim'
 Plug 'trapd00r/vimpoint'
 Plug 'vimwiki/vimwiki'
+Plug 'itchyny/calendar.vim'
 cal plug#end()
 " }}}
 
