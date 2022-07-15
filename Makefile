@@ -11,6 +11,7 @@ man:
 sh:
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/paste $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/trss $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/disp $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/wallpaper $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/yt $(DESTDIR)$(PREFIX)/bin
@@ -21,7 +22,6 @@ sh:
 	cp -f sh/pco $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/git-survey $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/vim-swap-handler $(DESTDIR)$(PREFIX)/bin
-	cp -f sh/snownews-url-handler $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/status $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/statusbar $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/cfg $(DESTDIR)$(PREFIX)/bin
@@ -35,6 +35,9 @@ sh:
 	cp -f sh/net $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/bspwm-toggle-gaps $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/machine $(DESTDIR)$(PREFIX)/bin
+
+check:
+	shellcheck sh/*
 
 mkc: c/scream c/timer c/boid c/anaconda c/colors
 

@@ -1,5 +1,4 @@
 #!/bin/sh
-set -x
 
 [ "$1" = "" ] && exit 1
-[ -f "$1" ] && curl -F"file=@${1}" https://ttm.sh && exit 0
+[ -f "$1" ] && curl -F"file=@${1}" https://0x0.st && exit 0
