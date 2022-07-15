@@ -34,6 +34,7 @@ sh:
 	cp -f sh/ss $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/net $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/bspwm-toggle-gaps $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/machine $(DESTDIR)$(PREFIX)/bin
 
 mkc: c/scream c/timer c/boid c/anaconda c/colors
 

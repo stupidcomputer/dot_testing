@@ -1,0 +1,15 @@
+#!/bin/sh
+
+host="$(hostname)"
+
+case "$host" in
+	"mlg" | "think")
+		exit 1
+		;;
+	"toaster")
+		exit 2
+		;;
+	"fish")
+		exit 3
+		;;
+esac
