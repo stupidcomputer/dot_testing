@@ -24,7 +24,7 @@ super + {_,shift + }n
 super + ctrl + n
 	net
 
-super + t
+super + ctrl + t
 	st -e htop
 
 {XF86Display,super + }

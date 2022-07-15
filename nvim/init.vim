@@ -33,6 +33,8 @@ set hlsearch
 set incsearch
 set ignorecase
 set smartcase
+set inccommand=nosplit
+set nocompatible
 
 colorscheme earth
 " }}}
@@ -54,6 +56,11 @@ inoremap <esc> <esc>:echo "use jk instead!"<CR>2gsi
 inoremap <C-d> <c-g>u<Esc>[s1z=`]a<c-g>u
 inoremap <C-s> <Esc>zgi
 nnoremap <C-s> zg
+tnoremap <Esc> <C-\><C-n>
+nnoremap <Leader>wl <C-w>\<
+nnoremap <Leader>wr <C-w>\>
+nnoremap <Leader>wd <C-w>-
+nnoremap <Leader>wu <C-w>+
 
 " }}}
 

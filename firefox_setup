@@ -52,7 +52,7 @@ HOME="/home/usr/.local/share/firefox/" bash gituser.js/updater.sh -l
 
 cd /home/usr/git/dot/firefox
 printf "Please install all the extensions, then close all windows in the browser.\n"
-fire https://example.com umatrix.xpi tridactyl.xpi gruvbox.xpi
+fire https://example.com $(pwd)/umatrix.xpi $(pwd)/tridactyl.xpi $(pwd)/gruvbox.xpi
 
 curl -fsSl https://raw.githubusercontent.com/tridactyl/native_messenger/master/installers/install.sh -o /tmp/trinativeinstall.sh && HOME="/home/usr/.local/share/firefox" sh /tmp/trinativeinstall.sh 1.22.1
 
