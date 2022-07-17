@@ -124,11 +124,7 @@ cat_handler () {
 			sed -e 's|\\n|\n|g' -e 's|\\t|\t|g' |
 			lynx -stdin
 
-		IFS="$OLDIFS"
-		return
 	done
-
-	printf "couldn't find any entries matching %s\n" "$realargs"
 }
 
 import_information
