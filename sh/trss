@@ -3,6 +3,7 @@
 # get configuration & data directories
 DATA="$HOME/.cache/trss"
 CONFIG="$HOME/.config/trss"
+MODE=""
 
 # make sure these directories are in place
 mkdir -p "$DATA"
@@ -24,7 +25,7 @@ synchronize () {
 
 		# generate sfeed formatted file
 		printf "> creating sfeed compound feed file for feed %s\n" "$i"
-		cat "$DATA/${i}.xml" | sfeed | cat - "$DATA/${i}.sfeed" | uniq >> "$DATA/${i}.tmp.sfeed"
+		cat "$DATA/${i}.xml" | sfeed | cat - "$DATA/${i}.sfeed" | sort -u | sort -r -k 1 >> "$DATA/${i}.tmp.sfeed"
 		mv "$DATA/${i}.tmp.sfeed" "${DATA}/${i}.sfeed"
 	done
 }
@@ -33,7 +34,104 @@ get_feed_attr () {
 	eval "printf '%s' \${$1_$2}"
 }
 
+cli_loop () {
+	read -p "$MODE\$ " input
+	case "$input" in
+		"ls"*)
+			ls_handler $input
+			;;
+		"cd"*)
+			cd_handler $input
+			;;
+		"cat"*)
+			cat_handler $input
+			;;
+		"sync"*)
+			sync_handler $input
+			;;
+		"set"*)
+			set_handler $input
+			;;
+	esac
+}
+
+ls_handler () {
+	if [ -z "$MODE" ]; then
+		# just list all the feeds
+		for i in $FEEDS; do
+			printf "%s\n" "$i"
+		done
+	else
+		# we have to list all the items in the feed
+		# check first if feed is downloaded
+		if [ -f "$DATA/${MODE}.sfeed" ]; then
+			awk -F'\t' '{ print $2 }' "$DATA/${MODE}.sfeed"
+		else
+			printf "synchronization of feed %s required\n" "$MODE"
+		fi
+	fi
+}
+
+cd_handler () {
+	if [ -z "$MODE" ]; then
+		# we're in the home state
+		[ -z "$2" ] && return
+		[ "$2" = ".." ] && return
+
+		# check if $2 is a valid feed
+		j=0
+		for i in $FEEDS; do
+			[ "$2" = "$i" ] && j=1
+		done
+
+		if [ "$j" -ne 1 ]; then
+			printf "trss: couldn't find feed %s\n" "$2"
+			return
+		fi
+
+		# set the $MODE to the feed
+		MODE="$2"
+	else
+		# we're in an individual feed
+		[ -z "$2" ] && MODE="" && return
+		[ "$2" = ".." ] && MODE="" && return
+
+		printf "trss: couldn't find feed %s\n" "$2"
+	fi
+}
+
+sync_handler () {
+	synchronize
+}
+
+set_handler () {
+	printf "stub, use +x or -x to disable/enable debug output\n"
+}
+
+cat_handler () {
+	realargs="$(printf '%s\n' "$@" | tr '\n' ' ' | sed 's/^cat //g;s/ $//g')"
+	[ -z "$MODE" ] && printf "couldn't find entry matching %s\n" "$realargs"
+	results="$(awk -F'\t' -v pat="$realargs" '$2 ~ pat { print $0 }' "$DATA/${MODE}.sfeed")"
+
+	OLDIFS="$IFS"
+	IFS="
+"
+
+	for i in $results; do
+		entry="$(printf "%s" "$i" | awk -F'\t' '{ print $4 }')"
+
+		printf "%s\n" "$entry" |
+			sed -e 's|\\n|\n|g' -e 's|\\t|\t|g' |
+			lynx -stdin
+
+		IFS="$OLDIFS"
+		return
+	done
+
+	printf "couldn't find any entries matching %s\n" "$realargs"
+}
+
 import_information
-synchronize
-printf "%s\n" "$FEEDS"
-get_feed_attr seirdy humanname
+while true; do
+	cli_loop
+done
