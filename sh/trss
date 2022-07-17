@@ -17,16 +17,20 @@ import_information () {
 	done
 }
 
+sync_individual () {
+	url="$(get_feed_attr "$1" feed)"
+	printf "> synchronizing feed %s via url %s\n" "$1" "$url"
+	curl "$url" -so "$DATA/${1}.xml"
+
+	# generate sfeed formatted file
+	printf "> creating sfeed compound feed file for feed %s\n" "$i"
+	cat "$DATA/${1}.xml" | sfeed | cat - "$DATA/${1}.sfeed" | sort -u | sort -r -k 1 >> "$DATA/${1}.tmp.sfeed"
+	mv "$DATA/${1}.tmp.sfeed" "${DATA}/${1}.sfeed"
+}
+
 synchronize () {
 	for i in $FEEDS; do
-		url="$(get_feed_attr "$i" feed)"
-		printf "> synchronizing feed %s via url %s\n" "$i" "$url"
-		curl "$url" -so "$DATA/${i}.xml"
-
-		# generate sfeed formatted file
-		printf "> creating sfeed compound feed file for feed %s\n" "$i"
-		cat "$DATA/${i}.xml" | sfeed | cat - "$DATA/${i}.sfeed" | sort -u | sort -r -k 1 >> "$DATA/${i}.tmp.sfeed"
-		mv "$DATA/${i}.tmp.sfeed" "${DATA}/${i}.sfeed"
+		sync_individual "$i"
 	done
 }
 
@@ -101,7 +105,18 @@ cd_handler () {
 }
 
 sync_handler () {
-	synchronize
+	force=0
+	[ "$2" = "-f" ] && force=1
+	[ "$3" = "-f" ] && force=1
+
+	if [ -z "$MODE" ]; then
+		# sync everything
+		synchronize
+	else
+		[ -n "$2" ] && [ ! "$2" = "-f" ] &&
+			sync_individual "$2" ||
+			sync_individual "$MODE"
+	fi
 }
 
 set_handler () {
