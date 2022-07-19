@@ -24,7 +24,11 @@ sync_individual () {
 
 	# generate sfeed formatted file
 	printf "> creating sfeed compound feed file for feed %s\n" "$1"
-	cat "$DATA/${1}.xml" | sfeed | cat - "$DATA/${1}.sfeed" | sort -u | sort -r -k 1 >> "$DATA/${1}.tmp.sfeed"
+	cat "$DATA/${1}.xml" |
+		sfeed |
+		cat - "$DATA/${1}.sfeed" |
+		sort -u |
+		sort -r -k 1 >> "$DATA/${1}.tmp.sfeed"
 	mv "$DATA/${1}.tmp.sfeed" "${DATA}/${1}.sfeed"
 }
 
@@ -120,7 +124,7 @@ sync_handler () {
 }
 
 open_handler() {
-	realargs="$(printf '%s\n' "$@" | tr '\n' ' ' | sed 's/^open //g;s/ $//g')"
+	realargs="$(printf '%s\n' "$@" | tr '\n' ' ' | sed 's/^open //g')"
 	[ -z "$MODE" ] && printf "couldn't find entry matching %s\n" "$realargs"
 	results="$(awk -F'\t' -v pat="$realargs" '$2 ~ pat { print $0 }' "$DATA/${MODE}.sfeed")"
 
@@ -128,15 +132,13 @@ open_handler() {
 	IFS="
 "
 
-	set -x
 	for i in $results; do
-		url="$(printf "%s" "$1" | awk -F'\t' '{ print $3 }')"
+		url="$(printf "%s" "$i" | awk -F'\t' '{ print $3 }')"
 
 		echo "$url"
 
 		fire "$url" &
 	done
-	set +x
 	IFS="$OLDIFS"
 }
 
