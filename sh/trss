@@ -135,9 +135,18 @@ open_handler() {
 	for i in $results; do
 		url="$(printf "%s" "$i" | awk -F'\t' '{ print $3 }')"
 
-		echo "$url"
-
+# on low power systems mpv can be expensive to run
+# have to figure out why it stutters so much more than the browser
+#		case "$url" in
+#			*youtube*)
+#				mpv "$url"
+#				;;
+#			*)
+#				fire "$url" &
+#				;;
+#		esac
 		fire "$url" &
+
 	done
 	IFS="$OLDIFS"
 }
