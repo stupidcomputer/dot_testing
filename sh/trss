@@ -23,7 +23,7 @@ sync_individual () {
 	curl "$url" -so "$DATA/${1}.xml"
 
 	# generate sfeed formatted file
-	printf "> creating sfeed compound feed file for feed %s\n" "$i"
+	printf "> creating sfeed compound feed file for feed %s\n" "$1"
 	cat "$DATA/${1}.xml" | sfeed | cat - "$DATA/${1}.sfeed" | sort -u | sort -r -k 1 >> "$DATA/${1}.tmp.sfeed"
 	mv "$DATA/${1}.tmp.sfeed" "${DATA}/${1}.sfeed"
 }
@@ -53,8 +53,8 @@ cli_loop () {
 		"sync"*)
 			sync_handler $input
 			;;
-		"set"*)
-			set_handler $input
+		"open"*)
+			open_handler $input
 			;;
 	esac
 }
@@ -119,8 +119,25 @@ sync_handler () {
 	fi
 }
 
-set_handler () {
-	printf "stub, use +x or -x to disable/enable debug output\n"
+open_handler() {
+	realargs="$(printf '%s\n' "$@" | tr '\n' ' ' | sed 's/^open //g;s/ $//g')"
+	[ -z "$MODE" ] && printf "couldn't find entry matching %s\n" "$realargs"
+	results="$(awk -F'\t' -v pat="$realargs" '$2 ~ pat { print $0 }' "$DATA/${MODE}.sfeed")"
+
+	OLDIFS="$IFS"
+	IFS="
+"
+
+	set -x
+	for i in $results; do
+		url="$(printf "%s" "$1" | awk -F'\t' '{ print $3 }')"
+
+		echo "$url"
+
+		fire "$url" &
+	done
+	set +x
+	IFS="$OLDIFS"
 }
 
 cat_handler () {
@@ -138,8 +155,8 @@ cat_handler () {
 		printf "%s\n" "$entry" |
 			sed -e 's|\\n|\n|g' -e 's|\\t|\t|g' |
 			lynx -stdin
-
 	done
+	IFS="$OLDIFS"
 }
 
 import_information
