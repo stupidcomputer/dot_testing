@@ -11,6 +11,9 @@ export PYTHONSTARTUP="$HOME/.config/python/pythonrc.py"
 # less
 export LESSHISTFILE="-"
 
+# gnupg
+export GNUPGHOME="$HOME/.local/share/gnupg"
+
 # remind
 export DOTREMINDERS="$HOME/git/calendar/reminders"
 

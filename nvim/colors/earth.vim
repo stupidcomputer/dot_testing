@@ -43,3 +43,6 @@ hi StatusLine ctermbg=black ctermfg=white cterm=NONE gui=NONE
 hi StatusLineNC ctermbg=white ctermfg=black cterm=NONE gui=NONE
 
 hi SpellBad ctermbg=NONE ctermfg=red cterm=NONE
+hi SpellCap ctermbg=NONE ctermfg=12 cterm=NONE
+hi SpellRare ctermbg=NONE ctermfg=13 cterm=NONE
+hi SpellLocal ctermbg=NONE ctermfg=14 cterm=NONE
