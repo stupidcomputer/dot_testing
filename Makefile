@@ -12,6 +12,7 @@ sh:
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/paste $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/trss $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/trss-yt-id $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/disp $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/wallpaper $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/yt $(DESTDIR)$(PREFIX)/bin
