@@ -69,6 +69,9 @@ super + q
 super + e
   bspc quit 0
 
+super + shift + e
+	systemctl suspend
+
 super + {_,ctrl +,shift + }{h,j,k,l}
   bspc node -{f,p,s} {west,south,north,east}
 
