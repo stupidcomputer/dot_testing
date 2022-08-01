@@ -1,9 +1,5 @@
 # pre-wm boilerplate
-disp
 wallpaper
-
-# statusbar
-statusbar &
 
 # adjust some keybindings
 setxkbmap -option caps:super
