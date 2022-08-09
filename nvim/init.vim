@@ -52,10 +52,11 @@ nnoremap <Leader>fs :Lexplore<CR>
 nnoremap <Leader>ke :e ~/.config/nvim/init.vim <CR>ggzR/shortcuts<CR>z<CR>
 " jk to escape insert mode
 inoremap jk <esc>
-inoremap <esc> <esc>:echo "use jk instead!"<CR>2gsi
 " go back to the previous error, then correct
 inoremap <C-d> <c-g>u<Esc>[s1z=`]a<c-g>u
+inoremap qp <c-g>u<Esc>[s1z=`]a<c-g>u
 inoremap <C-s> <Esc>zgi
+inoremap qo <Esc>zgi
 nnoremap <C-s> zg
 tnoremap <Esc> <C-\><C-n>
 nnoremap <Leader>wl <C-w>\<
