@@ -64,6 +64,8 @@ nnoremap <Leader>wr <C-w>\>
 nnoremap <Leader>wd <C-w>-
 nnoremap <Leader>wu <C-w>+
 
+nnoremap <Leader>mk :make<CR>:spl<CR>:terminal ./main<CR>
+
 " }}}
 
 " autocmds {{{
