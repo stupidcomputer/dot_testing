@@ -25,6 +25,14 @@ mod_bspwm () {
 	printf "%s" "$final_string"
 }
 
+mod_period () {
+	nextclass
+}
+
+mod_sensors () {
+	sensors | grep 'Core 0' | awk -F' ' '{print $3}' | tr -d '\n'
+}
+
 mod_power () {
 	[ -z "$bat" ] ||
 	tr -d '\n' < /sys/class/power_supply/$bat/capacity
@@ -50,7 +58,7 @@ get_mod () {
 
 echo_bar () {
 	left="$(get_mod "bspwm")"
-	right="$(get_mod "date_time") $(get_mod "power") $(get_mod "vol")"
+	right="$(get_mod "date_time")$(get_mod "period") $(get_mod "sensors") $(get_mod "power") $(get_mod "vol")"
 
 	width="$(tput cols)"
 	rightwidth="${#right}"
@@ -72,6 +80,8 @@ update_all () {
 	update_mod vol
 	update_mod bspwm
 	update_mod date_time
+	update_mod period
+	update_mod sensors
 }
 
 tput civis
