@@ -15,6 +15,9 @@ super + r
   pkill -USR1 -x sxhkd; \
   bspc wm -r
 
+super + ctrl + shift + b
+  brightness
+
 super + w
   wallpaper
 
@@ -26,6 +29,9 @@ super + ctrl + n
 
 super + ctrl + t
 	st -e htop
+
+super + m
+	lobster
 
 {XF86Display,super + }
   disp
@@ -44,6 +50,9 @@ super + b
 
 super + shift + b
 	fire -P
+
+super + ctrl + b
+	chromium
 
 super + {_,shift + }v
   vol {inc,dec}
