@@ -3,6 +3,6 @@
 file=$(mktemp)
 cat - > "$file"
 
-st -c tmenu-prompt -g 40x10+0+0 -e tmenu-backend "$file"
+st -c tmenu-prompt -g 40x10+0+0 -e tmenu-backend "$file" "$1"
 cat "$file"
 rm "$file"
