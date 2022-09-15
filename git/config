@@ -2,6 +2,9 @@
 	email = randomuser@tilde.club
 	name = randomuser
 
-[credential]
+[credential "https://tildegit.org"]
 	username = randomuser
 	helper = gitpass
+
+[advice]
+	addIgnoredFile = false
