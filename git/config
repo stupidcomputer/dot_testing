@@ -3,4 +3,4 @@
 	name = randomuser
 
 [core]
-	askPass = pash s tildegit
+	askPass = /usr/bin/pash s tildegit
