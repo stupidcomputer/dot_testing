@@ -3,4 +3,5 @@
 	name = randomuser
 
 [credential]
+	username = randomuser
 	helper = gitpass
