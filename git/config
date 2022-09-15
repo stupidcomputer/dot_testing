@@ -2,5 +2,5 @@
 	email = randomuser@tilde.club
 	name = randomuser
 
-[core]
-	askPass = gitpass
+[credential]
+	helper = gitpass
