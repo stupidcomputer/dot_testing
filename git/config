@@ -1,3 +1,6 @@
 [user]
 	email = randomuser@tilde.club
 	name = randomuser
+
+[core]
+	askPass = pash s tildegit
