@@ -2,6 +2,8 @@
 
 machine
 
-[ "$?" -eq 2 ] &&
-	st -c statusbar -g 142x1+0+0 -e status ||
-	st -c statusbar -g 195x1+0+0 -e status
+res="$?"
+
+[ "$res" -eq 1 ] && st -c statusbar -g 274x1+0+0 -e status
+[ "$res" -eq 2 ] && st -c statusbar -g 142x1+0+0 -e status
+[ "$res" -eq 4 ] && st -c statusbar -g 195x1+0+0 -e status

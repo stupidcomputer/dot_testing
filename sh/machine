@@ -3,7 +3,7 @@
 host="$(hostname)"
 
 case "$host" in
-	"mlg" | "think")
+	"mlg")
 		exit 1
 		;;
 	"toaster")
@@ -11,5 +11,8 @@ case "$host" in
 		;;
 	"fish")
 		exit 3
+		;;
+	"think")
+		exit 4
 		;;
 esac
