@@ -70,6 +70,12 @@ super + o
 super + p
 	xdotool mousemove_relative -- 10 0
 
+super + shift + u
+	xdotool click 1
+
+super + shift + p
+	xdotool click 2
+
 # bspwm
 
 super + q
