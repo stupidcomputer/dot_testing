@@ -19,6 +19,8 @@ get_xpi_for_ext() {
 	curl -s "$final_url" -o "$2"
 }
 
+mkdir firefox
+
 get_xpi_for_ext "umatrix" "firefox/umatrix.xpi"
 get_xpi_for_ext "tridactyl-vim" "firefox/tridactyl.xpi"
 get_xpi_for_ext "gruvbox-dark" "firefox/gruvbox.xpi"
