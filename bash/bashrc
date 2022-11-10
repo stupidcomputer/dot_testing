@@ -16,6 +16,7 @@ alias cal="rem -cl"
 alias shutdown="sudo shutdown -h now"
 
 alias ls="ls --color=auto"
+alias irssi="irssi --home=$HOME/.config/irssi"
 
 PS1="\w\$ "
 
