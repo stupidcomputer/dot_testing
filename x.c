@@ -256,6 +256,7 @@ static char *opt_io    = NULL;
 static char *opt_line  = NULL;
 static char *opt_name  = NULL;
 static char *opt_title = NULL;
+static int  opt_pixel  =    0;
 
 static uint buttons; /* bit field of pressed buttons */
 
@@ -1157,8 +1158,13 @@ xinit(int cols, int rows)
 	xloadcols();
 
 	/* adjust fixed window geometry */
-	win.w = 2 * borderpx + cols * win.cw;
-	win.h = 2 * borderpx + rows * win.ch;
+	if(!opt_pixel) {
+		win.w = 2 * borderpx + cols * win.cw;
+		win.h = 2 * borderpx + rows * win.ch;
+	} else {
+		win.w = cols;
+		win.h = rows;
+	}
 	if (xw.gm & XNegative)
 		xw.l += DisplayWidth(xw.dpy, xw.scr) - win.w - 2;
 	if (xw.gm & YNegative)
@@ -2091,6 +2097,9 @@ main(int argc, char *argv[])
 		break;
 	case 'o':
 		opt_io = EARGF(usage());
+		break;
+	case 'p':
+		opt_pixel = 1;
 		break;
 	case 'l':
 		opt_line = EARGF(usage());

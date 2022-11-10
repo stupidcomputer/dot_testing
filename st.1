@@ -3,7 +3,7 @@
 st \- simple terminal
 .SH SYNOPSIS
 .B st
-.RB [ \-aiv ]
+.RB [ \-aivp ]
 .RB [ \-c
 .IR class ]
 .RB [ \-f
@@ -27,7 +27,7 @@ st \- simple terminal
 .RI [ arguments ...]]
 .PP
 .B st
-.RB [ \-aiv ]
+.RB [ \-aivp ]
 .RB [ \-c
 .IR class ]
 .RB [ \-f
@@ -80,6 +80,9 @@ writes all the I/O to
 .I iofile.
 This feature is useful when recording st sessions. A value of "-" means
 standard output.
+.TP
+.BI \-p
+enters pixel-perfect mode, where -g requests specific pixels instead of characters
 .TP
 .BI \-T " title"
 defines the window title (default 'st').
