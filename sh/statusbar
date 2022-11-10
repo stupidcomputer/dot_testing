@@ -1,9 +1,21 @@
 #!/bin/sh
 
-machine
+barwidth=20
 
-res="$?"
+# remove all current statusbars
+processes="$(ps aux | grep 'st -c' | grep 'status' | awk -F' ' '{print $2}')"
+for i in $processes; do
+	pkill -P "$i" 2>&1 > /dev/null
+	kill $i
+done
 
-[ "$res" -eq 1 ] && st -c statusbar -g 274x1+0+0 -e status
-[ "$res" -eq 2 ] && st -c statusbar -g 142x1+0+0 -e status
-[ "$res" -eq 4 ] && st -c statusbar -g 195x1+0+0 -e status
+# get all screens
+screens="$(xrandr | grep ' connected' | sed 's/ primary//g' | awk -F' ' '{print $1 " " $3}')"
+
+# for every screen, create a statusbar
+IFS="
+"
+for i in $screens; do
+	screenstring=$(echo $i | awk -v a="$barwidth" -F'[ x+]' '{print $2 "x" a "+" $4 "+" $5}')
+	st -c statusbar -p -g "$screenstring" -e status &
+done
