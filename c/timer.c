@@ -32,12 +32,12 @@ struct settings {
   .s = 0
 };
 
-void timerdec(struct timer *t) { if (t->s != 0) t->s--; }
+void timerdec(struct timer *t) { if (t->s) t->s--; }
 void timerinc(struct timer *t) { t->s++; }
-void timerupdate(struct timer *t) { if(t->u != NULL) t->u(t); }
+void timerupdate(struct timer *t) { if(t->u) t->u(t); }
 
 int timerstate(int (*f)(struct timer *t), struct timer *t) {
-  if(f != NULL) {
+  if(f) {
     if(f(t)) return 1;
     else return 0;
   }
@@ -48,7 +48,7 @@ int timerstop(struct timer *t) { return timerstate(t->c, t); }
 int timerpause(struct timer *t) { return timerstate(t->p, t); }
 
 int timerzero(struct timer *t) {
-  if(t->s == 0) return 1;
+  if(!t->s) return 1;
   return 0;
 }
 
@@ -68,13 +68,13 @@ struct timer *timerinit(void) {
 }
 
 int timerissettings(struct timer *t) {
-  if(t->s == 0) return 0;
+  if(!t->s) return 0;
   if(s.s == t->s) return 1;
   return 0;
 }
 
 int tomatotimer(struct timer *t) {
-  if(t->s != 0) return 0;
+  if(t->s) return 0;
   if(t->d % 2) t->s = s.s / 2;
   else t->s = s.s;
   t->d++;
