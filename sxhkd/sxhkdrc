@@ -19,7 +19,7 @@ super + ctrl + shift + b
   brightness
 
 super + w
-  wallpaper
+  disp && wallpaper && statusbar
 
 super + {_,shift + }n
   nws {local,national}
@@ -32,9 +32,6 @@ super + ctrl + t
 
 super + m
 	lobster
-
-{XF86Display,super + }
-  disp
 
 {XF86ScreenSaver,super + shift + z}
   slock
