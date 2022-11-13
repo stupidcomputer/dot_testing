@@ -1,8 +1,0 @@
-#!/bin/sh
-
-[ -z "$1" ] && exit 1
-
-curl "${1}" -s | \
-	grep 'youtube/www\.youtube\.com/channel/.\{24\}' -o | \
-	awk -F'/' '{print "https://www.youtube.com/feeds/videos.xml?channel_id=" $NF}' | \
-	sed 1q

@@ -1,0 +1,25 @@
+#!/bin/sh
+
+[ -z "$1" ] && exit 1
+[ -z "$2" ] && exit 1
+
+printf "[info] this utility is used for adding youtube urls as rss feeds\n"
+
+feed="$(curl ${1} -s | \
+	grep 'youtube/www\.youtube\.com/channel/.\{24\}' -o | \
+	awk -F'/' '{print "https://www.youtube.com/feeds/videos.xml?channel_id=" $NF}' | \
+	sed 1q)"
+
+[ -z "$feed" ] && printf "[err] error processing the feed. are you sure it's *www*.youtube.com and not youtube.com?\n" && exit 1
+
+tmp="$(mktemp)"
+
+sfeedrc="$HOME/.config/sfeed/sfeedrc"
+
+ed "$sfeedrc" <<EOF
+/feeds
+a
+	feed "$2" "$feed"
+.
+w
+EOF
