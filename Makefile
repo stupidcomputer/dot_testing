@@ -11,7 +11,7 @@ man:
 sh:
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/paste $(DESTDIR)$(PREFIX)/bin
-	cp -f sh/ $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/sfeed_yt_add $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/disp $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/wallpaper $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/connect $(DESTDIR)$(PREFIX)/bin
