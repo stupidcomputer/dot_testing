@@ -9,4 +9,4 @@ tmenu_path () {
     done
 }
 
-tmenu_path | tmenu "$@" | ${SHELL:-"/bin/sh"} &
+tmenu_path | tmenu | ${SHELL:-"/bin/sh"} &
