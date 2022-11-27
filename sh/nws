@@ -43,7 +43,7 @@ localradar () {
 	mosaic ${NWS_ZONE}
 }
 mosaic () { 
-	${NWS_GIF} "https://radar.weather.gov/ridge/lite/${1}_loop.gif"
+	${NWS_GIF} "https://radar.weather.gov/ridge/standard/${1}_loop.gif"
 }
 setzone () {
 	printf "%s" "${1}" > "${NWS_CONFIG}"
