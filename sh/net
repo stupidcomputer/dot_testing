@@ -1,4 +1,4 @@
 #!/bin/sh
 # designed to be called from sxhkd (x session)
 
-[ "$(pgrep NetworkManager)" ] && st -e nmtui
+pgrep NetworkManager && st -e nmtui

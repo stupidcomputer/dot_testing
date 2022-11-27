@@ -1,36 +1,37 @@
 #!/bin/sh
 
-[ "$(ps -aux | grep -c NetworkManager)" -eq 2 ] && \
-	printf "NetworkManager is already running!" && \
+[ "$(pgrep -c NetworkManager)" -eq 1 ] &&
+	printf "NetworkManager is already running!\n" &&
 	exit
 
 case $1 in
 	"c"*)
 		wpa_supplicant -iwlp3s0 -c/etc/wpa_supplicant/wpa_supplicant.conf -B
 		dhcpcd wlp3s0
-		tor & disown
+		# make tor and nohup shut up in a posix-compliant way
+		nohup tor >/dev/null 2>&1
 		;;
 	"d"*)
 		killall -15 wpa_supplicant dhcpcd tor
 		;;
 	"r"*)
-		sh $0 d
-		sh $0 c
+		sh "$0" d
+		sh "$0" c
 		;;
 	"t"*)
-		[ $(ps aux | grep wpa_supplicant | wc -l) -eq 2 ] && sh $0 d && exit
-		sh $0 c
+		[ "$(pgrep -c wpa_supplicant)" -eq 1 ] && sh "$0" d && exit
+		sh "$0" c
 		;;
 	"l"*)
 		iw dev wlp3s0 scan | \
 			grep 'SSID\|signal' | \
-			grep -v '* SSID List' | \
+			grep -v 'SSID List' | \
 			awk -F': ' '{print $2}' | \
 			sed 'N;s/\n/ /' | \
 			grep -v '\x00'
 		;;
 	*)
-		printf "\
+		echo "
 simple wrapper for connecting to a network
 ${0} toggle to toggle wifi connection
 ${0} restart to restart wifi

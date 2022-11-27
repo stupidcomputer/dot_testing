@@ -1,11 +1,10 @@
 #!/bin/sh
 
-for i in $(ls); do
-	cd $i
+for i in *; do
+	cd "$i" || continue
 	exists=$(
-		git status |\
-		grep 'Your branch is ahead of ' |\
-		wc -l
+		git status |
+		grep -c 'Your branch is ahead of '
 	)
 
 	[ "$exists" -eq 0 ] || printf "> %s\n" "$i"

@@ -3,10 +3,12 @@
 barwidth=20
 
 # remove all current statusbars
+# pgrep doesn't handle arguments for running commands
+# shellcheck disable=2009
 processes="$(ps aux | grep 'st -c' | grep 'status' | awk -F' ' '{print $2}')"
 for i in $processes; do
-	pkill -P "$i" 2>&1 > /dev/null
-	kill $i
+	pkill -P "$i" >/dev/null 2>&1
+	kill "$i"
 done
 
 # get all screens
@@ -16,6 +18,6 @@ screens="$(xrandr | grep ' connected' | sed 's/ primary//g' | awk -F' ' '{print 
 IFS="
 "
 for i in $screens; do
-	screenstring=$(echo $i | awk -v a="$barwidth" -F'[ x+]' '{print $2 "x" a "+" $4 "+" $5}')
+	screenstring=$(echo "$i" | awk -v a="$barwidth" -F'[ x+]' '{print $2 "x" a "+" $4 "+" $5}')
 	st -c statusbar -p -g "$screenstring" -e status &
 done

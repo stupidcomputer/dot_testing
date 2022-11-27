@@ -19,7 +19,7 @@ desk=$(
 )
 
 [ "$desk" = "none" ] && exit 1
-desk=$(($desk + 1))
+desk=$((desk + 1))
 
 bspc desktop -f "^${desk}"
 killall -10 simplestatus

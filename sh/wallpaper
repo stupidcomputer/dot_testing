@@ -1,12 +1,11 @@
 #!/bin/sh
 
 WALLDIR="${HOME}/.local/share/wallpapers"
-TEEFILE="${WALLDIR}/.hist"
 BASECMD="feh --no-fehbg --bg-fill"
 
 generate_wall () {
   GENWALL=$( \
-    ls $WALLDIR | \
+    ls "$WALLDIR" | \
     grep "." | \
     shuf -n 1
   )
@@ -19,26 +18,15 @@ wall () {
   done
 }
 displays () {
-  displays=$(xrandr | grep ' connected' | wc -l)
-}
-check () {
-  which $1 &>/dev/null
+	displays=$(xrandr | grep -c ' connected')
 }
 
 cmd=""
-check "feh" || exit 1
-if check "xrandr"; then
-  displays
-  for i in $(seq 1 $displays); do
-    wall ${tmp}
-    tmp=${GENWALL}
-    echo ${GENWALL} ${i} | tee $TEEFILE
-    cmd="${cmd} ${GENWALL}"
-  done
-  eval ${BASECMD} ${cmd}
-else
-  generate_wall
-  eval ${BASECMD} ${GENWALL}
-fi
-unset GENWALL BASECMD tmp cmd displays i
+displays
+for i in $(seq 1 "$displays"); do
+  wall "${tmp}"
+  tmp="${GENWALL}"
+  cmd="${cmd} ${GENWALL}"
+done
+eval "${BASECMD}" "${cmd}"
 exit 0

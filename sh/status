@@ -4,7 +4,7 @@ power_prefix="/sys/class/power_supply/"
 [ -d "${power_prefix}sbs-20-000b" ] && bat="sbs-20-000b"
 [ -d "${power_prefix}BAT0" ] && bat="BAT0"
 
-[ "$(ps aux | grep pulseaudio | wc -l)" -eq 2 ] && ss="pulse" || ss="alsa"
+[ "$(pgrep -c pulseaudio)" -eq 1 ] && ss="pulse" || ss="alsa"
 
 mod_bspwm () {
 	used_desk=$(bspc query -D -d .occupied --names | tr '\n' ' ')
@@ -67,7 +67,7 @@ echo_bar () {
 	printf "\033[2J\033[H%s" "$left"
 
 	# print right side
-	printf "\033[1;%if%s" "$(($width - $rightwidth + 1))" "$right"
+	printf "\033[1;%if%s" "$((width - rightwidth + 1))" "$right"
 }
 
 register_sigs () {
@@ -94,5 +94,5 @@ while true; do
 	sleep 0.25
 	[ "$i" -eq $((29 * 4)) ] && update_all && i=0
 	echo_bar
-	i="$(($i + 1))"
+	i="$((i + 1))"
 done
