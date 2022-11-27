@@ -17,7 +17,6 @@ sh:
 	cp -f sh/connect $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/nws $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/vol $(DESTDIR)$(PREFIX)/bin
-	cp -f sh/proxtest $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/pco $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/git-survey $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/vim-swap-handler $(DESTDIR)$(PREFIX)/bin
