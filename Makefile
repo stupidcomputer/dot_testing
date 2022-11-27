@@ -1,3 +1,3 @@
 install:
-	mkdir -p ~/.local/share/wallpapers
-	cp walls/* ~/.local/share/wallpapers
+	mkdir -p ~/.local/share
+	ln -sf $(CURDIR)/wallpapers ~/.local/share/
