@@ -35,4 +35,10 @@ files() {
 	return 0
 }
 
+rss() {
+	cd ~/.local/share/sfeed/
+	sfeed_curses *
+	cd -
+}
+
 alias f=files
