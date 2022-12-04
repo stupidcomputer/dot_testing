@@ -5,9 +5,7 @@ Plug 'honza/vim-snippets'
 Plug 'sirver/ultisnips'
 Plug 'tridactyl/vim-tridactyl'
 Plug 'chrisbra/csv.vim'
-Plug 'trapd00r/vimpoint'
 Plug 'vimwiki/vimwiki'
-Plug 'itchyny/calendar.vim'
 cal plug#end()
 " }}}
 
@@ -71,7 +69,7 @@ nnoremap <Leader>mk :make<CR>:spl<CR>:terminal ./main<CR>
 
 nnoremap <Leader>w<Leader>I :VimwikiDiaryIndex<CR>
 
-inoremap <C-a> <Esc>mZ0i<Tab><Esc>`Zla
+inoremap <C-a> <Esc>mZ0i<Tab><Esc>`ZlA
 
 " }}}
 

@@ -29,7 +29,9 @@ repos() {
 }
 
 files() {
-	sel=`find /home/$(whoami) | fzy -l 50`
+	sel=$(find /home/$(whoami) |
+		grep -v '\.cache\|\.pki\|/scratch/\|\.config/chromium\|\.git\|\.local/lib\|\.mozilla/firefox/' |
+		fzy -l 50)
 	[ -z "$sel" ] && return 1
 	[ -d "$sel" ] && cd "$sel" || nvim "$sel"
 	return 0

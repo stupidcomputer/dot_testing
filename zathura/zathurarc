@@ -10,7 +10,7 @@ set font "Fantasque Sans Mono 11"
 set show-scrollbars "false"
 set database "plain"
 set dbus-service "false"
-set filemonitor "signal"
+set filemonitor "glib"
 set synctex "false"
 
 map ; feedkeys :

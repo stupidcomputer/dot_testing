@@ -86,3 +86,4 @@ setpref toolkit.telemetry.unified false
 setpref toolkit.telemetry.updatePing.enabled false
 setpref browser.newtabpage.activity-stream.discoverystream.enabled false
 setpref browser.uiCustomization.state '{"placements":{"widget-overflow-fixed-list":[],"nav-bar":["back-button","forward-button","umatrix_raymondhill_net-browser-action","stop-reload-button","downloads-button","urlbar-container","vim-vixen_i-beam_org-browser-action"],"toolbar-menubar":["menubar-items"],"TabsToolbar":["tabbrowser-tabs","new-tab-button","alltabs-button"],"PersonalToolbar":["personal-bookmarks"]},"seen":["developer-button","umatrix_raymondhill_net-browser-action","vim-vixen_i-beam_org-browser-action"],"dirtyAreaCache":["nav-bar","toolbar-menubar","TabsToolbar","PersonalToolbar"],"currentVersion":16,"newElementCount":4}'
+setpref privacy.resistFingerprinting.letterboxing false
