@@ -7,7 +7,7 @@ set zoom-min 10
 
 set font "Fantasque Sans Mono 11"
 
-set show-scrollbars "false"
+" set show-scrollbars "false"
 set database "plain"
 set dbus-service "false"
 set filemonitor "glib"
@@ -39,10 +39,10 @@ set index-bg "#161510"
 set index-fg "#ccbc8e"
 set index-active-bg "#ccbc8e"
 set index-active-fg "#161510"
-set tabbar-bg "#161510"
-set tabbar-fg "#ccbc8e"
-set tabbar-focus-bg "#ccbc8e"
-set tabbar-focus-fg "#161510"
+" set tabbar-bg "#161510"
+" set tabbar-fg "#ccbc8e"
+" set tabbar-focus-bg "#ccbc8e"
+" set tabbar-focus-fg "#161510"
 
 set notification-bg "#161510"
 set notification-fg "#ccbc8e"
