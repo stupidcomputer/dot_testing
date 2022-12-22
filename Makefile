@@ -1,12 +1,11 @@
+include config.mk
 all: mkc
 install: man sh c all
 .PHONY: man sh mkc c
 
 man:
-	# this used to be {command} $(DESTDIR)$(PREFIX)/man/man1
-	# this did not work on my computer, but might be needed on other installations
-	mkdir -p /usr/local/man/man1
-	cp -f man/* /usr/local/man/man1
+	mkdir -p $(DESTDIR)$(PREFIX)/man/man1
+	cp -f man/* $(DESTDIR)$(PREFIX)/man/man1
 
 sh:
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
