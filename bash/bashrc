@@ -50,6 +50,8 @@ git_main_branch () {
 }
 
 gp() {
+	# a bodge -- git authentication doesn't work quite right
+	pash c tildegit
 	git push -u origin $(git_main_branch)
 }
 
