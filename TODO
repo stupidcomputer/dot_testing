@@ -1,1 +1,11 @@
-overhaul nvim config: tabbing isn't correct, and make my workflow more efficent
+nvim:
+	- replace vimscript with lua completely
+utils:
+	- install applications to ~/.local/bin
+	- manpages to ~/.local/share/man
+		do this by exporting MANPATH=$(manpath):$HOME/.local/share/man
+
+other:
+	- make a 'setup' repository where one can just download
+		and run make and my setup is installed
+		- useful for foreign computers or setting up a liveusb
