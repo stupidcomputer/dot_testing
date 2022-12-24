@@ -43,4 +43,15 @@ rss() {
 	cd -
 }
 
+# stolen from stackoverflow
+# code from a stranger is always perfect
+git_main_branch () {
+    git branch | cut -c 3- | grep -E '^master$|^main$'
+}
+
+gp() {
+	git push -u origin $(git_main_branch)
+}
+
+alias gs='git status'
 alias f=files
