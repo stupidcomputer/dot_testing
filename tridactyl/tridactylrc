@@ -1,5 +1,8 @@
 sanitize commandline tridactyllocal tridactylsync
 
+" better thean google
+set searchengine duckduckgo
+
 " redirect youtube, reddit, twitter to proxies
 autocmd DocStart https://www.youtube.com js let vsites = ["invidious.snopyta.org", "yewtu.be", "invidious.kavin.rocks", "vid.puffyan.us"]; tri.excmds.urlmodify("-t", "www.youtube.com", vsites[Math.floor(Math.random() * vsites.length)])
 autocmd DocStart https://www.reddit.com js let rsites = ["libredd.it", "libreddit.spike.codes", "libreddit.kavin.rocks", "reddit.invak.id", "reddit.phii.me"]; tri.excmds.urlmodify("-t", "www.reddit.com", rsites[Math.floor(Math.random() * rsites.length)])
