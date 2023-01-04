@@ -11,19 +11,19 @@ mod_bspwm () {
 	current_desk=$(bspc query -D -d .focused --names)
 	final_string=""
 	current_printed=0
+	cur_char='>'
 	
 	for i in $used_desk; do
 		[ "$i" = "$current_desk" ] && \
-			final_string=${final_string}"*$i " && \
+			final_string=${final_string}"$cur_char$i " && \
 			current_printed=1 || \
 			final_string=${final_string}"$i "
 	done
 	
 	[ $current_printed -eq 0 ] &&
-		final_string=${final_string}"*$current_desk "
+		final_string=${final_string}"$cur_char$current_desk "
 	
 	printf "%s" "$final_string"
-	set +x
 }
 
 mod_period () {
