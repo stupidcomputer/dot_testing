@@ -1,11 +1,13 @@
 LOCATION="$(HOME)/.config"
 DATA="$(HOME)/.local/share"
-install_local: location_setup install_bspwm install_nvim install_sx install_sxhkd install_zathura install_bash install_ssh install_git install_tridactyl install_htop install_python
+install_local: location_setup install_theme install_bspwm install_nvim install_sx install_sxhkd install_zathura install_bash install_ssh install_git install_tridactyl install_htop install_python
 firefox: .firefox_env
 install: .environment
 
 location_setup:
 	mkdir -p $(LOCATION)/
+install_theme:
+	ln -sf $(CURDIR)/earth $(HOME)/.themes/
 install_bspwm:
 	ln -sf $(CURDIR)/bspwm $(LOCATION)/
 install_nvim:
