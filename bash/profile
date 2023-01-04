@@ -2,7 +2,7 @@
 
 # paths and stuff
 export PATH="$PATH:$HOME/.local/bin"
-export MANPATH="$(manpath):$HOME/.local/share/man"
+export MANPATH="$(manpath -q):$HOME/.local/share/man"
 export EDITOR="nvim"
 mkdir -p "$HOME/.local/bin" "$HOME/.share/man"
 
@@ -41,6 +41,9 @@ SFEED_URL_FILE="$HOME/.local/share/sfeed"
 mkdir -p $SFEED_URL_FILE
 touch "$SFEED_URL_FILE"
 export SFEED_URL_FILE="$SFEED_URL_FILE/.urls"
+
+export $(dbus-launch)
+export GTK_THEME="earth"
 
 # source the bashrc(s)
 [ -f $HOME/.config/bash/bashrc ] && . $HOME/.config/bash/bashrc

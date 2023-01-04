@@ -39,6 +39,7 @@ files() {
 
 rss() {
 	cd ~/.local/share/sfeed/
+	touch .urls
 	sfeed_curses *
 	cd -
 }
@@ -53,6 +54,44 @@ gp() {
 	# a bodge -- git authentication doesn't work quite right
 	pash c tildegit
 	git push -u origin $(git_main_branch)
+}
+
+start_bitlbee() {
+	mkdir -p $HOME/.config/bitlbee/
+	touch $HOME/.config/bitlbee/config
+	bitlbee #-D -c $HOME/.config/bitlbee/config -d $HOME/.config/bitlbee/
+}
+
+record() {
+	tmp=$(mktemp)
+	res=$(xrandr |
+		grep ' connected' |
+		awk -F' ' '{print $1 " " $4}' |
+		awk -F'+' '{print $1}' |
+		fzy |
+		awk -F' ' '{print $2}' )
+
+	ffmpeg -video_size "$res" -f x11grab -framerate 60 -i $DISPLAY -preset ultrafast -pix_fmt yuv420p "$tmp.mp4"
+
+	printf "> written to %s\n" "$tmp.mp4"
+	while true; do
+		result=$(printf "delete\nupload to pastebin\nreview footage\nquit\n" | fzy --prompt="what next?")
+		case "$result" in
+			*upload*)
+				paste "$tmp.mp4" | xclip -i
+				;;
+			*review*)
+				mpv "$tmp.mp4"
+				;;
+			*delete*)
+				rm "$tmp.mp4"
+				return
+				;;
+			*quit*)
+				return
+				;;
+		esac
+	done
 }
 
 alias gs='git status'

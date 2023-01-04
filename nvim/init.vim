@@ -1,10 +1,7 @@
 " randomuser's vimrc
 " vim-plug {{{
 call plug#begin()
-Plug 'honza/vim-snippets'
-Plug 'sirver/ultisnips'
 Plug 'tridactyl/vim-tridactyl'
-Plug 'chrisbra/csv.vim'
 Plug 'vimwiki/vimwiki'
 cal plug#end()
 " }}}
