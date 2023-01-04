@@ -7,6 +7,7 @@ power_prefix="/sys/class/power_supply/"
 [ "$(pgrep -c pulseaudio)" -eq 1 ] && ss="pulse" || ss="alsa"
 
 mod_bspwm () {
+	set -x
 	used_desk=$(bspc query -D -d .occupied --names | tr '\n' ' ')
 	current_desk=$(bspc query -D -d .focused --names)
 	final_string=""
@@ -23,6 +24,7 @@ mod_bspwm () {
 		final_string=${final_string}"*$current_desk "
 	
 	printf "%s" "$final_string"
+	set +x
 }
 
 mod_period () {
@@ -36,6 +38,7 @@ mod_sensors () {
 mod_power () {
 	[ -z "$bat" ] ||
 	tr -d '\n' < /sys/class/power_supply/$bat/capacity
+	sed 's/Charging/↑/g;s/Discharging/↓/g;s/Full/-/g' < /sys/class/power_supply/$bat/status
 }
 
 mod_vol () {

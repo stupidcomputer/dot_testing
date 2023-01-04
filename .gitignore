@@ -1,6 +1,7 @@
 *.swp
 *.tmp
 c/scream
+c/xgetnewwindow
 c/timer
 c/boid
 c/a.out
