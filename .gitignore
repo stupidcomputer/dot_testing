@@ -17,3 +17,4 @@ htop/htop
 tridactyl/tridactyl
 nvim/autoload/plug.vim.old
 nvim/spell/
+nvim/plugin
