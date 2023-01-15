@@ -34,6 +34,7 @@ sh:
 	cp -f sh/machine $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/brightness $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/git-credential-gitpass $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/capture $(DESTDIR)$(PREFIX)/bin
 
 check:
 	shellcheck sh/*
