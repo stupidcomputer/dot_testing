@@ -7,7 +7,10 @@ install: .environment
 location_setup:
 	mkdir -p $(LOCATION)/
 install_theme:
+	mkdir -p $(HOME)/.themes
+	mkdir -p $(HOME)/.local/share/firefox/.themes
 	ln -sf $(CURDIR)/earth $(HOME)/.themes/
+	ln -sf $(CURDIR)/earth $(HOME)/.local/share/firefox/.themes
 install_bspwm:
 	ln -sf $(CURDIR)/bspwm $(LOCATION)/
 install_nvim:

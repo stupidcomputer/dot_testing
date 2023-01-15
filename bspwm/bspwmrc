@@ -23,4 +23,4 @@ bspc rule -a statusbar border=off sticky=on state=floating manage=off
 bspc rule -a tmenu-prompt border=on sticky=on state=floating
 bspc rule -a Xmessage border=on state=floating
 bspc rule -a Zathura state=tiled
-bspc rule -a generic-st-window state=floating
+bspc rule -a generic-st-window state=floating manage=on sticky=on border=on
