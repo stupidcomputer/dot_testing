@@ -73,6 +73,9 @@ super + shift + u
 super + shift + p
 	xdotool click 2
 
+super + x
+	toggle-contingency-mode
+
 # bspwm
 
 super + q
