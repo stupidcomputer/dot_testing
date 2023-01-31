@@ -6,36 +6,41 @@
 -- |_|_| |_|_|\__(_)_|\__,_|\__,_|
 
 -- helper functions {{{
+local keymapper = vim.keymap
+local globals = vim.g
+local opt = vim.o
+local cmd = vim.cmd
 function nnoremap(l, r)
-	vim.keymap.set('n', l, r) -- noremap is implied
+	keymapper.set('n', l, r) -- noremap is implied
 end
 
 function inoremap(l, r)
-	vim.keymap.set('i', l, r)
+	keymapper.set('i', l, r)
 end
 
 function tnoremap(l, r)
-	vim.keymap.set('t', l, r)
+	keymapper.set('t', l, r)
 end
+
 -- }}}
 
 -- custom mappings {{{
-vim.g.mapleader = ' '
+globals.mapleader = ' '
 nnoremap(';', ':')
 nnoremap(':', ';')
 nnoremap('<leader><leader>', ':')
 
 -- source init.vim
 nnoremap('<leader>rr', function()
-	vim.cmd.source('~/.config/nvim/init.lua')
+	cmd.source('~/.config/nvim/init.lua')
 end)
 -- edit init.vim
 nnoremap('<leader>re', function()
-	vim.cmd.edit('~/.config/nvim/init.lua')
+	cmd.edit('~/.config/nvim/init.lua')
 end)
 -- openup netrw
 nnoremap('<leader>fs', function()
-	vim.cmd.Lexplore()
+	cmd.Lexplore()
 end)
 
 inoremap('qp', '<c-g>u<Esc>[s1z=`]a<c-g>u')
@@ -87,28 +92,39 @@ vim.api.nvim_create_autocmd({"Filetype"}, {
 -- }}}
 
 -- vim options {{{
-vim.o.compatible = false
-vim.o.number = true
-vim.o.foldmethod = 'marker'
-vim.o.encoding = 'utf8'
-vim.o.list = true
-vim.o.lcs = 'tab:->,trail:_,eol:^'
-vim.o.clipboard = 'unnamedplus'
-vim.o.spell = true
-vim.o.spelllang = "en_us"
-vim.o.title = true
-vim.o.ts = 2
-vim.o.sw = 2
-vim.o.hlsearch = true
-vim.o.incsearch = true
-vim.o.ignorecase = true
-vim.o.smartcase = true
-vim.o.inccommand = 'nosplit'
-vim.o.hidden = true
-vim.opt.path:append {'**'}
+opt.compatible = false
+opt.number = true
+opt.foldmethod = 'marker'
+opt.encoding = 'utf8'
+opt.list = true
+opt.lcs = 'tab:->,trail:_,eol:^'
+opt.clipboard = 'unnamedplus'
+opt.spell = true
+opt.spelllang = "en_us"
+opt.title = true
+opt.ts = 2
+opt.sw = 2
+opt.hlsearch = true
+opt.incsearch = true
+opt.ignorecase = true
+opt.smartcase = true
+opt.inccommand = 'nosplit'
+opt.hidden = true
+opt.path = '.,/usr/include,**'
 vim.cmd.colorscheme('earth')
-vim.o.statusline="%f %r%m%q%h%=%y 0x%02B %04l:%03c:%03p"
+opt.statusline="%f %r%m%q%h%=%y 0x%02B %04l:%03c:%03p"
 vim.api.nvim_exec("let &titlestring='%{expand(\"%:p\")}'", true)
+
+globals.vimtex_view_method = 'zathura'
+-- }}}
+
+-- netrw options {{{
+globals.netrw_winsize = -28
+globals.netrw_banner = 0
+-- for tree view
+globals.netrw_liststyle = 3
+-- use previous window to open files
+globals.netrw_browser_split = 4
 -- }}}
 
 -- packer.nvim {{{
@@ -128,10 +144,14 @@ local packer_bootstrap = ensure_packer()
 
 return require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
-	use 'vimwiki/vimwiki'
+	use 'tpope/vim-surround'
+	use 'tpope/vim-commentary'
+	use 'tpope/vim-fugitive'
+	use 'https://github.com/vimwiki/vimwiki.git'
+	use 'lervag/vimtex'
 
 	if packer_bootstrap then
 		require('packer').sync()
 	end
-end)
+end);
 -- }}}
