@@ -73,11 +73,14 @@ super + shift + u
 super + shift + p
 	xdotool click 2
 
+# misc
 super + x
 	toggle-contingency-mode
 
-# bspwm
+super + =
+	st -c generic-st-window -e nvim ~/.config/sxhkd/sxhkdrc
 
+# bspwm
 super + q
   bspc node -c
 
