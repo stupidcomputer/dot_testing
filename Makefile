@@ -36,6 +36,7 @@ sh:
 	cp -f sh/git-credential-gitpass $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/capture $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/toggle-contingency-mode $(DESTDIR)$(PREFIX)/bin
+	ln -sf $(DESTDIR)$(PREFIX)/bin/tmenu_run $(DESTDIR)$(PREFIX)/bin/regenerate
 
 check:
 	shellcheck sh/*
