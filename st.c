@@ -665,6 +665,17 @@ die(const char *errstr, ...)
 }
 
 void
+die_err(int err, const char *errstr, ...)
+{
+	va_list ap;
+
+	va_start(ap, errstr);
+	vfprintf(stderr, errstr, ap);
+	va_end(ap);
+	exit(err);
+}
+
+void
 execsh(char *cmd, char **args)
 {
 	char *sh, *prog, *arg;
@@ -735,7 +746,7 @@ sigchld(int a)
 	}
 
 	if (WIFEXITED(stat) && WEXITSTATUS(stat))
-		die("child exited with status %d\n", WEXITSTATUS(stat));
+		die_err(WEXITSTATUS(stat), "child exited with status %d\n", WEXITSTATUS(stat));
 	else if (WIFSIGNALED(stat))
 		die("child terminated due to signal %d\n", WTERMSIG(stat));
 	_exit(0);
