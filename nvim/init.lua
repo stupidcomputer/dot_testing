@@ -45,6 +45,8 @@ end)
 
 inoremap('qp', '<c-g>u<Esc>[s1z=`]a<c-g>u')
 inoremap("<C-a>", "<Esc>mZ0i<Tab><Esc>`ZlA")
+inoremap('jk', '<Esc>')
+inoremap('zz', '<Esc>:w!<CR>a')
 
 tnoremap('<Esc>', '<C-\\><C-n>')
 -- }}}

@@ -55,20 +55,20 @@ super + {_,shift + }v
   vol {inc,dec}
 
 # mouse movement
-super + u
-	xdotool mousemove_relative -- -10 0
+super + {u, i, o, p}
+	xdotool mousemove_relative -- {-10 0, 0 10, 0 -10, 10 0}
 
-super + i
-	xdotool mousemove_relative -- 0 10
-
-super + o
-	xdotool mousemove_relative -- 0 -10
-
-super + p
-	xdotool mousemove_relative -- 10 0
+super + alt + {u, i, o, p}
+	xdotool mousemove_relative -- {-20 0, 0 20, 0 -20, 20 0}
 
 super + shift + u
 	xdotool click 1
+
+super + ctrl + shift + u
+	xdotool mousedown 1
+
+@super + @ctrl + @shift + @u
+	xdotool mouseup 1
 
 super + shift + p
 	xdotool click 2
@@ -76,9 +76,6 @@ super + shift + p
 # misc
 super + x
 	toggle-contingency-mode
-
-super + =
-	st -c generic-st-window -e nvim ~/.config/sxhkd/sxhkdrc
 
 # bspwm
 super + q
@@ -102,3 +99,6 @@ super + {t,f,s}
 
 super + shift + t
 	bspwm-toggle-gaps
+
+alt + F4
+	exit

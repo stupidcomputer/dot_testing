@@ -1,2 +1,2 @@
-super + shift + p
+super + shift + XF86AudioRaiseVolume
 	toggle-contingency-mode

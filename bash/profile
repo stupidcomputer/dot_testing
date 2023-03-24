@@ -45,6 +45,9 @@ export SFEED_URL_FILE="$SFEED_URL_FILE/.urls"
 export $(dbus-launch)
 export GTK_THEME="earth"
 
+# elinks
+export ELINKS_CONFDIR="$HOME/.config/elinks"
+
 # source the bashrc(s)
 [ -f $HOME/.config/bash/bashrc ] && . $HOME/.config/bash/bashrc
 [ -f $HOME/.bashrc ] && . $HOME/.bashrc

@@ -65,3 +65,4 @@ start_bitlbee() {
 alias gs='git status'
 alias f=files
 alias lofi="mpv https://www.youtube.com/watch?v=jfKfPfyJRdk --no-video"
+alias pavucontrol="ncpamixer"
