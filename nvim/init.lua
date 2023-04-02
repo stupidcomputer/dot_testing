@@ -83,14 +83,28 @@ vim.api.nvim_create_autocmd({"BufWrite"}, {
 })
 
 -- autocmds for python
-vim.api.nvim_create_autocmd({"Filetype"}, {
-	pattern = {"python"},
-	callback = function()
-		vim.bo.expandtab = true
-		vim.bo.tabstop = 4
-		vim.bo.shiftwidth = 4
-	end
-})
+-- vim.api.nvim_create_autocmd({"Filetype"}, {
+-- 	pattern = {"python"},
+-- 	callback = function()
+-- 		vim.bo.expandtab = true
+-- 		vim.bo.tabstop = 4
+-- 		vim.bo.shiftwidth = 4
+-- 	end
+-- })
+
+function setTabbing(lang, width)
+	vim.api.nvim_create_autocmd({"Filetype"}, {
+		pattern = {lang},
+		callback = function()
+			vim.bo.expandtab = true
+			vim.bo.tabstop = width
+			vim.bo.shiftwidth = width
+		end
+	})
+end
+
+setTabbing("python", 4)
+setTabbing("javascript", 2)
 -- }}}
 
 -- vim options {{{
