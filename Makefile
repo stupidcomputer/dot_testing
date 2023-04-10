@@ -10,6 +10,7 @@ man:
 sh:
 	mkdir -p $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/paste $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/snapcad $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/sfeed_yt_add $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/disp $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/wallpaper $(DESTDIR)$(PREFIX)/bin
@@ -36,6 +37,7 @@ sh:
 	cp -f sh/git-credential-gitpass $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/capture $(DESTDIR)$(PREFIX)/bin
 	cp -f sh/toggle-contingency-mode $(DESTDIR)$(PREFIX)/bin
+	cp -f sh/keyboard $(DESTDIR)$(PREFIX)/bin
 	ln -sf $(DESTDIR)$(PREFIX)/bin/tmenu_run $(DESTDIR)$(PREFIX)/bin/regenerate
 	cp -f sh/discord $(DESTDIR)$(PREFIX)/bin
 
