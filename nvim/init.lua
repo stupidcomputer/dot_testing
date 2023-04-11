@@ -69,6 +69,7 @@ opt.ignorecase = true
 opt.smartcase = true
 opt.inccommand = 'nosplit'
 opt.hidden = true
+opt.linebreak = true
 opt.path = '.,/usr/include,**'
 vim.cmd.colorscheme('earth')
 opt.statusline="%f %r%m%q%h%=%y 0x%02B %04l:%03c:%03p"
