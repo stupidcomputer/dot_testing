@@ -63,6 +63,15 @@ start_bitlbee() {
 	bitlbee #-D -c $HOME/.config/bitlbee/config -d $HOME/.config/bitlbee/
 }
 
+dock-kill() {
+	docker stop $(
+		docker ps |
+		grep -v 'CONTAINER' |
+		fzy |
+		awk -F' ' '{print $1}'
+	)
+}
+
 alias gs='git status'
 alias f=files
 alias lofi="mpv https://www.youtube.com/watch?v=jfKfPfyJRdk --no-video"

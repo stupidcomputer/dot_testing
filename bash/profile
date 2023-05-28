@@ -48,6 +48,9 @@ export GTK_THEME="earth"
 # elinks
 export ELINKS_CONFDIR="$HOME/.config/elinks"
 
+# dbus configuration
+export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
+
 # source the bashrc(s)
 [ -f $HOME/.config/bash/bashrc ] && . $HOME/.config/bash/bashrc
 [ -f $HOME/.bashrc ] && . $HOME/.bashrc
