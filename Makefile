@@ -44,7 +44,7 @@ sh:
 check:
 	shellcheck sh/*
 
-mkc: c/scream c/timer c/boid c/anaconda c/colors c/xgetnewwindow
+mkc: c/scream c/timer c/boid c/anaconda c/colors c/xgetnewwindow c/tmessage
 
 c/boid:
 	cc c/boid.c -o c/boid -lm -lX11
@@ -62,6 +62,7 @@ c:
 	cp -f c/anaconda $(DESTDIR)$(PREFIX)/bin
 	cp -f c/colors $(DESTDIR)$(PREFIX)/bin
 	cp -f c/xgetnewwindow $(DESTDIR)$(PREFIX)/bin
+	cp -f c/tmessage $(DESTDIR)$(PREFIX)/bin
 
 clean:
 	rm -f c/scream
@@ -70,3 +71,4 @@ clean:
 	rm -f c/anaconda
 	rm -f c/simplestatus
 	rm -f c/xgetnewwindow
+	rm -f c/tmessage
