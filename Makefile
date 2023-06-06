@@ -69,6 +69,7 @@ clean:
 	rm -f c/timer
 	rm -f c/boid
 	rm -f c/anaconda
+	rm -f c/colors
 	rm -f c/simplestatus
 	rm -f c/xgetnewwindow
 	rm -f c/tmessage
