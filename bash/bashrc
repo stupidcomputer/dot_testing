@@ -7,9 +7,6 @@ alias rc=". ~/.config/bash/bashrc"
 alias erc="nvim ~/.config/bash/bashrc"
 alias reload=". ~/.config/bash/bashrc; . ~/.config/bash/profile"
 
-# ssh keeping tidy
-alias ssh="ssh -F $HOME/.config/ssh/config"
-
 # remind alias
 alias sched="nvim $DOTREMINDERS"
 alias cal="rem -cl"
