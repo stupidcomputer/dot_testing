@@ -1,0 +1,11 @@
+#!/bin/sh
+
+gaps="$(bspc config top_padding)"
+
+if [ "$gaps" -eq 20 ]; then
+	bspc config window_gap 0
+	bspc config top_padding 18
+else
+	bspc config window_gap 3
+	bspc config top_padding 20
+fi

@@ -1,0 +1,8 @@
+#!/bin/sh
+
+file=$(mktemp)
+cat - > "$file"
+
+st -c tmenu-prompt -g 40x10+0+0 -e tmenu-backend "$file"
+cat "$file"
+rm "$file"

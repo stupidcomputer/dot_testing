@@ -1,0 +1,18 @@
+#!/bin/sh
+
+tmenu_path () {
+    IFS=" :"
+    for i in $PATH; do
+        for j in "$i"/*; do
+            [ -f "$j" ] && [ -x "$j" ] && printf "%s\n" "$j" | xargs basename
+        done
+    done
+}
+
+if [ "$1" = "-g" ] || [ "$(basename $0)" = "regenerate" ]; then
+	mkdir -p $HOME/.local/share
+	tmenu_path > $HOME/.local/share/tmenu_cache
+	xmessage "regeneration complete"
+else
+	cat $HOME/.local/share/tmenu_cache | tmenu | ${SHELL:-"/bin/sh"} &
+fi
