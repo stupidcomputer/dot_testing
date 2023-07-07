@@ -18,3 +18,13 @@ tridactyl/tridactyl
 nvim/autoload/plug.vim.old
 nvim/spell/
 nvim/plugin
+utils/*.swp
+utils/*.tmp
+utils/c/scream
+utils/c/xgetnewwindow
+utils/c/timer
+utils/c/boid
+utils/c/a.out
+utils/c/anaconda
+utils/c/colors
+utils/c/tmessage

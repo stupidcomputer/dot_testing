@@ -1,0 +1,104 @@
+#!/bin/sh
+
+[ -z "${XDG_CONFIG_DIR}" ] && XDG_CONFIG_DIR="${HOME}/.config"
+[ -z "${NWS_CONFIG}" ] && NWS_CONFIG="${XDG_CONFIG_DIR}/nws"
+[ -n "${NWS_ZONE}" ] || \
+  [ -e "${NWS_CONFIG}" ] && NWS_ZONE=$(cat "${NWS_CONFIG}") ||
+	NWS_ZONE="KGYX"
+[ -z "${NWS_GIF}" ] && NWS_GIF="mpv --loop"
+[ -z "${NWS_TORIFY}" ] && NWS_TORIFY=""
+
+
+info () {
+  printf %s "\
+nws - wrapper for the National Weather Service's website
+
+=> [n]ational     - View national weather mosaic
+=> [l]ocal        - View local weather mosaic
+=> [r]ivers       - View local river conditions
+=> [w]eather      - View local weather observations
+=> [m]osaic  [id] - View a given area's weather mosaic
+=> [s]et     [id] - Set local zone
+=> [t]ext    [id] - View text messages by catagory
+
+Default zone:       export NWS_ZONE=<zone>
+GIF player:         export NWS_GIF=<command>
+Configuration:      export NWS_CONFIG=<file>
+Torify wrapper:     export NWS_TORIFY=<command>
+"
+}
+err () {
+	printf "err: %s\n" "${1}"
+	[ -z "${2}" ] && exit 1
+	exit "${2}"
+}
+kstrip () {
+	printf %s "$1" | sed 's/^K\(.*\)/\1/'
+}
+national () {
+	mosaic CONUS-LARGE
+}
+# name interestingly to avoid keyword collision
+localradar () {
+	mosaic ${NWS_ZONE}
+}
+mosaic () { 
+	${NWS_GIF} "https://radar.weather.gov/ridge/standard/${1}_loop.gif"
+}
+setzone () {
+	printf "%s" "${1}" > "${NWS_CONFIG}"
+}
+river () {
+	textmessage "RVA"
+}
+weather () {
+	textmessage "ZFP"
+}
+textmessage () {
+	curl --silent --fail "https://forecast.weather.gov/product.php?site=NWS&issuedby=$(kstrip ${NWS_ZONE})&product=${1}&format=TXT&version=1" | \
+		sed -n '/<!-- \/\/ CONTENT STARTS HERE -->/,/<\/pre>/p' | \
+		grep -v "a href" | \
+		grep -v '<!-- // CONTENT STARTS HERE -->' | \
+		grep -v '<\/pre>' || \
+		printf "${1} data not found for zone %s" ${NWS_ZONE}
+}
+
+case $1 in
+	"n"*)
+		national
+		;;
+	"l"*)
+		localradar
+		;;
+	"r"*)
+		river
+		;;
+	"w"*)
+		weather
+		;;
+	"m"*)
+		if [ "$#" -eq 2 ]; then
+			mosaid "$2"
+		else
+		  err "two args required"
+		fi
+		;;
+	"s"*)
+		if [ "$#" -eq 2 ]; then
+			setzone "$2"
+		else
+		  err "two args required"
+		fi
+		;;
+	"t"*)
+		if [ "$#" -eq 2 ]; then
+			textmessage "$2"
+		else
+		  err "two args required"
+		fi
+		;;
+	*)
+		info
+		;;
+esac
+exit 0

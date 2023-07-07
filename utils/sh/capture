@@ -1,0 +1,60 @@
+#!/bin/sh
+
+# get screen info and temporary file
+tmp=$(mktemp)
+res=$(xrandr |
+	grep ' connected' |
+	awk -F' ' '{print $1 " " $4}' |
+	awk -F'+' '{print $1}' |
+	fzy |
+	awk -F' ' '{print $2}' )
+
+# still or motion
+medium=$(printf ".mp4\n.png\n" | fzy)
+output="$tmp$medium"
+
+# capture
+case "$medium" in
+	*mp4*)
+		printf "> starting video capture...\n"
+		ffmpeg -video_size "$res" -f x11grab -framerate 60 -i $DISPLAY -preset ultrafast -pix_fmt yuv420p "$output"
+		;;
+	*png*)
+		printf "> taking screenshot...\n"
+		# for a screenshot, we usually want an  a s t h e t i c
+		ffmpeg -f x11grab -video_size "$res" -i $DISPLAY -vframes 1 "$output" -loglevel quiet # be quiet
+		;;
+	*)
+		printf "not a choice\n"
+		exit 1
+esac
+
+# what to do with the capture?
+printf "> written to %s\n" "$output"
+while true; do
+	result=$(printf "delete\nmove to home directory\nupload to pastebin\nreview footage\nquit\n" | fzy --prompt="what next? ")
+	case "$result" in
+		*upload*)
+			paste "$output" | xclip -i
+			printf "> pasted! check your clipboard\n"
+			;;
+		*review*)
+			[ "$medium" = ".mp4" ] && mpv "$output" && continue
+			feh "$output"
+			;;
+		*delete*)
+			printf "> removing target file...\n"
+			rm "$output"
+			exit 1
+			;;
+		*home*)
+			printf "> warping your capture to home...\n"
+			name=$(echo "capture$medium" | fzy --prompt="name please? ")
+			mv "$output" "$HOME/$name"
+			exit 1
+			;;
+		*quit*)
+			exit 1
+			;;
+	esac
+done

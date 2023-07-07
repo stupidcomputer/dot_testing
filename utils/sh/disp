@@ -1,0 +1,27 @@
+#!/bin/sh
+
+exists() {
+	xrandr | grep ' connected' | grep -c "${1}"
+}
+
+bspc monitor -d 1 2 3 4 5 6 7 8 9
+
+if [ "$(exists "HDMI-2")" -eq 1 ] && [ "$(exists "LVDS-1")" -eq 1 ]; then
+	printf "two"
+	xrandr --output HDMI-2 --right-of LVDS-1 --auto
+	xrandr --output VGA-1 --off --auto
+	bspc monitor LVDS-1 -d 1 2 3 4 5 6 7 8 9
+	bspc monitor HDMI-2 -d 1 2 3 4 5 6 7 8 9
+	exit 0
+fi
+
+if [ "$(exists "HDMI-1")" -eq 1 ] && [ "$(exists "LVDS-1")" -eq 1 ]; then
+	printf "two"
+	xrandr --output HDMI-1 --right-of LVDS-1 --auto
+	xrandr --output VGA-1 --off --auto
+	bspc monitor LVDS-1 -d 1 2 3 4 5 6 7 8 9
+	bspc monitor HDMI-1 -d 1 2 3 4 5 6 7 8 9
+	exit 0
+fi
+
+# default configuration's fine

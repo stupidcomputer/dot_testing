@@ -1,0 +1,28 @@
+#!/bin/sh
+# when the vim SwapExists autocommand is fired, this script is
+# called with the path of the file in question.
+
+# mad props to daniel conway for having this big brain idea
+
+# note to self: protect $1 from expansion as it can contain a
+# ~
+
+[ "$#" -eq 0 ] && exit 2
+
+window=$(
+	xdotool search --name "$1" | \
+	sed 1q
+)
+
+desk=$(
+	xdotool get_desktop_for_window "$window" 2>/dev/null || printf "none"
+)
+
+[ "$desk" = "none" ] && exit 1
+desk=$((desk + 1))
+
+bspc desktop -f "^${desk}"
+killall -10 simplestatus
+xdotool set_window --urgency 1 "$window"
+
+exit 0

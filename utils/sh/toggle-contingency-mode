@@ -1,0 +1,28 @@
+#!/bin/sh
+
+pid=$(pgrep sxhkd)
+
+for i in $pid; do
+	inv_id=$(cat /proc/$i/cmdline | awk -F'\0' '{print $3}')
+
+	echo $inv_id
+	[ -z "$inv_id" ] && contingency_mode="off"
+	[ "$inv_id" = *"contingency" ] && contingency_mode="on"
+done
+
+killall sxhkd
+
+trackpoint=$(xinput | grep "TrackPoint" | awk -F'\t' '{print $2}' | awk -F'=' '{print $2}')
+touchpad=$(xinput | grep "TouchPad" | awk -F'\t' '{print $2}' | awk -F'=' '{print $2}')
+
+if [ "$contingency_mode" = "off" ]; then
+	sxhkd -c $HOME/.config/sxhkd/contingency &
+	xinput disable "$trackpoint"
+	xinput disable "$touchpad"
+	xmessage "contingency mode enabled."
+else
+	sxhkd &
+	xinput enable "$trackpoint"
+	xinput enable "$touchpad"
+	killall xmessage
+fi

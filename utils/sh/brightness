@@ -1,0 +1,4 @@
+#!/bin/sh
+
+brightness=$(printf "250\n500\n1000\n2000\n3000\n4000\n" | tmenu)
+st -c st-gpg-menu -e sh -c "sudo sh -c \"echo $brightness >> /sys/class/backlight/intel_backlight/brightness\""
