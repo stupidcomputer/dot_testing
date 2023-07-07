@@ -114,6 +114,10 @@ in
         source = ./config/zathura;
         recursive = true;
       };
+      ".local/share/wallpapers" = {
+        source = ./wallpapers;
+        recursive = true;
+      };
     };
   };
 
