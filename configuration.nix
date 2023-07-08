@@ -1,5 +1,6 @@
 { config, pkgs, ... }:
 
+with lib;
 let
   hostname = "virtbox";
 in
@@ -33,7 +34,7 @@ in
 
   # branch and enable different capabilities based on the system
 
-  lib.mkIf hostname == "virtbox" {
+  mkIf hostname == "virtbox" {
     services.virtbox.enable = true;
   };
 }
