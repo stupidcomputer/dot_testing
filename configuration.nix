@@ -35,7 +35,7 @@ in
 
   # branch and enable different capabilities based on the system
 
-  mkIf isVirtbox {
+  test = mkIf isVirtbox {
     services.virtbox.enable = true;
   };
 }
