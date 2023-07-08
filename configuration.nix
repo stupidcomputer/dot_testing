@@ -47,7 +47,7 @@ in
     git
     sx
 
-    (pkgs.callPackage ./builds/utils/utils.nix {})
+    (pkgs.callPackage ./builds/utils.nix {})
   ];
 
   users.users.usr = {
