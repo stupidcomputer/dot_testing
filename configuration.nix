@@ -3,6 +3,7 @@
 with lib;
 let
   hostname = "virtbox";
+  isVirtbox = hostname == "virtbox";
 in
 {
   imports =
@@ -34,7 +35,7 @@ in
 
   # branch and enable different capabilities based on the system
 
-  mkIf hostname == "virtbox" {
+  mkIf isVirtbox {
     services.virtbox.enable = true;
   };
 }
