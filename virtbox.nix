@@ -1,6 +1,5 @@
 { lib, config, pkgs, ...}:
 
-with lib;
 let
   cfg = config.services.virtbox;
   home-manager = builtins.fetchTarball {
@@ -9,14 +8,14 @@ let
   };
 in {
   options.serviecs.virtbox = {
-    enable = mkEnableOption "virtbox configs";
+    enable = lib.mkEnableOption "virtbox configs";
   };
 
   imports = [
     (import "${home-manager}/nixos")
   ];
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     boot.loader.grub.enable = true;
     boot.loader.grub.device = "/dev/vda";
 

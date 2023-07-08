@@ -1,10 +1,10 @@
-{ config, pkgs, ... }:
+{ config, lib, pkgs, ... }:
 let
   release = "nixos-23.05";
   cfg = config.services.nixosmail;
 in {
   options.services.nixosmail = {
-    enable = mkEnableOption "NixOS mail server";
+    enable = lib.mkEnableOption "NixOS mail server";
   };
 
   imports = [
@@ -15,7 +15,7 @@ in {
     })
   ];
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     mailserver = {
       enable = true;
       fqdn = "mail.beepboop.systems";

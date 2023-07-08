@@ -41,7 +41,7 @@ in
     services.virtbox.enable = true;
   };
 
-  test = lib.mkIf isNetbox {
+  test_ = lib.mkIf isNetbox {
     services.netbox.enable = true;
   };
 }

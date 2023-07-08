@@ -1,11 +1,10 @@
 { lib, config, pkgs, ... }:
 
-with lib;
 let
   cfg = config.services.netbox;
 in {
   options.serviecs.netbox = {
-    enable = mkEnableOption "netbox configs";
+    enable = lib.mkEnableOption "netbox configs";
   };
 
   imports =
@@ -13,7 +12,7 @@ in {
       ./mail.nix
     ];
 
-  config = mkIf cfg.enable {
+  config = lib.mkIf cfg.enable {
     boot.loader.grub.enable = true;
     boot.loader.grub.device = "/dev/vda";
 
