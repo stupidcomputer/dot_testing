@@ -31,8 +31,16 @@ in {
 
   environment.systemPackages = with pkgs; [
     sx
+    lynx
+    firefox
+    fzy
 
     (pkgs.callPackage ./builds/utils.nix {})
+    (pkgs.callPackage ./builds/st.nix {})
+  ];
+
+  fonts.fonts = with pkgs; [
+    fantasque-sans-mono
   ];
 
   users.users.usr = {
