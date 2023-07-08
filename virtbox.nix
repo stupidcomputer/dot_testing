@@ -7,7 +7,7 @@ let
     sha256 = "0dfshsgj93ikfkcihf4c5z876h4dwjds998kvgv7sqbfv0z6a4bc";
   };
 in {
-  options.serviecs.virtbox = {
+  options.services.virtbox = {
     enable = lib.mkEnableOption "virtbox configs";
   };
 
