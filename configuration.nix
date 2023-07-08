@@ -3,6 +3,7 @@
 let
   hostname = "virtbox";
   isVirtbox = hostname == "virtbox";
+  isNetbox = hostname == "netbox";
 in
 {
   imports =
@@ -12,7 +13,7 @@ in
       ./netbox.nix
     ];
 
-  networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
+  networking.networkmanager.enable = true;
 
   time.timeZone = "America/Chicago";
 
@@ -27,14 +28,20 @@ in
     curl
     htop
     git
+    tree
+    dig
+    htop
   ];
 
   system.copySystemConfiguration = true;
   system.stateVersion = "23.05"; # don't change this, lol
 
   # branch and enable different capabilities based on the system
-
   test = lib.mkIf isVirtbox {
     services.virtbox.enable = true;
+  };
+
+  test = lib.mkIf isNetbox {
+    services.netbox.enable = true;
   };
 }
