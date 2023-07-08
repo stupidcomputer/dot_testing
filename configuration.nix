@@ -5,18 +5,19 @@ let
     url = "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz";
     sha256 = "0dfshsgj93ikfkcihf4c5z876h4dwjds998kvgv7sqbfv0z6a4bc";
   };
+  hostname = "virtbox";
 in
 {
   imports =
     [
-      ./hardware-configuration.nix
+      (import "./hardware-config/${hostname}.nix")
       (import "${home-manager}/nixos")
     ];
 
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/vda";
 
-  networking.hostName = "virtbox"; # Define your hostname.
+  networking.hostName = hostname; # Define your hostname.
   networking.networkmanager.enable = true;  # Easiest to use and most distros use this by default.
 
   time.timeZone = "America/Chicago";
