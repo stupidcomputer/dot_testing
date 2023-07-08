@@ -1,16 +1,9 @@
 { lib, config, pkgs, ... }:
 
-let
-  hostname = "virtbox";
-  isVirtbox = hostname == "virtbox";
-  isNetbox = hostname == "netbox";
-in
 {
   imports =
     [
       ./hardware-configuration.nix # include the results of the hardware scan
-      ./virtbox.nix
-      ./netbox.nix
     ];
 
   networking.networkmanager.enable = true;
@@ -35,13 +28,4 @@ in
 
   system.copySystemConfiguration = true;
   system.stateVersion = "23.05"; # don't change this, lol
-
-  # branch and enable different capabilities based on the system
-  test = lib.mkIf isVirtbox {
-    services.virtbox.enable = true;
-  };
-
-  test_ = lib.mkIf isNetbox {
-    services.netbox.enable = true;
-  };
 }
