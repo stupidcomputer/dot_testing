@@ -124,6 +124,7 @@ setTabbing("python", 4)
 setTabbing("javascript", 4)
 setTabbing("css", 4)
 setTabbing("html", 4)
+setTabbing("nix", 2)
 
 vim.api.nvim_create_autocmd({"TermOpen"}, {
 	pattern = {"*"},

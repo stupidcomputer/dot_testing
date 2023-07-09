@@ -24,6 +24,7 @@
     tree
     dig
     htop
+    gnumake
   ];
 
   system.copySystemConfiguration = true;
