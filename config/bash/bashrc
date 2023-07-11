@@ -1,38 +1,25 @@
 #!/bin/bash
 
 # some housekeeping
-set -o vi
 shopt -s autocd
 alias rc=". ~/.config/bash/bashrc"
 alias erc="nvim ~/.config/bash/bashrc"
-alias reload=". ~/.config/bash/bashrc; . ~/.config/bash/profile"
+alias reload=". ~/.config/bash/bashrc"
 
-# remind alias
 alias sched="nvim $DOTREMINDERS"
 alias cal="rem -cl"
 alias shutdown="sudo shutdown -h now"
-
 alias ls="ls --color=auto"
 alias ll="ls -lah --color=auto"
 alias irssi="irssi --home=$HOME/.config/irssi"
 
 PS1="\w\$ "
 
-# repos func
 repos() {
 	sel="$(ls ~/git | fzy | awk '{print "/home/usr/git/"$1}')"
 	[ "$?" -eq 1 ] && exit
 
 	cd "$sel"
-}
-
-files() {
-	sel=$(find /home/$(whoami) |
-		grep -v '\.cache\|\.pki\|/scratch/\|\.config/chromium\|\.git\|\.local/lib\|\.mozilla/firefox/' |
-		fzy -l 50)
-	[ -z "$sel" ] && return 1
-	[ -d "$sel" ] && cd "$sel" || nvim "$sel"
-	return 0
 }
 
 rss() {
@@ -41,35 +28,3 @@ rss() {
 	sfeed_curses *
 	cd -
 }
-
-# stolen from stackoverflow
-# code from a stranger is always perfect
-git_main_branch () {
-    git branch | cut -c 3- | grep -E '^master$|^main$'
-}
-
-gp() {
-	# a bodge -- git authentication doesn't work quite right
-	pash c tildegit
-	git push -u origin $(git_main_branch)
-}
-
-start_bitlbee() {
-	mkdir -p $HOME/.config/bitlbee/
-	touch $HOME/.config/bitlbee/config
-	bitlbee #-D -c $HOME/.config/bitlbee/config -d $HOME/.config/bitlbee/
-}
-
-dock-kill() {
-	docker stop $(
-		docker ps |
-		grep -v 'CONTAINER' |
-		fzy |
-		awk -F' ' '{print $1}'
-	)
-}
-
-alias gs='git status'
-alias f=files
-alias lofi="mpv https://www.youtube.com/watch?v=jfKfPfyJRdk --no-video"
-alias pavucontrol="ncpamixer"
