@@ -1,2 +1,0 @@
-nvim:
-	- replace vimscript with lua completely
