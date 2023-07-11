@@ -3,7 +3,7 @@
 {
   imports =
     [
-      ./mail.nix
+      ./modules/mail.nix
       ./main.nix
     ];
 
