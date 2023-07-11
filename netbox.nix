@@ -4,7 +4,7 @@
   imports =
     [
       ./mail.nix
-      ./configuration.nix
+      ./main.nix
     ];
 
   boot.loader.grub.enable = true;

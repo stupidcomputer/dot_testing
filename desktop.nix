@@ -8,7 +8,7 @@ let
 in {
   imports = [
     (import "${home-manager}/nixos")
-    ./configuration.nix
+    ./main.nix
   ];
 
   services.xserver = {
