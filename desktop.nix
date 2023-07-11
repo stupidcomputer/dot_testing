@@ -191,4 +191,10 @@ in {
       };
     };
   };
+
+  environment.etc = {
+    "profile.local" = {
+      text = "source $HOME/.config/bash/profile";
+    };
+  };
 }
