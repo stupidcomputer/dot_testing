@@ -165,6 +165,10 @@ in {
         source = ./config/python;
         recursive = true;
       };
+      ".config/polybar" = {
+        source = ./config/polybar;
+        recursive = true;
+      };
       ".config/sx" = {
         source = ./config/sx;
         recursive = true;
