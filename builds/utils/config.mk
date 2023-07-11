@@ -1,2 +1,0 @@
-DESTDIR=$(HOME)/.local
-

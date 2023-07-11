@@ -4,7 +4,7 @@
 # post-wm boilerplate
 wallpaper
 disp
-statusbar &
+polybar &
 
 # set up the color scheme
 bspc config normal_border_color "#161510"

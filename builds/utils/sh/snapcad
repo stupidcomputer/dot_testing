@@ -1,4 +1,0 @@
-#!/bin/sh
-# opens snapcad
-
-wine ~/.wine/drive_c/Program\ Files\ \(x86\)/VEX\ Robotics/SnapCAD/SnapCAD.exe

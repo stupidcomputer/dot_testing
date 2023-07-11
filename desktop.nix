@@ -24,12 +24,34 @@ in {
   sound.enable = true;
   hardware.pulseaudio.enable = true;
 
+  nixpkgs.config = {
+    allowUnfree = true;
+  };
+
   environment.systemPackages = with pkgs; [
     sx
-    lynx
     fzy
     gnupg
     xclip
+    polybar
+
+    ncpamixer
+    tig
+    cmus
+    neomutt
+    mpv
+    yt-dlp
+    zathura
+    tmux
+    lynx
+    feh
+    elinks
+    sc-im
+    ledger
+    remind
+    python3
+
+    discord
 
     (pkgs.callPackage ./builds/utils.nix {})
     (pkgs.callPackage ./builds/st.nix {})
