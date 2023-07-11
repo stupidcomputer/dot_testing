@@ -198,4 +198,6 @@ in {
       text = "source $HOME/.config/bash/profile";
     };
   };
+
+  programs.ssh.askPassword = "";
 }
