@@ -34,6 +34,7 @@ in {
     gnupg
     xclip
     polybar
+    ffmpeg
 
     ncpamixer
     tig
