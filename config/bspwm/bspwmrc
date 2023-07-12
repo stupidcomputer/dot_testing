@@ -16,7 +16,7 @@ bspc config pointer_follows_monitor true
 bspc config focus_follows_pointer true
 
 bspc config window_gap 3
-bspc config top_padding 20
+#bspc config top_padding 20
 
 bspc rule -a st-gpg-menu state=floating
 bspc rule -a statusbar border=off sticky=on state=floating manage=off
