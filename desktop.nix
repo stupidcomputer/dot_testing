@@ -33,6 +33,7 @@ in {
     fzy
     gnupg
     xclip
+    xcape
     polybar
     ffmpeg
 
@@ -52,6 +53,7 @@ in {
     remind
     python3
 
+    ungoogled-chromium
     discord
 
     (pkgs.callPackage ./builds/utils.nix {})
