@@ -120,6 +120,7 @@ in {
   users.users.usr = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
+    initialPassword = "usr";
     packages = with pkgs; [
       firefox
       tree
