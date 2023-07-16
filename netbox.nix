@@ -84,6 +84,14 @@
     };
   };
 
+  services.nginx.virtualHosts."ntfy.beepboop.systems" = {
+    forceSSL = true;
+    enableACME = true;
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:3500";
+    };
+  };
+
   services.nginx.virtualHosts."skillissue.agency" = {
     forceSSL = true;
     enableACME = true;
@@ -116,6 +124,13 @@
     address = "localhost";
     extraConfig = {
       PAPERLESS_URL = "https://paperless.beepboop.systems";
+    };
+  };
+
+  services.ntfy-sh = {
+    enable = true;
+    settings = {
+      listen-http = ":3500";
     };
   };
 
