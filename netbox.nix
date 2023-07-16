@@ -127,12 +127,12 @@
     };
   };
 
-  services.ntfy-sh = {
-    enable = true;
-    settings = {
-      listen-http = ":3500";
-    };
-  };
+  # services.ntfy-sh = {
+  #   enable = true;
+  #   settings = {
+  #     listen-http = ":3500";
+  #   };
+  # };
 
   services.vaultwarden.enable = true;
 
