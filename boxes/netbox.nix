@@ -3,8 +3,8 @@
 {
   imports =
     [
-      ./modules/mail.nix
-      ./main.nix
+      ../modules/mail.nix
+      ../main.nix
     ];
 
   boot.loader.grub.enable = true;
