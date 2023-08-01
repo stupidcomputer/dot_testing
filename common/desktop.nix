@@ -56,9 +56,9 @@ in {
     ungoogled-chromium
     discord
 
-    (pkgs.callPackage ./builds/utils.nix {})
-    (pkgs.callPackage ./builds/st.nix {})
-    (pkgs.callPackage ./builds/pash.nix {})
+    (pkgs.callPackage ../builds/utils.nix {})
+    (pkgs.callPackage ../builds/st.nix {})
+    (pkgs.callPackage ../builds/pash.nix {})
   ];
 
   fonts.fonts = with pkgs; [
@@ -146,51 +146,51 @@ in {
 
     file = {
       ".config/bash" = {
-        source = ./config/bash;
+        source = ../config/bash;
         recursive = true;
       };
       ".config/bspwm" = {
-        source = ./config/bspwm;
+        source = ../config/bspwm;
         recursive = true;
       };
       ".config/git" = {
-        source = ./config/git;
+        source = ../config/git;
         recursive = true;
       };
       ".config/htop" = {
-        source = ./config/htop;
+        source = ../config/htop;
         recursive = true;
       };
       ".config/nvim" = {
-        source = ./config/nvim;
+        source = ../config/nvim;
         recursive = true;
       };
       ".config/python" = {
-        source = ./config/python;
+        source = ../config/python;
         recursive = true;
       };
       ".config/polybar" = {
-        source = ./config/polybar;
+        source = ../config/polybar;
         recursive = true;
       };
       ".config/sx" = {
-        source = ./config/sx;
+        source = ../config/sx;
         recursive = true;
       };
       ".config/sxhkd" = {
-        source = ./config/sxhkd;
+        source = ../config/sxhkd;
         recursive = true;
       };
       ".config/tridactyl" = {
-        source = ./config/tridactyl;
+        source = ../config/tridactyl;
         recursive = true;
       };
       ".config/zathura" = {
-        source = ./config/zathura;
+        source = ../config/zathura;
         recursive = true;
       };
       ".local/share/wallpapers" = {
-        source = ./wallpapers;
+        source = ../wallpapers;
         recursive = true;
       };
     };
