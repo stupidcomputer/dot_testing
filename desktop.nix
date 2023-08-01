@@ -31,7 +31,6 @@ in {
   environment.systemPackages = with pkgs; [
     sx
     fzy
-    gnupg
     xclip
     xcape
     polybar
@@ -52,6 +51,7 @@ in {
     ledger
     remind
     python3
+    pinentry-curses
 
     ungoogled-chromium
     discord
@@ -67,7 +67,7 @@ in {
 
   programs.gnupg.agent = {
     enable = true;
-    pinentryFlavor = "curses";
+    pinentryFlavor = "gtk2";
     enableSSHSupport = true;
   };
 
@@ -198,7 +198,10 @@ in {
 
   environment.etc = {
     "profile.local" = {
-      text = "source $HOME/.config/bash/profile";
+      text = "source /home/usr/.config/bash/profile";
+    };
+    "bashrc.local" = {
+      text = "source /home/usr/.config/bash/bashrc";
     };
   };
 
