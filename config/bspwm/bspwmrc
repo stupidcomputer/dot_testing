@@ -5,6 +5,7 @@
 wallpaper
 disp
 polybar &
+dunst &
 
 # set up the color scheme
 bspc config normal_border_color "#161510"

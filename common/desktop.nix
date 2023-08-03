@@ -5,6 +5,10 @@ let
     url = "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz";
     sha256 = "0dfshsgj93ikfkcihf4c5z876h4dwjds998kvgv7sqbfv0z6a4bc";
   };
+  customPolybar = pkgs.polybar.override {
+    alsaSupport = true;
+    pulseSupport = true;
+  };
 in {
   imports = [
     (import "${home-manager}/nixos")
@@ -16,9 +20,7 @@ in {
     libinput.enable = true;
     layout = "us";
 
-    # we're going to be pulling a sneaky
-    # we don't actually use startx, it just gets lightdm out of the way
-    displayManager.startx.enable = true;
+    displayManager.sx.enable = true;
   };
 
   sound.enable = true;
@@ -33,10 +35,14 @@ in {
     fzy
     xclip
     xcape
-    polybar
     ffmpeg
 
+    pciutils
+    xscreensaver
     ncpamixer
+    gpick
+    dunst
+    libnotify
     tig
     cmus
     neomutt
@@ -56,6 +62,7 @@ in {
     ungoogled-chromium
     discord
 
+    customPolybar
     (pkgs.callPackage ../builds/utils.nix {})
     (pkgs.callPackage ../builds/st.nix {})
     (pkgs.callPackage ../builds/pash.nix {})
@@ -191,6 +198,10 @@ in {
       };
       ".local/share/wallpapers" = {
         source = ../wallpapers;
+        recursive = true;
+      };
+      ".local/share/gnupg" = {
+        source = ../config/gnupg;
         recursive = true;
       };
     };
