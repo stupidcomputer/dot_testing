@@ -37,6 +37,7 @@ in {
     xcape
     ffmpeg
 
+    ncmpcpp
     pciutils
     xscreensaver
     ncpamixer
@@ -44,7 +45,6 @@ in {
     dunst
     libnotify
     tig
-    cmus
     neomutt
     mpv
     yt-dlp
@@ -122,6 +122,18 @@ in {
       SearchSuggestEnabled = false;
     };
     nativeMessagingHosts.tridactyl = true;
+  };
+
+  services.mpd = {
+    enable = true;
+    musicDirectory = "/home/usr/music";
+    extraConfig = ''
+      audio_output {
+        type "pulse"
+        name "pulseaudio"
+        server "127.0.0.1"
+      }
+    '';
   };
 
   users.users.usr = {

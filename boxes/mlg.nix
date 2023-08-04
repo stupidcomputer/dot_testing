@@ -3,9 +3,8 @@
 {
   imports = [
     ../common/desktop.nix
-    ../common/steam.nix
-    ../common/minecraft.nix
     ../common/nvidia.nix
+    ../common/gaming.nix
   ];
 
   boot.loader = {
