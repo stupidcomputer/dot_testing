@@ -39,6 +39,7 @@ in {
 
     ncmpcpp
     pciutils
+    tor-browser-bundle-bin
     xscreensaver
     ncpamixer
     gpick
