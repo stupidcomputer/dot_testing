@@ -5,6 +5,7 @@
     ../common/desktop.nix
     ../common/nvidia.nix
     ../common/gaming.nix
+    ../common/steam.nix
   ];
 
   boot.loader = {
