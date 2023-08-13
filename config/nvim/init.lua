@@ -158,8 +158,24 @@ end
 
 local packer_bootstrap = ensure_packer()
 
-return require('packer').startup(function(use)
+local packaer = require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
+	use 'nvim-lua/plenary.nvim'
+	use 'nvim-telescope/telescope.nvim'
+	use {
+		'VonHeikemen/lsp-zero.nvim',
+		reqiures = {
+			-- LSP Support
+			'neovim/nvim-lspconfig',
+			'williamboman/mason.nvim',
+			'williamboman/mason-lspconfig.nvim',
+
+			-- Autocompletion
+			'hrsh7th/nvim-cmp',
+			'hrsh7th/cmp-nvim-lsp',
+			'L3MON4D3/LuaSnip',
+		}
+	}
 	use 'tpope/vim-surround'
 	use 'tpope/vim-commentary'
 	use 'tpope/vim-fugitive'
@@ -171,3 +187,19 @@ return require('packer').startup(function(use)
 	end
 end);
 -- }}}
+
+-- lsp configuration {{{
+local lsp = require('lsp-zero').preset({})
+
+lsp.on_attach(function(client, bufnr)
+  lsp.default_keymaps({buffer = bufnr})
+end)
+
+lsp.setup()
+-- }}}
+
+nnoremap('<leader>ff', function()
+	require('telescope.builtin').find_files()
+end)
+
+return packer
