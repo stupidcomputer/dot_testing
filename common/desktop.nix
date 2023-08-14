@@ -43,6 +43,7 @@ in {
     xscreensaver
     ncpamixer
     gpick
+    calcurse
     dunst
     libnotify
     tig
@@ -59,6 +60,13 @@ in {
     remind
     python3
     pinentry-curses
+    magic-wormhole
+    xbrightness
+
+    unzip
+    lua-language-server
+    rnix-lsp
+    python311Packages.jedi-language-server
 
     ungoogled-chromium
     discord

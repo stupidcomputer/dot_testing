@@ -158,29 +158,26 @@ end
 
 local packer_bootstrap = ensure_packer()
 
-local packaer = require('packer').startup(function(use)
+local packer = require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
 	use 'nvim-lua/plenary.nvim'
 	use 'nvim-telescope/telescope.nvim'
-	use {
-		'VonHeikemen/lsp-zero.nvim',
-		reqiures = {
-			-- LSP Support
-			'neovim/nvim-lspconfig',
-			'williamboman/mason.nvim',
-			'williamboman/mason-lspconfig.nvim',
-
-			-- Autocompletion
-			'hrsh7th/nvim-cmp',
-			'hrsh7th/cmp-nvim-lsp',
-			'L3MON4D3/LuaSnip',
-		}
-	}
-	use 'tpope/vim-surround'
-	use 'tpope/vim-commentary'
-	use 'tpope/vim-fugitive'
+	use 'VonHeikemen/lsp-zero.nvim'
+	use 'neovim/nvim-lspconfig'
+	use 'hrsh7th/nvim-cmp'
+	use 'hrsh7th/cmp-nvim-lsp'
+	use 'L3MON4D3/LuaSnip'
 	use 'https://github.com/vimwiki/vimwiki.git'
 	use 'lervag/vimtex'
+	use {
+		"folke/which-key.nvim",
+		config = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+--			require("which-key").setup {
+--			}
+		end
+	}
 
 	if packer_bootstrap then
 		require('packer').sync()
@@ -194,6 +191,17 @@ local lsp = require('lsp-zero').preset({})
 lsp.on_attach(function(client, bufnr)
   lsp.default_keymaps({buffer = bufnr})
 end)
+
+local lspconfig = require('lspconfig')
+
+lsp.ensure_installed({
+	'rnix',
+	'jedi_language_server',
+})
+
+lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
+lspconfig.rnix.setup({})
+lspconfig.jedi_language_server.setup({})
 
 lsp.setup()
 -- }}}
