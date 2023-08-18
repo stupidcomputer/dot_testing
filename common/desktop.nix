@@ -62,6 +62,7 @@ in {
     pinentry-curses
     magic-wormhole
     xbrightness
+    figlet
 
     unzip
     lua-language-server

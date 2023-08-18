@@ -169,6 +169,8 @@ local packer = require('packer').startup(function(use)
 	use 'L3MON4D3/LuaSnip'
 	use 'https://github.com/vimwiki/vimwiki.git'
 	use 'lervag/vimtex'
+	use 'https://github.com/protex/better-digraphs.nvim'
+	use 'https://github.com/itchyny/calendar.vim'
 	use {
 		"folke/which-key.nvim",
 		config = function()
@@ -208,6 +210,10 @@ lsp.setup()
 
 nnoremap('<leader>ff', function()
 	require('telescope.builtin').find_files()
+end)
+
+inoremap('<C-k><C-k>', function()
+	require('better-digraphs').digraphs("insert")
 end)
 
 return packer
