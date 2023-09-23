@@ -15,9 +15,6 @@ super + r
   pkill -USR1 -x sxhkd; \
   bspc wm -r
 
-super + ctrl + shift + b
-  brightness
-
 super + w
   disp && wallpaper && statusbar
 
@@ -29,15 +26,6 @@ super + ctrl + n
 
 super + ctrl + t
 	st -e htop
-
-super + m
-	lobster
-
-{XF86ScreenSaver,super + shift + z}
-  slock
-
-XF86AudioMute
-  amixer sset Master 0%
 
 {XF86AudioRaiseVolume,XF86AudioLowerVolume}
   vol {inc,dec}
@@ -54,29 +42,6 @@ super + ctrl + b
 super + {_,shift + }v
   vol {inc,dec}
 
-# mouse movement
-super + {u, i, o, p}
-	xdotool mousemove_relative -- {-10 0, 0 10, 0 -10, 10 0}
-
-super + alt + {u, i, o, p}
-	xdotool mousemove_relative -- {-20 0, 0 20, 0 -20, 20 0}
-
-super + shift + u
-	xdotool click 1
-
-super + ctrl + shift + u
-	xdotool mousedown 1
-
-@super + @ctrl + @shift + @u
-	xdotool mouseup 1
-
-super + shift + p
-	xdotool click 2
-
-# misc
-super + x
-	toggle-contingency-mode
-
 # bspwm
 super + q
   bspc node -c
@@ -85,14 +50,13 @@ super + e
   bspc quit 0
 
 super + shift + e
-	systemctl suspend
+      	systemctl suspend
 
 super + {_,ctrl +,shift + }{h,j,k,l}
   bspc node -{f,p,s} {west,south,north,east}
 
 super + {_,shift + } {1-9,0}
-  bspc {desktop -f,node -d} '^{1-9,10}'; \
-  {killall -10 status,_}
+  bspc {desktop -f,node -d} '^{1-9,10}'
 
 super + {t,f,s}
   bspc node -t {tiled,floating,fullscreen}

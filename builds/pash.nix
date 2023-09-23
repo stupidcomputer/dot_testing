@@ -1,6 +1,7 @@
 { stdenv
 , lib
 , bash
+, gnupg
 , makeWrapper
 , fetchgit
 }:
@@ -14,7 +15,7 @@ stdenv.mkDerivation rec {
     sha256 = "sha256-0L3N7F4BwVdu4rR5xpUEIHcX/x64Gni8JTUki5kGH24=";
   };
 
-  nativeBuildInputs = [ makeWrapper ];
+  nativeBuildInputs = [ makeWrapper gnupg ];
 
   installPhase = ''
     mkdir -p $out/bin

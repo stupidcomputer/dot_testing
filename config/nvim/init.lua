@@ -30,12 +30,13 @@ nnoremap(':', ';')
 nnoremap('<leader><leader>', ':')
 
 -- source init.vim
+-- requires rebuilding the configuration first
 nnoremap('<leader>rr', function()
 	cmd.source('~/.config/nvim/init.lua')
 end)
 -- edit init.vim
 nnoremap('<leader>re', function()
-	cmd.edit('~/.config/nvim/init.lua')
+	cmd.edit('~/dot_testing/config/nvim/init.lua')
 end)
 -- openup netrw
 nnoremap('<leader>fs', function()
@@ -79,22 +80,6 @@ globals.vimtex_view_method = 'zathura'
 -- }}}
 
 -- autocommands {{{
--- swapfile handler
-vim.api.nvim_create_autocmd({"SwapExists"}, {
-	pattern = {"*"},
-	callback = function()
-		vim.fn.system("vim-swap-handler " .. vim.api.nvim_buf_get_name(0))
-		print(vim.v.shell_error)
-		if (vim.v.shell_error == 0) then
-			vim.v.swapchoice = 'o'
-			print("opened in other place. you should have teleported there")
-		elseif (vim.v.shell_error == 1) then
-			vim.v.swapchoice = 'o'
-			print("file opened readonly. orphaned swap file?")
-		end
-	end
-})
-
 -- autocmds for sxhkd and bspwm config files
 vim.api.nvim_create_autocmd({"BufWrite"}, {
 	pattern = {"bspwmrc"},
@@ -162,6 +147,7 @@ local packer = require('packer').startup(function(use)
 	use 'wbthomason/packer.nvim'
 	use 'nvim-lua/plenary.nvim'
 	use 'nvim-telescope/telescope.nvim'
+	use 'octarect/telescope-menu.nvim'
 	use 'VonHeikemen/lsp-zero.nvim'
 	use 'neovim/nvim-lspconfig'
 	use 'hrsh7th/nvim-cmp'
@@ -171,6 +157,11 @@ local packer = require('packer').startup(function(use)
 	use 'lervag/vimtex'
 	use 'https://github.com/protex/better-digraphs.nvim'
 	use 'https://github.com/itchyny/calendar.vim'
+	use {
+		"empat94/nvim-rss",
+		requires = { "tami5/sqlite.lua" },
+		rocks = "luaexpat",
+	}
 	use {
 		"folke/which-key.nvim",
 		config = function()
@@ -207,6 +198,12 @@ lspconfig.jedi_language_server.setup({})
 
 lsp.setup()
 -- }}}
+
+require("nvim-rss").setup({
+	feeds_dir = "/home/usr",
+	date_format = "%x %r",
+	verbose = false,
+})
 
 nnoremap('<leader>ff', function()
 	require('telescope.builtin').find_files()

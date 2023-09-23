@@ -15,19 +15,29 @@
     zathura
     lilypond
     virt-manager
-    virtualbox
+#    virtualbox
     xsane
-    xsane
+    android-studio
+    mpc-cli
+    emacs
+    nyxt
+    cmus
   ];
 
-  users.extraGroups.vboxusers.members = [ "usr" ];
-  virtualisation.virtualbox.host.enable = true;
-  virtualisation.virtualbox.host.enableExtensionPack = true;
+#  users.extraGroups.vboxusers.members = [ "usr" ];
+#  virtualisation.virtualbox.host.enable = true;
+#  virtualisation.virtualbox.host.enableExtensionPack = true;
 
   services.tlp.enable = true;
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  services.printing.enable = true;
+  services.avahi.enable = true;
+  services.avahi.nssmdns = true;
+  # for a WiFi printer
+  services.avahi.openFirewall = true;
 
   networking.nameservers = [ "1.1.1.1" "9.9.9.9" ];
 

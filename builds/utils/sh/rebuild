@@ -1,2 +1,2 @@
 cd ~/dot_testing
-sudo nixos-rebuild -I nixos-config=./boxes/$(hostname).nix switch
+sudo nixos-rebuild -I nixos-config=./boxes/$(hostname).nix switch $@

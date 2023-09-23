@@ -1,6 +1,10 @@
 { lib, config, pkgs, ... }:
 
-{
+let
+my_neovim = pkgs.neovim.overrideAttrs (oldAttrs: {
+  buildInputs = oldAttrs.buildInputs or [] ++ [ pkgs.luajitPackages.luaexpat ];
+});
+in {
   imports =
     [
       ../hardware-configuration.nix # include the results of the hardware scan
@@ -17,7 +21,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    neovim
     curl
     htop
     git

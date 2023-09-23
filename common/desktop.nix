@@ -36,6 +36,7 @@ in {
     xclip
     xcape
     ffmpeg
+    man-pages
 
     ncmpcpp
     pciutils
@@ -137,11 +138,15 @@ in {
   services.mpd = {
     enable = true;
     musicDirectory = "/home/usr/music";
+    user = "usr";
     extraConfig = ''
       audio_output {
         type "pulse"
-        name "pulseaudio"
-        server "127.0.0.1"
+        name "Pulseaudio"
+      }
+      audio_output {
+        type "alsa"
+        name "mpd alsamixer-output"
       }
     '';
   };
@@ -170,10 +175,16 @@ in {
     fi
   '';
 
-  home-manager.users.usr.home = {
-    stateVersion = "23.05";
+  home-manager.users.usr = {
+    home.stateVersion = "23.05";
 
-    file = {
+    programs.neovim = {
+      enable = true;
+      extraLuaPackages = luaPkgs: with luaPkgs; [ luaexpat ];
+      extraPackages = [ pkgs.sqlite ];
+    };
+
+    home.file = {
       ".config/bash" = {
         source = ../config/bash;
         recursive = true;
@@ -224,6 +235,10 @@ in {
       };
       ".local/share/gnupg" = {
         source = ../config/gnupg;
+        recursive = true;
+      };
+      ".config/emacs" = {
+        source = ../config/emacs;
         recursive = true;
       };
     };
