@@ -4,9 +4,11 @@ if [ "$(id -u)" -eq 1000 ]; then
 fi
 
 lsblk
-
 read -p "Drive name? (/dev/vda): " DRIVE
+
+ls ../boxes
 read -p "NixOS configuration? (virtbox): " NIXOS_CONFIG
+
 read -p "Reboot? (yes/no, default 'yes'): " REBOOT
 
 umount -f /mnt/boot
@@ -69,7 +71,7 @@ swapon "$DRIVE"2
 nixos-generate-config --root /mnt
 git clone https://git.beepboop.systems/rndusr/dot_testing /mnt/root/dot_testing
 cp /mnt/etc/nixos/hardware-configuration.nix /mnt/root/dot_testing/
-yes | nixos-install -I nixos-config=/mnt/root/dot_testing/$NIXOS_CONFIG.nix --cores 0
+yes | nixos-install -I nixos-config=/mnt/root/dot_testing/boxes/$NIXOS_CONFIG.nix --cores 0
 mv /mnt/root/dot_testing /mnt/home/usr/dot_testing
 
 if [ "$REBOOT" = "yes" ]; then
