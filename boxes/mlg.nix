@@ -8,6 +8,21 @@
     ../common/steam.nix
   ];
 
+  environment.systemPackages = with pkgs; [
+    wine
+    xdotool
+
+    qemu
+    virt-manager
+    gnome.cheese
+    calyx-vpn
+    android-studio
+    emacs
+    deepin.deepin-album
+    nomacs
+    vscodium
+  ];
+
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
@@ -18,6 +33,10 @@
       device = "nodev";
     };
   };
+
+  virtualisation.libvirtd.enable = true;
+  programs.dconf.enable = true;
+  users.users.usr.extraGroups = [ "libvirtd" ];
 
   networking.hostName = "mlg";
 }
