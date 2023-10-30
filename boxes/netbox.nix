@@ -122,23 +122,6 @@
     '';
   };
 
-  services.paperless = {
-    enable = true;
-    passwordFile = "/etc/paperless-password";
-    port = 3004;
-    address = "localhost";
-    extraConfig = {
-      PAPERLESS_URL = "https://paperless.beepboop.systems";
-    };
-  };
-
-  # services.ntfy-sh = {
-  #   enable = true;
-  #   settings = {
-  #     listen-http = ":3500";
-  #   };
-  # };
-
   services.vaultwarden.enable = true;
 
   # Open ports in the firewall.
