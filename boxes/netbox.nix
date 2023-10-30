@@ -17,6 +17,10 @@
     extraGroups = [ "wheel" "docker" ];
   };
 
+  users.users.paperlesspassthrough = {
+    isNormalUser = true;
+  };
+
   environment.systemPackages = with pkgs; [
     neovim
     # nothing more needed, at the moment
