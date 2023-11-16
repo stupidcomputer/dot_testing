@@ -1,0 +1,20 @@
+q
+	mode sxhkdrc
+
+{ctrl +,shift +,_} h
+	xdotool mousemove_relative -- {-5,-50,-20} 0
+
+{ctrl +,shift +,_} j
+	xdotool mousemove_relative -- 0 {-5,-50,-20}
+
+{ctrl +,shift +,_} k
+	xdotool mousemove_relative -- 0 {5,50,20}
+
+{ctrl +,shift +,_} l
+	xdotool mousemove_relative -- {5,50,20} 0
+
+{ctrl +,_} {a,s,d}
+	xdotool {mousedown,click} {1,2,3}
+
+g
+	xdotool mouseup 1; xdotool mouseup 2; xdotool mouseup 3

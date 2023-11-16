@@ -16,30 +16,15 @@ super + r
   bspc wm -r
 
 super + w
-  disp && wallpaper && statusbar
+  disp && wallpaper && statusbar && keyboard
 
 super + {_,shift + }n
   nws {local,national}
 
-super + ctrl + n
-	net
-
-super + ctrl + t
-	st -e htop
+super + m
+	mode mouse
 
 {XF86AudioRaiseVolume,XF86AudioLowerVolume}
-  vol {inc,dec}
-
-super + b
-	fire
-
-super + shift + b
-	fire -P
-
-super + ctrl + b
-	chromium
-
-super + {_,shift + }v
   vol {inc,dec}
 
 # bspwm

@@ -63,6 +63,7 @@ in {
     pinentry-curses
     magic-wormhole
     xbrightness
+    xdotool
     figlet
 
     unzip

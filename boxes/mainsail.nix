@@ -2,6 +2,7 @@
 
 {
   imports = [
+    ../common/steam.nix
     ../common/desktop.nix
   ];
 
@@ -19,6 +20,27 @@
       PAPERLESS_URL = "https://paperless.beepboop.systems";
     };
   };
+  programs.adb.enable = true;
+  users.users.usr.extraGroups = ["adbusers"];
+
+  environment.etc."nextcloud-admin-pass".text = "aslkfjaslkdfjsalkdfjlKJFLKJDLFKJLSKDJFLSKDJFLSKDJFLSKDFJ";
+  services.nextcloud = {
+    enable = true;
+    hostName = "beepboop.systems";
+    config.adminpassFile = "/etc/nextcloud-admin-pass";
+    package = pkgs.nextcloud27;
+    # Instead of using pkgs.nextcloud27Packages.apps,
+    # we'll reference the package version specified above
+    extraApps = with config.services.nextcloud.package.packages.apps; {
+      inherit news contacts calendar tasks;
+    };
+    extraAppsEnable = true;
+  };
+
+  systemd.targets.sleep.enable = false;
+  systemd.targets.suspend.enable = false;
+  systemd.targets.hibernate.enable = false;
+  systemd.targets.hybrid-sleep.enable = false;
 
   services.getty.greetingLine = "
     welcome to mainsail    |`-:_
@@ -32,6 +54,15 @@
   ";
 
   environment.systemPackages = with pkgs; [
-    vscodium
+    vscodium-fhs
+    libreoffice
+
+    anki
+    youtube-tui
+    kdenlive
+    libreoffice
+    i3
+    gcc
+    gnumake
   ];
 }
