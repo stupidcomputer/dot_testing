@@ -58,7 +58,7 @@
     libreoffice
 
     anki
-    youtube-tui
+    ytfzf
     kdenlive
     libreoffice
     i3

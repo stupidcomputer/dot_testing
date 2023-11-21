@@ -5,10 +5,10 @@ q
 	xdotool mousemove_relative -- {-5,-50,-20} 0
 
 {ctrl +,shift +,_} j
-	xdotool mousemove_relative -- 0 {-5,-50,-20}
+	xdotool mousemove_relative -- 0 {5,50,20}
 
 {ctrl +,shift +,_} k
-	xdotool mousemove_relative -- 0 {5,50,20}
+	xdotool mousemove_relative -- 0 {-5,-50,-20}
 
 {ctrl +,shift +,_} l
 	xdotool mousemove_relative -- {5,50,20} 0
