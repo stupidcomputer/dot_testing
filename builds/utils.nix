@@ -1,5 +1,6 @@
 { stdenv
 , lib
+, sxhkd
 , bash
 , feh
 , jq
@@ -24,7 +25,7 @@ stdenv.mkDerivation rec {
 
     for i in $(ls $src/sh); do
       cp $src/sh/$i $out/bin
-      wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ bash feh xrandr jq curl ]}
+      wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ sxhkd bash feh xrandr jq curl ]}
     done
   '';
 

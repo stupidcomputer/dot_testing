@@ -16,30 +16,15 @@ super + r
   bspc wm -r
 
 super + w
-  disp && wallpaper && statusbar
+  disp && wallpaper && statusbar && keyboard
 
 super + {_,shift + }n
   nws {local,national}
 
-super + ctrl + n
-	net
-
-super + ctrl + t
-	st -e htop
+super + m
+	mode mouse
 
 {XF86AudioRaiseVolume,XF86AudioLowerVolume}
-  vol {inc,dec}
-
-super + b
-	fire
-
-super + shift + b
-	fire -P
-
-super + ctrl + b
-	chromium
-
-super + {_,shift + }v
   vol {inc,dec}
 
 # bspwm
@@ -56,7 +41,7 @@ super + {_,ctrl +,shift + }{h,j,k,l}
   bspc node -{f,p,s} {west,south,north,east}
 
 super + {_,shift + } {1-9,0}
-  bspc {desktop -f,node -d} '^{1-9,10}'
+  bspc {desktop -f,node -d} '{1-9,10}'
 
 super + {t,f,s}
   bspc node -t {tiled,floating,fullscreen}

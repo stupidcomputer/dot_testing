@@ -4,7 +4,9 @@ exists() {
 	xrandr | grep ' connected' | grep -c "${1}"
 }
 
-bspc monitor eDP-1 -d 1 2 3 4 5 6 7 8 9
+if [ ! "$(hostname)" = "mainsail" ]; then
+	bspc monitor eDP-1 -d 1 2 3 4 5 6 7 8 9
+fi
 
 if [ "$(exists "DP-1")" -gt 1 ]; then
 	printf "two"
@@ -13,5 +15,10 @@ if [ "$(exists "DP-1")" -gt 1 ]; then
 	exit 0
 fi
 
-
-# default configuration's fine
+if [ "$(hostname)" = "mainsail" ]; then
+	# this is a tower, so there's only one configuration
+	printf "mainsail detected\n"
+	xrandr --output VGA-1 --left-of HDMI-1
+	bspc monitor VGA-1 -d 1 3 5 7 9
+	bspc monitor HDMI-1 -d 2 4 6 8 0
+fi
