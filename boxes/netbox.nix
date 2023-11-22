@@ -111,7 +111,7 @@
 
   security.acme = {
     acceptTerms = true;
-    email = "nickforanick@protonmail.com";
+    defaults.email = "nickforanick@protonmail.com";
   };
 
   services.roundcube = {
