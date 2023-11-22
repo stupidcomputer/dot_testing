@@ -4,6 +4,7 @@
 , bash
 , feh
 , jq
+, figlet
 , curl
 , xrandr
 , makeWrapper
@@ -25,7 +26,7 @@ stdenv.mkDerivation rec {
 
     for i in $(ls $src/sh); do
       cp $src/sh/$i $out/bin
-      wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ sxhkd bash feh xrandr jq curl ]}
+      wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ sxhkd bash feh xrandr jq figlet curl ]}
     done
   '';
 

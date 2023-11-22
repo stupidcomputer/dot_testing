@@ -1,0 +1,18 @@
+case $? in
+	0)
+		st -g 100x30+20+20 -c generic-st-window sh -c 'summarize backend | less'
+		;;
+	1)
+		figlet help menu
+		for i in $(ls ~/.config/sxhkd); do
+			printf "\n%s mode | ----------------------\n" $i
+			grep -iv "^[[:blank:]].*$" ~/.config/sxhkd/$i | \
+				grep -v '^$' | \
+				sed 'N;s/\n/ -> /' | \
+				sed 's/^\# //g'
+		done
+		;;
+	*)
+		echo "???????????????"
+		;;
+esac

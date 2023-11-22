@@ -38,5 +38,8 @@ in {
       };
       certificateScheme = "acme-nginx";
     };
+
+    security.acme.acceptTerms = true;
+    security.acme.defaults.email = "ryan@beepboop.systems";
   };
 }
