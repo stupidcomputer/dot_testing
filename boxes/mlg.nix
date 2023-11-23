@@ -19,8 +19,10 @@
     android-studio
     emacs
     deepin.deepin-album
+    libreoffice
     nomacs
     vscodium
+    minetest
   ];
 
   boot.loader = {
@@ -37,6 +39,11 @@
   virtualisation.libvirtd.enable = true;
   programs.dconf.enable = true;
   users.users.usr.extraGroups = [ "libvirtd" ];
+
+  services.printing.enable = true;
+  services.avahi.enable = true; # runs the Avahi daemon
+  services.avahi.nssmdns = true; # enables the mDNS NSS plug-in
+  services.avahi.openFirewall = true; # opens the firewall for UDP port 5353
 
   networking.hostName = "mlg";
 }
