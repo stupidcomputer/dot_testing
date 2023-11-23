@@ -28,6 +28,8 @@ in {
     dig
     htop
     gnumake
+
+    (pkgs.callPackage ../builds/rebuild.nix {})
   ];
 
   system.copySystemConfiguration = true;

@@ -1,6 +1,0 @@
-#!/bin/sh
-
-sel="$(find -L ~/dot_testing 2>/dev/null | fzy)"
-[ "$?" -eq 1 ] && exit 1
-
-nvim "$sel"

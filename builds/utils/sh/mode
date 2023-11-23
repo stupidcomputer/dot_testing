@@ -1,0 +1,4 @@
+# mode - change the current effective sxhkd configuration
+
+pkill sxhkd
+sxhkd -c ~/.config/sxhkd/$1 & disown

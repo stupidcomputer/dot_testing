@@ -1,68 +1,48 @@
-# rndusr's sxhkdrc
-
-# program launching + sxhkd reload
-
+# spawn a terminal
 super + Return
-  st
+	st
 
+# spawn the launcher
 super + d
-  tmenu_run
+	tmenu_run
 
-super + z
-	pash-dmenu
-
+# kill sxhkd with USR1 and restart bspwm
 super + r
-  pkill -USR1 -x sxhkd; \
-  bspc wm -r
+	pkill -USR1 -x sxhkd; \
+	bspc wm -r
 
+# reinitialize ancillary services
 super + w
-  disp && wallpaper && statusbar
+	disp && wallpaper && statusbar && keyboard
 
+# control the national weather service
 super + {_,shift + }n
-  nws {local,national}
+	nws {local,national}
 
-super + ctrl + n
-	net
+# switch to "mouse mode"
+super + m
+	mode mouse
 
-super + ctrl + t
-	st -e htop
-
-{XF86AudioRaiseVolume,XF86AudioLowerVolume}
-  vol {inc,dec}
-
-super + b
-	fire
-
-super + shift + b
-	fire -P
-
-super + ctrl + b
-	chromium
-
-super + {_,shift + }v
-  vol {inc,dec}
-
-# bspwm
+# kill the current node
 super + q
-  bspc node -c
+	bspc node -c
 
+# kill bspwm
 super + e
-  bspc quit 0
+	bspc quit 0
 
+# systemctl suspend
 super + shift + e
-      	systemctl suspend
+	systemctl suspend
 
+# manipulate a node
 super + {_,ctrl +,shift + }{h,j,k,l}
-  bspc node -{f,p,s} {west,south,north,east}
+	bspc node -{f,p,s} {west,south,north,east}
 
+# change to or move a node to a desktop
 super + {_,shift + } {1-9,0}
-  bspc {desktop -f,node -d} '^{1-9,10}'
+	bspc {desktop -f,node -d} '{1-9,10}'
 
+# change a node to tiling, floating, or fullscreen
 super + {t,f,s}
-  bspc node -t {tiled,floating,fullscreen}
-
-super + shift + t
-	bspwm-toggle-gaps
-
-alt + F4
-	exit
+	bspc node -t {tiled,floating,fullscreen}

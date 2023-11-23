@@ -158,11 +158,6 @@ local packer = require('packer').startup(function(use)
 	use 'https://github.com/protex/better-digraphs.nvim'
 	use 'https://github.com/itchyny/calendar.vim'
 	use {
-		"empat94/nvim-rss",
-		requires = { "tami5/sqlite.lua" },
-		rocks = "luaexpat",
-	}
-	use {
 		"folke/which-key.nvim",
 		config = function()
 			vim.o.timeout = true
@@ -177,33 +172,6 @@ local packer = require('packer').startup(function(use)
 	end
 end);
 -- }}}
-
--- lsp configuration {{{
-local lsp = require('lsp-zero').preset({})
-
-lsp.on_attach(function(client, bufnr)
-  lsp.default_keymaps({buffer = bufnr})
-end)
-
-local lspconfig = require('lspconfig')
-
-lsp.ensure_installed({
-	'rnix',
-	'jedi_language_server',
-})
-
-lspconfig.lua_ls.setup(lsp.nvim_lua_ls())
-lspconfig.rnix.setup({})
-lspconfig.jedi_language_server.setup({})
-
-lsp.setup()
--- }}}
-
-require("nvim-rss").setup({
-	feeds_dir = "/home/usr",
-	date_format = "%x %r",
-	verbose = false,
-})
 
 nnoremap('<leader>ff', function()
 	require('telescope.builtin').find_files()

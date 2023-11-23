@@ -1,7 +1,0 @@
-#!/bin/sh
-
-sel="$(pash l | tmenu)"
-[ "$?" -eq 1 ] && exit 0
-
-# requires bspc rule -a st-gpg-menu state=floating
-st -c st-gpg-menu -e pash-dmenu-backend "$sel"

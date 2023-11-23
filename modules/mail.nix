@@ -30,6 +30,11 @@ in {
               "postmaster@beepboop.systems"
           ];
         };
+
+        "mailsynchronization@beepboop.systems" = {
+          # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt' > /hashed/password/file/location
+          hashedPasswordFile = "/etc/ryan-beepboop-systemsuser-pass";
+        };
       };
       certificateScheme = "acme-nginx";
     };

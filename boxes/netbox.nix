@@ -69,6 +69,12 @@
     root = "/var/www/beepboop.systems";
   };
 
+  services.nginx.virtualHosts."cloud.beepboop.systems" = {
+    forceSSL = true;
+    enableACME = true;
+    locations."/".proxyPass = "http://localhost:4000";
+  };
+
   services.nginx.virtualHosts."git.beepboop.systems" = {
     forceSSL = true;
     enableACME = true;
@@ -105,7 +111,7 @@
 
   security.acme = {
     acceptTerms = true;
-    email = "nickforanick@protonmail.com";
+    defaults.email = "nickforanick@protonmail.com";
   };
 
   services.roundcube = {
@@ -122,26 +128,9 @@
     '';
   };
 
-  services.paperless = {
-    enable = true;
-    passwordFile = "/etc/paperless-password";
-    port = 3004;
-    address = "localhost";
-    extraConfig = {
-      PAPERLESS_URL = "https://paperless.beepboop.systems";
-    };
-  };
-
-  # services.ntfy-sh = {
-  #   enable = true;
-  #   settings = {
-  #     listen-http = ":3500";
-  #   };
-  # };
-
   services.vaultwarden.enable = true;
 
   # Open ports in the firewall.
   networking.firewall.enable = false;
-  networking.firewall.allowedTCPPorts = [ 55555 80 443 ];
+  networking.firewall.allowedTCPPorts = [ 5232 55555 80 443 ];
 }
