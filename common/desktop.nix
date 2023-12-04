@@ -3,7 +3,7 @@
 let
   home-manager = builtins.fetchTarball {
     url = "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz";
-    sha256 = "0dfshsgj93ikfkcihf4c5z876h4dwjds998kvgv7sqbfv0z6a4bc";
+    sha256 = "1q7wnf4ffvzgxsn828gl6hgfqbpynk9b77grsqzfxpki86nfk4mz";
   };
   customPolybar = pkgs.polybar.override {
     alsaSupport = true;
@@ -11,6 +11,7 @@ let
   };
 in {
   imports = [
+    "${builtins.fetchTarball "https://github.com/Mic92/sops-nix/archive/master.tar.gz"}/modules/sops"
     (import "${home-manager}/nixos")
     ./main.nix
   ];
@@ -65,6 +66,7 @@ in {
     xbrightness
     xdotool
     figlet
+    neomutt
 
     unzip
     lua-language-server
