@@ -12,6 +12,15 @@
 
   networking.hostName = "netbox";
 
+  services.rss2email = {
+    enable = true;
+    feeds = {
+      "eff" = {
+        url = "https://www.eff.org/rss/updates.xml";
+      };
+    };
+  };
+
   users.users.useracc = {
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" ];
