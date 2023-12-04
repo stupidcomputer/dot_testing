@@ -32,6 +32,7 @@
   };
 
   services.endlessh.enable = true;
+  services.endlessh.port = 22;
   services.vaultwarden.enable = true;
   services.vaultwarden.config = {
   	DOMAIN = "https://bitwarden.beepboop.systems";
