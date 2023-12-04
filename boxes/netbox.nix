@@ -31,6 +31,13 @@
     ports = [55555];
   };
 
+  services.endlessh.enable = true;
+  services.vaultwarden.enable = true;
+  services.vaultwarden.config = {
+  	DOMAIN = "https://bitwarden.beepboop.systems";
+	SIGNUPS_ALLOWED = false;
+  };
+
   networking.usePredictableInterfaceNames = false;
 
   services.nixosmail.enable = true;
@@ -69,12 +76,6 @@
     root = "/var/www/beepboop.systems";
   };
 
-  services.nginx.virtualHosts."cloud.beepboop.systems" = {
-    forceSSL = true;
-    enableACME = true;
-    locations."/".proxyPass = "http://localhost:4000";
-  };
-
   services.nginx.virtualHosts."git.beepboop.systems" = {
     forceSSL = true;
     enableACME = true;
@@ -111,7 +112,7 @@
 
   security.acme = {
     acceptTerms = true;
-    defaults.email = "nickforanick@protonmail.com";
+    email = "nickforanick@protonmail.com";
   };
 
   services.roundcube = {
@@ -128,9 +129,18 @@
     '';
   };
 
-  services.vaultwarden.enable = true;
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 5232 55555 22 80 443 ];
+  };
 
-  # Open ports in the firewall.
-  networking.firewall.enable = false;
-  networking.firewall.allowedTCPPorts = [ 5232 55555 80 443 ];
+#  services.paperless = {
+#    enable = true;
+#    passwordFile = "/etc/paperless-password";
+#    port = 3004;
+#    address = "localhost";
+#    extraConfig = {
+#      PAPERLESS_URL = "https://paperless.beepboop.systems";
+#    };
+#  };
 }
