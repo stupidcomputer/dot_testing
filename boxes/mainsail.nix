@@ -66,20 +66,24 @@
     gnumake
   ];
 
-  systemd.user.services.paperless-activate = {
+  systemd.services.paperless-activate = {
     script = ''
       while true; do
         # restart every 5 minutes
         echo "starting link"
-        ssh -v -NR 3004:localhost:3004 -p 55555 useracc@beepboop.systems & disown
-        sudo ssh -v -NR 4000:localhost:80 -p 55555 useracc@beepboop.systems & disown
+        ${pkgs.openssh}/bin/ssh -v -NR 3004:localhost:3004 -p 55555 useracc@beepboop.systems &
+        ONE="$!"
+        ${pkgs.openssh}/bin/ssh -v -NR 4000:localhost:80 -p 55555 useracc@beepboop.systems &
+        TWO="$!"
         echo "waiting"
         sleep $((60 * 5))
         echo "killing and restarting"
-        pkill ssh
+        kill $ONE || true
+        kill $TWO || true
       done
     '';
 
     wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" ];
   };
 }
