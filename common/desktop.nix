@@ -2,8 +2,8 @@
 
 let
   home-manager = builtins.fetchTarball {
-    url = "https://github.com/nix-community/home-manager/archive/release-23.05.tar.gz";
-    sha256 = "1q7wnf4ffvzgxsn828gl6hgfqbpynk9b77grsqzfxpki86nfk4mz";
+    url = "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
+    sha256 = "16078fwcmqq41dqfnm124xxm8l6zykvqlj1kzgi0fvfil4y86slm";
   };
   customPolybar = pkgs.polybar.override {
     alsaSupport = true;
@@ -29,6 +29,9 @@ in {
 
   nixpkgs.config = {
     allowUnfree = true;
+    permittedInsecurePackages = [
+      "libxls-1.6.2"
+    ];
   };
 
   environment.systemPackages = with pkgs; [
@@ -82,7 +85,7 @@ in {
     (pkgs.callPackage ../builds/pash.nix {})
   ];
 
-  fonts.fonts = with pkgs; [
+  fonts.packages = with pkgs; [
     fantasque-sans-mono
   ];
 
@@ -135,7 +138,9 @@ in {
       PasswordManagerEnabled = false;
       SearchSuggestEnabled = false;
     };
-    nativeMessagingHosts.tridactyl = true;
+    nativeMessagingHosts.packages = [
+      pkgs.tridactyl-native
+    ];
   };
 
   services.mpd = {

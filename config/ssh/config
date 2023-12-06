@@ -1,6 +1,4 @@
-IdentityFile ~/.local/share/ssh/id_rsa
-IdentityFile ~/.local/share/ssh/id_dsa
-IdentityFile ~/.local/share/ssh/id_ecdsa
-IdentityFile ~/.local/share/ssh/id_ed25519
-
-UserKnownHostsFile ~/.local/share/ssh/known_hosts.d/%k
+Host main
+	HostName beepboop.systems
+	User useracc
+	Port 55555
