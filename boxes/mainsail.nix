@@ -20,8 +20,19 @@
       PAPERLESS_URL = "https://paperless.beepboop.systems";
     };
   };
+
   programs.adb.enable = true;
   users.users.usr.extraGroups = ["adbusers"];
+
+  services.radicale = {
+    enable = true;
+    config = ''
+      [auth]
+      type = htpasswd
+      htpasswd_filename = radicale-passwd
+      htpasswd_encryption = plain
+    '';
+  };
 
   environment.etc."nextcloud-admin-pass".text = "aslkfjaslkdfjsalkdfjlKJFLKJDLFKJLSKDJFLSKDJFLSKDJFLSKDFJ";
   services.nextcloud = {
@@ -64,6 +75,8 @@
     i3
     gcc
     gnumake
+
+    scrcpy
   ];
 
   systemd.services.paperless-activate = {
@@ -75,15 +88,18 @@
         ONE="$!"
         ${pkgs.openssh}/bin/ssh -v -NR 4000:localhost:80 -p 55555 useracc@beepboop.systems &
         TWO="$!"
+        ${pkgs.openssh}/bin/ssh -v -NR 5232:localhost:5232 -p 55555 useracc@beepboop.systems &
+        THREE="$!"
         echo "waiting"
         sleep $((60 * 5))
         echo "killing and restarting"
         kill $ONE || true
         kill $TWO || true
+        kill $THREE || true
       done
     '';
 
     wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" ];
+    after = [ "network.target" "ankisyncd.service" ];
   };
 }
