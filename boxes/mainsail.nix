@@ -1,5 +1,4 @@
 { lib, config, pkgs, ...}:
-
 {
   imports = [
     ../common/steam.nix
@@ -21,8 +20,16 @@
     };
   };
 
+  services.calibre-web.enable = true;
+  services.calibre-web.listen.port = 8080;
+
   programs.adb.enable = true;
   users.users.usr.extraGroups = ["adbusers"];
+
+  services.openssh = {
+    enable = true;
+    ports = [2222];
+  };
 
   services.radicale = {
     enable = true;
@@ -32,20 +39,6 @@
       htpasswd_filename = radicale-passwd
       htpasswd_encryption = plain
     '';
-  };
-
-  environment.etc."nextcloud-admin-pass".text = "aslkfjaslkdfjsalkdfjlKJFLKJDLFKJLSKDJFLSKDJFLSKDJFLSKDFJ";
-  services.nextcloud = {
-    enable = true;
-    hostName = "beepboop.systems";
-    config.adminpassFile = "/etc/nextcloud-admin-pass";
-    package = pkgs.nextcloud27;
-    # Instead of using pkgs.nextcloud27Packages.apps,
-    # we'll reference the package version specified above
-    extraApps = with config.services.nextcloud.package.packages.apps; {
-      inherit news contacts calendar tasks;
-    };
-    extraAppsEnable = true;
   };
 
   systemd.targets.sleep.enable = false;
@@ -68,7 +61,7 @@
     vscodium-fhs
     libreoffice
 
-    anki
+    anki-bin
     ytfzf
     kdenlive
     libreoffice
@@ -77,28 +70,30 @@
     gnumake
 
     scrcpy
+    thunderbird
+    mepo
   ];
 
-  systemd.services.paperless-activate = {
+  systemd.services.paperless-web-bridge = {
     script = ''
-      while true; do
-        # restart every 5 minutes
-        echo "starting link"
-        ${pkgs.openssh}/bin/ssh -v -NR 3004:localhost:3004 -p 55555 useracc@beepboop.systems &
-        ONE="$!"
-        ${pkgs.openssh}/bin/ssh -v -NR 4000:localhost:80 -p 55555 useracc@beepboop.systems &
-        TWO="$!"
-        ${pkgs.openssh}/bin/ssh -v -NR 5232:localhost:5232 -p 55555 useracc@beepboop.systems &
-        THREE="$!"
-        echo "waiting"
-        sleep $((60 * 5))
-        echo "killing and restarting"
-        kill $ONE || true
-        kill $TWO || true
-        kill $THREE || true
-      done
+      ${pkgs.openssh}/bin/ssh -v -NR 3004:localhost:3004 -p 55555 useracc@beepboop.systems
     '';
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" "ankisyncd.service" ];
+  };
 
+  systemd.services.radicale-web-bridge = {
+    script = ''
+      ${pkgs.openssh}/bin/ssh -v -NR 5232:localhost:5232 -p 55555 useracc@beepboop.systems
+    '';
+    wantedBy = [ "multi-user.target" ];
+    after = [ "network.target" "ankisyncd.service" ];
+  };
+
+  systemd.services.internal-ssh-bridge = {
+    script = ''
+      ${pkgs.openssh}/bin/ssh -v -NR 2222:localhost:2222 -p 55555 useracc@beepboop.systems
+    '';
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" "ankisyncd.service" ];
   };
