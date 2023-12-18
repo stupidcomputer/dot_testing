@@ -76,6 +76,12 @@
     extraGroups = [ "wheel" "docker" ];
   };
 
+  users.users.ryan = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "docker" ];
+    packages = [ "browsh" ];
+  };
+
   users.users.paperlesspassthrough = {
     isNormalUser = true;
   };
