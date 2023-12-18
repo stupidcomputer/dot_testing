@@ -79,7 +79,6 @@
   users.users.ryan = {
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" ];
-    packages = [ "browsh" ];
   };
 
   users.users.paperlesspassthrough = {
@@ -154,6 +153,12 @@
     locations."/".proxyPass = "http://localhost:3004";
   };
 
+  services.nginx.virtualHosts."bit.beepboop.systems" = {
+    forceSSL = true;
+    enableACME = true;
+    globalRedirect = "bitwarden.beepboop.systems";
+  };
+
   services.nginx.virtualHosts."bitwarden.beepboop.systems" = {
     forceSSL = true;
     enableACME = true;
@@ -175,12 +180,16 @@
     };
   };
 
-  services.nginx.virtualHosts."ntfy.beepboop.systems" = {
+  services.nginx.virtualHosts."calendar.beepboop.systems" = {
     forceSSL = true;
     enableACME = true;
-    locations."/" = {
-      proxyPass = "http://127.0.0.1:3500";
-    };
+    globalRedirect = "radicale.beepboop.systems";
+  };
+
+  services.nginx.virtualHosts."cal.beepboop.systems" = {
+    forceSSL = true;
+    enableACME = true;
+    globalRedirect = "radicale.beepboop.systems";
   };
 
   services.nginx.virtualHosts."skillissue.agency" = {
@@ -206,6 +215,18 @@
       $config['smtp_user'] = "%u";
       $config['smtp_pass'] = "%p";
     '';
+  };
+
+  services.nginx.virtualHosts."roundcube.beepboop.systems" = {
+    forceSSL = true;
+    enableACME = true;
+    globalRedirect = "cube.beepboop.systems";
+  };
+
+  services.nginx.virtualHosts."mail.beepboop.systems" = {
+    forceSSL = true;
+    enableACME = true;
+    globalRedirect = "cube.beepboop.systems";
   };
 
   networking.firewall = {
