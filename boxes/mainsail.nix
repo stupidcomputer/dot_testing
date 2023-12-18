@@ -80,6 +80,10 @@
     '';
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" "ankisyncd.service" ];
+    serviceConfig = {
+      Restart = "on-failure";
+      RestartSec = "0s";
+    };
   };
 
   systemd.services.radicale-web-bridge = {
@@ -88,6 +92,10 @@
     '';
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" "ankisyncd.service" ];
+    serviceConfig = {
+      Restart = "on-failure";
+      RestartSec = "0s";
+    };
   };
 
   systemd.services.internal-ssh-bridge = {
@@ -96,5 +104,9 @@
     '';
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" "ankisyncd.service" ];
+    serviceConfig = {
+      Restart = "on-failure";
+      RestartSec = "0s";
+    };
   };
 }
