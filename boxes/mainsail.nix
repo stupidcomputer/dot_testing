@@ -76,36 +76,42 @@
 
   systemd.services.paperless-web-bridge = {
     script = ''
-      ${pkgs.openssh}/bin/ssh -v -NR 3004:localhost:3004 -p 55555 useracc@beepboop.systems
+      ${pkgs.openssh}/bin/ssh -v -NR 3004:localhost:3004 -oExitOnForwardFailure=yes -p 55555 useracc@beepboop.systems
     '';
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" "ankisyncd.service" ];
     serviceConfig = {
       Restart = "on-failure";
+      StartLimitInterval = 0;
+      StartLimitBurst = 10000;
       RestartSec = "0s";
     };
   };
 
   systemd.services.radicale-web-bridge = {
     script = ''
-      ${pkgs.openssh}/bin/ssh -v -NR 5232:localhost:5232 -p 55555 useracc@beepboop.systems
+      ${pkgs.openssh}/bin/ssh -v -NR 5232:localhost:5232 -oExitOnForwardFailure=yes -p 55555 useracc@beepboop.systems
     '';
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" "ankisyncd.service" ];
     serviceConfig = {
       Restart = "on-failure";
+      StartLimitInterval = 0;
+      StartLimitBurst = 10000;
       RestartSec = "0s";
     };
   };
 
   systemd.services.internal-ssh-bridge = {
     script = ''
-      ${pkgs.openssh}/bin/ssh -v -NR 2222:localhost:2222 -p 55555 useracc@beepboop.systems
+      ${pkgs.openssh}/bin/ssh -v -NR 2222:localhost:2222 -oExitOnForwardFailure=yes -p 55555 useracc@beepboop.systems
     '';
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" "ankisyncd.service" ];
     serviceConfig = {
       Restart = "on-failure";
+      StartLimitInterval = 0;
+      StartLimitBurst = 10000;
       RestartSec = "0s";
     };
   };
