@@ -10,13 +10,15 @@
   };
 
   outputs = { self, nixpkgs, ... }@inputs: {
-    "virtbox" = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+    nixosConfigurations = {
+      virtbox = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
 
-      modules = [
-        ./bootstrap.nix
-	./boxes/virtbox.nix
-      ];
+        modules = [
+          ./bootstrap.nix
+          ./boxes/virtbox.nix
+        ];
+      };
     };
   };
 }
