@@ -1,18 +1,13 @@
-{ lib, config, pkgs, ...}:
+{ lib, config, pkgs, home-manager, ...}:
 
 let
-  home-manager = builtins.fetchTarball {
-    url = "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
-    sha256 = "16078fwcmqq41dqfnm124xxm8l6zykvqlj1kzgi0fvfil4y86slm";
-  };
   customPolybar = pkgs.polybar.override {
     alsaSupport = true;
     pulseSupport = true;
   };
 in {
   imports = [
-    "${builtins.fetchTarball "https://github.com/Mic92/sops-nix/archive/master.tar.gz"}/modules/sops"
-    (import "${home-manager}/nixos")
+    home-manager.nixosModules.default
     ./main.nix
   ];
 
