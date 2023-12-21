@@ -1,4 +1,4 @@
-{ lib, config, pkgs, home, ... }:
+{ lib, inputs, config, pkgs, home, ... }:
 
 {
   programs.firefox = {
@@ -6,7 +6,7 @@
 
     profiles = {
       "main" = {
-        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+        extensions = with inputs.firefox-addons; [
           bitwarden
         ];
       };
