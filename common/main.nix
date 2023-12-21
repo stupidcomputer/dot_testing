@@ -32,6 +32,5 @@ in {
     (pkgs.callPackage ../builds/rebuild.nix {})
   ];
 
-  system.copySystemConfiguration = true;
   system.stateVersion = "23.11"; # don't change this, lol
 }

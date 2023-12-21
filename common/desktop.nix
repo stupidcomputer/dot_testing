@@ -1,4 +1,4 @@
-{ lib, config, pkgs, home-manager, ...}:
+{ lib, config, pkgs, ...}:
 
 let
   customPolybar = pkgs.polybar.override {
@@ -7,7 +7,6 @@ let
   };
 in {
   imports = [
-    home-manager.nixosModules.default
     ./main.nix
   ];
 
@@ -177,75 +176,6 @@ in {
       ${pkgs.git}/bin/git https://git.beepboop.systems/rndusr/privdata /home/usr/git/privdata
     fi
   '';
-
-  home-manager.users.usr = {
-    home.stateVersion = "23.05";
-
-    programs.neovim = {
-      enable = true;
-      extraLuaPackages = luaPkgs: with luaPkgs; [ luaexpat ];
-      extraPackages = [ pkgs.sqlite ];
-    };
-
-    home.file = {
-      ".config/bash" = {
-        source = ../config/bash;
-        recursive = true;
-      };
-      ".config/bspwm" = {
-        source = ../config/bspwm;
-        recursive = true;
-      };
-      ".config/git" = {
-        source = ../config/git;
-        recursive = true;
-      };
-      ".config/htop" = {
-        source = ../config/htop;
-        recursive = true;
-      };
-      ".config/nvim" = {
-        source = ../config/nvim;
-        recursive = true;
-      };
-      ".config/python" = {
-        source = ../config/python;
-        recursive = true;
-      };
-      ".config/polybar" = {
-        source = ../config/polybar;
-        recursive = true;
-      };
-      ".config/sx" = {
-        source = ../config/sx;
-        recursive = true;
-      };
-      ".config/sxhkd" = {
-        source = ../config/sxhkd;
-        recursive = true;
-      };
-      ".config/tridactyl" = {
-        source = ../config/tridactyl;
-        recursive = true;
-      };
-      ".config/zathura" = {
-        source = ../config/zathura;
-        recursive = true;
-      };
-      ".local/share/wallpapers" = {
-        source = ../wallpapers;
-        recursive = true;
-      };
-      ".local/share/gnupg" = {
-        source = ../config/gnupg;
-        recursive = true;
-      };
-      ".config/emacs" = {
-        source = ../config/emacs;
-        recursive = true;
-      };
-    };
-  };
 
   environment.etc = {
     "profile.local" = {

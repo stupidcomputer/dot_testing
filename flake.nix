@@ -13,13 +13,18 @@
     nixosConfigurations = {
       virtbox = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-	specialArgs = {
-	  home-manager = home-manager;
-	};
+#        specialArgs = inputs;
         modules = [
           ./bootstrap.nix
           ./boxes/virtbox.nix
-	  ./common/desktop.nix
+          ./common/desktop.nix
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            home-manager.users.usr = import ./home/terminal.nix;
+          }
         ];
       };
     };
