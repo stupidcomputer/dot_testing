@@ -178,7 +178,7 @@ in {
     fi
   '';
 
-  home-manager.nixosModules.home-manager.users.usr = {
+  home-manager.users.usr = {
     home.stateVersion = "23.05";
 
     programs.neovim = {
