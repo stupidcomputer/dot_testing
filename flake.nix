@@ -13,7 +13,9 @@
     nixosConfigurations = {
       virtbox = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
-
+	specialArgs = {
+	  home-manager = home-manager;
+	};
         modules = [
           ./bootstrap.nix
           ./boxes/virtbox.nix
