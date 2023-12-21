@@ -46,10 +46,8 @@ in {
     dunst
     libnotify
     tig
-    neomutt
     mpv
     yt-dlp
-    zathura
     tmux
     lynx
     feh
@@ -89,82 +87,16 @@ in {
     enableSSHSupport = true;
   };
 
-  programs.firefox = {
-    enable = true;
-    policies = {
-      DisableFirefoxStudies = true;
-      DisablePocket = true;
-      DisableTelemetry = {
-        Cryptomining = true;
-        Fingerprinting = true;
-        EmailTracking = true;
-      };
-      DisableFirefoxAccounts = true;
-      DisableFirefoxScreenshots = true;
-      DisableSetDesktopBackground = true;
-      DisplayBookmarksToolbar = "never";
-      DontCheckDefaultBrowser = true;
-      Extensions = {
-        Install = [
-          "https://addons.mozilla.org/firefox/downloads/file/3812704/umatrix-1.4.4.xpi"
-          "https://addons.mozilla.org/firefox/downloads/file/3824639/gruvbox_true_dark-2.0.xpi"
-          "https://addons.mozilla.org/firefox/downloads/file/4128489/darkreader-4.9.64.xpi"
-          "https://addons.mozilla.org/firefox/downloads/file/4036604/tridactyl_vim-1.23.0.xpi"
-          "https://addons.mozilla.org/firefox/downloads/file/4098688/user_agent_string_switcher-0.5.0.xpi"
-        ];
-      };
-      FirefoxHome = {
-        Pocket = false;
-        Snippets = false;
-        TopSites = false;
-        SponsoredTopSites = false;
-      };
-      UserMessaging = {
-        ExtensionRecommendations = false;
-        SkipOnboarding = true;
-        MoreFromMozilla = false;
-        UrlbarInterventions = false;
-        WhatsNew = false;
-      };
-      EnableTrackingProtection = true;
-      OverrideFirstRunPage = "";
-      OverridePostUpdatePage = "";
-      PasswordManagerEnabled = false;
-      SearchSuggestEnabled = false;
-    };
-    nativeMessagingHosts.packages = [
-      pkgs.tridactyl-native
-    ];
-  };
-
-  services.mpd = {
-    enable = true;
-    musicDirectory = "/home/usr/music";
-    user = "usr";
-    extraConfig = ''
-      audio_output {
-        type "pulse"
-        name "Pulseaudio"
-      }
-      audio_output {
-        type "alsa"
-        name "mpd alsamixer-output"
-      }
-    '';
-  };
-
   users.users.usr = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
     initialPassword = "usr";
     packages = with pkgs; [
-      firefox
       tree
       bspwm
       sxhkd
     ];
   };
-
 
   # honking impure, but who's counting anyway?
   system.activationScripts.test-script.text = ''
@@ -185,6 +117,4 @@ in {
       text = "source /home/usr/.config/bash/bashrc";
     };
   };
-
-  programs.ssh.askPassword = "";
 }

@@ -12,7 +12,6 @@
     libsForQt5.kdenlive
     xdotool
     texlive.combined.scheme-full
-    zathura
     lilypond
     virt-manager
 #    virtualbox
