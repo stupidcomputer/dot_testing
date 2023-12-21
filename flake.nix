@@ -7,13 +7,12 @@
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    schizofox = {
-      url = "github:schizofox/schizofox/v0.0.1";
-      inputs.nixpkgs.follows = "nixpkgs";
+    nur = {
+      url = "github:nix-community/NUR";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, nur, ... }@inputs: {
     nixosConfigurations = {
       virtbox = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
@@ -29,6 +28,7 @@
 
             home-manager.users.usr = import ./home/terminal.nix;
           }
+          nur.nixosModules.nur
         ];
       };
     };

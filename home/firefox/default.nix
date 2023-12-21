@@ -1,13 +1,15 @@
-{ lib, config, pkgs, home, inputs, ... }:
+{ lib, config, pkgs, home, ... }:
 
 {
-  imports = [inputs.schizofox.homeManagerModule];
-  programs.schizofox = {
+  programs.firefox = {
     enable = true;
 
-    theme = {
-      simplefox.enable = true;
-      darkreader.enable = true;
+    profiles = {
+      "main" = {
+        extensions = with pkgs.nur.repos.rycee.firefox-addons; [
+          bitwarden
+        ];
+      };
     };
   };
 }
