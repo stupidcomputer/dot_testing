@@ -5,8 +5,8 @@
     enable = true;
 
     profiles = {
-      "main" = {
-        extensions = with inputs.firefox-addons; [
+      main = {
+        extensions = with inputs.firefox-addons.packages.${pkgs.system}; [
           bitwarden
         ];
       };
