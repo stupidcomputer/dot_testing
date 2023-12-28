@@ -80,10 +80,10 @@
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "utils": "utils"
+        "utilpkg": "utilpkg"
       }
     },
-    "utils": {
+    "utilpkg": {
       "inputs": {
         "nixpkgs": [
           "nixpkgs"
@@ -91,12 +91,12 @@
       },
       "locked": {
         "lastModified": 1,
-        "narHash": "sha256-WtyNlVS46B3e7GlJY0S5p9lKfp++kVudfkzinGtTP+8=",
-        "path": "/nix/store/4910sx6j7s74xb9ywmp0piqfgkr2v3lx-source/builds",
+        "narHash": "sha256-xCQE9SSKWjmoYOaIkzdlGULeGbEF9Gau5TPgYJxalmw=",
+        "path": "/nix/store/khgahixmjd7zvvv541crbibjwg3wbshv-source/builds",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/4910sx6j7s74xb9ywmp0piqfgkr2v3lx-source/builds",
+        "path": "/nix/store/khgahixmjd7zvvv541crbibjwg3wbshv-source/builds",
         "type": "path"
       }
     }

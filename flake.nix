@@ -11,25 +11,25 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    utils = {
+    utilpkg = {
       url = "./builds";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, firefox-addons, utils, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, firefox-addons, utilpkg, ... }@inputs: {
     nixosConfigurations = {
       virtbox = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = { inherit inputs; };
         modules = [
-          ./boxes/virtbox.nix
+          ./boxes/virtbox
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
             home-manager.extraSpecialArgs = { inherit inputs; };
-            home-manager.users.usr = import ./home/x11.nix;
+            home-manager.users.usr = import ./boxes/virtbox/home.nix;
           }
         ];
       };

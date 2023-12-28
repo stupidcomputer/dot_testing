@@ -8,6 +8,11 @@
     ./pulse.nix
   ];
 
+  environment.systemPackages = [
+    pkgs.bspwm
+    pkgs.sxhkd
+  ];
+
   services.xserver = {
     enable = true;
     libinput.enable = true;

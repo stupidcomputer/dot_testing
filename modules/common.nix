@@ -7,12 +7,9 @@
 
   environment.systemPackages = [
 # is it this? this throws a similar error; no attr st, etc.
-#    inputs.utilpkg.packages.st
-#    inputs.utilpkg.packages.rebuild
-#    inputs.utilpkg.packages.utils
-    inputs.utilpkg.st
-    inputs.utilpkg.rebuild
-    inputs.utilpkg.utils
+    inputs.utilpkg.packages.x86_64-linux.st
+    inputs.utilpkg.packages.x86_64-linux.rebuild
+    inputs.utilpkg.packages.x86_64-linux.utils
     pkgs.man-pages
   ];
 

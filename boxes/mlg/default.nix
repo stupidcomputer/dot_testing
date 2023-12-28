@@ -2,10 +2,13 @@
 
 {
   imports = [
-    ../common/desktop.nix
-    ../common/nvidia.nix
-    ../common/gaming.nix
-    ../common/steam.nix
+    ./hardware-configuration.nix
+    ./nvidia.nix
+    ../../modules/bootstrap.nix
+    ../../modules/common.nix
+    ../../modules/x11.nix
+    ../../modules/discord.nix
+    ../../modules/gaming.nix
   ];
 
   environment.systemPackages = with pkgs; [

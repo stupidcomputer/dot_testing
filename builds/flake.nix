@@ -19,7 +19,6 @@
         st = pkgs.callPackage ./st.nix { };
         rebuild = pkgs.callPackage ./rebuild.nix { };
         utils = pkgs.callPackage ./utils.nix { };
-        pash = pkgs.callPackage ./pash.nix { };
       };
     in
     withSystem (

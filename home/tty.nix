@@ -11,6 +11,4 @@
 
     ./tty-progs.nix
   ];
-
-  home.stateVersion = "23.11";
 }
