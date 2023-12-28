@@ -1,8 +1,6 @@
 { lib, config, pkgs, ...}:
 {
   imports = [
-    ../common/steam.nix
-    ../common/desktop.nix
   ];
 
   boot.loader.grub.enable = true;
