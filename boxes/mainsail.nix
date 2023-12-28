@@ -23,6 +23,8 @@
   services.calibre-web.enable = true;
   services.calibre-web.listen.port = 8080;
 
+  powerManagement.enable = false;
+
   programs.adb.enable = true;
   users.users.usr.extraGroups = ["adbusers"];
 
@@ -33,12 +35,13 @@
 
   services.radicale = {
     enable = true;
-    config = ''
-      [auth]
-      type = htpasswd
-      htpasswd_filename = radicale-passwd
-      htpasswd_encryption = plain
-    '';
+    settings = {
+      auth = {
+        type = "htpasswd";
+        htpasswd_filename = "radicale-passwd";
+        htpasswd_encryption = "plain";
+      };
+    };
   };
 
   systemd.targets.sleep.enable = false;
@@ -82,7 +85,6 @@
     after = [ "network.target" "ankisyncd.service" ];
     serviceConfig = {
       Restart = "on-failure";
-      StartLimitInterval = 0;
       StartLimitBurst = 10000;
       RestartSec = "0s";
     };
@@ -96,7 +98,6 @@
     after = [ "network.target" "ankisyncd.service" ];
     serviceConfig = {
       Restart = "on-failure";
-      StartLimitInterval = 0;
       StartLimitBurst = 10000;
       RestartSec = "0s";
     };
@@ -110,7 +111,6 @@
     after = [ "network.target" "ankisyncd.service" ];
     serviceConfig = {
       Restart = "on-failure";
-      StartLimitInterval = 0;
       StartLimitBurst = 10000;
       RestartSec = "0s";
     };
