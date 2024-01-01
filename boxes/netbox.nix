@@ -42,18 +42,18 @@
     jails = {
       "nginx-bruteforce" = ''
         enabled = true
-	filter = nginx-bruteforce
-	logpath = /var/log/nginx/access.log
-	backend = auto
-	maxretry = 6
-	findtime = 600
+        filter = nginx-bruteforce
+        logpath = /var/log/nginx/access.log
+        backend = auto
+        maxretry = 6
+        findtime = 600
       '';
 
       "postfix-bruteforce" = ''
         enabled = true
-	filter = postfix-bruteforce
-	maxretry = 6
-	findtime = 600
+        filter = postfix-bruteforce
+        maxretry = 6
+        findtime = 600
       '';
     };
   };
@@ -175,14 +175,6 @@
     };
   };
 
-  services.nginx.virtualHosts."ntfy.beepboop.systems" = {
-    forceSSL = true;
-    enableACME = true;
-    locations."/" = {
-      proxyPass = "http://127.0.0.1:3500";
-    };
-  };
-
   services.nginx.virtualHosts."skillissue.agency" = {
     forceSSL = true;
     enableACME = true;
@@ -212,14 +204,4 @@
     enable = true;
     allowedTCPPorts = [ 5232 55555 22 80 443 ];
   };
-
-#  services.paperless = {
-#    enable = true;
-#    passwordFile = "/etc/paperless-password";
-#    port = 3004;
-#    address = "localhost";
-#    extraConfig = {
-#      PAPERLESS_URL = "https://paperless.beepboop.systems";
-#    };
-#  };
 }

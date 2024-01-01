@@ -22,6 +22,7 @@
     libreoffice
     nomacs
     vscodium
+    thunderbird
     minetest
   ];
 

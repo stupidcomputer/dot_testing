@@ -3,7 +3,7 @@
 let
   home-manager = builtins.fetchTarball {
     url = "https://github.com/nix-community/home-manager/archive/release-23.11.tar.gz";
-    sha256 = "16078fwcmqq41dqfnm124xxm8l6zykvqlj1kzgi0fvfil4y86slm";
+    sha256 = "1caggh7q5674b24ghx5p8l4jmd22afwrqqj2flfvlh3n6p94wfyc";
   };
   customPolybar = pkgs.polybar.override {
     alsaSupport = true;
@@ -85,7 +85,7 @@ in {
     (pkgs.callPackage ../builds/pash.nix {})
   ];
 
-  fonts.packages = with pkgs; [
+  fonts.fonts = with pkgs; [
     fantasque-sans-mono
   ];
 
