@@ -12,6 +12,16 @@
 
   networking.hostName = "netbox";
 
+  services.radicale = {
+    enable = true;
+    config = ''
+      [auth]
+      type = htpasswd
+      htpasswd_filename = radicale-passwd
+      htpasswd_encryption = plain
+    '';
+  };
+
   services.rss2email = {
     enable = true;
     to = "ryan@beepboop.systems";
@@ -100,7 +110,8 @@
   services.vaultwarden.enable = true;
   services.vaultwarden.config = {
   	DOMAIN = "https://bitwarden.beepboop.systems";
-	SIGNUPS_ALLOWED = false;
+#	SIGNUPS_ALLOWED = false;
+	ADMIN_TOKEN = "an_amazing_token_xd";
   };
 
   networking.usePredictableInterfaceNames = false;
@@ -139,6 +150,12 @@
     forceSSL = true;
     enableACME = true;
     root = "/var/www/beepboop.systems";
+  };
+
+  services.nginx.virtualHosts."webhooks.beepboop.systems" = {
+    forceSSL = true;
+    enableACME = true;
+    root = "/var/www/webhooks.beepboop.systems";
   };
 
   services.nginx.virtualHosts."git.beepboop.systems" = {

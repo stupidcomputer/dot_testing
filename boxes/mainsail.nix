@@ -33,6 +33,7 @@
     ports = [2222];
   };
 
+<<<<<<< Updated upstream
   services.radicale = {
     enable = true;
     settings = {
@@ -44,6 +45,8 @@
     };
   };
 
+=======
+>>>>>>> Stashed changes
   systemd.targets.sleep.enable = false;
   systemd.targets.suspend.enable = false;
   systemd.targets.hibernate.enable = false;
@@ -80,19 +83,6 @@
   systemd.services.paperless-web-bridge = {
     script = ''
       ${pkgs.openssh}/bin/ssh -v -NR 3004:localhost:3004 -oExitOnForwardFailure=yes -p 55555 useracc@beepboop.systems
-    '';
-    wantedBy = [ "multi-user.target" ];
-    after = [ "network.target" "ankisyncd.service" ];
-    serviceConfig = {
-      Restart = "on-failure";
-      StartLimitBurst = 10000;
-      RestartSec = "0s";
-    };
-  };
-
-  systemd.services.radicale-web-bridge = {
-    script = ''
-      ${pkgs.openssh}/bin/ssh -v -NR 5232:localhost:5232 -oExitOnForwardFailure=yes -p 55555 useracc@beepboop.systems
     '';
     wantedBy = [ "multi-user.target" ];
     after = [ "network.target" "ankisyncd.service" ];
