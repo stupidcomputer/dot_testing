@@ -6,7 +6,6 @@
     ../../modules/bootstrap.nix
     ../../modules/common.nix
     ../../modules/x11.nix
-    ../../modules/discord.nix
   ];
 
   boot.loader.grub.enable = true;
