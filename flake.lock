@@ -92,11 +92,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-xCQE9SSKWjmoYOaIkzdlGULeGbEF9Gau5TPgYJxalmw=",
-        "path": "/nix/store/ngxkaia0jmb6bfn1i5blvqaggxb8sy3f-source/builds",
+        "path": "/nix/store/rg6mp8f9i9grfp47chg801vxzz4w564f-source/builds",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/ngxkaia0jmb6bfn1i5blvqaggxb8sy3f-source/builds",
+        "path": "/nix/store/rg6mp8f9i9grfp47chg801vxzz4w564f-source/builds",
         "type": "path"
       }
     }
