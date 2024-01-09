@@ -16,6 +16,7 @@
         st = pkgs.callPackage ./st.nix { };
         rebuild = pkgs.callPackage ./rebuild.nix { };
         utils = pkgs.callPackage ./utils.nix { };
+        xbattmon = pkgs.callPackage ./xbattmon.nix { };
       };
     in
     withSystem (

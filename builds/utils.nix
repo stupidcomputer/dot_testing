@@ -27,7 +27,8 @@ stdenv.mkDerivation rec {
 
     for i in $(ls $src/sh); do
       cp $src/sh/$i $out/bin
-      wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ sxhkd bash feh xrandr jq figlet curl ]}
+      ln -sf $out/bin/tmenu_run $out/bin/regenerate
+      wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ sxhkd bash feh xrandr jq figlet curl fzy ]}
     done
   '';
 

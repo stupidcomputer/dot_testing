@@ -4,6 +4,7 @@
 , pkg-config
 , libX11
 , libXft
+, libXinerama
 , fontconfig
 , freetype
 , ncurses
@@ -11,18 +12,19 @@
 }:
 
 stdenv.mkDerivation rec {
-  pname = "st";
+  pname = "xbattmon";
   version = "69.19";
 
   src = fetchgit {
-    url = "https://git.beepboop.systems/rndusr/st";
-    sha256 = "sha256-zdID1SUnTO/zl90EG8TguBNYYCnrnqFnSLz32kQZbng=";
+    url = "https://git.beepboop.systems/rndusr/xbattmon";
+    sha256 = "sha256-mM5pjyBw+1lJoaXt0BNiXmqGRt0U2ABENitA8K/EZ9E=";
   };
 
   nativeBuildInputs = [ pkg-config fontconfig freetype ncurses ];
-  buildInputs = [ libX11 libXft ] ++ extraLibs;
+  buildInputs = [ libX11 libXft libXinerama ] ++ extraLibs;
 
   buildPhase = ''
+    ./configure
     make
   '';
 

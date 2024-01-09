@@ -24,6 +24,13 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./boxes/virtbox
+
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.users.usr = import ./boxes/virtbox/home.nix;
+          }
         ];
       };
       x230t = nixpkgs.lib.nixosSystem {
@@ -31,6 +38,13 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./boxes/x230t
+
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.users.usr = import ./boxes/x230t/home.nix;
+          }
         ];
       };
       mainsail = nixpkgs.lib.nixosSystem {
@@ -38,30 +52,14 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./boxes/mainsail
+
+          home-manager.nixosModules.home-manager {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit inputs; };
+            home-manager.users.usr = import ./boxes/mainsail/home.nix;
+          }
         ];
-      };
-    };
-    homeConfigurations = {
-      "usr@x230t" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-	extraSpecialArgs = { inherit inputs; };
-	modules = [
-	  ./boxes/x230t/home.nix
-	];
-      };
-      "usr@mainsail" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-	extraSpecialArgs = { inherit inputs; };
-	modules = [
-	  ./boxes/x230t/home.nix
-	];
-      };
-      "usr@virtbox" = home-manager.lib.homeManagerConfiguration {
-        pkgs = nixpkgs.legacyPackages.x86_64-linux;
-	extraSpecialArgs = { inherit inputs; };
-	modules = [
-	  ./boxes/x230t/home.nix
-	];
       };
     };
   };

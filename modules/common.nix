@@ -10,6 +10,7 @@
     inputs.utilpkg.packages.x86_64-linux.st
     inputs.utilpkg.packages.x86_64-linux.rebuild
     inputs.utilpkg.packages.x86_64-linux.utils
+    inputs.utilpkg.packages.x86_64-linux.xbattmon
     pkgs.man-pages
   ];
 
