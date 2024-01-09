@@ -6,6 +6,7 @@
     ../../modules/bootstrap.nix
     ../../modules/common.nix
     ../../modules/x11.nix
+    ../../modules/tlp.nix
   ];
 
   boot.loader.grub.enable = true;

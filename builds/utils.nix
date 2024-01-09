@@ -4,6 +4,7 @@
 , bash
 , feh
 , jq
+, fzy
 , figlet
 , curl
 , xrandr
@@ -17,7 +18,7 @@ stdenv.mkDerivation rec {
   src = ./utils;
 
   nativeBuildInputs = [ makeWrapper ];
-  buildInputs = [ bash feh xrandr jq curl ];
+  buildInputs = [ bash feh xrandr jq curl fzy ];
 
   buildPhase = "";
 
