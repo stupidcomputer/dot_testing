@@ -12,7 +12,7 @@
 
 stdenv.mkDerivation rec {
   pname = "st";
-  version = "69.19";
+  version = "1.02";
 
   src = fetchgit {
     url = "https://git.beepboop.systems/rndusr/st";

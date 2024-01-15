@@ -7,5 +7,8 @@
     ".config/sxhkd/sxhkdrc" = {
       source = ./sxhkdrc;
     };
+    ".config/sxhkd/mouse" = {
+      source = ./mouse;
+    };
   };
 }

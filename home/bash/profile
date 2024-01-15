@@ -54,3 +54,6 @@ export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
 # source the bashrc(s)
 [ -f $HOME/.config/bash/bashrc ] && . $HOME/.config/bash/bashrc
 [ -f $HOME/.bashrc ] && . $HOME/.bashrc
+
+# if we're interactive and the tty is /dev/tty1 then start xorg
+[ "$(tty)" = "/dev/tty1" ] && sx

@@ -7,12 +7,26 @@
     ../../modules/common.nix
     ../../modules/x11.nix
     ../../modules/tlp.nix
+    ../../modules/media.nix
+    ../../modules/anki.nix
+    ../../modules/power-control.nix
   ];
+
+  environment.systemPackages = with pkgs; [
+    xscreensaver
+  ];
+
+  services.getty.autologinUser = "usr";
+
+  boot.loader = {
+    grub.timeoutStyle = "hidden";
+    timeout = 0;
+    grub.enable = true;
+    grub.device = "/dev/sda";
+  };
 
   hardware.pulseaudio.enable = true;
 
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/sda";
 
   networking.hostName = "x230t";
 

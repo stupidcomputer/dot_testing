@@ -6,11 +6,13 @@
     ./gnupg.nix
     ./fonts.nix
     ./pulse.nix
+    ./sxiv.nix
   ];
 
-  environment.systemPackages = [
-    pkgs.bspwm
-    pkgs.sxhkd
+  environment.systemPackages = with pkgs; [
+    bspwm
+    sxhkd
+    xscreensaver
   ];
 
   services.xserver = {

@@ -80,20 +80,6 @@ globals.vimtex_view_method = 'zathura'
 -- }}}
 
 -- autocommands {{{
--- autocmds for sxhkd and bspwm config files
-vim.api.nvim_create_autocmd({"BufWrite"}, {
-	pattern = {"bspwmrc"},
-	callback = function()
-		vim.fn.system("bspc wm -r")
-	end
-})
-vim.api.nvim_create_autocmd({"BufWrite"}, {
-	pattern = {"sxhkdrc"},
-	callback = function()
-		vim.fn.system("killall sxhkd -USR1")
-	end
-})
-
 function setTabbing(lang, width)
 	vim.api.nvim_create_autocmd({"Filetype"}, {
 		pattern = {lang},
@@ -153,19 +139,8 @@ local packer = require('packer').startup(function(use)
 	use 'hrsh7th/nvim-cmp'
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'L3MON4D3/LuaSnip'
-	use 'https://github.com/vimwiki/vimwiki.git'
 	use 'lervag/vimtex'
 	use 'https://github.com/protex/better-digraphs.nvim'
-	use 'https://github.com/itchyny/calendar.vim'
-	use {
-		"folke/which-key.nvim",
-		config = function()
-			vim.o.timeout = true
-			vim.o.timeoutlen = 300
---			require("which-key").setup {
---			}
-		end
-	}
 
 	if packer_bootstrap then
 		require('packer').sync()
