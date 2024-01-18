@@ -1,4 +1,13 @@
 # mode - change the current effective sxhkd configuration
 
-pkill sxhkd
-sxhkd -c ~/.config/sxhkd/$1 & disown
+if [ -n "$1" ]; then
+	pkill sxhkd
+	sxhkd -c ~/.config/sxhkd/$1 & disown
+	[ -f "~/.config/sxhkd/$1.sh ] && ~/.config/sxhkd/$1.sh
+
+	exit
+fi
+
+# we need a menu
+choice=$(ls ~/.config/sxhkd | tmenu)
+$0 $choice
