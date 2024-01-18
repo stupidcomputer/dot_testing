@@ -7,6 +7,8 @@ geos=$(
 	awk -F'[x+]' '{print $1 "x20+" $3 "+" $4}'
 )
 
+pkill statusbar
+
 for i in $geos; do
 	st -c statusbar -p -g "$i" -e statusbar & disown
 done

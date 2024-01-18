@@ -1,8 +1,6 @@
 #!/bin/sh
 # rndusr's bspwmrc
 
-bspc monitor -d 1 2 3 4 5 6 7 8 9
-
 bspc rule -a st-gpg-menu state=floating
 bspc rule -a statusbar border=off sticky=on state=floating manage=off
 bspc rule -a tmenu-prompt border=on sticky=on state=floating
@@ -11,10 +9,17 @@ bspc rule -a Zathura state=tiled
 bspc rule -a generic-st-window state=floating manage=on sticky=on border=on
 bspc rule -a floating-feh state=floating
 
+set_walls() {
+	for i in $(xrandr | grep ' connected' | cut -d' ' -f1); do
+		xwallpaper --output $i --zoom ~/.local/share/pape.jpg
+	done
+}
+
 # post-wm boilerplate
-statuswrap
-wallpaper
 disp
+statuswrap
+set_walls
+pkill xscreensaver
 HOME=".config/xscreensaver" xscreensaver --no-splash &
 
 # set up the color scheme

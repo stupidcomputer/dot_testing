@@ -13,7 +13,7 @@ super + r
 
 # reinitialize ancillary services
 super + w
-	disp && wallpaper && statusbar && keyboard
+	disp && keyboard
 
 # control the national weather service
 super + {_,shift + }n

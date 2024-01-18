@@ -6,7 +6,8 @@
     xcape
     xscreensaver
     mpv
-    feh
+    sxiv
+    xwallpaper
     xbrightness
     xdotool
   ];

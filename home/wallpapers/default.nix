@@ -2,9 +2,8 @@
 
 {
   home.file = {
-    ".local/share/wallpapers" = {
-      source = ./src;
-      recursive = true;
+    ".local/share/pape.jpg" = {
+      source = ./pape.jpg;
     };
   };
 }
