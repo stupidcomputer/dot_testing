@@ -15,7 +15,9 @@
       url = "./builds";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-23.11";
+    simple-nixos-mailserver = {
+      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-23.11";
+    };
   };
 
   outputs = { self, nixpkgs, home-manager, firefox-addons, simple-nixos-mailserver, utilpkg, ... }@inputs: {
@@ -25,10 +27,10 @@
         specialArgs = { inherit inputs; };
         modules = [
           ./boxes/netbox
-	  simple-nixos-mailserver.nixosModule
-	  {
-	    mailserver = {
-	      enable = true;
+          simple-nixos-mailserver.nixosModule
+          {
+            mailserver = {
+              enable = true;
               fqdn = "mail.beepboop.systems";
               domains = [ "beepboop.systems" ];
               loginAccounts = {
@@ -41,10 +43,10 @@
                       "postmaster@beepboop.systems"
                   ];
                 };
-	      };
+              };
               certificateScheme = "acme-nginx";
-	    };
-	  }
+            };
+          }
         ];
       };
       virtbox = nixpkgs.lib.nixosSystem {

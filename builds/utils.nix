@@ -9,6 +9,7 @@
 , bash
 , feh
 , jq
+, ffmpeg
 , fzy
 , figlet
 , curl
@@ -23,7 +24,7 @@ stdenv.mkDerivation rec {
   src = ./utils;
 
   nativeBuildInputs = [ makeWrapper pkg-config libxcb ];
-  buildInputs = [ libxcb bash feh xrandr jq curl fzy ytfzf ];
+  buildInputs = [ libxcb bash feh xrandr jq curl fzy ytfzf ffmpeg ];
 
   buildPhase = ''
     ls
@@ -36,7 +37,7 @@ stdenv.mkDerivation rec {
     for i in $(ls $src/sh); do
       cp $src/sh/$i $out/bin
       ln -sf $out/bin/tmenu_run $out/bin/regenerate
-      wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ sxhkd bash feh xrandr jq figlet curl fzy ytfzf ]}
+      wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ sxhkd bash feh xrandr jq figlet curl fzy ytfzf ffmpeg ]}
     done
 
     cp c/status/main $out/bin/statusbar
