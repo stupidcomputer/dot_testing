@@ -3,14 +3,63 @@
 {
   imports =
     [
-      ../modules/mail.nix
-      ../common/main.nix
+      ./hardware-configuration.nix
+      ../../modules/bootstrap.nix
     ];
 
+  networking.networkmanager.enable = true;
+
+  time.timeZone = "America/Chicago";
+
+  i18n.defaultLocale = "en_US.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
+  };
+
+  environment.systemPackages = with pkgs; [
+    curl
+    htop
+    git
+    tree
+    dig
+    htop
+    gnumake
+  ];
+
+  system.copySystemConfiguration = true;
+  system.stateVersion = "23.05"; # don't change this, lol
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/vda";
 
+#  services.cgit = {
+#    "beepboop.systems" = {
+#      extraConfig = ''
+#      	root-desc="testing"
+#
+#      	section=main
+#	repo.url=dot_testing
+#	repo.path=/var/lib/git/dot_testing
+#	repo.desc=configuration for NixOS/Linux systems
+#	repo.owner=rndusr
+#
+#      	readme=:README.md
+#      '';
+#      enable = true;
+#    };
+#  };
+
   networking.hostName = "netbox";
+
+  services.radicale = {
+    enable = true;
+    config = ''
+      [auth]
+      type = htpasswd
+      htpasswd_filename = radicale-passwd
+      htpasswd_encryption = plain
+    '';
+  };
 
   services.rss2email = {
     enable = true;
@@ -81,15 +130,6 @@
     extraGroups = [ "wheel" "docker" ];
   };
 
-  users.users.paperlesspassthrough = {
-    isNormalUser = true;
-  };
-
-  environment.systemPackages = with pkgs; [
-    neovim
-    # nothing more needed, at the moment
-  ];
-
   services.openssh = {
     enable = true;
     ports = [55555];
@@ -100,12 +140,10 @@
   services.vaultwarden.enable = true;
   services.vaultwarden.config = {
   	DOMAIN = "https://bitwarden.beepboop.systems";
-	SIGNUPS_ALLOWED = false;
+#	SIGNUPS_ALLOWED = false;
   };
 
   networking.usePredictableInterfaceNames = false;
-
-  services.nixosmail.enable = true;
 
   services.gitea = {
     enable = true;
@@ -145,12 +183,6 @@
     forceSSL = true;
     enableACME = true;
     locations."/".proxyPass = "http://localhost:3001";
-  };
-
-  services.nginx.virtualHosts."paperless.beepboop.systems" = {
-    forceSSL = true;
-    enableACME = true;
-    locations."/".proxyPass = "http://localhost:3004";
   };
 
   services.nginx.virtualHosts."bit.beepboop.systems" = {
@@ -203,19 +235,19 @@
     email = "nickforanick@protonmail.com";
   };
 
-  services.roundcube = {
-    enable = true;
-    # this is the url of the vhost, not necessarily the same as the fqdn of
-    # the mailserver
-    hostName = "cube.beepboop.systems";
-    extraConfig = ''
-      # starttls needed for authentication, so the fqdn required to match
-      # the certificate
-      $config['smtp_server'] = "tls://${config.mailserver.fqdn}";
-      $config['smtp_user'] = "%u";
-      $config['smtp_pass'] = "%p";
-    '';
-  };
+#  services.roundcube = {
+#    enable = true;
+#    # this is the url of the vhost, not necessarily the same as the fqdn of
+#    # the mailserver
+#    hostName = "cube.beepboop.systems";
+#    extraConfig = ''
+#      # starttls needed for authentication, so the fqdn required to match
+#      # the certificate
+#      $config['smtp_server'] = "tls://${config.mailserver.fqdn}";
+#      $config['smtp_user'] = "%u";
+#      $config['smtp_pass'] = "%p";
+#    '';
+#  };
 
   services.nginx.virtualHosts."roundcube.beepboop.systems" = {
     forceSSL = true;
@@ -233,14 +265,4 @@
     enable = true;
     allowedTCPPorts = [ 5232 55555 22 80 443 ];
   };
-
-#  services.paperless = {
-#    enable = true;
-#    passwordFile = "/etc/paperless-password";
-#    port = 3004;
-#    address = "localhost";
-#    extraConfig = {
-#      PAPERLESS_URL = "https://paperless.beepboop.systems";
-#    };
-#  };
 }
