@@ -113,6 +113,7 @@ in {
     [
       ./hardware-configuration.nix
       ../../modules/bootstrap.nix
+      ../../builds/gmail_mail_bridge.nix
     ];
 
   networking.networkmanager.enable = true;
@@ -135,6 +136,8 @@ in {
     gnumake
     neovim
   ];
+
+  services.gmail_mail_bridge.enable = true;
 
   system.copySystemConfiguration = true;
   system.stateVersion = "23.05"; # don't change this, lol
@@ -412,7 +415,16 @@ in {
   services.nginx.virtualHosts."mail.beepboop.systems" = {
     forceSSL = true;
     enableACME = true;
-    globalRedirect = "cube.beepboop.systems";
+    locations."/bridge-submit" = {
+      extraConfig = ''
+        proxy_pass http://localhost:8041;
+      '';
+    };
+    locations."/" = {
+      extraConfig = ''
+        return 301 https://cube.beepboop.systems;
+      '';
+    };
   };
 
   networking.firewall = {

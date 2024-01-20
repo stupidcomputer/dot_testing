@@ -1,0 +1,23 @@
+// google-side synchronization
+// add a minute-wise trigger for mail synchronization
+// go to the sidebar, select triggers, add a new one, configure it
+// to run syncMail every minute
+
+function syncMail() {
+  var threads = GmailApp.search("label:need_processing");
+  var label = GmailApp.getUserLabelByName("need_processing");
+  for (var thread of threads) {
+    for (var message of GmailApp.getMessagesForThread(thread)) {
+      var formData = {
+        auth: 'amongus sussy imposter',
+        payload: message.getRawContent(),
+      };
+      var options = {
+        'method' : 'POST',
+        'payload' : formData
+      };
+      var resp = UrlFetchApp.fetch('https://mail.beepboop.systems/bridge-submit', options);
+    }
+    thread.removeLabel(label);
+  }
+}
