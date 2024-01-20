@@ -210,11 +210,11 @@
       "locked": {
         "lastModified": 1,
         "narHash": "sha256-wGl3ZnqjhpAEpTkzgjWxgsbmGX9c7TPCM4I0okuOYFE=",
-        "path": "/nix/store/z62lv62z8yn2vfgxk06aqdr7i6wmk2v0-source/builds",
+        "path": "/nix/store/6nljlgsf56x9pglryla3l480awympq84-source/builds",
         "type": "path"
       },
       "original": {
-        "path": "/nix/store/z62lv62z8yn2vfgxk06aqdr7i6wmk2v0-source/builds",
+        "path": "/nix/store/6nljlgsf56x9pglryla3l480awympq84-source/builds",
         "type": "path"
       }
     },
