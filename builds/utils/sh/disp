@@ -29,22 +29,34 @@ case "$(hostname)" in
 		;;
 	"x230t")
 		echo "x230t"
-		if
-			assert_edid "VGA-1" "35737dc483d2c3b1b20ea2343ce13c6c42d115febdc9634f8437e1b9f7fd3f5c" &&
-			assert_edid "HDMI-A-1" "01887cbd23d74201e489a6334656f7db73a7b7f732a738a9f1ee2d53389f7817";
-		then
-			echo "docked"
-			xrandr --output LVDS-1 --primary --mode 1366x768 --pos 1194x1080 --rotate normal \
-				--output VGA-1 --mode 1920x1080 --pos 0x0 --rotate normal \
-				--output HDMI-1 --mode 1920x1080 --pos 1920x0 --rotate normal \
-				--output DP-1 --off \
-				--output HDMI-2 --off \
-				--output DP-2 --off
-			bspc monitor LVDS-1 -d 1 4 7
-			bspc monitor VGA-1 -d 2 5 8
-			bspc monitor HDMI-1 -d 3 6 9
-		else
-			bspc monitor LVDS-1 -d 1 2 3 4 5 6 7 8 9
-		fi
+		case "$1" in
+			"dockedtwo")
+				# assume we're connected to the two external displays
+				xrandr --output VGA-1 --primary --mode 1920x1080 --rotate normal \
+					--output HDMI-1 --mode 1920x1080 --rotate normal --right-of VGA-1 \
+					--output LVDS-1 --off
+				bspc monitor VGA-1 -d 1 3 5 7 9
+				bspc monitor HDMI-1 -d 2 4 6 8
+				;;
+			*)
+				if
+					assert_edid "VGA-1" "35737dc483d2c3b1b20ea2343ce13c6c42d115febdc9634f8437e1b9f7fd3f5c" &&
+					assert_edid "HDMI-A-1" "01887cbd23d74201e489a6334656f7db73a7b7f732a738a9f1ee2d53389f7817";
+				then
+					echo "docked"
+					xrandr --output LVDS-1 --primary --mode 1366x768 --pos 1194x1080 --rotate normal \
+						--output VGA-1 --mode 1920x1080 --pos 0x0 --rotate normal \
+						--output HDMI-1 --mode 1920x1080 --pos 1920x0 --rotate normal \
+						--output DP-1 --off \
+						--output HDMI-2 --off \
+						--output DP-2 --off
+					bspc monitor LVDS-1 -d 1 4 7
+					bspc monitor VGA-1 -d 2 5 8
+					bspc monitor HDMI-1 -d 3 6 9
+				else
+					bspc monitor LVDS-1 -d 1 2 3 4 5 6 7 8 9
+				fi
+				;;
+		esac
 		;;
 esac

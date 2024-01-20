@@ -2,7 +2,6 @@
 
 {
   imports = [
-    ./polybar.nix
     ./gnupg.nix
     ./fonts.nix
     ./pulse.nix

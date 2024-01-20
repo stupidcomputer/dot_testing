@@ -16,7 +16,13 @@
   environment.systemPackages = with pkgs; [
     xscreensaver
     thunderbird
+    hue-cli
+    bluetuith
   ];
+
+  hardware.bluetooth = {
+    enable = true;
+  };
 
   services.udev.extraRules = ''
     ACTION=="add", SUBSYSTEM=="input", KERNEL=="event[0-20]*", ENV{ID_INPUT_TOUCHSCREEN}=="1", MODE:="0666" GROUP="usr", SYMLINK+="input/touchscreen"
