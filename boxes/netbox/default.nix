@@ -144,6 +144,23 @@ in {
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/vda";
 
+  services.sslh = {
+    enable = true;
+    settings.protocols = [
+      {
+        host = "localhost";
+	name = "ssh";
+	port = "55555";
+	service = "ssh";
+      }
+      {
+        host = "localhost";
+	name = "tls";
+	port = "442";
+      }
+    ];
+  };
+
   # cgit
   users = {
     groups.git = { };
@@ -279,6 +296,7 @@ in {
 
   services.nginx.enable = true;
   services.nginx.clientMaxBodySize = "100m";
+  services.nginx.defaultSSLListenPort = 442;
 
   services.nginx.virtualHosts."beepboop.systems" = {
     forceSSL = true;
@@ -442,6 +460,6 @@ in {
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 5232 55555 22 80 443 ];
+    allowedTCPPorts = [ 80 443 ];
   };
 }
