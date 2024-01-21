@@ -229,12 +229,10 @@ in {
     '';
   };
 
-  users.users.useracc = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
-  };
-
   users.users.ryan = {
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKbhM3wj0oqjR3pUaZgpfX4Xo4dlzvBTbQ48zHyg7Pwx usr"
+    ];
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" ];
   };
@@ -320,6 +318,21 @@ in {
     locations."/roundcube" = {
       extraConfig = ''
         return 301 https://mail.beepboop.systems;
+      '';
+    };
+    locations."~ \\.git" = {
+      extraConfig = ''
+        client_max_body_size 0;
+        
+        include ${pkgs.nginx}/conf/fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME ${pkgs.git}/bin/git-http-backend;
+        fastcgi_param GIT_HTTP_EXPORT_ALL "";
+        fastcgi_param GIT_PROJECT_ROOT /var/lib/git;
+        fastcgi_param PATH_INFO $uri;
+        
+        # Forward REMOTE_USER as we want to know when we are authenticated
+        fastcgi_param REMOTE_USER $remote_user;
+        fastcgi_pass unix:${config.services.fcgiwrap.socketAddress};
       '';
     };
     locations."/" = {
