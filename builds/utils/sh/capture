@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # get screen info and temporary file
-tmp=$(mktemp)
+tmp=$(mktemp -d)
 res=$(xrandr |
 	grep ' connected' |
 	awk -F' ' '{print $1 " " $4}' |
@@ -11,7 +11,7 @@ res=$(xrandr |
 
 # still or motion
 medium=$(printf ".mp4\n.png\n" | fzy)
-output="$tmp$medium"
+output="$tmp/main$medium"
 
 # capture
 case "$medium" in
