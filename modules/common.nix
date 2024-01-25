@@ -6,10 +6,9 @@
   ];
 
   environment.systemPackages = [
-# is it this? this throws a similar error; no attr st, etc.
-    inputs.utilpkg.packages.x86_64-linux.st
-    inputs.utilpkg.packages.x86_64-linux.rebuild
-    inputs.utilpkg.packages.x86_64-linux.utils
+    (pkgs.callPackage ../builds/rebuild.nix {})
+    (pkgs.callPackage ../builds/st.nix {})
+    (pkgs.callPackage ../builds/utils.nix {})
     pkgs.man-pages
   ];
 

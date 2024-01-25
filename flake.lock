@@ -172,8 +172,7 @@
         "firefox-addons": "firefox-addons",
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs",
-        "simple-nixos-mailserver": "simple-nixos-mailserver",
-        "utilpkg": "utilpkg"
+        "simple-nixos-mailserver": "simple-nixos-mailserver"
       }
     },
     "simple-nixos-mailserver": {
@@ -199,23 +198,6 @@
         "ref": "nixos-23.11",
         "repo": "nixos-mailserver",
         "type": "gitlab"
-      }
-    },
-    "utilpkg": {
-      "inputs": {
-        "nixpkgs": [
-          "nixpkgs"
-        ]
-      },
-      "locked": {
-        "lastModified": 1,
-        "narHash": "sha256-3icKqIEjS068WDJ+05sEvFDL6DsPB0GpKTc8Bm4F9Po=",
-        "path": "/nix/store/9797g0387xqz764w22ascnvn3bvm90kd-source/builds",
-        "type": "path"
-      },
-      "original": {
-        "path": "/nix/store/9797g0387xqz764w22ascnvn3bvm90kd-source/builds",
-        "type": "path"
       }
     },
     "utils": {

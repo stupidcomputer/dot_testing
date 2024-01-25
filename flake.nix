@@ -11,16 +11,12 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    utilpkg = {
-      url = "./builds";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
     simple-nixos-mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-23.11";
     };
   };
 
-  outputs = { self, nixpkgs, home-manager, firefox-addons, simple-nixos-mailserver, utilpkg, ... }@inputs: {
+  outputs = { self, nixpkgs, home-manager, firefox-addons, simple-nixos-mailserver, ... }@inputs: {
     nixosConfigurations = {
       netbox = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

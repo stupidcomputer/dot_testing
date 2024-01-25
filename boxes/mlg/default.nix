@@ -61,6 +61,8 @@
   services.avahi.openFirewall = true; # opens the firewall for UDP port 5353
 
   nixpkgs.config.allowUnfree = true;
-  networking.hostName = "mlg";
-
+  networking = {
+    hostName = "mlg";
+    firewall.enable = true;
+  };
 }
