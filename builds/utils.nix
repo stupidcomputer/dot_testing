@@ -5,6 +5,7 @@
 , libxcb
 # shell scripts stuff
 , makeWrapper
+, sshuttle
 , sxhkd
 , bash
 , feh
@@ -24,7 +25,7 @@ stdenv.mkDerivation rec {
   src = ./utils;
 
   nativeBuildInputs = [ makeWrapper pkg-config libxcb ];
-  buildInputs = [ libxcb bash feh xrandr jq curl fzy ytfzf ffmpeg ];
+  buildInputs = [ libxcb bash feh xrandr jq curl fzy ytfzf ffmpeg sshuttle ];
 
   buildPhase = ''
     ls
@@ -37,7 +38,7 @@ stdenv.mkDerivation rec {
     for i in $(ls $src/sh); do
       cp $src/sh/$i $out/bin
       ln -sf $out/bin/tmenu_run $out/bin/regenerate
-      wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ sxhkd bash feh xrandr jq figlet curl fzy ytfzf ffmpeg ]}
+      wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ sxhkd bash feh xrandr jq figlet curl fzy ytfzf ffmpeg sshuttle ]}
     done
 
     cp c/status/main $out/bin/statusbar

@@ -2,8 +2,9 @@
 
 {
   imports = [
-#    ./hardware-configuration.nix
+    ./hardware-configuration.nix
     ./nvidia.nix
+    ../../modules/ssh-phone-home.nix
     ../../modules/bootstrap.nix
     ../../modules/common.nix
     ../../modules/x11.nix
@@ -25,8 +26,19 @@
     libreoffice
     nomacs
     vscodium
+    thunderbird
     minetest
   ];
+
+  services.openssh.enable = true;
+  services.ssh-phone-home = {
+    enable = true;
+    localUser = "usr";
+    remoteHostname = "192.168.1.100";
+    remotePort = 22;
+    remoteUser = "usr";
+    bindPort = 2222;
+  };
 
   boot.loader = {
     efi = {
@@ -48,5 +60,9 @@
   services.avahi.nssmdns = true; # enables the mDNS NSS plug-in
   services.avahi.openFirewall = true; # opens the firewall for UDP port 5353
 
-  networking.hostName = "mlg";
+  nixpkgs.config.allowUnfree = true;
+  networking = {
+    hostName = "mlg";
+    firewall.enable = true;
+  };
 }

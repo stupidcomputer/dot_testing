@@ -249,7 +249,8 @@ in {
 
   users.users.ryan = {
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKbhM3wj0oqjR3pUaZgpfX4Xo4dlzvBTbQ48zHyg7Pwx usr"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKbhM3wj0oqjR3pUaZgpfX4Xo4dlzvBTbQ48zHyg7Pwx usr" # x230t
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGrpVDLQszFKoYbvYKRyVTTpehxR0BVU47SXkz39l2wK usr" # mainsail
     ];
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" ];
@@ -342,7 +343,7 @@ in {
     locations."~ \\.git" = {
       extraConfig = ''
         client_max_body_size 0;
-        
+
         include ${pkgs.nginx}/conf/fastcgi_params;
         fastcgi_param SCRIPT_FILENAME ${pkgs.git}/bin/git-http-backend;
         fastcgi_param GIT_HTTP_EXPORT_ALL "";

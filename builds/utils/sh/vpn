@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# a poor man's vpn
+ip=$(dig +short beepboop.systems)
+sshuttle --dns -r ryan@$ip:443 0/0
