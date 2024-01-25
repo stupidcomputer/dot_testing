@@ -62,7 +62,7 @@
     remoteHostname = "beepboop.systems";
     remotePort = 443;
     remoteUser = "ryan";
-    bindPort = 2222;
+    bindPort = 55554;
   };
 
   users.users.usr.openssh.authorizedKeys.keys = [
