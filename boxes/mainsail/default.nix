@@ -2,6 +2,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ../../modules/ssh-phone-home.nix
     ../../modules/bootstrap.nix
     ../../modules/common.nix
   ];
@@ -53,6 +54,15 @@
       PermitRootLogin = "no";
       PasswordAuthentication = false;
     };
+  };
+
+  services.ssh-phone-home = {
+    enable = true;
+    localUser = "usr";
+    remoteHostname = "beepboop.systems";
+    remotePort = 443;
+    remoteUser = "ryan";
+    bindPort = 2222;
   };
 
   users.users.usr.openssh.authorizedKeys.keys = [
