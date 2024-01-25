@@ -16,9 +16,9 @@ installation
 
 `sudo nixos-rebuild --flake .#your-flake-name-here switch`
 
-if you're trying to install `virtbox`, then use the `--impure` flag:
+if you're trying to install `netbox`, then use the `--impure` flag:
 
-`sudo nixos-rebuild --flake .#virtbox switch --impure`
+`sudo nixos-rebuild --flake .#netbox switch --impure`
 
 for alternate installations on non-NixOS hosts, a Makefile will be made available
 
@@ -28,6 +28,8 @@ things to do
 - integrate `disko` and `sops-nix` into the setup
 - switch from gitea to cgit
 - establish backup infrastructure for `netbox`
+- move gmail-mail-bridge into mail-sync repo
+  * (perhaps figure out how to produce a flake for it)
 
 license
 -------

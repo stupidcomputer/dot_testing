@@ -113,6 +113,7 @@ in {
     [
       ./hardware-configuration.nix
       ../../modules/bootstrap.nix
+      ../../builds/gmail_mail_bridge.nix
     ];
 
   networking.networkmanager.enable = true;
@@ -136,10 +137,29 @@ in {
     neovim
   ];
 
+  services.gmail_mail_bridge.enable = true;
+
   system.copySystemConfiguration = true;
   system.stateVersion = "23.05"; # don't change this, lol
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/vda";
+
+  services.sslh = {
+    enable = true;
+    settings.protocols = [
+      {
+        host = "localhost";
+	name = "ssh";
+	port = "55555";
+	service = "ssh";
+      }
+      {
+        host = "localhost";
+	name = "tls";
+	port = "442";
+      }
+    ];
+  };
 
   # cgit
   users = {
@@ -226,12 +246,10 @@ in {
     '';
   };
 
-  users.users.useracc = {
-    isNormalUser = true;
-    extraGroups = [ "wheel" "docker" ];
-  };
-
   users.users.ryan = {
+    openssh.authorizedKeys.keys = [
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKbhM3wj0oqjR3pUaZgpfX4Xo4dlzvBTbQ48zHyg7Pwx usr"
+    ];
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" ];
   };
@@ -278,6 +296,7 @@ in {
 
   services.nginx.enable = true;
   services.nginx.clientMaxBodySize = "100m";
+  services.nginx.defaultSSLListenPort = 442;
 
   services.nginx.virtualHosts."beepboop.systems" = {
     forceSSL = true;
@@ -317,6 +336,21 @@ in {
     locations."/roundcube" = {
       extraConfig = ''
         return 301 https://mail.beepboop.systems;
+      '';
+    };
+    locations."~ \\.git" = {
+      extraConfig = ''
+        client_max_body_size 0;
+        
+        include ${pkgs.nginx}/conf/fastcgi_params;
+        fastcgi_param SCRIPT_FILENAME ${pkgs.git}/bin/git-http-backend;
+        fastcgi_param GIT_HTTP_EXPORT_ALL "";
+        fastcgi_param GIT_PROJECT_ROOT /var/lib/git;
+        fastcgi_param PATH_INFO $uri;
+        
+        # Forward REMOTE_USER as we want to know when we are authenticated
+        fastcgi_param REMOTE_USER $remote_user;
+        fastcgi_pass unix:${config.services.fcgiwrap.socketAddress};
       '';
     };
     locations."/" = {
@@ -412,11 +446,20 @@ in {
   services.nginx.virtualHosts."mail.beepboop.systems" = {
     forceSSL = true;
     enableACME = true;
-    globalRedirect = "cube.beepboop.systems";
+    locations."/bridge-submit" = {
+      extraConfig = ''
+        proxy_pass http://localhost:8041;
+      '';
+    };
+    locations."/" = {
+      extraConfig = ''
+        return 301 https://cube.beepboop.systems;
+      '';
+    };
   };
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 5232 55555 22 80 443 ];
+    allowedTCPPorts = [ 80 443 ];
   };
 }

@@ -2,8 +2,9 @@
 
 {
   imports = [
-#    ./hardware-configuration.nix
+    ./hardware-configuration.nix
     ./nvidia.nix
+    ../../modules/ssh-phone-home.nix
     ../../modules/bootstrap.nix
     ../../modules/common.nix
     ../../modules/x11.nix
@@ -27,6 +28,16 @@
     vscodium
     minetest
   ];
+
+  services.openssh.enable = true;
+  services.ssh-phone-home = {
+    enable = true;
+    localUser = "usr";
+    remoteHostname = "192.168.1.100";
+    remotePort = 22;
+    remoteUser = "usr";
+    bindPort = 2222;
+  };
 
   boot.loader = {
     efi = {
