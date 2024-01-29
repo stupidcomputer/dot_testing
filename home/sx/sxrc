@@ -1,6 +1,3 @@
-# adjust some keybindings
-keyboard
-#
 # start the wm
 sxhkd &
 bspwm

@@ -1,4 +1,30 @@
 #!/bin/sh
+# you can think of this more as post-wm setup
+
+set_walls() {
+	for i in $(xrandr | grep ' connected' | cut -d' ' -f1); do
+		xwallpaper --output $i --zoom ~/.local/share/pape.jpg
+	done
+}
+
+screensaver () {
+	pkill xscreensaver
+	HOME=".config/xscreensaver" xscreensaver --no-splash &
+}
+
+keyboard () {
+	setxkbmap -option caps:super
+	pkill xcape
+	xcape -e 'Super_L=Escape'
+	xset -q | grep "Caps Lock:\s*on" && xdotool key Caps_Lock
+	xset r rate 200 40
+}
+
+# initial post-wm setup
+keyboard
+statuswrap
+set_walls
+screensaver
 
 find_card_pci() {
 	[ -z $pci_path ] && pci_path=$(find /sys/devices | \
@@ -19,7 +45,6 @@ assert_edid() {
 exists() {
 	xrandr | grep ' connected' | grep -c "${1}"
 }
-
 case "$(hostname)" in
 	"mainsail")
 		echo "mainsail"
@@ -28,10 +53,11 @@ case "$(hostname)" in
 		bspc monitor HDMI-1 -d 2 4 6 8 0
 		;;
 	"mlg")
-		# holdover configuration for the time being
-		xrandr --output eDP-1 --brightness 0
-		xrandr --output DP-1 --primary
-		bspc monitor DP-1 -d 1 2 3 4 5 6 7 8 9
+		xrandr --output HDMI-0 --primary --mode 1920x1080 --rate 120 --pos 0x0 --rotate normal \
+			--output DP-1-2 --mode 1920x1080 --rate 120 --pos 1920x0 --rotate normal \
+			--output DP-0 --off \
+			--output DP-1-1 --off
+		xinput set-prop 'INSTANT USB GAMING MOUSE ' 338 -1
 		;;
 	"x230t")
 		echo "x230t"
