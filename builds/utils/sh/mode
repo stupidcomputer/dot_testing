@@ -3,7 +3,7 @@
 if [ -n "$1" ]; then
 	pkill sxhkd
 	sxhkd -c ~/.config/sxhkd/$1 & disown
-	[ -f "~/.config/sxhkd/$1.sh ] && ~/.config/sxhkd/$1.sh
+	[ -f "~/.config/sxhkd/$1.sh" ] && ~/.config/sxhkd/$1.sh
 
 	exit
 fi

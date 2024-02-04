@@ -1,8 +1,0 @@
-#!/bin/sh
-
-setxkbmap -option caps:super
-killall xcape
-xcape -e 'Super_L=Escape'
-xset -q | grep "Caps Lock:\s*on" && xdotool key Caps_Lock
-xset -r 161 # tablet rotate key doesn't need repeat
-xset r rate 200 40

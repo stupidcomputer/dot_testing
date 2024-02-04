@@ -18,17 +18,15 @@
 
     qemu
     virt-manager
-    gnome.cheese
-    calyx-vpn
-    android-studio
-    emacs
     deepin.deepin-album
     libreoffice
     nomacs
     vscodium
     thunderbird
-    minetest
+    kitty
   ];
+
+  services.hardware.bolt.enable = true;
 
   services.openssh.enable = true;
   services.ssh-phone-home = {
@@ -50,10 +48,6 @@
       device = "nodev";
     };
   };
-
-  virtualisation.libvirtd.enable = true;
-  programs.dconf.enable = true;
-  users.users.usr.extraGroups = [ "libvirtd" ];
 
   services.printing.enable = true;
   services.avahi.enable = true; # runs the Avahi daemon
