@@ -23,6 +23,8 @@
     isync
     khal
     todoman
+    lisgd
+    vscodium
   ];
 
   hardware.bluetooth = {
