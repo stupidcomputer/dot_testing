@@ -340,8 +340,9 @@ in {
         return 301 https://mail.beepboop.systems;
       '';
     };
-    locations."~ \\.git" = {
+    locations."~* ^(.*)\\.git(/.*)?$" = {
       extraConfig = ''
+        set $modified_path $1$2;
         client_max_body_size 0;
 
         include ${pkgs.nginx}/conf/fastcgi_params;
