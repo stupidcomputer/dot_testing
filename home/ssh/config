@@ -1,4 +1,21 @@
-Host main
+Host mainsail
+	HostName 192.168.1.100
+	User usr
+	Port 22
+
+Host netbox
 	HostName beepboop.systems
-	User useracc
-	Port 55555
+	User ryan
+	Port 443
+
+Host mainsail-prox
+	HostName localhost
+	User usr
+	Port 55554
+	ProxyJump netbox
+
+Host mlg-prox
+	HostName localhost
+	User usr
+	Port 2222
+	ProxyJump mainsail-prox

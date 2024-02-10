@@ -46,3 +46,6 @@ super + {_,shift + } {1-9,0}
 # change a node to tiling, floating, or fullscreen
 super + {t,f,s}
 	bspc node -t {tiled,floating,fullscreen}
+
+XF86RotateWindows
+	tabletmenu

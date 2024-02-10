@@ -3,9 +3,14 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.11";
+    phone-nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";
     home-manager = {
       url = "github:nix-community/home-manager/release-23.11";
       inputs.nixpkgs.follows = "nixpkgs";
+    };
+    home-manager-phone = {
+      url = "github:nix-community/home-manager/release-23.05";
+      inputs.nixpkgs.follows = "phone-nixpkgs";
     };
     firefox-addons = {
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
@@ -14,9 +19,22 @@
     simple-nixos-mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-23.11";
     };
+    nix-on-droid = {
+      url = "github:t184256/nix-on-droid/release-23.05";
+      inputs.nixpkgs.follows = "phone-nixpkgs";
+      inputs.home-manager.follows = "home-manager-phone";
+    };
   };
 
-  outputs = { self, nixpkgs, home-manager, firefox-addons, simple-nixos-mailserver, ... }@inputs: {
+  outputs = { self, nixpkgs, phone-nixpkgs, home-manager, home-manager-phone, firefox-addons, simple-nixos-mailserver, nix-on-droid, ... }@inputs: {
+    nixOnDroidConfigurations = {
+      phone = nix-on-droid.lib.nixOnDroidConfiguration {
+        modules = [
+	  ./boxes/phone
+	];
+      };
+    };
+    
     nixosConfigurations = {
       netbox = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";

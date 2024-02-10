@@ -32,10 +32,13 @@
   services.getty.autologinUser = "usr";
 
   boot.loader = {
-    grub.timeoutStyle = "hidden";
-    timeout = 0;
-    grub.enable = true;
-    grub.device = "/dev/sda";
+    grub = {
+      timeoutStyle = "hidden";
+      enable = true;
+      device = "/dev/sda";
+      splashImage = null;
+    };
+    timeout = 1;
   };
 
   hardware.pulseaudio.enable = true;
