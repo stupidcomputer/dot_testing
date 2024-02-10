@@ -11,6 +11,11 @@
     ./wallpapers
     ./firefox
     ./emacs
+    ./vdirsyncer
+    ./khal
+    ./isync
+    ./todoman
+    ./neomutt
 
     ./x11-progs.nix
     ./tty.nix

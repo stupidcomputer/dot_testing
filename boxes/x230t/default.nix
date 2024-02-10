@@ -17,12 +17,6 @@
     xscreensaver
     thunderbird
     hue-cli
-    bluetuith
-    brave
-    vdirsyncer
-    isync
-    khal
-    todoman
   ];
 
   hardware.bluetooth = {

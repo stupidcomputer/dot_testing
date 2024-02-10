@@ -7,7 +7,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    prismlauncher
+    (prismlauncher.override { jdks = [ zulu8 zulu17 ]; })
     xonotic
     minetest
   ];

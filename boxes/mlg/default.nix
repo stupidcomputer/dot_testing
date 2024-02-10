@@ -18,15 +18,22 @@
 
     qemu
     virt-manager
-    deepin.deepin-album
     libreoffice
     nomacs
     vscodium
     thunderbird
-    kitty
   ];
 
-  services.hardware.bolt.enable = true;
+  services.hardware.bolt.enable = true; # thunderbolt support
+  hardware.bluetooth = {
+    enable = true;
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        ControllerMode = "bredr";
+      };
+    };
+  };
 
   services.openssh.enable = true;
   services.ssh-phone-home = {
@@ -54,9 +61,13 @@
   services.avahi.nssmdns = true; # enables the mDNS NSS plug-in
   services.avahi.openFirewall = true; # opens the firewall for UDP port 5353
 
+  powerManagement.cpuFreqGovernor = "performance";
+
   nixpkgs.config.allowUnfree = true;
   networking = {
     hostName = "mlg";
     firewall.enable = true;
   };
+
+  system.stateVersion = "23.11"; # don't change this, lol
 }
