@@ -10,6 +10,7 @@
     ../../home/todoman
     ../../home/msmtp
     ../../home/neomutt
+    ../../home/rbw
   ];
 
   home.stateVersion = "23.05";

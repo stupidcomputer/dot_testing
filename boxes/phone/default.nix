@@ -19,6 +19,7 @@
     todoman
     neomutt
     khal
+    rbw
     git
     tmux
     hostname
