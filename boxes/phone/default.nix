@@ -20,6 +20,7 @@
     neomutt
     khal
     rbw
+    isync
     git
     tmux
     hostname
