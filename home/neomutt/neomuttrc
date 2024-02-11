@@ -10,7 +10,7 @@ set sidebar_visible
 set sidebar_format = "%B%<F? [%F}>%* %<N?%N/>%S"
 set mail_check_stats
 
-set sendmail = "msmtp -a default -C /home/usr/.config/msmtp/config"
+set sendmail = "msmtp -a default -C $HOME/.config/msmtp/config"
 
 set from = "ryan@beepboop.systems"
 set spoolfile = +INBOX
@@ -20,7 +20,7 @@ set postponed = "+Drafts"
 mailboxes +SMS +INBOX "+College Messages"
 
 unset wait_key
-macro index S "<shell-escape>mbsync --config=/home/usr/.config/isync/config main; vdirsyncer sync<enter>"
+macro index S "<shell-escape>mbsync --config=$HOME/.config/isync/config main; vdirsyncer sync<enter>"
 
 set use_threads = yes
 set sort_aux = reverse-last-date-received
