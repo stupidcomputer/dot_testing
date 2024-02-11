@@ -16,6 +16,8 @@
     ./isync
     ./todoman
     ./neomutt
+    ./msmtp
+    ./rbw
 
     ./x11-progs.nix
     ./tty.nix

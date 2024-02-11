@@ -11,6 +11,7 @@
     ../../modules/anki.nix
     ../../modules/power-control.nix
     ../../modules/adb.nix
+    ../../modules/rbw.nix
   ];
 
   environment.systemPackages = with pkgs; [

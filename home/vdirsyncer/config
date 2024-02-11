@@ -36,7 +36,7 @@ type = "carddav"
 
 url = "https://radicale.beepboop.systems/ryan/20cda0dd-5922-4905-8956-859c989a6519/"
 username = "ryan"
-password.fetch = ["prompt", "password for radicale"]
+password.fetch = ["command", "rbw", "get", "beepboop.systems radicale instance"]
 
 [storage band_calendar_remote]
 type = "http"
@@ -48,4 +48,4 @@ type = "caldav"
 
 url = "https://radicale.beepboop.systems/ryan/edfbeaf1-e9f3-4d94-a512-40cdafdbc7a0/"
 username = "ryan"
-password.fetch = ["prompt", "password for radicale"]
+password.fetch = ["command", "rbw", "get", "beepboop.systems radicale instance"]

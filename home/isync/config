@@ -2,6 +2,7 @@ IMAPStore main-remote
 Host mail.beepboop.systems
 Port 993
 User ryan@beepboop.systems
+PassCmd "rbw get mail.beepboop.systems"
 SSLType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 

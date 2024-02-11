@@ -10,6 +10,7 @@
     ../../modules/x11.nix
     ../../modules/discord.nix
     ../../modules/gaming.nix
+    ../../modules/rbw.nix
   ];
 
   environment.systemPackages = with pkgs; [

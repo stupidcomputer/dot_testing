@@ -22,6 +22,7 @@
     todoman
     sshfs
     rsync
+    msmtp
   ];
 
   services.xserver = {
