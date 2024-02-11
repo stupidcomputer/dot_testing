@@ -12,20 +12,19 @@
     config = ./home.nix;
   };
 
-  # Simply install just the packages
   environment.packages = with pkgs; [
-    # User-facing stuff that you really really want to have
-
+    vdirsyncer
+    msmtp
+    khal
+    todoman
+    neomutt
+    khal
     git
     tmux
     hostname
   ];
 
   environment.etcBackupExtension = ".bak";
-
-  # Read the changelog before changing this value
   system.stateVersion = "23.05";
-
-  # Set your time zone
   time.timeZone = "America/Chicago";
 }

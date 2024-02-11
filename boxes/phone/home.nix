@@ -4,6 +4,12 @@
     ../../home/nvim
     ../../home/ssh
     ../../home/git # needed for flakes
+    ../../home/vdirsyncer
+    ../../home/isync
+    ../../home/khal
+    ../../home/todoman
+    ../../home/msmtp
+    ../../home/neomutt
   ];
 
   home.stateVersion = "23.05";
