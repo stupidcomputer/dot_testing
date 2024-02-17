@@ -3,6 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./special-ssh-magic.nix
     ../../modules/bootstrap.nix
     ../../modules/common.nix
     ../../modules/x11.nix
@@ -18,6 +19,9 @@
     xscreensaver
     thunderbird
     hue-cli
+    texliveSmall
+
+    strawberry
   ];
 
   hardware.bluetooth = {

@@ -22,7 +22,7 @@ struct module mods[] = {
 	{mod_battery, "battery", "BAT0", { '\0' }},
 	{mod_battstatus, "battstatus", "BAT0", { '\0' }},
 	{mod_time, "time", "", { '\0' }},
-/*	{mod_bspwm, "bspwm", "", { '\0' }}, not working at the moment */
+	{mod_bspwm, "bspwm", "", { '\0' }},
 };
 
 void create_module_proc(int index, char *pipename) {

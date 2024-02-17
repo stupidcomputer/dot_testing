@@ -49,75 +49,6 @@ int is_a_desktop(char c) {
 	return c == 'O' || c == 'o' || c == 'F' || c == 'f' || c == 'U' || c == 'u';
 }
 
-/* XXX: this function has the potential to buffer overflow by ONE BYTE.
- * probably fix this? */
-void print_desktop_status(char *in, char *out, int outlen) {
-	int written;
-	int i;
-	char c;
-
-	/* flags */
-	int read_colon;
-	int skip_to_next_colon;
-	int read_until_colon;
-	int is_first_desktop;
-	int last_was_desktop;
-
-	i = 0;
-	written = 0;
-	read_colon = 1;
-	skip_to_next_colon = 0;
-	read_until_colon = 0;
-	is_first_desktop = 1;
-	last_was_desktop = 0;
-
-	for(;;) {
-		c = in[i];
-
-		if(!c) break;
-		if(written == outlen) break;
-
-		if (skip_to_next_colon) {
-			if (c == ':') {
-				skip_to_next_colon = 0;
-				read_until_colon = 0;
-				read_colon = 1;
-			} else if (read_until_colon) {
-				out[written] = c;
-				written++;
-			}
-		} else if (read_colon && should_be_shown(c)) {
-			if (!is_first_desktop) {
-				out[written] = ' ';
-				written++;
-			}
-
-			switch(c) {
-				case 'O':
-				case 'F': /* fallthrough */
-					out[written] = '*';
-					written++;
-					break;
-			}
-
-			skip_to_next_colon = 1;
-			read_until_colon = 1;
-			read_colon = 0;
-			is_first_desktop = 0;
-			last_was_desktop = 1;
-		} else if (read_colon && is_a_desktop(c)) {
-			last_was_desktop = 1;
-		} else {
-			if(last_was_desktop) {
-				break;
-			}
-		}
-		i++;
-	}
-
-	out[written] = '\0';
-}
-
 int mod_bspwm(char *config, char *name, char *pipename) {
 	struct message msg;
 	int fd, bspcfd;
@@ -132,8 +63,8 @@ int mod_bspwm(char *config, char *name, char *pipename) {
 	send(bspcfd, subscribe, sizeof(subscribe), 0);
 
 	for(;;) {
-		int recvd = recv(bspcfd, in, BUFFER_SIZE, 0);
-		print_desktop_status(in, msg.content, 512);
+		int recvd = recv(bspcfd, msg.content, sizeof(msg.content), 0);
+		msg.content[recvd - 1] = '\0';
 		write(fd, &msg, sizeof(msg));
 		memset(msg.content, 0, 512);
 	}

@@ -23,6 +23,7 @@
     sshfs
     rsync
     msmtp
+    ytfzf
   ];
 
   services.xserver = {
