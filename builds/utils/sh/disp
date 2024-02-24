@@ -1,6 +1,8 @@
 #!/bin/sh
 # you can think of this more as post-wm setup
 
+set -x
+
 set_walls() {
 	for i in $(xrandr | grep ' connected' | cut -d' ' -f1); do
 		xwallpaper --output $i --zoom ~/.local/share/pape.jpg
@@ -40,6 +42,7 @@ assert_edid() {
 exists() {
 	xrandr | grep ' connected' | grep -c "${1}"
 }
+
 case "$(hostname)" in
 	"mainsail")
 		echo "mainsail"
@@ -48,14 +51,26 @@ case "$(hostname)" in
 		bspc monitor HDMI-1 -d 2 4 6 8 0
 		;;
 	"mlg")
-		xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 1080x420 --rotate normal --rate 120 \
-			--output DP-0 --off \
-			--output DP-1-1 --mode 1920x1080 --pos 3000x420 --rotate normal --rate 120 \
-			--output DP-1-2 --mode 1920x1080 --pos 0x0 --rotate right --rate 60
-		bspc monitor DP-1-1 -d 2 4 6 8
-		bspc monitor DP-1-2 -d 9
-		bspc monitor HDMI-0 -d 1 3 5 7
-
+		case "$1" in
+			"invert")
+				xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 1080x420 --rotate normal --rate 120 \
+					--output DP-0 --off \
+					--output DP-1-1 --mode 1920x1080 --pos 3000x420 --rotate normal --rate 120 \
+					--output DP-1-2 --mode 1920x1080 --pos 0x0 --rotate right --rate 60
+				bspc monitor DP-1-1 -d 2 4 6 8
+				bspc monitor DP-1-2 -d 9
+				bspc monitor HDMI-0 -d 1 3 5 7
+				;;
+			*)
+				xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 1080x420 --rotate normal --rate 120 \
+					--output DP-0 --off \
+					--output DP-1-2 --mode 1920x1080 --pos 3000x420 --rotate normal --rate 120 \
+					--output DP-1-1 --mode 1920x1080 --pos 0x0 --rotate right --rate 60
+				bspc monitor DP-1-2 -d 2 4 6 8
+				bspc monitor DP-1-1 -d 9
+				bspc monitor HDMI-0 -d 1 3 5 7
+				;;
+		esac
 		xinput set-prop 'INSTANT USB GAMING MOUSE ' 'libinput Accel Speed' -1
 
 		# setup synchronization
@@ -64,7 +79,7 @@ case "$(hostname)" in
 		             # but it's just a link, so it's a regular file.
 		             # in conclusion, good either way
 		mkdir -p $HOME/.cache/mount_point
-		sshfs usr@mainsail:./doc $HOME/.cache/mount_point
+		sshfs usr@192.168.1.120:/home/usr/doc $HOME/.cache/mount_point
 		ln -sf $HOME/.cache/mount_point $HOME/doc
 		;;
 	"x230t")

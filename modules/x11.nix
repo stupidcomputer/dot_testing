@@ -24,6 +24,7 @@
     rsync
     msmtp
     ytfzf
+    peaclock
   ];
 
   services.xserver = {

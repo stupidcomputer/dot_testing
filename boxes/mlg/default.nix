@@ -23,6 +23,7 @@
     nomacs
     vscodium
     thunderbird
+    libreoffice
   ];
 
   services.hardware.bolt.enable = true; # thunderbolt support

@@ -10,4 +10,8 @@
       text = "source /home/usr/.config/bash/bashrc";
     };
   };
+
+  environment.systemPackages = with pkgs; [
+    fzy
+  ];
 }

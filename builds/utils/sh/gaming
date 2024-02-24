@@ -1,0 +1,12 @@
+#!/bin/sh
+
+discord &
+st -c send-to-9 -e cmus &
+st -c send-to-9 -e ncpamixer &
+sleep 1
+cmus-remote <<EOF
+view playlist
+win-down
+win-activate
+EOF
+steam &

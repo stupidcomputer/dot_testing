@@ -2,18 +2,10 @@
 
 # some housekeeping
 shopt -s autocd
-alias rc=". ~/.config/bash/bashrc"
-alias erc="nvim ~/.config/bash/bashrc"
-alias reload=". ~/.config/bash/bashrc"
-
-alias sched="nvim $DOTREMINDERS"
-alias cal="rem -cl"
-alias shutdown="sudo shutdown -h now"
 alias ls="ls --color=auto"
 alias ll="ls -lah --color=auto"
-alias irssi="irssi --home=$HOME/.config/irssi"
 
-PS1="\w\$ "
+PS1="\h:\w\$ "
 
 repos() {
 	sel="$(ls ~/git | fzy | awk '{print "/home/usr/git/"$1}')"
@@ -22,9 +14,26 @@ repos() {
 	cd "$sel"
 }
 
-rss() {
-	cd ~/.local/share/sfeed/
-	touch .urls
-	sfeed_curses *
-	cd -
+hist() {
+	res=$(cat ~/.config/bash/hist | \
+		sort | \
+		uniq | \
+		shuf | \
+		fzy)
+
+	[ -n "$res" ] && $($res)
+}
+
+search() {
+	res=$(find /home/usr/ /home/usr/doc/ \
+		-mindepth 1 \
+		-not -path '*/.*' \
+		-not -path './Mail/*' \
+		-not -path './vdir/*' \
+		-not -path '*venv*' \
+		-not -path '*node_modules*' \
+		-not -path '*__pycache__*' \
+		-type d | cut -c 11- | fzy)
+
+	[ -n "$res" ] && cd /home/usr/"$res"
 }
