@@ -2,9 +2,9 @@
 	email = randomuser@tilde.club
 	name = randomuser
 
-[credential "https://tildegit.org"]
-	username = randomuser
-	helper = gitpass
+[credential "https://git.beepboop.systems"]
+	username = rndusr
+	helper = !rbw get 'beepboop.systems gitea instance'
 
 [advice]
 	addIgnoredFile = false
