@@ -20,6 +20,7 @@
     thunderbird
     hue-cli
     texliveSmall
+    latexrun
 
     strawberry
   ];

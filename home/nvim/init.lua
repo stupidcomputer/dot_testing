@@ -156,4 +156,21 @@ inoremap('<C-k><C-k>', function()
 	require('better-digraphs').digraphs("insert")
 end)
 
+-- luasnip configuration {{{
+local luasnip = require("luasnip")
+local ls_extras = require("luasnip.extras")
+require("luasnip.loaders.from_snipmate").lazy_load()
+vim.cmd[[
+	imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
+]]
+
+luasnip.add_snippets("tex", {
+	luasnip.snippet("env", {
+		luasnip.text_node("\\begin{"), luasnip.insert_node(1), luasnip.text_node("}"),
+		luasnip.text_node({ "", "\t" }), luasnip.insert_node(0),
+		luasnip.text_node({ "", "\\end{" }), ls_extras.rep(1), luasnip.text_node("}")
+	})
+})
+-- }}}
+
 return packer
