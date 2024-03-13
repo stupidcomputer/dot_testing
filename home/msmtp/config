@@ -9,4 +9,3 @@ port 587
 tls_starttls on
 from ryan@beepboop.systems
 user ryan@beepboop.systems
-passwordeval "rbw get mail.beepboop.systems"

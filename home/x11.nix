@@ -3,7 +3,6 @@
 {
   imports = [
     ./bspwm
-    ./polybar
     ./sx
     ./sxhkd
     ./tridactyl

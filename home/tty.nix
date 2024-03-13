@@ -8,6 +8,7 @@
     ./nvim
     ./python
     ./gnupg
+    ./elinks
 
     ./tty-progs.nix
   ];

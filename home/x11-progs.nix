@@ -10,5 +10,7 @@
     xwallpaper
     xbrightness
     xdotool
+
+    brave
   ];
 }

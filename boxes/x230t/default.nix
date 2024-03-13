@@ -17,16 +17,22 @@
 
   environment.systemPackages = with pkgs; [
     xscreensaver
-    thunderbird
-    hue-cli
-    texliveSmall
-    latexrun
+    texliveMedium
+    libreoffice
 
-    strawberry
+    ecryptfs
+    ffmpeg
   ];
 
   hardware.bluetooth = {
     enable = true;
+  };
+
+  services.printing.enable = true;
+  services.avahi = {
+    enable = true;
+    nssmdns = true;
+    openFirewall = true;
   };
 
   services.udev.extraRules = ''

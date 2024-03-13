@@ -139,6 +139,7 @@ local packer = require('packer').startup(function(use)
 	use 'hrsh7th/nvim-cmp'
 	use 'hrsh7th/cmp-nvim-lsp'
 	use 'L3MON4D3/LuaSnip'
+	use 'saadparwaiz1/cmp_luasnip'
 	use 'lervag/vimtex'
 	use 'https://github.com/protex/better-digraphs.nvim'
 
@@ -156,6 +157,19 @@ inoremap('<C-k><C-k>', function()
 	require('better-digraphs').digraphs("insert")
 end)
 
+-- lsp config {{{
+local lsp_zero = require('lsp-zero')
+lsp_zero.on_attach(function(client, bufnr)
+  -- see :help lsp-zero-keybindings
+  -- to learn the available actions
+  lsp_zero.default_keymaps({buffer = bufnr})
+end)
+
+require('lspconfig').lua_ls.setup({})
+require('lspconfig').texlab.setup({})
+require('lspconfig').pylyzer.setup({})
+-- }}}
+
 -- luasnip configuration {{{
 local luasnip = require("luasnip")
 local ls_extras = require("luasnip.extras")
@@ -169,6 +183,14 @@ luasnip.add_snippets("tex", {
 		luasnip.text_node("\\begin{"), luasnip.insert_node(1), luasnip.text_node("}"),
 		luasnip.text_node({ "", "\t" }), luasnip.insert_node(0),
 		luasnip.text_node({ "", "\\end{" }), ls_extras.rep(1), luasnip.text_node("}")
+	})
+})
+
+luasnip.add_snippets("tex", {
+	luasnip.snippet("desc", {
+		luasnip.text_node("\\begin{description}"),
+		luasnip.text_node({ "", "\t\\item " }), luasnip.insert_node(1),
+		luasnip.text_node({ "", "\\end{description}" })
 	})
 })
 -- }}}
