@@ -11,6 +11,7 @@
     ../../home/msmtp
     ../../home/neomutt
     ../../home/rbw
+    ./bash.nix
   ];
 
   home.stateVersion = "23.05";
