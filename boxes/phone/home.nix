@@ -11,7 +11,7 @@
     ../../home/msmtp
     ../../home/neomutt
     ../../home/rbw
-    ./bash.nix
+    ( import ../../home/bash { isRoot = true; } )
   ];
 
   home.stateVersion = "23.05";
