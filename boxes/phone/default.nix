@@ -13,17 +13,16 @@
   };
 
   environment.packages = with pkgs; [
-    vdirsyncer
-    msmtp
-    khal
-    todoman
-    neomutt
-    khal
-    rbw
-    isync
+    tigervnc
     git
     tmux
     hostname
+    tigervnc
+    xorg.xinit
+#    tar
+#    awk
+#    sed
+    elinks
   ];
 
   environment.etcBackupExtension = ".bak";

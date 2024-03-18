@@ -147,8 +147,8 @@ local packer = require('packer').startup(function(use)
 		require('packer').sync()
 	end
 end);
--- }}}
-
+-- -- }}}
+ 
 nnoremap('<leader>ff', function()
 	require('telescope.builtin').find_files()
 end)
@@ -194,5 +194,3 @@ luasnip.add_snippets("tex", {
 	})
 })
 -- }}}
-
-return packer

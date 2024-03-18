@@ -1,114 +1,6 @@
 { lib, config, pkgs, ... }:
 
-let
-  cgitrc = pkgs.writeText "cgitrc" ''
-    css=/static/cgit.css
-    logo=/static/logo.png
-    favicon=/static/favicon.ico
-    root-title=beepboop.systems
-    root-desc=quality git hosting
-
-    readme=:README
-    readme=:readme
-    readme=:readme.txt
-    readme=:README.txt
-    readme=:readme.md
-    readme=:README.md
-
-    remove-suffix=1
-    section-from-path=1
-
-    section-sort=0
-
-    section=meta
-
-    repo.url=about
-    repo.path=/doesnt/exist
-    repo.desc=about this site
-
-    section=other services at beepboop.systems
-
-    repo.url=bitwarden
-    repo.path=/doesnt/exist
-    repo.desc=a simple password manager
-
-    repo.url=radicale
-    repo.path=/doesnt/exist
-    repo.desc=a simple calendar server
-
-    repo.url=roundcube
-    repo.path=/doesnt/exist
-    repo.desc=mail.beepboop.systems webmail
-
-    repo.url=gitea
-    repo.path=/doesnt/exist
-    repo.desc=real git hosting services (until this one is fully operational)
-
-    section=projects
-
-    repo.url=advent
-    repo.path=/var/lib/git/advent
-    repo.desc=advent of code solutions
-
-    repo.url=desmos-computer
-    repo.path=/var/lib/git/desmos-computer
-    repo.desc=a minimal ISA implemented in the Desmos graphing calculator
-
-    repo.url=dot_testing
-    repo.path=/var/lib/git/dot_testing
-    repo.desc=configuration files for NixOS/GNU+Linux boxes
-
-    repo.url=esgd
-    repo.path=/var/lib/git/esgd
-    repo.desc=the exceedingly simple gopher daemon
-
-    repo.url=mail-sync
-    repo.path=/var/lib/git/mail-sync
-    repo.desc=synchronize mail from walled gardens
-
-    repo.url=mastosnake
-    repo.path=/var/lib/git/mastosnake
-    repo.desc=a low quality clone of Twitter Plays Snake
-
-    repo.url=secmsg
-    repo.path=/var/lib/git/secmsg
-    repo.desc=a stupid (in)secure messaging client thing
-
-    repo.url=ultimate
-    repo.path=/var/lib/git/ultimate
-    repo.desc=ultimate tic tac toe solving engine
-
-    repo.url=wordlefish
-    repo.path=/var/lib/git/wordlefish
-    repo.desc=use information theory to solve wordle puzzles
-
-    section=irc robots
-
-    repo.url=botanybot
-    repo.path=/var/lib/git/botanybot
-    repo.desc=water bots on ~.club
-
-    repo.url=coinminer
-    repo.path=/var/lib/git/coinminer
-    repo.desc=mine fake coins on irc
-
-    repo.url=chaosbot
-    repo.path=/var/lib/git/chaosbot
-    repo.desc=robot to protect a user on chaos
-
-    repo.url=modbot
-    repo.path=/var/lib/git/modbot
-    repo.desc=modular irc robot
-
-    repo.url=pychaos
-    repo.path=/var/lib/git/pychaos
-    repo.desc=python chaos bot
-
-    repo.url=universalducks
-    repo.path=/var/lib/git/universalducks
-    repo.desc=cross channel irc ducks
-  '';
-in {
+{
   imports =
     [
       ./hardware-configuration.nix
@@ -150,31 +42,17 @@ in {
     settings.protocols = [
       {
         host = "localhost";
-	name = "ssh";
-	port = "55555";
-	service = "ssh";
+        name = "ssh";
+        port = "55555";
+        service = "ssh";
       }
       {
         host = "localhost";
-	name = "tls";
-	port = "442";
+          name = "tls";
+          port = "442";
       }
     ];
   };
-
-  # cgit
-  users = {
-    groups.git = { };
-    users.git = {
-      createHome = true;
-      home = /var/lib/git;
-      isSystemUser = true;
-      shell = "${pkgs.git}/bin/git-shell";
-      group = "git";
-    };
-  };
-
-  services.fcgiwrap = { enable = true; user = "git"; group = "git"; };
 
   networking.hostName = "netbox";
 
@@ -218,18 +96,18 @@ in {
     jails = {
       "nginx-bruteforce" = ''
         enabled = true
-	filter = nginx-bruteforce
-	logpath = /var/log/nginx/access.log
-	backend = auto
-	maxretry = 6
-	findtime = 600
+        filter = nginx-bruteforce
+        logpath = /var/log/nginx/access.log
+        backend = auto
+        maxretry = 6
+        findtime = 600
       '';
 
       "postfix-bruteforce" = ''
         enabled = true
-	filter = postfix-bruteforce
-	maxretry = 6
-	findtime = 600
+        filter = postfix-bruteforce
+        maxretry = 6
+        findtime = 600
       '';
     };
   };
@@ -273,14 +151,19 @@ in {
 
   services.gitea = {
     enable = true;
-    appName = "crappy code"; # Give the site a name
+    appName = "beepboop.systems"; # Give the site a name
     database = {
       type = "postgres";
       passwordFile = "/etc/gittea-pass"; 
     };
+    settings.security.INSTALL_LOCK = true;
+    settings.service.SHOW_REGISTRATION_BUTTON = false;
+    settings.ui.DEFAULT_THEME = "arc-green";
+    settings.api.ENABLE_SWAGGER = false;
     settings.server = {
       DOMAIN = "git.beepboop.systems";
       ROOT_URL = "https://git.beepboop.systems/";
+      LANDING_PAGE = "explore";
       HTTP_PORT = 3001;
     };
   };
@@ -304,70 +187,6 @@ in {
     forceSSL = true;
     enableACME = true;
     root = "/var/www/beepboop.systems";
-
-    locations."~* ^/static/(.+.(ico|css))$" = {
-      extraConfig = ''
-        alias ${pkgs.cgit}/cgit/$1;
-      '';
-    };
-    locations."/static/logo.png" = {
-      extraConfig = ''
-        try_files /icon.png /icon.png;
-      '';
-    };
-    locations."/about" = {
-      extraConfig = ''
-        try_files /about.html /about.html;
-      '';
-    };
-    locations."/bitwarden" = {
-      extraConfig = ''
-        return 301 https://bit.beepboop.systems;
-      '';
-    };
-    locations."/gitea" = {
-      extraConfig = ''
-        return 301 https://git.beepboop.systems/rndusr;
-      '';
-    };
-    locations."/radicale" = {
-      extraConfig = ''
-        return 301 https://cal.beepboop.systems;
-      '';
-    };
-    locations."/roundcube" = {
-      extraConfig = ''
-        return 301 https://mail.beepboop.systems;
-      '';
-    };
-    locations."~* ^(.*)\\.git(/.*)?$" = {
-      extraConfig = ''
-        set $modified_path $1$2;
-        client_max_body_size 0;
-
-        include ${pkgs.nginx}/conf/fastcgi_params;
-        fastcgi_param SCRIPT_FILENAME ${pkgs.git}/bin/git-http-backend;
-        fastcgi_param GIT_HTTP_EXPORT_ALL "";
-        fastcgi_param GIT_PROJECT_ROOT /var/lib/git;
-        fastcgi_param PATH_INFO $uri;
-        
-        # Forward REMOTE_USER as we want to know when we are authenticated
-        fastcgi_param REMOTE_USER $remote_user;
-        fastcgi_pass unix:${config.services.fcgiwrap.socketAddress};
-      '';
-    };
-    locations."/" = {
-      extraConfig = ''
-        include ${pkgs.nginx}/conf/fastcgi_params;
-        fastcgi_param CGIT_CONFIG ${cgitrc};
-        fastcgi_param SCRIPT_FILENAME ${pkgs.cgit}/cgit/cgit.cgi;
-        fastcgi_split_path_info ^(/?)(.+)$;
-        fastcgi_param PATH_INFO $fastcgi_path_info;
-        fastcgi_param QUERY_STRING $args;
-        fastcgi_param HTTP_HOST $server_name;
-        fastcgi_pass unix:${config.services.fcgiwrap.socketAddress};
-      '';
-    };
   };
 
   services.nginx.virtualHosts."git.beepboop.systems" = {

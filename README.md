@@ -26,7 +26,6 @@ things to do
 ------------
 
 - integrate `disko` and `sops-nix` into the setup
-- switch from gitea to cgit
 - establish backup infrastructure for `netbox`
 - move gmail-mail-bridge into mail-sync repo
   * (perhaps figure out how to produce a flake for it)

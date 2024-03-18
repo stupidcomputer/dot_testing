@@ -42,7 +42,8 @@
       phone-nixpkgs,
       home-manager-phone,
       nix-on-droid,
-    ... }@inputs: {
+      ...
+    }@inputs: {
     nixOnDroidConfigurations = {
       phone = nix-on-droid.lib.nixOnDroidConfiguration {
         modules = [

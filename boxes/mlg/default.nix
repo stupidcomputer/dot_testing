@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ./nvidia.nix
     ../../modules/ssh-phone-home.nix
+    ../../modules/hosts.nix
     ../../modules/bootstrap.nix
     ../../modules/common.nix
     ../../modules/x11.nix
@@ -24,6 +25,7 @@
     vscodium
     thunderbird
     libreoffice
+    texliveMedium
   ];
 
   services.hardware.bolt.enable = true; # thunderbolt support
