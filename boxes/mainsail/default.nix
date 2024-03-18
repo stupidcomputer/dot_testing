@@ -4,6 +4,7 @@
     ./hardware-configuration.nix
     ../../modules/ssh-phone-home.nix
     ../../modules/bootstrap.nix
+    ../../modules/hosts.nix
     ../../modules/common.nix
   ];
 

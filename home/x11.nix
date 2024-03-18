@@ -18,6 +18,7 @@
     ./neomutt
     ./msmtp
     ./rbw
+    ./nws
 
     ./x11-progs.nix
     ./tty.nix

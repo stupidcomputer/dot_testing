@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ../../modules/bootstrap.nix
+    ../../modules/hosts.nix
     ../../modules/common.nix
     ../../modules/x11.nix
     ../../modules/discord.nix

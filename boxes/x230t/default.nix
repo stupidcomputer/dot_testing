@@ -7,6 +7,7 @@
     ../../modules/bootstrap.nix
     ../../modules/common.nix
     ../../modules/x11.nix
+    ../../modules/hosts.nix
     ../../modules/tlp.nix
     ../../modules/media.nix
     ../../modules/anki.nix

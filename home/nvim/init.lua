@@ -146,8 +146,8 @@ local packer = require('packer').startup(function(use)
 		require('packer').sync()
 	end
 end);
--- }}}
-
+-- -- }}}
+ 
 nnoremap('<leader>ff', function()
 	require('telescope.builtin').find_files()
 end)
@@ -171,6 +171,12 @@ luasnip.add_snippets("tex", {
 		luasnip.text_node({ "", "\\end{" }), ls_extras.rep(1), luasnip.text_node("}")
 	})
 })
--- }}}
 
-return packer
+luasnip.add_snippets("tex", {
+	luasnip.snippet("desc", {
+		luasnip.text_node({ "\\begin{description}", "\t\\item "}),
+		luasnip.insert_node(1),
+		luasnip.text_node({ "", "\\end{description}" }),
+	})
+})
+-- }}}
