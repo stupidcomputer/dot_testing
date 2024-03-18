@@ -15,6 +15,9 @@
     simple-nixos-mailserver = {
       url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-23.11";
     };
+    nix-colors = {
+      url = "github:misterio77/nix-colors";
+    };
 
     # nix-on-droid inputs
     phone-nixpkgs.url = "github:NixOS/nixpkgs/nixos-23.05";

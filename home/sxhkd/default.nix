@@ -2,6 +2,9 @@
 
 {
   # managed by nixos configuration
+  home.packages = with pkgs; [
+    sxhkd
+  ];
 
   home.file = {
     ".config/sxhkd/sxhkdrc" = {

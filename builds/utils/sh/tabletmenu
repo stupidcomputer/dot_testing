@@ -9,6 +9,7 @@ nokeyb
 musexplore
 brave
 chromium
+run
 close-wind
 	" | tmenu
 )
@@ -39,6 +40,9 @@ case "$choice" in
 		;;
 	"chromium")
 		chromium
+		;;
+	"run")
+		tmenu_run
 		;;
 	"close-wind")
 		bspc node -c
