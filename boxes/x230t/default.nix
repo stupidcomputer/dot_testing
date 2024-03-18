@@ -1,6 +1,8 @@
-{ lib, config, pkgs, ...}:
+{ lib, config, pkgs, inputs, ...}:
 
-{
+let
+  nix-color-lib = inputs.nix-colors.lib.contrib { inherit pkgs; };
+in {
   imports = [
     ./hardware-configuration.nix
     ./special-ssh-magic.nix

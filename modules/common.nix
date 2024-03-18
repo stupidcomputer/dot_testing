@@ -7,7 +7,11 @@
 
   environment.systemPackages = [
     (pkgs.callPackage ../builds/rebuild.nix {})
-    (pkgs.callPackage ../builds/st.nix {})
+    (pkgs.callPackage ../builds/st.nix {
+      colorscheme = {
+        base01 = "amongus";
+      };
+    })
     (pkgs.callPackage ../builds/utils.nix {})
     pkgs.man-pages
   ];
