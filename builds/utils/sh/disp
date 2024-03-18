@@ -81,6 +81,12 @@ case "$(hostname)" in
 		mkdir -p $HOME/.cache/mount_point
 		sshfs usr@192.168.1.120:/home/usr/doc $HOME/.cache/mount_point
 		ln -sf $HOME/.cache/mount_point $HOME/doc
+
+		rm $HOME/dot_testing # this is also safe. see above
+		mkdir -p $HOME/.cache/mount_point2
+		sshfs usr@192.168.1.120:/home/usr/dot_testing $HOME/.cache/mount_point2
+		ln -sf $HOME/.cache/mount_point2 $HOME/dot_testing
+
 		;;
 	"x230t")
 		echo "x230t"
