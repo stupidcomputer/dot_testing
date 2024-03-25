@@ -33,4 +33,7 @@ things to do
 license
 -------
 
-all materials, except `./home/wallpapers/pape.jpg`, is licensed under the GPLv3. the licensing status of `pape.jpg` is unknown.
+all materials, except for:
+	a) `./home/wallpapers/pape.jpg`, which is of unknown licenses, and
+	b) ./builds/st, which is licensed under MIT, persuant to ./builds/st/LICENSE,
+is licensed under the GPLv3.
