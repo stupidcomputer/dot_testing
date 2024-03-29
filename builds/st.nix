@@ -14,10 +14,7 @@ stdenv.mkDerivation rec {
   pname = "st";
   version = "1.02";
 
-  src = fetchgit {
-    url = "https://git.beepboop.systems/rndusr/st";
-    sha256 = "sha256-zdID1SUnTO/zl90EG8TguBNYYCnrnqFnSLz32kQZbng=";
-  };
+  src = ./st;
 
   nativeBuildInputs = [ pkg-config fontconfig freetype ncurses ];
   buildInputs = [ libX11 libXft ] ++ extraLibs;
