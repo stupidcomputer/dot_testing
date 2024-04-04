@@ -18,11 +18,12 @@
 
   environment.systemPackages = with pkgs; [
     xscreensaver
-    texliveMedium
+    texliveFull
     libreoffice
 
     ecryptfs
     ffmpeg
+    thunderbird
   ];
 
   hardware.bluetooth = {
