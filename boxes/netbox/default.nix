@@ -187,12 +187,22 @@
     forceSSL = true;
     enableACME = true;
     root = "/var/www/beepboop.systems";
+    locations."/" = {
+      extraConfig = ''
+        if ($request_uri ~ ^/(.*)\.html(\?|$)) {
+          return 302 /$1;
+        }
+        try_files $uri $uri.html $uri/ =404;
+      '';
+    };
   };
 
   services.nginx.virtualHosts."git.beepboop.systems" = {
     forceSSL = true;
     enableACME = true;
-    locations."/".proxyPass = "http://localhost:3001";
+    locations."/" = {
+      proxyPass = "http://localhost:3001";
+    };
   };
 
   services.nginx.virtualHosts."bit.beepboop.systems" = {
@@ -245,19 +255,19 @@
     email = "nickforanick@protonmail.com";
   };
 
-  services.roundcube = {
-    enable = true;
-    # this is the url of the vhost, not necessarily the same as the fqdn of
-    # the mailserver
-    hostName = "cube.beepboop.systems";
-    extraConfig = ''
-      # starttls needed for authentication, so the fqdn required to match
-      # the certificate
-      $config['smtp_server'] = "tls://${config.mailserver.fqdn}";
-      $config['smtp_user'] = "%u";
-      $config['smtp_pass'] = "%p";
-    '';
-  };
+#  services.roundcube = {
+#    enable = true;
+#    # this is the url of the vhost, not necessarily the same as the fqdn of
+#    # the mailserver
+#    hostName = "cube.beepboop.systems";
+#    extraConfig = ''
+#      # starttls needed for authentication, so the fqdn required to match
+#      # the certificate
+#      $config['smtp_server'] = "tls://${config.mailserver.fqdn}";
+#      $config['smtp_user'] = "%u";
+#      $config['smtp_pass'] = "%p";
+#    '';
+#  };
 
   services.nginx.virtualHosts."roundcube.beepboop.systems" = {
     forceSSL = true;
