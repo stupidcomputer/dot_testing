@@ -7,7 +7,7 @@
 
   home.file = {
     ".config/isync/config" = {
-      source = ./config;
+      source = ../../.config/isync/config;
     };
   };
 }

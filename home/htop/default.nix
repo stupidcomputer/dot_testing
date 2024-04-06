@@ -5,7 +5,7 @@
 
   home.file = {
     ".config/htop/htoprc" = {
-      source = ./htoprc;
+      source = ../../.config/htop/htoprc;
     };
   };
 }

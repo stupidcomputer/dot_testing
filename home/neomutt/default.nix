@@ -7,7 +7,7 @@
 
   home.file = {
     ".config/neomutt/neomuttrc" = {
-      source = ./neomuttrc;
+      source = ../../.config/neomutt/neomuttrc;
     };
   };
 }

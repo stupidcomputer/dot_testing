@@ -7,7 +7,7 @@
 
   home.file = {
     ".config/todoman/config.py" = {
-      source = ./config.py;
+      source = ../../.config/todoman/config.py;
     };
   };
 }

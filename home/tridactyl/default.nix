@@ -3,7 +3,7 @@
 {
   home.file = {
     ".config/tridactyl/tridactylrc" = {
-      source = ./tridactylrc;
+      source = ../../.config/tridactyl/tridactylrc;
     };
   };
 }

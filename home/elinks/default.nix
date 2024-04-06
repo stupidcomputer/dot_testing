@@ -7,7 +7,7 @@
 
   home.file = {
     ".config/elinks/elinks.conf" = {
-      source = ./elinks.conf;
+      source = ../../.config/elinks/elinks.conf;
     };
   };
 }

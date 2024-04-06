@@ -7,7 +7,7 @@
 
   home.file = {
     ".config/vdirsyncer/config" = {
-      source = ./config;
+      source = ../../.config/vdirsyncer/config;
     };
   };
 }

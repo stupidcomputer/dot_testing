@@ -5,7 +5,7 @@
 
   home.file = {
     ".config/git/config" = {
-      source = ./config;
+      source = ../../.config/git/config;
     };
   };
 }

@@ -3,6 +3,6 @@
 {
   programs.zathura = {
     enable = true;
-    extraConfig = (builtins.readFile ./zathurarc);
+    extraConfig = (builtins.readFile ../../.config/zathura/zathurarc);
   };
 }

@@ -5,7 +5,7 @@
 
   home.file = {
     ".config/emacs/init.el" = {
-      source = ./init.el;
+      source = ../../.config/emacs/init.el;
     };
   };
 }

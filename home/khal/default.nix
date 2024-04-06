@@ -7,7 +7,7 @@
 
   home.file = {
     ".config/khal/config" = {
-      source = ./config;
+      source = ../../.config/khal/config;
     };
   };
 }

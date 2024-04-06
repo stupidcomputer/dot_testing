@@ -11,10 +11,10 @@
 
   home.file = {
     ".config/nvim/init.lua" = {
-      source = ./init.lua;
+      source = ../../.config/nvim/init.lua;
     };
     ".config/nvim/colors/earth.vim" = {
-      source = ./colors/earth.vim;
+      source = ../../.config/nvim/colors/earth.vim;
     };
   };
 }

@@ -8,7 +8,7 @@
 
   home.file = {
     ".config/bspwm/bspwmrc" = {
-      source = ./bspwmrc;
+      source = ../../.config/bspwm/bspwmrc;
     };
   };
 }

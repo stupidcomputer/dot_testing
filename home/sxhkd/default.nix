@@ -8,10 +8,10 @@
 
   home.file = {
     ".config/sxhkd/sxhkdrc" = {
-      source = ./sxhkdrc;
+      source = ../../.config/sxhkd/sxhkdrc;
     };
     ".config/sxhkd/mouse" = {
-      source = ./mouse;
+      source = ../../.config/sxhkd/mouse;
     };
   };
 }

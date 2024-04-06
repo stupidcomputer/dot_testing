@@ -9,10 +9,10 @@
 
   home.file = {
     ".config/bash/bashrc" = {
-      source = ./bashrc;
+      source = ../../.config/bash/bashrc;
     };
     ".config/bash/profile" = {
-      source = ./profile;
+      source = ../../.config/bash/profile;
     };
   };
 }

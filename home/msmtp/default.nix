@@ -7,7 +7,7 @@
 
   home.file = {
     ".config/msmtp/config" = {
-      source = ./config;
+      source = ../../.config/msmtp/config;
     };
   };
 }

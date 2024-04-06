@@ -5,7 +5,7 @@
 
   home.file = {
     ".config/sx/sxrc" = {
-      source = ./sxrc;
+      source = ../../.config/sx/sxrc;
     };
   };
 }

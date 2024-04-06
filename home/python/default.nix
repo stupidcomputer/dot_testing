@@ -3,7 +3,7 @@
 {
   home.file = {
     ".config/python/pythonrc" = {
-      source = ./pythonrc.py;
+      source = ../../.config/python/pythonrc.py;
     };
   };
 }
