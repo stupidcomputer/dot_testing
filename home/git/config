@@ -1,10 +1,9 @@
 [user]
-	email = randomuser@tilde.club
-	name = randomuser
+	email = ryan@beepboop.systems
+	name = stupidcomputer
 
 [credential "https://git.beepboop.systems"]
-	username = rndusr
-	helper = !rbw get 'beepboop.systems gitea instance'
+	username = stupidcomputer
 
 [advice]
 	addIgnoredFile = false
