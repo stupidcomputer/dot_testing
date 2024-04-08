@@ -84,10 +84,20 @@ case "$(hostname)" in
 		sshfs usr@192.168.1.120:/home/usr/doc $HOME/.cache/mount_point
 		ln -sf $HOME/.cache/mount_point $HOME/doc
 
-		rm $HOME/.thunderbird
+		rm $HOME/.thunderbird # see previous comment
 		mkdir -p $HOME/.cache/mount_point3
 		sshfs usr@192.168.1.120:/home/usr/.thunderbird $HOME/.cache/mount_point3
 		ln -sf $HOME/.cache/mount_point3 $HOME/.thunderbird
+
+		rm $HOME/Mail
+		mkdir -p $HOME/.cache/mount_point4
+		sshfs usr@192.168.1.120:/home/usr/Mail $HOME/.cache/mount_point4
+		ln -sf $HOME/.cache/mount_point4 $HOME/Mail
+
+		rm $HOME/vdir
+		mkdir -p $HOME/.cache/mount_point5
+		sshfs usr@192.168.1.120:/home/usr/vdir $HOME/.cache/mount_point5
+		ln -sf $HOME/.cache/mount_point5 $HOME/vdir
 
 		;;
 	"x230t")
