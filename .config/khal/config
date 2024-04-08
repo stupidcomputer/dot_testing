@@ -2,9 +2,11 @@
 [[home]]
 path = "~/vdir/calendar/personal/edfbeaf1-e9f3-4d94-a512-40cdafdbc7a0"
 color = dark green
+
 [[band]]
 path = "~/vdir/calendar/band"
-color = dark green
+color = light cyan
+
 [locale]
 timeformat = %H:%M
 dateformat = %Y-%m-%d
