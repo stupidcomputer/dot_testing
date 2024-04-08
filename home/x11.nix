@@ -8,8 +8,6 @@
     ./tridactyl
     ./zathura
     ./wallpapers
-    ./firefox
-    ./emacs
     ./vdirsyncer
     ./khal
     ./isync
