@@ -2,6 +2,7 @@
 
 case $1 in
 	"regular")
+		khal new -a home $2 07:00 07:01 Depart
 		khal new -a home $2 07:40 08:28 Spanish I H
 		khal new -a home $2 08:34 09:21 AP Human Geography
 		khal new -a home $2 09:27 09:52 SAIL
@@ -13,14 +14,15 @@ case $1 in
 		khal new -a home $2 13:59 14:47 Algebra II H
 		;;
 	"late")
-		khal new -a home $2 08:40 08:28 Spanish I H
-		khal new -a home $2 08:34 09:21 AP Human Geography
-		khal new -a home $2 09:27 09:52 SAIL
-		khal new -a home $2 09:58 10:45 Symphonic Band
-		khal new -a home $2 10:51 11:38 English I H
-		khal new -a home $2 11:38 12:07 Lunch
-		khal new -a home $2 12:13 13:00 Biology I H
-		khal new -a home $2 13:06 13:53 Study Hall
-		khal new -a home $2 13:59 14:47 Algebra II H
+		khal new -a home $2 07:40 07:41 Depart
+		khal new -a home $2 08:25 09:06 Spanish I H
+		khal new -a home $2 09:12 09:52 AP Human Geography
+		khal new -a home $2 09:58 10:23 SAIL
+		khal new -a home $2 10:29 11:09 Symphonic Band
+		khal new -a home $2 11:15 11:55 English I H
+		khal new -a home $2 11:55 12:28 Lunch
+		khal new -a home $2 12:34 13:14 Biology I H
+		khal new -a home $2 13:20 14:00 Study Hall
+		khal new -a home $2 14:06 14:47 Algebra II H
 		;;
 esac
