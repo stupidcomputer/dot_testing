@@ -14,6 +14,4 @@ def write_history():
     except OSError:
         pass
 
-print("laskdjflaskfjd")
-
 atexit.register(write_history)

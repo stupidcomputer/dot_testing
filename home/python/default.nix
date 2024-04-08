@@ -2,7 +2,7 @@
 
 {
   home.file = {
-    ".config/python/pythonrc" = {
+    ".config/python/pythonrc.py" = {
       source = ../../.config/python/pythonrc.py;
     };
   };
