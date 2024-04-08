@@ -25,15 +25,26 @@ hist() {
 }
 
 search() {
-	res=$(find /home/usr/ /home/usr/doc/ \
-		-mindepth 1 \
-		-not -path '*/.*' \
-		-not -path './Mail/*' \
-		-not -path './vdir/*' \
-		-not -path '*venv*' \
-		-not -path '*node_modules*' \
-		-not -path '*__pycache__*' \
-		-type d | cut -c 11- | fzy)
-
+	if [ "$1" = '-a' ]; then
+		res=$(find /home/usr/ /home/usr/doc/ \
+			-mindepth 1 \
+			-not -path '*/.*' \
+			-not -path './Mail/*' \
+			-not -path './vdir/*' \
+			-not -path '*venv*' \
+			-not -path '*node_modules*' \
+			-not -path '*__pycache__*' \
+			-type d | cut -c 11- | fzy)
+	else
+		res=$(find $(pwd) \
+			-mindepth 1 \
+			-not -path '*/.*' \
+			-not -path './Mail/*' \
+			-not -path './vdir/*' \
+			-not -path '*venv*' \
+			-not -path '*node_modules*' \
+			-not -path '*__pycache__*' \
+			-type d | cut -c 11- | fzy)
+	fi
 	[ -n "$res" ] && cd /home/usr/"$res"
 }
