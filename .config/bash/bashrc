@@ -2,8 +2,22 @@
 
 # some housekeeping
 shopt -s autocd
+set -o vi # vim mode
 alias ls="ls --color=auto"
 alias ll="ls -lah --color=auto"
+function cd() {
+	builtin cd "$@" && ls --color=auto
+}
+
+# history
+HISTCONTROL=ignorespace:ignoredups:erasedups
+HISTFILESIZE=9999999999
+HISTSIZE=9999999999
+
+shopt -s cmdhist
+shopt -s histreedit
+shopt -s histappend
+shopt -s histverify
 
 PS1="\h:\w\$ "
 
