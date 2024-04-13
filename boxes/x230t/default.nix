@@ -24,6 +24,7 @@
     ecryptfs
     ffmpeg
     thunderbird
+    ledger
   ];
 
   hardware.bluetooth = {
