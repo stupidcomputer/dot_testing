@@ -26,6 +26,7 @@
     thunderbird
     libreoffice
     texliveMedium
+    ledger
   ];
 
   services.hardware.bolt.enable = true; # thunderbolt support
