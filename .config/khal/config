@@ -7,6 +7,14 @@ color = dark green
 path = "~/vdir/calendar/band"
 color = light cyan
 
+[[pco]]
+path = "~/vdir/calendar/pco"
+color = yellow
+
+[[school]]
+path = "~/vdir/calendar/school"
+color = dark red
+
 [locale]
 timeformat = %H:%M
 dateformat = %Y-%m-%d
