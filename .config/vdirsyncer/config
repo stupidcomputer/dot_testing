@@ -72,7 +72,6 @@ url.fetch = ["command", "rbw", "get", "pco-ical-sync"]
 type = "http"
 
 url.fetch = ["command", "rbw", "get", "school-ical-sync"]
-
 [storage calendar_remote]
 type = "caldav"
 

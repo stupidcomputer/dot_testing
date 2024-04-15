@@ -18,6 +18,7 @@
 , ytfzf
 , xrandr
 , svkbd
+, xkbset
 , libsForQt5
 }:
 
@@ -28,7 +29,7 @@ stdenv.mkDerivation rec {
   src = ./utils;
 
   nativeBuildInputs = [ makeWrapper pkg-config libxcb ];
-  buildInputs = [ libxcb bash feh xrandr jq curl fzy ytfzf ffmpeg sshuttle svkbd scrcpy libsForQt5.kolourpaint ];
+  buildInputs = [ libxcb bash feh xrandr jq curl fzy ytfzf ffmpeg sshuttle svkbd scrcpy xkbset libsForQt5.kolourpaint ];
 
   buildPhase = ''
     ls
