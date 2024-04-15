@@ -44,7 +44,7 @@
   services.ssh-phone-home = {
     enable = true;
     localUser = "usr";
-    remoteHostname = "192.168.1.100";
+    remoteHostname = "mainsail";
     remotePort = 22;
     remoteUser = "usr";
     bindPort = 2222;

@@ -18,6 +18,8 @@ keyboard () {
 	setxkbmap -option caps:super
 	pkill xcape
 	xcape -e 'Super_L=Escape'
+	xkbset bo 50
+	xkbset exp =bo
 	xset -q | grep "Caps Lock:\s*on" && xdotool key Caps_Lock
 	xset -r 161 # tablet rotate key doesn't need repeat
 	xset r rate 200 80
@@ -81,22 +83,22 @@ case "$(hostname)" in
 		             # but it's just a link, so it's a regular file.
 		             # in conclusion, good either way
 		mkdir -p $HOME/.cache/mount_point
-		sshfs usr@192.168.1.120:/home/usr/doc $HOME/.cache/mount_point
+		sshfs usr@x230t:/home/usr/doc $HOME/.cache/mount_point
 		ln -sf $HOME/.cache/mount_point $HOME/doc
 
 		rm $HOME/.thunderbird # see previous comment
 		mkdir -p $HOME/.cache/mount_point3
-		sshfs usr@192.168.1.120:/home/usr/.thunderbird $HOME/.cache/mount_point3
+		sshfs usr@x230t:/home/usr/.thunderbird $HOME/.cache/mount_point3
 		ln -sf $HOME/.cache/mount_point3 $HOME/.thunderbird
 
 		rm $HOME/Mail
 		mkdir -p $HOME/.cache/mount_point4
-		sshfs usr@192.168.1.120:/home/usr/Mail $HOME/.cache/mount_point4
+		sshfs usr@x230t:/home/usr/Mail $HOME/.cache/mount_point4
 		ln -sf $HOME/.cache/mount_point4 $HOME/Mail
 
 		rm $HOME/vdir
 		mkdir -p $HOME/.cache/mount_point5
-		sshfs usr@192.168.1.120:/home/usr/vdir $HOME/.cache/mount_point5
+		sshfs usr@x230t:/home/usr/vdir $HOME/.cache/mount_point5
 		ln -sf $HOME/.cache/mount_point5 $HOME/vdir
 
 		;;

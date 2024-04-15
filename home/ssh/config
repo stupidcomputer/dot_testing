@@ -1,5 +1,4 @@
 Host mainsail
-	HostName 192.168.1.100
 	User usr
 	Port 22
 
@@ -18,4 +17,10 @@ Host mlg-prox
 	HostName localhost
 	User usr
 	Port 2222
+	ProxyJump mainsail-prox
+
+Host x230t-prox
+	HostName x230t
+	User usr
+	Port 22
 	ProxyJump mainsail-prox
