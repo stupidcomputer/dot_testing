@@ -9,6 +9,7 @@
     ./python
     ./gnupg
     ./elinks
+    ./ssh
 
     ./tty-progs.nix
   ];
