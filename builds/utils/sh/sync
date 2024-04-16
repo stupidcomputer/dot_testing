@@ -1,0 +1,11 @@
+is_school && echo "enable the vpn"
+mbsync --config=$HOME/.config/isync/config main
+vdirsyncer sync
+rbw sync
+
+# check if we have new mail, and if so, notify
+new=$(ls ~/Mail/main/INBOX/new | wc -l)
+if [ "$new" -gt 0 ]; then
+	inbox=$(ls ~/Mail/main/INBOX/cur | wc -l)
+	printf "%i new email(s); %i total in inbox" "$new" "$inbox" > ~/.cache/statusbar_notification
+fi

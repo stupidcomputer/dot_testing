@@ -1,0 +1,3 @@
+cssid=$(nmcli -t -f IN-USE,SSID device wifi list | grep '^\*' | awk -F':' '{print $2}')
+
+[ "WCS-BYOT" = "$cssid" ]
