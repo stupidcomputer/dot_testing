@@ -17,7 +17,8 @@ int mod_message(char *config, char *name, char *pipename) {
 
 	for(;;) {
 		int watchdesc = inotify_add_watch(fd, config, IN_MODIFY);
-		read(fd, &buf, sizeof(struct inotify_event));
+read:
+		int watchread = read(fd, &buf, sizeof(struct inotify_event));
 
 		/* the file's changed, so reread it */
 		int filefd = open(config, O_RDONLY, 0);

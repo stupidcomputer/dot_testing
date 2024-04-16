@@ -24,7 +24,7 @@ struct module mods[] = {
 	{mod_battstatus, "battstatus", "BAT0", { '\0' }},
 	{mod_time, "time", "", { '\0' }},
 	{mod_bspwm, "bspwm", "", { '\0' }},
-	{mod_message, "message", "/home/usr/.cache/statusbar_notification", { '\0' }},
+/*	{mod_message, "message", "/home/usr/.cache/statusbar_notification", { '\0' }}, */
 };
 
 void create_module_proc(int index, char *pipename) {
