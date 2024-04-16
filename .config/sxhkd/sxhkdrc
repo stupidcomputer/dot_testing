@@ -35,6 +35,10 @@ super + e
 super + shift + e
 	systemctl suspend
 
+# password menu
+super + z
+	passmenu
+
 # manipulate a node
 super + {_,ctrl +,shift + }{h,j,k,l}
 	bspc node -{f,p,s} {west,south,north,east}
