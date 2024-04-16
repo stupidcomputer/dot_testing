@@ -17,12 +17,14 @@
 #include "battstatus.h"
 #include "bspwm.h"
 #include "time.h"
+#include "message.h"
 
 struct module mods[] = {
 	{mod_battery, "battery", "BAT0", { '\0' }},
 	{mod_battstatus, "battstatus", "BAT0", { '\0' }},
 	{mod_time, "time", "", { '\0' }},
 	{mod_bspwm, "bspwm", "", { '\0' }},
+	{mod_message, "message", "/home/usr/.cache/statusbar_notification", { '\0' }},
 };
 
 void create_module_proc(int index, char *pipename) {
@@ -59,17 +61,12 @@ void redraw() {
 static char NAMED_PIPE[] = "/home/usr/.cache/statusbar_pipe";
 
 int main(void) {
-	char pipename[BUFFER_SIZE];
 	srand(time(NULL));
-	strcpy(pipename, &NAMED_PIPE);
-	pipename[sizeof(NAMED_PIPE) - 1] = 'A' + (rand() % 26);
-	pipename[sizeof(NAMED_PIPE)] = 'A' + (rand() % 26);
-	pipename[sizeof(NAMED_PIPE) + 1] = '\0';
-	mkfifo(pipename, 0666);
-	int fd = open(pipename, O_RDWR);
+	mkfifo(&NAMED_PIPE, 0666); /* it's okay if this fails */
+	int fd = open(&NAMED_PIPE, O_RDWR);
 	struct message msg;
 
-	create_module_procs(pipename);
+	create_module_procs(&NAMED_PIPE);
 
 	for (;;) {
 		int ret = read(fd, &msg, sizeof(msg));
