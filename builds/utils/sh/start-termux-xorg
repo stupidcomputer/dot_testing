@@ -1,0 +1,4 @@
+vncserver -localhost
+export DISPLAY=":1"
+sxhkd &
+bspwm &
