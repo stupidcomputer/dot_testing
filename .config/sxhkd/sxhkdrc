@@ -11,11 +11,6 @@ super + r
 	pkill -USR1 -x sxhkd; \
 	bspc wm -r
 
-# reinitialize ancillary services
-super + w
-	disp && keyboard
-
-# control the national weather service
 super + {_,shift + }n
 	nws {local,national}
 
@@ -38,6 +33,10 @@ super + shift + e
 # password menu
 super + z
 	passmenu
+
+# start a browser
+super + b
+	chromium
 
 # manipulate a node
 super + {_,ctrl +,shift + }{h,j,k,l}

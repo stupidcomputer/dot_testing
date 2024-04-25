@@ -25,6 +25,7 @@
     ffmpeg
     thunderbird
     ledger
+    ranger
   ];
 
   hardware.bluetooth = {
