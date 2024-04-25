@@ -129,6 +129,7 @@
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKbhM3wj0oqjR3pUaZgpfX4Xo4dlzvBTbQ48zHyg7Pwx usr" # x230t
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGrpVDLQszFKoYbvYKRyVTTpehxR0BVU47SXkz39l2wK usr" # mainsail
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHZw5bg0TrvSkW/XQa4c+2iLbIKOxfMGbjy5Nb3HSfBv usr" # phone
     ];
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" ];
