@@ -1,3 +1,6 @@
+pkill Xvnc
+rm -f /data/data/com.termux/files/usr/tmp/.X1-lock
+rm -f /data/data/com.termux/files/usr/tmp/.X11-unix/X1
 vncserver -localhost
 export DISPLAY=":1"
 sxhkd &

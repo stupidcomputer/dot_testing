@@ -13,17 +13,24 @@ termux-pkgs:
 		tigervnc \
 		sxhkd \
 		clang \
+		elinks \
+		tmux \
 		fontconfig \
 		xorgproto \
 		fzy \
+		man \
 		libxft \
 		firefox \
+		mupdf \
+		texlive-bin \
 		htop \
+		rbw \
 		pkg-config \
 		bspwm \
 		x11-repo
 
 termux-dots:
 	ln -sf $(CURDIR)/.config ~/.config
+	ln -sf $(CURDIR)/home/ssh/config ~/.ssh/config
 	ln -sf ~/.config/bash/bashrc ~/.bashrc
 	ln -sf ~/.config/bash/profile ~/.bash_profile
