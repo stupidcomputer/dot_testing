@@ -8,6 +8,12 @@
       ../../builds/gmail_mail_bridge.nix
     ];
 
+  # nix optimization
+  nix.optimise = {
+    automatic = true;
+    dates = [ "03:45" ];
+  };
+
   networking.networkmanager.enable = true;
 
   time.timeZone = "America/Chicago";
