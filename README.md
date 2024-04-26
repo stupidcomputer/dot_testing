@@ -20,7 +20,7 @@ if you're trying to install `netbox`, then use the `--impure` flag:
 
 `sudo nixos-rebuild --flake .#netbox switch --impure`
 
-for alternate installations on non-NixOS hosts, a Makefile will be made available
+for installation onto Termux, run `make`.
 
 things to do
 ------------
