@@ -10,6 +10,7 @@ termux-pkgs:
 	pkg install \
 		neovim \
 		git \
+		tig \
 		tigervnc \
 		sxhkd \
 		clang \
