@@ -8,6 +8,12 @@
     ../../modules/common.nix
   ];
 
+  # nix optimization
+  nix.optimise= {
+    automatic = true;
+    dates = [ "03:45" ];
+  };
+
   boot.loader.grub.enable = true;
   boot.loader.grub.device = "/dev/sda";
 
