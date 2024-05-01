@@ -25,4 +25,12 @@ case $1 in
 		khal new -a home $2 13:20 14:00 Study Hall
 		khal new -a home $2 14:06 14:47 Algebra II H
 		;;
+	"help")
+			echo "
+this is khalmacs.
+
+builtin-options:
+	- regular
+	- late
+			"
 esac
