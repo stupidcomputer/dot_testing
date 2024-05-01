@@ -2,6 +2,10 @@ Host mainsail
 	User usr
 	Port 22
 
+Host phone
+	User u0_a193
+	Port 8022
+
 Host netbox
 	HostName beepboop.systems
 	User ryan

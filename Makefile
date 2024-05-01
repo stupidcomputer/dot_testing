@@ -10,6 +10,7 @@ termux-pkgs:
 	pkg install \
 		neovim \
 		git \
+		tig \
 		tigervnc \
 		sxhkd \
 		clang \
@@ -27,6 +28,8 @@ termux-pkgs:
 		rbw \
 		pkg-config \
 		bspwm \
+		termux-api \
+		jq \
 		x11-repo
 
 termux-dots:
