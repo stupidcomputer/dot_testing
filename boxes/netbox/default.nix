@@ -25,14 +25,12 @@
   };
 
   environment.systemPackages = with pkgs; [
-    python3
     curl
     htop
     git
     tree
     dig
     htop
-    gnumake
     neovim
   ];
 
@@ -259,7 +257,7 @@
 
   security.acme = {
     acceptTerms = true;
-    email = "nickforanick@protonmail.com";
+    defaults.email = "nickforanick@protonmail.com";
   };
 
 #  services.roundcube = {
@@ -308,6 +306,6 @@
 
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 80 443 ];
+    allowedTCPPorts = [ 80 443 6667 ];
   };
 }
