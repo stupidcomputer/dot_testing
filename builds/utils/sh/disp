@@ -138,7 +138,7 @@ esac
 
 # initial post-wm setup
 keyboard
-statuswrap
+statusbar start_statusbars
 set_walls
 screensaver
 
