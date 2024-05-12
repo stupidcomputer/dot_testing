@@ -1,60 +1,37 @@
-#!/bin/sh
+display=$(xrandr \
+	| grep ' connected' \
+	| awk -F ' ' '{print $1}' \
+	| sed '1i select rectangle' \
+	| fzy)
 
-# get screen info and temporary file
-tmp=$(mktemp -d)
-res=$(xrandr |
-	grep ' connected' |
-	awk -F' ' '{print $1 " " $4}' |
-	awk -F'+' '{print $1}' |
-	fzy |
-	awk -F' ' '{print $2}' )
-
-# still or motion
-medium=$(printf ".mp4\n.png\n" | fzy)
-output="$tmp/main$medium"
-
-# capture
-case "$medium" in
-	*mp4*)
-		printf "> starting video capture...\n"
-		ffmpeg -video_size "$res" -f x11grab -framerate 60 -i $DISPLAY -preset ultrafast -pix_fmt yuv420p "$output"
-		;;
-	*png*)
-		printf "> taking screenshot...\n"
-		# for a screenshot, we usually want an  a s t h e t i c
-		ffmpeg -f x11grab -video_size "$res" -i $DISPLAY -vframes 1 "$output" -loglevel quiet # be quiet
+case "$display" in
+	"select"*)
+		geom=$(xrectsel)
 		;;
 	*)
-		printf "not a choice\n"
-		exit 1
+		geom=$(xrandr \
+			| grep "$display" \
+			| awk -F ' ' '{print $3 " " $4}' \
+			| sed 's/primary //g' \
+			| awk -F ' ' '{print $1}' \
+			| grep '[[:digit:]]'
+		)
+		;;
 esac
 
-# what to do with the capture?
-printf "> written to %s\n" "$output"
-while true; do
-	result=$(printf "delete\nmove to home directory\nupload to pastebin\nreview footage\nquit\n" | fzy --prompt="what next? ")
-	case "$result" in
-		*upload*)
-			paste "$output" | xclip -i
-			printf "> pasted! check your clipboard\n"
-			;;
-		*review*)
-			[ "$medium" = ".mp4" ] && mpv "$output" && continue
-			feh "$output"
-			;;
-		*delete*)
-			printf "> removing target file...\n"
-			rm "$output"
-			exit 1
-			;;
-		*home*)
-			printf "> warping your capture to home...\n"
-			name=$(echo "capture$medium" | fzy --prompt="name please? ")
-			mv "$output" "$HOME/$name"
-			exit 1
-			;;
-		*quit*)
-			exit 1
-			;;
-	esac
-done
+printf "[] selected geometry is %s\n" "$geom"
+
+medium=$(
+	printf ".mp4\n.png\n" | fzy
+)
+
+printf "[] capturing in medium %s\n" "$medium"
+
+case "$medium" in
+	*"mp4"*)
+		ffcast -g $geom rec
+		;;
+	*"png"*)
+		ffcast -g $geom png
+		;;
+esac
