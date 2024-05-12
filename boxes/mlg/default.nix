@@ -71,8 +71,19 @@
   nixpkgs.config.allowUnfree = true;
   networking = {
     hostName = "mlg";
-    firewall.enable = true;
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [ 6000 ];
+      allowedTCPPortRanges = [
+        { from = 1714; to = 1764; } # KDE Connect
+      ];
+      allowedUDPPortRanges = [
+        { from = 1714; to = 1764; } # KDE Connect
+      ];
+    };
   };
+
+  programs.kdeconnect.enable = true;
 
   system.stateVersion = "23.11"; # don't change this, lol
 }

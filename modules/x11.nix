@@ -9,6 +9,7 @@
 
   environment.systemPackages = with pkgs; [
     xscreensaver
+    dunst
   ];
 
   services.xserver = {

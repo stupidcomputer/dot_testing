@@ -17,7 +17,7 @@ set spoolfile = +INBOX
 set record = "+Sent"
 set trash = "+Trash"
 set postponed = "+Drafts"
-mailboxes +SMS +INBOX "+College Messages"
+mailboxes +SMS +INBOX "+College Messages" +"Internship 24"
 
 unset wait_key
 macro index S "<shell-escape>mbsync --config=$HOME/.config/isync/config main; vdirsyncer sync<enter>"
