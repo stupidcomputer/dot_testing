@@ -297,6 +297,15 @@
     };
   };
 
+  services.bitlbee = {
+    enable = true;
+    hostName = "beepboop.systems";
+    plugins = with pkgs; [
+      bitlbee-steam
+      bitlbee-discord # shhhhhhhhh
+    ];
+  };
+
   networking.firewall = {
     enable = true;
     allowedTCPPorts = [ 80 443 ];
