@@ -54,6 +54,16 @@ def filemodfactory(filename: str, modname: str):
 
     return filemod
 
+def new_mail(queue, _):
+    while True:
+        dir_output = os.listdir("/home/usr/Mail/main/INBOX/new")
+        dir_output = len(dir_output)
+        queue.put({
+            "module": "newmail",
+            "data": str(dir_output)
+        })
+        time.sleep(20)
+
 def bspwm(queue, monitor):
     client = socket.socket(
         socket.AF_UNIX,
@@ -112,7 +122,7 @@ def render(modules) -> str:
     columns, _ = os.get_terminal_size(0)
 
     left = "{} | {}({})".format(modules["clock"], modules["bspwm"], modules["sxhkdmode"])
-    right = "{}({})".format(modules["bat"], modules["batstat"])
+    right = "{} {}({})".format(modules["newmail"], modules["bat"], modules["batstat"])
     padding = " " * (columns - len(left) - len(right) - 0)
 
     output = left + padding + right
@@ -163,7 +173,7 @@ def main():
             ))
         return
     queue = Queue()
-    modules = [bspwm, clock, battery, batterystatus, sxhkdmode]
+    modules = [bspwm, clock, battery, batterystatus, sxhkdmode, new_mail]
     [Process(target=module, args=(queue, argv[1])).start() for module in modules]
 
     module_outputs = defaultdict(lambda: "")
