@@ -10,6 +10,7 @@
     ./wallpapers
     ./vdirsyncer
     ./khal
+    ./khard
     ./isync
     ./todoman
     ./neomutt
