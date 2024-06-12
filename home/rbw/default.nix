@@ -6,7 +6,7 @@
     settings = {
       base_url = "https://bitwarden.beepboop.systems";
       email = "bit@beepboop.systems";
-#      pinentry = "gtk";
+      pinentry = pkgs.pinentry-gnome3;
     };
   };
 }
