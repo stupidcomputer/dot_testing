@@ -4,7 +4,7 @@ if [ -n "$1" ]; then
 	pkill sxhkd
 	sxhkd -c ~/.config/sxhkd/$1 & disown
 	[ -f "~/.config/sxhkd/$1.sh" ] && ~/.config/sxhkd/$1.sh
-	echo "$1" > ~/.cache/sxhkd_mode
+	echo "$1" > ~/.cache/statusbar/sxhkd_mode
 
 	exit
 fi

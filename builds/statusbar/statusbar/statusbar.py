@@ -116,7 +116,7 @@ def filecheckerfactory(filename: str, modname: str, timeout=60):
 
 battery = filecheckerfactory("/sys/class/power_supply/BAT0/capacity", "bat")
 batterystatus = filecheckerfactory("/sys/class/power_supply/BAT0/status", "batstat")
-sxhkdmode = filemodfactory("/home/usr/.cache/sxhkd_mode", "sxhkdmode")
+sxhkdmode = filemodfactory("/home/usr/.cache/statusbar/sxhkd_mode", "sxhkdmode")
 
 def render(modules) -> str:
     columns, _ = os.get_terminal_size(0)
@@ -144,10 +144,12 @@ def render(modules) -> str:
     stdout.flush()
 
 def main():
+    try:
+        os.mkdir("/home/usr/.cache/statusbar")
+    except FileExistsError:
+        pass
+
     if argv[1] == "start_statusbars":
-#        signal.signal(signal.SIGINT, signal.SIG_IGN)
-#        os.system("pkill statusbar")
-#        signal.signal(signal.SIGINT, signal.SIG_DFL)
         # get the monitors
         xrandr = subprocess.Popen(['xrandr'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         output = list(xrandr.stdout)
