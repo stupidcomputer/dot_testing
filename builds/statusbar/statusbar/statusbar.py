@@ -144,7 +144,10 @@ def render(modules) -> str:
     stdout.flush()
 
 def main():
-    os.mkdir("/home/usr/.cache/statusbar")
+    try:
+        os.mkdir("/home/usr/.cache/statusbar")
+    except FileExistsError:
+        pass
 
     if argv[1] == "start_statusbars":
         # get the monitors
