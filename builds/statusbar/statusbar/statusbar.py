@@ -38,6 +38,32 @@ def generate_desktop_string(monitor_array):
 
     return ' '.join(output)
 
+def filemodfactory(filename: str, modname: str):
+    def filemod(queue, _):
+        orig = 0
+        while True:
+            new = os.path.getmtime(filename)
+            if(new > orig):
+                with open(filename, 'r') as f:
+                    queue.put({
+                        "module": modname,
+                        "data": f.read().rstrip()
+                    })
+                orig = new
+            time.sleep(0.1)
+
+    return filemod
+
+def new_mail(queue, _):
+    while True:
+        dir_output = os.listdir("/home/usr/Mail/main/INBOX/new")
+        dir_output = len(dir_output)
+        queue.put({
+            "module": "newmail",
+            "data": str(dir_output)
+        })
+        time.sleep(20)
+
 def bspwm(queue, monitor):
     client = socket.socket(
         socket.AF_UNIX,
@@ -90,12 +116,13 @@ def filecheckerfactory(filename: str, modname: str, timeout=60):
 
 battery = filecheckerfactory("/sys/class/power_supply/BAT0/capacity", "bat")
 batterystatus = filecheckerfactory("/sys/class/power_supply/BAT0/status", "batstat")
+sxhkdmode = filemodfactory("/home/usr/.cache/statusbar/sxhkd_mode", "sxhkdmode")
 
 def render(modules) -> str:
     columns, _ = os.get_terminal_size(0)
 
-    left = "{} | {}".format(modules["clock"], modules["bspwm"])
-    right = "{}({})".format(modules["bat"], modules["batstat"])
+    left = "{} | {}({})".format(modules["clock"], modules["bspwm"], modules["sxhkdmode"])
+    right = "{} {}({})".format(modules["newmail"], modules["bat"], modules["batstat"])
     padding = " " * (columns - len(left) - len(right) - 0)
 
     output = left + padding + right
@@ -117,10 +144,12 @@ def render(modules) -> str:
     stdout.flush()
 
 def main():
+    try:
+        os.mkdir("/home/usr/.cache/statusbar")
+    except FileExistsError:
+        pass
+
     if argv[1] == "start_statusbars":
-#        signal.signal(signal.SIGINT, signal.SIG_IGN)
-#        os.system("pkill statusbar")
-#        signal.signal(signal.SIGINT, signal.SIG_DFL)
         # get the monitors
         xrandr = subprocess.Popen(['xrandr'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         output = list(xrandr.stdout)
@@ -146,7 +175,7 @@ def main():
             ))
         return
     queue = Queue()
-    modules = [bspwm, clock, battery, batterystatus]
+    modules = [bspwm, clock, battery, batterystatus, sxhkdmode, new_mail]
     [Process(target=module, args=(queue, argv[1])).start() for module in modules]
 
     module_outputs = defaultdict(lambda: "")

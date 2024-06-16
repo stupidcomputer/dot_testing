@@ -13,7 +13,6 @@
 , figlet
 , curl
 , ytfzf
-, herbe
 , xrandr
 , xrectsel
 , ffcast
@@ -21,7 +20,6 @@
 , xkbset
 , rbw
 , xclip
-, libsForQt5
 }:
 
 stdenv.mkDerivation rec {
@@ -31,7 +29,7 @@ stdenv.mkDerivation rec {
   src = ./utils;
 
   nativeBuildInputs = [ makeWrapper ];
-  buildInputs = [ bash feh xrandr jq curl fzy ytfzf sshuttle svkbd scrcpy xkbset rbw xclip ffcast libsForQt5.kolourpaint ];
+  buildInputs = [ bash feh xrandr jq curl fzy ytfzf sshuttle svkbd scrcpy rbw xclip ffcast xkbset ];
 
   installPhase = ''
     mkdir -p $out/bin
@@ -39,7 +37,7 @@ stdenv.mkDerivation rec {
     for i in $(ls $src/sh); do
       cp $src/sh/$i $out/bin
       ln -sf $out/bin/tmenu_run $out/bin/regenerate
-      wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ sxhkd bash feh xrandr jq figlet curl fzy ytfzf herbe sshuttle svkbd scrcpy libsForQt5.kolourpaint xrectsel ffcast ]}
+      wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ sxhkd bash feh xrandr jq figlet curl fzy xkbset ytfzf sshuttle svkbd scrcpy xrectsel ffcast ]}
     done
   '';
 }

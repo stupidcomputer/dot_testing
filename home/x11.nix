@@ -3,6 +3,7 @@
 {
   imports = [
     ./bspwm
+    ./brave
     ./sx
     ./sxhkd
     ./tridactyl
@@ -10,6 +11,7 @@
     ./wallpapers
     ./vdirsyncer
     ./khal
+    ./khard
     ./isync
     ./todoman
     ./neomutt

@@ -92,6 +92,7 @@ function setTabbing(lang, width)
 end
 
 setTabbing("python", 4)
+setTabbing("htmldjango", 4)
 setTabbing("javascript", 4)
 setTabbing("css", 4)
 setTabbing("html", 4)

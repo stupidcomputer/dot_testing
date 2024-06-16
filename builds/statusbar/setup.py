@@ -7,7 +7,7 @@ setup(
     author_email = 'ryan@beepboop.systems',
     url = 'https://git.beepboop.systems/stupidcomputer/dot_testing',
     description = 'simple statusbar content program',
-    license = 'MIT',
+    license = 'GPLv3',
     entry_points = {
         'console_scripts': [
             'statusbar = statusbar.statusbar:main'
