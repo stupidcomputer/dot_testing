@@ -194,14 +194,6 @@
     forceSSL = true;
     enableACME = true;
     root = "/var/www/beepboop.systems";
-    locations."/" = {
-      extraConfig = ''
-        if ($request_uri ~ ^/(.*)\.html(\?|$)) {
-          return 302 /$1;
-        }
-        try_files $uri $uri.html $uri/ =404;
-      '';
-    };
   };
 
   services.nginx.virtualHosts."git.beepboop.systems" = {
