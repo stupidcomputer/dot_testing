@@ -2,7 +2,7 @@
 
 {
   home.packages = [
-    (pkgs.callPackage ./elinks.nix {})
+    pkgs.elinks
   ];
 
   home.file = {

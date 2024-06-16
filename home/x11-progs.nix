@@ -12,12 +12,5 @@ in {
     pkgs.xwallpaper
     pkgs.xbrightness
     pkgs.xdotool
-  ] ++ [
-    (plib.mkPackageWrapper
-      pkgs.brave
-      "export HOME=$HOME/.cache/brave"
-      ""
-      "--args --disable-frame-rate-limit"
-    )
   ];
 }

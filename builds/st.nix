@@ -7,6 +7,7 @@
 , fontconfig
 , freetype
 , ncurses
+, lightMode ? false
 , extraLibs ? [ ]
 }:
 
@@ -19,7 +20,8 @@ stdenv.mkDerivation rec {
   nativeBuildInputs = [ pkg-config fontconfig freetype ncurses ];
   buildInputs = [ libX11 libXft ] ++ extraLibs;
 
-  buildPhase = ''
+  buildPhase = lib.optionalString (lightMode == true) "cp lightmode.h colors.h;" +
+  ''
     make
   '';
 

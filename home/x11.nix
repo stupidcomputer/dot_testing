@@ -3,6 +3,7 @@
 {
   imports = [
     ./bspwm
+    ./brave
     ./sx
     ./sxhkd
     ./tridactyl
