@@ -3,6 +3,8 @@
 
 set -x
 
+[ "$1" = "-h" ] && echo "use DISP_ACCESS_IP to control sshfs conn ip" && exit 0
+
 set_walls() {
 	for i in $(xrandr | grep ' connected' | cut -d' ' -f1); do
 		xwallpaper --output $i --zoom ~/.local/share/pape.jpg
@@ -62,6 +64,9 @@ case "$(hostname)" in
 				bspc monitor DP-1-1 -d 1 3 5 7
 				bspc monitor DP-1-2 -d 2 4 6 8
 				;;
+			"solo")
+				bspc monitor DP-0 -d 1 2 3 4 5 6 7 8 9
+				;;
 			*)
 				xrandr \
 					--output DP-0 --off \
@@ -74,27 +79,34 @@ case "$(hostname)" in
 		xinput set-prop 'INSTANT USB GAMING MOUSE ' 'libinput Accel Speed' -1
 
 		# setup synchronization
+		# check if we have another IP defined
+		if [ ! -z "$DISP_ACCESS_IP" ]; then
+			target="$DISP_ACCESS_IP"
+		else
+			target=x230t
+		fi
+
 		pkill sshfs
 		rm $HOME/doc # this is safe, as doc is a dir if it mattered,
 		             # but it's just a link, so it's a regular file.
 		             # in conclusion, good either way
 		mkdir -p $HOME/.cache/mount_point
-		sshfs usr@x230t:/home/usr/doc $HOME/.cache/mount_point
+		sshfs "usr@$target:/home/usr/doc" $HOME/.cache/mount_point -o ConnectTimeout=1
 		ln -sf $HOME/.cache/mount_point $HOME/doc
 
 		rm $HOME/.thunderbird # see previous comment
 		mkdir -p $HOME/.cache/mount_point3
-		sshfs usr@x230t:/home/usr/.thunderbird $HOME/.cache/mount_point3
+		sshfs "usr@$target:/home/usr/.thunderbird" $HOME/.cache/mount_point3 -o ConnectTimeout=1
 		ln -sf $HOME/.cache/mount_point3 $HOME/.thunderbird
 
 		rm $HOME/Mail
 		mkdir -p $HOME/.cache/mount_point4
-		sshfs usr@x230t:/home/usr/Mail $HOME/.cache/mount_point4
+		sshfs "usr@$target:/home/usr/Mail" $HOME/.cache/mount_point4 -o ConnectTimeout=1
 		ln -sf $HOME/.cache/mount_point4 $HOME/Mail
 
 		rm $HOME/vdir
 		mkdir -p $HOME/.cache/mount_point5
-		sshfs usr@x230t:/home/usr/vdir $HOME/.cache/mount_point5
+		sshfs "usr@$target:/home/usr/vdir" $HOME/.cache/mount_point5 -o ConnectTimeout=1
 		ln -sf $HOME/.cache/mount_point5 $HOME/vdir
 
 		;;
