@@ -33,7 +33,9 @@ things to do
 license
 -------
 
-all materials, except for:
-	a) `./home/wallpapers/pape.jpg`, which is of unknown licenses, and
-	b) ./builds/st, which is licensed under MIT, persuant to ./builds/st/LICENSE,
-is licensed under the GPLv3.
+all materials in this repository, except for:
+
+* `./home/wallpapers/pape.jpg`, which is of unknown license, and
+* `./builds/st`, which is licensed under MIT, persuant to `./builds/st/LICENSE`,
+
+is (c) rndusr, randomuser, stupidcomputer, etc 2024 and licensed under the GPLv3 (see `./LICENSE`)
