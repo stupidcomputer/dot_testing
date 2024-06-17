@@ -14,9 +14,10 @@
 
   services.xserver = {
     enable = true;
-    libinput.enable = true;
-    layout = "us";
+    xkb.layout = "us";
 
     displayManager.sx.enable = true;
   };
+
+  services.libinput.enable = true;
 }

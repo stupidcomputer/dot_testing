@@ -63,12 +63,13 @@
 
   services.radicale = {
     enable = true;
-    config = ''
-      [auth]
-      type = htpasswd
-      htpasswd_filename = radicale-passwd
-      htpasswd_encryption = plain
-    '';
+    settings = {
+      auth = {
+        type = "htpasswd";
+        htpasswd_filename = "radicale-passwd";
+        htpasswd_encryption = "plain";
+      };
+    };
   };
 
   services.rss2email = {
