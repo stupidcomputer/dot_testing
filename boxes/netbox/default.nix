@@ -146,8 +146,6 @@
     ports = [55555];
   };
 
-  services.endlessh.enable = true;
-  services.endlessh.port = 22;
   services.vaultwarden.enable = true;
   services.vaultwarden.config = {
     DOMAIN = "https://bitwarden.beepboop.systems";
@@ -194,6 +192,12 @@
     forceSSL = true;
     enableACME = true;
     root = "/var/www/beepboop.systems";
+    locations."/" = {
+    	extraConfig = ''
+    	  port_in_redirect off;
+	  absolute_redirect off;
+    	'';
+    };
   };
 
   services.nginx.virtualHosts."git.beepboop.systems" = {
@@ -243,63 +247,13 @@
     globalRedirect = "radicale.beepboop.systems";
   };
 
-  services.nginx.virtualHosts."skillissue.agency" = {
-    forceSSL = true;
-    enableACME = true;
-    root = "/var/www/skillissue.agency";
-  };
-
   security.acme = {
     acceptTerms = true;
     defaults.email = "nickforanick@protonmail.com";
   };
 
-#  services.roundcube = {
-#    enable = true;
-#    # this is the url of the vhost, not necessarily the same as the fqdn of
-#    # the mailserver
-#    hostName = "cube.beepboop.systems";
-#    extraConfig = ''
-#      # starttls needed for authentication, so the fqdn required to match
-#      # the certificate
-#      $config['smtp_server'] = "tls://${config.mailserver.fqdn}";
-#      $config['smtp_user'] = "%u";
-#      $config['smtp_pass'] = "%p";
-#    '';
-#  };
-
-  services.nginx.virtualHosts."roundcube.beepboop.systems" = {
-    forceSSL = true;
-    enableACME = true;
-    globalRedirect = "cube.beepboop.systems";
-  };
-
-  services.nginx.virtualHosts."mail.beepboop.systems" = {
-    forceSSL = true;
-    enableACME = true;
-    locations."/bridge-submit" = {
-      extraConfig = ''
-        proxy_pass http://localhost:8041;
-      '';
-    };
-    locations."/" = {
-      extraConfig = ''
-        return 301 https://cube.beepboop.systems;
-      '';
-    };
-  };
-
-  services.bitlbee = {
-    enable = true;
-    hostName = "beepboop.systems";
-    plugins = with pkgs; [
-      bitlbee-steam
-      bitlbee-discord # shhhhhhhhh
-    ];
-  };
-
   networking.firewall = {
     enable = true;
-    allowedTCPPorts = [ 80 443 6667 ];
+    allowedTCPPorts = [ 80 443 ];
   };
 }
