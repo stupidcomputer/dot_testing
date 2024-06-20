@@ -14,6 +14,13 @@
     ../../modules/rbw.nix
   ];
 
+  virtualisation.docker.enable = true;
+
+
+  users.users.usr.extraGroups = [
+    "docker"
+  ];
+
   environment.systemPackages = with pkgs; [
     wine
     xdotool
