@@ -167,7 +167,10 @@
       passwordFile = "/etc/gittea-pass"; 
     };
     settings.security.INSTALL_LOCK = true;
-    settings.service.SHOW_REGISTRATION_BUTTON = false;
+    settings.service = {
+      SHOW_REGISTRATION_BUTTON = false;
+      DISABLE_REGISRATION = true;
+    };
     settings.ui.DEFAULT_THEME = "arc-green";
     settings.api.ENABLE_SWAGGER = false;
     settings.server = {
