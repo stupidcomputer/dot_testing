@@ -201,10 +201,10 @@
     enableACME = true;
     root = "/var/www/beepboop.systems";
     locations."/" = {
-    	extraConfig = ''
-    	  port_in_redirect off;
-	  absolute_redirect off;
-    	'';
+      extraConfig = ''
+        port_in_redirect off;
+        absolute_redirect off;
+      '';
     };
   };
 
