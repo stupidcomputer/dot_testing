@@ -35,8 +35,6 @@
     neovim
   ];
 
-  services.gmail_mail_bridge.enable = true;
-
   system.copySystemConfiguration = true;
   system.stateVersion = "23.05"; # don't change this, lol
   boot.loader.grub.enable = true;
