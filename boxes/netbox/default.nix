@@ -5,7 +5,16 @@
     [
       ./hardware-configuration.nix
       ../../modules/bootstrap.nix
-      ../../builds/gmail_mail_bridge.nix
+
+      ./radicale.nix
+      ./ssh.nix
+      ./gitea.nix
+      ./radicale.nix
+      ./vaultwarden.nix
+      ./sslh.nix
+      ./rss2email.nix
+      ./fail2ban.nix
+      ./nginx.nix
     ];
 
   # nix optimization
@@ -14,7 +23,6 @@
     dates = [ "03:45" ];
   };
 
-  networking.networkmanager.enable = true;
 
   time.timeZone = "America/Chicago";
 
@@ -35,98 +43,14 @@
     neovim
   ];
 
-  system.copySystemConfiguration = true;
-  system.stateVersion = "23.05"; # don't change this, lol
-  boot.loader.grub.enable = true;
-  boot.loader.grub.device = "/dev/vda";
-
-  services.sslh = {
-    enable = true;
-    settings.protocols = [
-      {
-        host = "localhost";
-        name = "ssh";
-        port = "55555";
-        service = "ssh";
-      }
-      {
-        host = "localhost";
-          name = "tls";
-          port = "442";
-      }
-    ];
+  system = {
+    copySystemConfiguration = true;
+    stateVersion = "23.05"; # don't change this, lol
   };
 
-  networking.hostName = "netbox";
-
-  services.radicale = {
-    enable = true;
-    settings = {
-      auth = {
-        type = "htpasswd";
-        htpasswd_filename = "radicale-passwd";
-        htpasswd_encryption = "plain";
-      };
-    };
-  };
-
-  services.rss2email = {
-    enable = true;
-    to = "ryan@beepboop.systems";
-    feeds = {
-      "eff" = {
-        url = "https://www.eff.org/rss/updates.xml";
-      };
-      "nixos" = {
-        url = "https://nixos.org/blog/announcements-rss.xml";
-      };
-      "drewdevault" = {
-        url = "https://drewdevault.com/blog/index.xml";
-      };
-      "nullprogram" = {
-        url = "https://nullprogram.com/feed/";
-      };
-    };
-  };
-
-  services.fail2ban = {
-    enable = true;
-    ignoreIP = [
-      "192.168.1.0/24"
-    ];
-    extraPackages = [pkgs.ipset];
-    banaction = "iptables-ipset-proto6-allports";
-
-    jails = {
-      "nginx-bruteforce" = ''
-        enabled = true
-        filter = nginx-bruteforce
-        logpath = /var/log/nginx/access.log
-        backend = auto
-        maxretry = 6
-        findtime = 600
-      '';
-
-      "postfix-bruteforce" = ''
-        enabled = true
-        filter = postfix-bruteforce
-        maxretry = 6
-        findtime = 600
-      '';
-    };
-  };
-
-  environment.etc = {
-    "fail2ban/filter.d/nginx-bruteforce.conf".text = ''
-      [Definition]
-      failregex = ^<HOST>.*GET.*(matrix/server|\.php|admin|wp\-).* HTTP/\d.\d\" 404.*$
-    '';
-
-    "fail2ban/filter.d/postfix-bruteforce.conf".text = ''
-      [Definition]
-      failregex = warning: [\w\.\-]+\[<HOST>\]: SASL LOGIN authentication failed.*$
-      journalmatch = _SYSTEMD_UNIT=postfix.service
-    '';
+  boot.loader = {
+    grub.enable = true;
+    grub.device = "/dev/vda";
   };
 
   users.users.ryan = {
@@ -139,127 +63,14 @@
     extraGroups = [ "wheel" "docker" ];
   };
 
-  services.openssh = {
-    enable = true;
-    ports = [55555];
-    settings = {
-      X11Forwarding = false;
-      PermitRootLogin = "no";
-      PasswordAuthentication = false;
+  networking = {
+    usePredictableInterfaceNames = false;
+    networkmanager.enable = true;
+    hostName = "netbox";
+
+    firewall = {
+      enable = true;
+      allowedTCPPorts = [ 80 443 ];
     };
-  };
-
-  services.vaultwarden.enable = true;
-  services.vaultwarden.config = {
-    DOMAIN = "https://bitwarden.beepboop.systems";
-    SIGNUPS_ALLOWED = false;
-  };
-
-  networking.usePredictableInterfaceNames = false;
-
-  services.gitea = {
-    enable = true;
-    appName = "beepboop.systems"; # Give the site a name
-    database = {
-      type = "postgres";
-      passwordFile = "/etc/gittea-pass"; 
-    };
-    settings.security.INSTALL_LOCK = true;
-    settings.service = {
-      SHOW_REGISTRATION_BUTTON = false;
-      DISABLE_REGISRATION = true;
-    };
-    settings.ui.DEFAULT_THEME = "arc-green";
-    settings.api.ENABLE_SWAGGER = false;
-    settings.server = {
-      DOMAIN = "git.beepboop.systems";
-      ROOT_URL = "https://git.beepboop.systems/";
-      LANDING_PAGE = "explore";
-      HTTP_PORT = 3001;
-    };
-  };
-
-  services.postgresql = {
-    enable = true;                # Ensure postgresql is enabled
-    authentication = ''
-      local gitea all ident map=gitea-users
-    '';
-    identMap =                    # Map the gitea user to postgresql
-      ''
-        gitea-users gitea gitea
-      '';
-  };
-
-  services.nginx.enable = true;
-  services.nginx.clientMaxBodySize = "100m";
-  services.nginx.defaultSSLListenPort = 442;
-
-  services.nginx.virtualHosts."beepboop.systems" = {
-    forceSSL = true;
-    enableACME = true;
-    root = "/var/www/beepboop.systems";
-    locations."/" = {
-      extraConfig = ''
-        port_in_redirect off;
-        absolute_redirect off;
-      '';
-    };
-  };
-
-  services.nginx.virtualHosts."git.beepboop.systems" = {
-    forceSSL = true;
-    enableACME = true;
-    locations."/" = {
-      proxyPass = "http://localhost:3001";
-    };
-  };
-
-  services.nginx.virtualHosts."bit.beepboop.systems" = {
-    forceSSL = true;
-    enableACME = true;
-    globalRedirect = "bitwarden.beepboop.systems";
-  };
-
-  services.nginx.virtualHosts."bitwarden.beepboop.systems" = {
-    forceSSL = true;
-    enableACME = true;
-    locations."/" = {
-      proxyPass = "http://127.0.0.1:8000";
-    };
-  };
-
-  services.nginx.virtualHosts."radicale.beepboop.systems" = {
-    forceSSL = true;
-    enableACME = true;
-    locations."/" = {
-      proxyPass = "http://127.0.0.1:5232";
-      extraConfig = ''
-        proxy_set_header  X-Script-Name /;
-        proxy_set_header  X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_pass_header Authorization;
-      '';
-    };
-  };
-
-  services.nginx.virtualHosts."calendar.beepboop.systems" = {
-    forceSSL = true;
-    enableACME = true;
-    globalRedirect = "radicale.beepboop.systems";
-  };
-
-  services.nginx.virtualHosts."cal.beepboop.systems" = {
-    forceSSL = true;
-    enableACME = true;
-    globalRedirect = "radicale.beepboop.systems";
-  };
-
-  security.acme = {
-    acceptTerms = true;
-    defaults.email = "nickforanick@protonmail.com";
-  };
-
-  networking.firewall = {
-    enable = true;
-    allowedTCPPorts = [ 80 443 ];
   };
 }
