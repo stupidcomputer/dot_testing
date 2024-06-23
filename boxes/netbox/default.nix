@@ -15,6 +15,7 @@
       ./rss2email.nix
       ./fail2ban.nix
       ./nginx.nix
+      ./franklincce.nix
     ];
 
   # nix optimization
