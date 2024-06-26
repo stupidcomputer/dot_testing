@@ -59,7 +59,6 @@
 
   hardware.pulseaudio.enable = true;
 
-
   networking.hostName = "x230t";
 
   system.stateVersion = "23.11";
