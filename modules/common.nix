@@ -6,7 +6,6 @@
   ];
 
   environment.systemPackages = [
-    (pkgs.callPackage ../builds/rebuild.nix {})
     (pkgs.callPackage ../builds/st.nix { lightMode = false; })
     (pkgs.callPackage ../builds/utils.nix {})
     (pkgs.callPackage ../builds/statusbar {})

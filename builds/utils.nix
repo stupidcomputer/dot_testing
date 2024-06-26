@@ -34,8 +34,8 @@ stdenv.mkDerivation rec {
   installPhase = ''
     mkdir -p $out/bin
 
-    for i in $(ls $src/sh); do
-      cp $src/sh/$i $out/bin
+    for i in $(ls $src/); do
+      cp $src/$i $out/bin
       ln -sf $out/bin/tmenu_run $out/bin/regenerate
       wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ sxhkd bash feh xrandr jq figlet curl fzy xkbset ytfzf sshuttle svkbd scrcpy xrectsel ffcast ]}
     done
