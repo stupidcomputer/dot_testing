@@ -1,5 +1,7 @@
 # wrapper around rbw
 
+st -c tmenu-prompt -e rbw list
+
 resp=$(rbw list | tmenu)
 
 rbw get "$resp" | xclip -selection clipboard
