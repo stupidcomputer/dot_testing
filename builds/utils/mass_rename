@@ -1,0 +1,14 @@
+temp=$(mktemp)
+ls > $temp
+nvim $temp
+results=$(ls | paste -d'|' - $temp)
+
+IFS="
+"
+for i in $results; do
+	before="${i%%|*}"
+	after="${i#*|}"
+
+	[ "$before" != "$after" ] && mv "$before" "$after"
+	printf "%s -> %s\n" "$before" "$after"
+done
