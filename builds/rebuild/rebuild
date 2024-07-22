@@ -1,4 +1,11 @@
+#!/bin/sh
+
 cd ~/dot_testing
+if [ -f "boxes/$(hostname)/custom_command" ]; then
+	eval "$(cat boxes/$(hostname)/custom_command)"
+	exit
+fi
+
 if [ -f "flake.nix" ]; then
 	sudo nixos-rebuild --flake . switch $@
 else
