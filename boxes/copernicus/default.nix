@@ -34,6 +34,9 @@
     libreoffice
     texliveMedium
     ledger
+
+    unzip
+    imagemagick
   ];
 
   services.hardware.bolt.enable = true; # thunderbolt support
