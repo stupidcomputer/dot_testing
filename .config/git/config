@@ -3,7 +3,10 @@
 	name = stupidcomputer
 
 [credential "https://git.beepboop.systems"]
-	username = stupidcomputer
+	helper = !git-rbw-wrap gitea
+
+[credential "https://github.com"]
+	helper = !git-rbw-wrap github-pat
 
 [advice]
 	addIgnoredFile = false
