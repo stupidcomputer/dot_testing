@@ -9,10 +9,11 @@ tmenu_path () {
     done
 }
 
-if [ "$1" = "-g" ] || [ "$(basename $0)" = "regenerate" ]; then
+if [ "$(basename $0)" = "regenerate" ]; then
 	mkdir -p $HOME/.local/share
 	tmenu_path > $HOME/.local/share/tmenu_cache
 	xmessage "regeneration complete"
+	exit
 else
 	cat $HOME/.local/share/tmenu_cache | tmenu | ${SHELL:-"/bin/sh"} &
 fi

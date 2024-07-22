@@ -20,6 +20,7 @@
 , xkbset
 , rbw
 , xclip
+, xmessage
 }:
 
 stdenv.mkDerivation rec {
@@ -29,7 +30,7 @@ stdenv.mkDerivation rec {
   src = ./utils;
 
   nativeBuildInputs = [ makeWrapper ];
-  buildInputs = [ bash feh xrandr jq curl fzy ytfzf sshuttle svkbd scrcpy rbw xclip ffcast xkbset ];
+  buildInputs = [ bash feh xrandr jq curl fzy ytfzf sshuttle svkbd scrcpy rbw xclip ffcast xkbset xmessage ];
 
   installPhase = ''
     mkdir -p $out/bin
@@ -37,7 +38,7 @@ stdenv.mkDerivation rec {
     for i in $(ls $src/); do
       cp $src/$i $out/bin
       ln -sf $out/bin/tmenu_run $out/bin/regenerate
-      wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ sxhkd bash feh xrandr jq figlet curl fzy xkbset ytfzf sshuttle svkbd scrcpy xrectsel ffcast ]}
+      wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ sxhkd bash feh xrandr jq figlet curl fzy xkbset ytfzf sshuttle svkbd scrcpy xrectsel ffcast xmessage ]}
     done
   '';
 }
