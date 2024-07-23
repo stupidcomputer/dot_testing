@@ -19,6 +19,7 @@
 
   users.users.usr.extraGroups = [
     "docker"
+    "adbusers"
   ];
 
   environment.systemPackages = with pkgs; [
@@ -37,6 +38,8 @@
 
     unzip
     imagemagick
+    pciutils
+    usbutils
   ];
 
   services.hardware.bolt.enable = true; # thunderbolt support
@@ -65,6 +68,8 @@
   services.avahi.enable = true; # runs the Avahi daemon
   services.avahi.nssmdns4 = true; # enables the mDNS NSS plug-in
   services.avahi.openFirewall = true; # opens the firewall for UDP port 5353
+
+  programs.adb.enable = true;
 
   powerManagement.cpuFreqGovernor = "performance";
 
