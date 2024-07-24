@@ -5,6 +5,9 @@
 # wrap rbw get $1 --full to output in the git credential helper
 # format
 
+# assume we're running xorg
+prompt_for_rbw_password
+
 # username=yourusername
 # password=yourpassword
 

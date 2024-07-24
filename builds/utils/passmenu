@@ -1,6 +1,6 @@
 # wrapper around rbw
 
-st -c tmenu-prompt -e rbw list
+prompt_for_rbw_password
 
 resp=$(rbw list | tmenu)
 
