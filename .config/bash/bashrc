@@ -21,6 +21,25 @@ shopt -s histverify
 
 PS1="\h:\w\$ "
 
+# hostname shenanigans
+case "$HOSTNAME" in
+	"copernicus")
+		PS1="\[\033[92;1m\]$PS1\[\033[0;0m\]"
+		;;
+	"x230t")
+		PS1="\[\033[93;1m\]$PS1\[\033[0;0m\]"
+		;;
+	"mlg")
+		PS1="\[\033[94;1m\]$PS1\[\033[0;0m\]"
+		;;
+	"netbox")
+		PS1="\[\033[95;1m\]$PS1\[\033[0;0m\]"
+		;;
+	*)
+		PS1="\[\033[96;1m\]$PS1\[\033[0;0m\]"
+		;;
+esac
+
 repos() {
 	sel="$(ls ~/git | fzy | awk '{print "/home/usr/git/"$1}')"
 	[ "$?" -eq 1 ] && exit
