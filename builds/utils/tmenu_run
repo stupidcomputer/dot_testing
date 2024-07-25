@@ -15,5 +15,6 @@ if [ "$(basename $0)" = "regenerate" ]; then
 	xmessage "regeneration complete"
 	exit
 else
+	export IS_RUNNING_IN_TMENU="yes"
 	cat $HOME/.local/share/tmenu_cache | tmenu | ${SHELL:-"/bin/sh"} &
 fi

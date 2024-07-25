@@ -1,3 +1,11 @@
+#!/bin/sh
+
+if [ "$IS_RUNNING_IN_TMENU" = "yes" ]; then
+	unset IS_RUNNING_IN_TMENU
+	st -c tmenu-prompt -e "$0"
+	exit
+fi
+
 display=$(xrandr \
 	| grep ' connected' \
 	| awk -F ' ' '{print $1}' \
@@ -29,7 +37,7 @@ printf "[] capturing in medium %s\n" "$medium"
 
 case "$medium" in
 	*"mp4"*)
-		ffcast -g $geom rec
+		ffcast -g $geom rec $HOME/output.mp4
 		;;
 	*"png"*)
 		ffcast -g $geom png
