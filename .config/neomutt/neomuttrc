@@ -26,3 +26,4 @@ set use_threads = yes
 set sort_aux = reverse-last-date-received
 
 set imap_keepalive = 300
+set query_command = "khard email --parsable --search-in-source-files '%s'"

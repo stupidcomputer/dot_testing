@@ -6,7 +6,7 @@
   ];
 
   home.file = {
-    ".config/khard/config" = {
+    ".config/khard/khard.conf" = {
       source = ../../.config/khard/khard.conf;
     };
   };
