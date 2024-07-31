@@ -16,3 +16,6 @@
 
 [help]
 	autocorrect = prompt
+
+[push]
+	autoSetupRemote = true
