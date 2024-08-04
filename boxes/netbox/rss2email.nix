@@ -16,6 +16,9 @@
       "nullprogram" = {
         url = "https://nullprogram.com/feed/";
       };
+      "computersarebad" = {
+        url = "https://computer.rip/rss.xml";
+      };
     };
   };
 }
