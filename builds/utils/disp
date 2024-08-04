@@ -160,19 +160,22 @@ case "$(hostname)" in
 				;;
 			*)
 				xinput set-prop 'INSTANT USB GAMING MOUSE ' 'libinput Accel Speed' -1
-				xrandr --output HDMI-0 --primary --mode 1920x1080 --rate 180 --pos 1920x0 --rotate normal \
-					--output DP-0 --mode 1920x1080 --pos 0x0 --rate 180 --rotate normal \
+				xrandr \
+					--output HDMI-0 --primary --mode 1920x1080 --pos 1920x1080 --rotate normal --rate 180 \
+					--output DP-0 --mode 1920x1080 --pos 0x1080 --rotate normal --rate 180 \
 					--output DP-1 --off \
-					--output DP-2 --off \
+					--output DP-2 --mode 1920x1080 --pos 0x0 --rotate normal \
 					--output DP-3 --off \
 					--output DP-4 --off \
 					--output DP-5 --off \
 					--output DP-1-1 --off \
 					--output HDMI-1-1 --off \
-					--output DP-1-2 --off \
-					--output HDMI-1-2 --mode 1920x1080 --pos 3840x0 --rotate normal
-				bspc monitor DP-0 -d 1 3 5 7
-				bspc monitor HDMI-0 -d 2 4 6 8
+					--output HDMI-1-2 --mode 1920x1080 --pos 3840x485 --rotate normal \
+					--output DP-1-2 --mode 1920x1080 --pos 1920x0 --rotate normal
+				bspc monitor DP-0 -d 1 3 5
+				bspc monitor HDMI-0 -d 2 4 6
+				bspc monitor DP-2 -d 7
+				bspc monitor DP-1-2 -d 8
 				bspc monitor HDMI-1-2 -d 9
 				;;
 		esac
