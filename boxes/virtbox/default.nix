@@ -7,6 +7,7 @@
     ../../modules/hosts.nix
     ../../modules/common.nix
     ../../modules/x11.nix
+    ../../modules/pulse.nix
     ../../modules/discord.nix
   ];
 

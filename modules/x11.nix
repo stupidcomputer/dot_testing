@@ -4,7 +4,6 @@
   imports = [
     ./gnupg.nix
     ./fonts.nix
-    ./pulse.nix
   ];
 
   environment.systemPackages = with pkgs; [
