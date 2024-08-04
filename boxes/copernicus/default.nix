@@ -9,7 +9,6 @@
     ../../modules/bootstrap.nix
     ../../modules/common.nix
     ../../modules/x11.nix
-    ../../modules/pulse.nix
     ../../modules/discord.nix
     ../../modules/gaming.nix
     ../../modules/rbw.nix
@@ -41,6 +40,7 @@
     imagemagick
     pciutils
     usbutils
+    pwvucontrol
   ];
 
   services.hardware.bolt.enable = true; # thunderbolt support
@@ -69,6 +69,13 @@
   services.avahi.enable = true; # runs the Avahi daemon
   services.avahi.nssmdns4 = true; # enables the mDNS NSS plug-in
   services.avahi.openFirewall = true; # opens the firewall for UDP port 5353
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
 
   programs.adb.enable = true;
 
