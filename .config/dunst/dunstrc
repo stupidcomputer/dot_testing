@@ -1,0 +1,24 @@
+[global]
+  follow = mouse
+  font = Fantasque Sans Mono 8
+  frame_width = 1
+  always_run_script = true
+
+[urgency_low]
+  background = "#161510"
+  foreground = "#cccccc"
+  frame_color = "#727a18"
+
+[urgency_normal]
+  background = "#161510"
+  foreground = "#cccccc"
+  frame_color = "#727a18"
+
+[urgency_critical]
+  background = "#161510"
+  foreground = "#cccccc"
+  frame_color = "#727a18"
+
+[notify]
+  summary = "*"
+  script = ~/.config/dunst/notification_handler.sh

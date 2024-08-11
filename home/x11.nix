@@ -4,6 +4,7 @@
   imports = [
     ./bspwm
     ./brave
+    ./dunst
     ./sx
     ./sxhkd
     ./tridactyl
