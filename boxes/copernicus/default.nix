@@ -41,6 +41,9 @@
     pciutils
     usbutils
     pwvucontrol
+
+    dunst
+    libnotify
   ];
 
   services.hardware.bolt.enable = true; # thunderbolt support
@@ -48,6 +51,7 @@
     enable = true;
     settings = {
       General = {
+        AutoEnable = true;
         Enable = "Source,Sink,Media,Socket";
         ControllerMode = "bredr";
       };
@@ -87,8 +91,16 @@
     firewall = {
       enable = true;
       allowedTCPPorts = [ 6000 ];
+      allowedTCPPortRanges = [
+        { from = 1714; to = 1764; } # KDE Connect
+      ];
+      allowedUDPPortRanges = [
+        { from = 1714; to = 1764; } # KDE Connect
+      ];
     };
   };
+
+  programs.kdeconnect.enable = true;
 
   system.stateVersion = "24.05"; # don't change this, lol
 }

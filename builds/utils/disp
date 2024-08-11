@@ -179,6 +179,9 @@ case "$(hostname)" in
 				bspc monitor HDMI-1-2 -d 9
 				;;
 		esac
+		dunst & disown
+		dbus-launch kdeonnect-indicator & disown
+		;;
 esac
 
 # initial post-wm setup
