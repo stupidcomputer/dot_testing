@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ./nvidia.nix
+    ../x230t/special-ssh-magic.nix
     ../../modules/ssh-phone-home.nix
     ../../modules/hosts.nix
     ../../modules/bootstrap.nix
@@ -44,6 +45,7 @@
 
     dunst
     libnotify
+    ffmpeg
   ];
 
   services.hardware.bolt.enable = true; # thunderbolt support
