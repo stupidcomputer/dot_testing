@@ -1,6 +1,6 @@
 [global]
   follow = mouse
-  font = Fantasque Sans Mono 8
+  font = Fantasque Sans Mono 20
   frame_width = 1
   always_run_script = true
 
