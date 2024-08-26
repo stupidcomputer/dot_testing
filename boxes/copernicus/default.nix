@@ -46,6 +46,8 @@
     dunst
     libnotify
     ffmpeg
+
+    (pkgs.callPackage ../../builds/archutils.nix {})
   ];
 
   services.hardware.bolt.enable = true; # thunderbolt support

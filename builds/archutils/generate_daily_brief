@@ -1,0 +1,90 @@
+#!/bin/sh
+
+working_directory=$(date +%Y-%m-%d)
+human_readable=$(date "+%d %b %Y")
+
+cd ~/doc/briefs/
+mkdir "$working_directory"
+cd "$working_directory"
+
+cat > main.tex <<EOF
+\documentclass[oneside]{article}
+
+\usepackage{amssymb}
+
+\pagenumbering{gobble}
+
+\begin{document}
+
+\noindent {\Large Ryan Marina} \hspace{\fill} {\Large Briefing for $human_readable}
+
+\noindent \textsc{Internal Document System} \hspace{\fill} $ \square $ \textit{scanned?} $ \square $ \textit{not scanned?}
+
+\noindent \textit{Digital Archive Supplement} \hspace{\fill} internal notes: \rule{3cm}{0.4pt}
+
+\noindent \texttt{iref:doc/briefs/$working_directory}
+
+\vspace{0.4cm}
+
+\noindent \textsc{Schedule}
+
+\vspace{-0.30cm}
+
+\noindent \rule{12cm}{0.4pt}
+
+EOF
+
+schedule=$(
+	khal list today today --format "{categories}|{start-time}|{end-time}|{title}" |
+	grep '^school|'
+)
+IFS='
+'
+
+for class in $schedule; do
+	echo "$class" |
+		awk -F'|' '{
+			print "\\noindent " $4 " \\hspace{\\fill} \\textit{(" $2 "-" $3 ")}\n\n"
+		}' >> main.tex
+done
+
+cat >> main.tex <<EOF
+\vspace{0.4cm}
+
+\noindent \textsc{Unresolved Items}
+
+\vspace{-0.30cm}
+
+\noindent \rule{12cm}{0.4pt}
+
+
+EOF
+
+todo_items=$(
+	todo --porcelain |
+	jq -r '.[].summary'
+)
+IFS='
+'
+
+for todo in $todo_items; do
+	printf '\\noindent $ \\square $ %s\n\n' "$todo" >> main.tex
+done
+
+cat >> main.tex <<EOF
+\vspace{0.4cm}
+
+\noindent \textsc{Items to be Appended to the Agenda}
+
+\vspace{-0.30cm}
+
+\noindent \rule{12cm}{0.4pt}
+
+\end{document}
+EOF
+
+pdflatex main.tex
+
+printf "[!] briefing generated\n"
+
+printf "file:///home/usr/doc/briefs/%s/main.pdf\n" "$working_directory"
