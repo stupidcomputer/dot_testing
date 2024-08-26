@@ -26,3 +26,5 @@ bspc config top_padding 20
 
 # post-wm configuration
 disp
+
+bspc desktop -f 1
