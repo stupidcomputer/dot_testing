@@ -180,7 +180,7 @@ case "$(hostname)" in
 				;;
 		esac
 		dunst & disown
-		dbus-launch kdeonnect-indicator & disown
+		phone pair & disown
 		;;
 esac
 
