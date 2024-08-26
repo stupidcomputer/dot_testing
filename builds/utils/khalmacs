@@ -1,36 +1,41 @@
 #!/bin/sh
 
-case $1 in
-	"regular")
-		khal new -a home $2 07:00 07:01 Depart
-		khal new -a home $2 07:40 08:28 Spanish I H
-		khal new -a home $2 08:34 09:21 AP Human Geography
-		khal new -a home $2 09:27 09:52 SAIL
-		khal new -a home $2 09:58 10:45 Symphonic Band
-		khal new -a home $2 10:51 11:38 English I H
-		khal new -a home $2 11:38 12:07 Lunch
-		khal new -a home $2 12:13 13:00 Biology I H
-		khal new -a home $2 13:06 13:53 Study Hall
-		khal new -a home $2 13:59 14:47 Algebra II H
-		;;
-	"late")
-		khal new -a home $2 07:40 07:41 Depart
-		khal new -a home $2 08:25 09:06 Spanish I H
-		khal new -a home $2 09:12 09:52 AP Human Geography
-		khal new -a home $2 09:58 10:23 SAIL
-		khal new -a home $2 10:29 11:09 Symphonic Band
-		khal new -a home $2 11:15 11:55 English I H
-		khal new -a home $2 11:55 12:28 Lunch
-		khal new -a home $2 12:34 13:14 Biology I H
-		khal new -a home $2 13:20 14:00 Study Hall
-		khal new -a home $2 14:06 14:47 Algebra II H
-		;;
-	"help")
-			echo "
+print_help() {
+	echo "
 this is khalmacs.
 
 builtin-options:
 	- regular
 	- late
-			"
+	"
+}
+
+case $1 in
+	"regular")
+		khal new -g school -a home $2 07:40 08:27 AP Computer Science
+		khal new -g school -a home $2 08:34 09:19 Chemistry I H
+		khal new -g school -a home $2 09:29 10:14 AP Precalculus
+		khal new -g school -a home $2 10:21 11:08 AP European History
+		khal new -g school -a home $2 11:15 12:05 Wind Ensemble H
+		khal new -g school -a home $2 12:12 12:37 SAIL
+		khal new -g school -a home $2 12:37 13:02 Lunch
+		khal new -g school -a home $2 13:09 13:54 English II H
+		khal new -g school -a home $2 14:01 14:47 Spanish III H
+		;;
+	"late")
+		khal new -g school -a home $2 08:25 09:08 AP Computer Science
+		khal new -g school -a home $2 09:15 09:56 Chemistry I H
+		khal new -g school -a home $2 10:06 10:47 AP Precalculus
+		khal new -g school -a home $2 10:54 11:35 AP European History
+		khal new -g school -a home $2 11:41 12:22 Wind Ensemble H
+		khal new -g school -a home $2 12:29 13:10 Lunch
+		khal new -g school -a home $2 13:17 13:58 English II H
+		khal new -g school -a home $2 14:05 14:47 Spanish III H
+		;;
+	*)
+		print_help
+		;;
+	"help")
+		print_help
+		;;
 esac
