@@ -60,6 +60,8 @@
     };
   };
 
+  virtualisation.virtualbox.host.enable = true;
+
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
