@@ -1,0 +1,11 @@
+#!/bin/sh
+
+temp=$(mktemp)
+
+nvim $temp
+
+IFS='
+'
+for i in $(cat $temp); do
+	todo new "$i"
+done
