@@ -6,7 +6,6 @@ in {
   home.packages = [
     pkgs.xclip
     pkgs.xcape
-    pkgs.xscreensaver
     pkgs.mpv
     pkgs.sxiv
     pkgs.xwallpaper

@@ -19,6 +19,7 @@
     ./msmtp
     ./rbw
     ./nws
+    ./xscreensaver
 
     ./x11-progs.nix
     ./tty.nix

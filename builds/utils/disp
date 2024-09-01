@@ -13,6 +13,7 @@ set_walls() {
 
 screensaver () {
 	pkill xscreensaver
+	mkdir -p ~/.config/xscreensaver
 	HOME=".config/xscreensaver" xscreensaver --no-splash & 2>&1 > /dev/null
 }
 
