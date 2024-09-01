@@ -23,6 +23,9 @@ PS1="\h:\w\$ "
 
 # hostname shenanigans
 case "$HOSTNAME" in
+	"aristotle")
+		PS1="\[\033[36;1m\]$PS1\[\033[0;0m\]"
+		;;
 	"copernicus")
 		PS1="\[\033[92;1m\]$PS1\[\033[0;0m\]"
 		;;

@@ -35,7 +35,7 @@
   services.printing.enable = true;
   services.avahi = {
     enable = true;
-    nssmdns = true;
+    nssmdns4 = true;
     openFirewall = true;
   };
 
@@ -51,6 +51,8 @@
   hardware.pulseaudio.enable = true;
 
   networking.hostName = "aristotle";
+
+  powerManagement.cpuFreqGovernor = "powersave";
 
   system.stateVersion = "24.05";
 }
