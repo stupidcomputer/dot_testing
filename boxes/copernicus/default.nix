@@ -46,6 +46,7 @@
     dunst
     libnotify
     ffmpeg
+    mdadm
 
     (pkgs.callPackage ../../builds/archutils.nix {})
   ];
