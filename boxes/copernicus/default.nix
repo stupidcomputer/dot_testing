@@ -47,6 +47,7 @@
     libnotify
     ffmpeg
     mdadm
+    git-annex
 
     (pkgs.callPackage ../../builds/archutils.nix {})
   ];
