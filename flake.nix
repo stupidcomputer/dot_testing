@@ -74,6 +74,9 @@
                       "postmaster@beepboop.systems"
                   ];
                 };
+                "machines@beepboop.systems" = {
+                  hashedPasswordFile = "/etc/ryan-beepboop-systemsuser-pass";
+                };
               };
               certificateScheme = "acme-nginx";
             };
