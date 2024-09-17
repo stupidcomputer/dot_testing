@@ -10,8 +10,6 @@
     ../../modules/bootstrap.nix
     ../../modules/common.nix
     ../../modules/x11.nix
-    ../../modules/discord.nix
-    ../../modules/gaming.nix
     ../../modules/rbw.nix
   ];
 
