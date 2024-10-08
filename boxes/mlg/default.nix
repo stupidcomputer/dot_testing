@@ -35,6 +35,7 @@
     libreoffice
     texliveMedium
     ledger
+    git-annex
   ];
 
   services.hardware.bolt.enable = true; # thunderbolt support
