@@ -81,7 +81,7 @@
     hostName = "mlg";
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 6000 ];
+      allowedTCPPorts = [ 6000 8000 ];
       allowedTCPPortRanges = [
         { from = 1714; to = 1764; } # KDE Connect
       ];
