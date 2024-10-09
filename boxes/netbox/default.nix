@@ -18,12 +18,17 @@
       ./franklincce.nix
     ];
 
-  # nix optimization
-  nix.optimise = {
-    automatic = true;
-    dates = [ "03:45" ];
+  nix = {
+    optimise = {
+      automatic = true;
+      dates = [ "02:30" ];
+    };
+    gc = {
+      automatic = true;
+      dates = "03:15";
+      options = "-d";
+    };
   };
-
 
   time.timeZone = "America/Chicago";
 
