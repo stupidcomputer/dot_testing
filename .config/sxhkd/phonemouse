@@ -1,0 +1,43 @@
+# exit mouse mode
+w
+	mode phone
+
+# move left
+{ctrl +,shift +,_} h
+	xdotool mousemove_relative -- {-5,-50,-20} 0
+
+# move down
+{ctrl +,shift +,_} j
+	xdotool mousemove_relative -- 0 {5,50,20}
+
+# move up
+{ctrl +,shift +,_} k
+	xdotool mousemove_relative -- 0 {-5,-50,-20}
+
+# move right
+{ctrl +,shift +,_} l
+	xdotool mousemove_relative -- {5,50,20} 0
+
+# left, middle, right click
+{ctrl +,_} {a,s,d}
+	xdotool {mousedown,click} {1,2,3}
+
+# let go of clicked button
+q
+	xdotool mouseup 1; xdotool mouseup 2; xdotool mouseup 3
+
+# move the mouse to the top of the window
+g ; g
+	mousehelper top
+
+# ditto for bottom
+G
+	mousehelper bottom
+
+# ditto for left
+0
+	mousehelper left
+
+# ditto for right
+dollar
+	mousehelper right

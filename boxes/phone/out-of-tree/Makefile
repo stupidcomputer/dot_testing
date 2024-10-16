@@ -1,14 +1,15 @@
 termux: termux-pkgs termux-dots utils-sh st
 
 st:
-	cd builds/st/ && CC=clang make && cp st ~/.local/bin/st
+	cd ../../../builds/st/ && CFLAGS="-DIS_PHONE" CC=clang make && cp st ~/.local/bin/st
 
 utils-sh:
-	cp builds/utils/sh/* ~/.local/bin
+	cp ../../../builds/utils/* ~/.local/bin
 
 termux-pkgs:
 	pkg install \
 		neovim \
+		xdotool \
 		git \
 		tig \
 		tigervnc \
@@ -33,7 +34,7 @@ termux-pkgs:
 		x11-repo
 
 termux-dots:
-	ln -sf $(CURDIR)/.config ~/.config
-	ln -sf $(CURDIR)/home/ssh/config ~/.ssh/config
+	ln -sf $(CURDIR)/../../../.config ~/.config
+	ln -sf $(CURDIR)/../../../home/ssh/config ~/.ssh/config
 	ln -sf ~/.config/bash/bashrc ~/.bashrc
 	ln -sf ~/.config/bash/profile ~/.bash_profile

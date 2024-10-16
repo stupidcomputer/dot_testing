@@ -18,12 +18,17 @@
       ./franklincce.nix
     ];
 
-  # nix optimization
-  nix.optimise = {
-    automatic = true;
-    dates = [ "03:45" ];
+  nix = {
+    optimise = {
+      automatic = true;
+      dates = [ "02:30" ];
+    };
+    gc = {
+      automatic = true;
+      dates = "03:15";
+      options = "-d";
+    };
   };
-
 
   time.timeZone = "America/Chicago";
 
@@ -59,6 +64,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKbhM3wj0oqjR3pUaZgpfX4Xo4dlzvBTbQ48zHyg7Pwx usr" # x230t
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILBGh1FHPneg7PCDkhMs2BCJPTIRVJkRTKpOj1w02ydD usr" # copernicus
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGrpVDLQszFKoYbvYKRyVTTpehxR0BVU47SXkz39l2wK usr" # mainsail
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2xUbQw9+RCPVw7qCFm4NNCP/MpS2BIArcwMv0KdKOI usr" # mlg
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHZw5bg0TrvSkW/XQa4c+2iLbIKOxfMGbjy5Nb3HSfBv usr" # phone
     ];
     isNormalUser = true;

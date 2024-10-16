@@ -3,7 +3,12 @@
 /*
  * font: see http://freedesktop.org/software/fontconfig/fontconfig-user.html
  */
+#ifdef IS_PHONE
+static char *font = "Monospace:pixelsize=34:antialias=true:autohint=true";
+#else
 static char *font = "Fantasque Sans Mono:pixelsize=14:antialias=true:autohint=true";
+#endif
+
 static int borderpx = 2;
 
 /*
