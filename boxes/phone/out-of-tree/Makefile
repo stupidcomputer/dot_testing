@@ -1,4 +1,4 @@
-termux: termux-pkgs termux-dots utils-sh st
+termux: termux-pkgs termux-dots utils-sh st pip-pkgs
 
 st:
 	cd ../../../builds/st/ && CFLAGS="-DIS_PHONE" CC=clang make && cp st ~/.local/bin/st
@@ -6,9 +6,16 @@ st:
 utils-sh:
 	cp ../../../builds/utils/* ~/.local/bin
 
+pip-pkgs:
+	pip3 install vdirsyncer
+	pip3 install khal
+	pip3 install khard
+
 termux-pkgs:
 	pkg install \
 		neovim \
+		python-pip \
+		feh \
 		xdotool \
 		git \
 		tig \
@@ -31,6 +38,8 @@ termux-pkgs:
 		bspwm \
 		termux-api \
 		jq \
+		isync \
+		neomutt \
 		x11-repo
 
 termux-dots:
@@ -38,3 +47,5 @@ termux-dots:
 	ln -sf $(CURDIR)/../../../home/ssh/config ~/.ssh/config
 	ln -sf ~/.config/bash/bashrc ~/.bashrc
 	ln -sf ~/.config/bash/profile ~/.bash_profile
+	mkdir -p ~/.local/share
+	cp $(CURDIR)/../../../home/wallpapers/pape.jpg ~/.local/share
