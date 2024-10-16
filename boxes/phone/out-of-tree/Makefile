@@ -9,7 +9,7 @@ utils-sh:
 pip-pkgs:
 	pip3 install vdirsyncer
 	pip3 install khal
-	pip3 install khard
+#	pip3 install khard
 
 termux-pkgs:
 	pkg install \
