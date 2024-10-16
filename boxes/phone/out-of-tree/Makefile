@@ -49,3 +49,5 @@ termux-dots:
 	ln -sf ~/.config/bash/profile ~/.bash_profile
 	mkdir -p ~/.local/share
 	cp $(CURDIR)/../../../home/wallpapers/pape.jpg ~/.local/share
+	mkdir -p ~/.shortcuts
+	cp $(CURDIR)/shortcuts/* ~/.shortcuts
