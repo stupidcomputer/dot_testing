@@ -1,8 +1,8 @@
 #!/bin/sh
 
 svkbd-mobile-intl &
-choice=$(ls ~/doc/music/works | tmenu)
+choice=$(ls ~/annex/music/works | tmenu)
 kill %1
 if [ -n "$choice" ]; then
-	find "$HOME/doc/music/works/$choice/" -type f | sxiv -i
+	find "$HOME/annex/music/works/$choice/" -type f | sxiv -i
 fi
