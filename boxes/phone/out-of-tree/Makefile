@@ -1,4 +1,4 @@
-termux: termux-pkgs termux-dots utils-sh st pip-pkgs
+termux: termux-pkgs termux-dots utils-sh st pip-pkgs git-annex.linux
 
 st:
 	cd ../../../builds/st/ && CFLAGS="-DIS_PHONE" CC=clang make && cp st ~/.local/bin/st
@@ -40,6 +40,7 @@ termux-pkgs:
 		jq \
 		isync \
 		neomutt \
+		wget \
 		x11-repo
 
 termux-dots:
@@ -51,3 +52,6 @@ termux-dots:
 	cp $(CURDIR)/../../../home/wallpapers/pape.jpg ~/.local/share
 	mkdir -p ~/.shortcuts
 	cp $(CURDIR)/shortcuts/* ~/.shortcuts
+
+git-annex.linux:
+	bash install-git-annex.sh
