@@ -44,7 +44,10 @@ super + {_,ctrl +,shift + }{h,j,k,l}
 
 # change to or move a node to a desktop
 super + {_,shift + } {1-9,0}
-	bspc {desktop -f,node -d} '{1-9,10}'
+	bspc {desktop -f,node -d} '0{1-9,0}'
+
+super + space; {_,shift + } {1-9,0}
+	bspc {desktop -f,node -d} '1{1-9,0}'
 
 # change a node to tiling, floating, or fullscreen
 super + {t,f,s}
