@@ -46,6 +46,7 @@
     ffmpeg
     mdadm
     git-annex
+    tigervnc
 
     (pkgs.callPackage ../../builds/archutils.nix {})
   ];
