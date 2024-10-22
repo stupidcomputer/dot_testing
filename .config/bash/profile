@@ -2,6 +2,10 @@
 
 # paths and stuff
 export PATH="$PATH:$HOME/.local/bin"
+
+if [ $(hostname) = "localhost" ]; then # this is phone
+	export PATH="$PATH:$HOME/dot_testing/boxes/phone/out-of-tree/git-annex.linux"
+fi
 export MANPATH="$(manpath -q):$HOME/.local/share/man"
 export EDITOR="nvim"
 mkdir -p "$HOME/.local/bin" "$HOME/.share/man"

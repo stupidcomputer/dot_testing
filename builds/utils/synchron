@@ -1,5 +1,10 @@
-is_school && echo "enable the vpn"
-mbsync --config=$HOME/.config/isync/config main
+if [ "$(hostname)" = "localhost" ]; then
+	mbsync --config=$HOME/.config/isync/phone-config
+else
+	is_school && echo "enable the vpn"
+	mbsync --config=$HOME/.config/isync/config main
+fi
+
 vdirsyncer sync
 rbw sync
 
