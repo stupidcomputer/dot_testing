@@ -28,4 +28,4 @@ for i in $habits; do
 	show_past_habit "$i"
 done
 
-read
+read THROWAWAY
