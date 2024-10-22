@@ -1,5 +1,3 @@
-set -x
-
 register_habits=$(ls ~/pdbs/ |
 	grep '\.habit$' |
 	fzy)
