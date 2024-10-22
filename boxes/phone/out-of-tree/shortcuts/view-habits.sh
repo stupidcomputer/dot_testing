@@ -9,23 +9,23 @@ today=$(date "+%m/%d/%Y")
 
 # $1 -- habit filename
 show_past_habit () {
-	printf "%55s =========\n" "$1"
-	donein5days=$(grep -c "$day5" ~/pdbs/$1.habit )
-	donein4days=$(grep -c "$day4" ~/pdbs/$1.habit )
-	donein3days=$(grep -c "$day3" ~/pdbs/$1.habit )
-	donein2days=$(grep -c "$day2" ~/pdbs/$1.habit )
-	donein1days=$(grep -c "$day1" ~/pdbs/$1.habit )
-	donetoday=$(grep -c "$today" ~/pdbs/$1.habit)
+	printf "%25s =========\n" "$1"
+	donein5days=$(grep -c "$day5" "$HOME/pdbs/$1")
+	donein4days=$(grep -c "$day4" "$HOME/pdbs/$1")
+	donein3days=$(grep -c "$day3" "$HOME/pdbs/$1")
+	donein2days=$(grep -c "$day2" "$HOME/pdbs/$1")
+	donein1days=$(grep -c "$day1" "$HOME/pdbs/$1")
+	donetoday=$(grep -c "$today"  "$HOME/pdbs/$1")
 
-	printf "%10s %10s %10s %10s %10s %10s\n%10s %10s %10s %10s %10s (today)%3s\n\n" \
+	printf "%.5s %.5s %.5s %.5s %.5s %.5s\n%5s %5s %5s %5s %5s %5s\n\n" \
 		"$day5" "$day4" "$day3" "$day2" "$day1" "$today" \
 		"$donein5days" "$donein4days" "$donein3days" \
 		"$donein2days" "$donein1days" "$donetoday"
 }
 
-habits=$(ls ~/pdbs | grep '\.habit$' | sed 's/\.habit$//g')
-IFS='
-'
-for i in "$habits"; do
+habits=$(ls ~/pdbs | grep '\.habit$')
+for i in $habits; do
 	show_past_habit "$i"
 done
+
+read
