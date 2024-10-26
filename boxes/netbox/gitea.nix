@@ -39,5 +39,8 @@
     locations."/" = {
       proxyPass = "http://localhost:3001";
     };
+    locations."/bridge" = {
+      proxyPass = "http://localhost:5000";
+    };
   };
 }
