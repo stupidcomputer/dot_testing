@@ -49,7 +49,7 @@ termux-pkgs:
 
 termux-dots:
 	ln -sf $(CURDIR)/../../../.config ~/.config
-	ln -sf $(CURDIR)/../../../home/ssh/config ~/.ssh/config
+	ln -sf $(CURDIR)/../../../.config/ssh/config ~/.ssh/config
 	ln -sf ~/.config/bash/bashrc ~/.bashrc
 	ln -sf ~/.config/bash/profile ~/.bash_profile
 	mkdir -p ~/.local/share
