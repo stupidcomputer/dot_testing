@@ -1,4 +1,4 @@
-termux: termux-pkgs termux-dots utils-sh rebuild-sh st pip-pkgs git-annex.linux
+termux: termux-pkgs termux-dots utils-sh rebuild-sh st pip-pkgs git-annex.linux sssg
 
 list: options # alias
 options:
@@ -9,9 +9,10 @@ options:
 	@echo termux-pkgs - install termux pkgs
 	@echo termux-dots - install termux dotfiles
 	@echo git-annex.linux - install git-annex
+	@echo sssg - install sssg
 
 st:
-	cd ../../../builds/st/ && CFLAGS="-DIS_PHONE" CC=clang make && cp st ~/.local/bin/st
+	-cd ../../../builds/st/ && CFLAGS="-DIS_PHONE" CC=clang make && cp st ~/.local/bin/st
 
 utils-sh:
 	cp ../../../builds/utils/* ~/.local/bin
@@ -52,6 +53,7 @@ termux-pkgs:
 		jq \
 		isync \
 		neomutt \
+		pandoc \
 		wget \
 		tur-repo \
 		x11-repo
@@ -71,3 +73,7 @@ termux-dots:
 
 git-annex.linux:
 	bash install-git-annex.sh
+
+sssg:
+	cp ~/git/sssg/sssg.sh ~/.local/bin/sssg
+	chmod +x ~/.local/bin/sssg
