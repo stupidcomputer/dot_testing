@@ -41,7 +41,11 @@ termux-pkgs:
 		isync \
 		neomutt \
 		wget \
+		tur-repo \
 		x11-repo
+
+	pkg install \
+		chromium # from tur-repo
 
 termux-dots:
 	ln -sf $(CURDIR)/../../../.config ~/.config
