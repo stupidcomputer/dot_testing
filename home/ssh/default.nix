@@ -5,7 +5,7 @@
 
   home.file = {
     ".ssh/config" = {
-      source = ./config;
+      source = ../../.config/ssh/config;
     };
   };
 }
