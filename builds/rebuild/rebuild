@@ -1,6 +1,13 @@
 #!/bin/sh
 
 cd ~/dot_testing
+if [ "$(hostname)" = "localhost" ]; then
+	# we're on a phone
+	cd boxes/phone/out-of-tree
+	make $@
+	exit
+fi
+
 if [ -f "boxes/$(hostname)/custom_command" ]; then
 	eval "$(cat boxes/$(hostname)/custom_command)"
 	exit

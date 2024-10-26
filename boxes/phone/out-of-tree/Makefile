@@ -1,10 +1,22 @@
-termux: termux-pkgs termux-dots utils-sh st pip-pkgs git-annex.linux
+termux: termux-pkgs termux-dots utils-sh rebuild-sh st pip-pkgs git-annex.linux
+
+list: options # alias
+options:
+	@echo specific options
+	@echo st - rebuild st
+	@echo utils-sh - copy utilities
+	@echo pip-pkgs - install pip packages
+	@echo termux-pkgs - install termux pkgs
+	@echo termux-dots - install termux dotfiles
+	@echo git-annex.linux - install git-annex
 
 st:
 	cd ../../../builds/st/ && CFLAGS="-DIS_PHONE" CC=clang make && cp st ~/.local/bin/st
 
 utils-sh:
 	cp ../../../builds/utils/* ~/.local/bin
+rebuild-sh:
+	cp ../../../builds/rebuild/* ~/.local/bin
 
 pip-pkgs:
 	pip3 install vdirsyncer
