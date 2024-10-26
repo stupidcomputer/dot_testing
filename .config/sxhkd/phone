@@ -2,6 +2,9 @@
 ctrl + b; c
 	st
 
+ctrl + b; Return
+	st
+
 ctrl + b; q
 	bspc node -c
 
