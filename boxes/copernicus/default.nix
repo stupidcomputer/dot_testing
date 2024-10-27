@@ -15,7 +15,6 @@
 
   virtualisation.docker.enable = true;
 
-
   users.users.usr.extraGroups = [
     "docker"
     "adbusers"
@@ -33,6 +32,8 @@
     thunderbird
     libreoffice
     texliveMedium
+    kdePackages.kdenlive
+    unzip
     ledger
 
     unzip
@@ -76,17 +77,25 @@
     };
   };
 
-  services.printing.enable = true;
-  services.avahi.enable = true; # runs the Avahi daemon
-  services.avahi.nssmdns4 = true; # enables the mDNS NSS plug-in
-  services.avahi.openFirewall = true; # opens the firewall for UDP port 5353
+  services = {
+    # enable printing
+    printing.enable = true;
+    avahi = {
+      enable = true; # runs the Avahi daemon
+      nssmdns4 = true; # enables the mDNS NSS plug-in
+      openFirewall = true; # opens the firewall for UDP port 5353
+    };
 
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
+    pipewire = {
+      enable = true;
+      alsa = {
+        enable = true;
+        support32Bit = true;
+      };
+      pulse.enable = true;
+    };
   };
+
 
   programs.adb.enable = true;
 
