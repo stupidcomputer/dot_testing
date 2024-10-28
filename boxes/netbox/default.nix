@@ -17,6 +17,7 @@
       ./nginx.nix
       ./franklincce.nix
       ./wireguard.nix
+      ./photoprism-bridge.nix
     ];
 
   nix = {
