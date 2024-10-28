@@ -3,5 +3,6 @@
 {
   imports = [
     ./photoprism.nix
+    ./wireguard.nix
   ];
 }

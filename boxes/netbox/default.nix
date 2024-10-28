@@ -16,6 +16,7 @@
       ./fail2ban.nix
       ./nginx.nix
       ./franklincce.nix
+      ./wireguard.nix
     ];
 
   nix = {

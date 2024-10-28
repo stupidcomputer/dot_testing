@@ -107,13 +107,26 @@
     hostName = "copernicus";
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 6000 ];
-      allowedTCPPortRanges = [
-        { from = 1714; to = 1764; } # KDE Connect
-      ];
-      allowedUDPPortRanges = [
-        { from = 1714; to = 1764; } # KDE Connect
-      ];
+      interfaces = {
+        eno1 = {
+          allowedTCPPorts = [ 6000 ];
+          allowedTCPPortRanges = [
+            { from = 1714; to = 1764; } # KDE Connect
+          ];
+          allowedUDPPortRanges = [
+            { from = 1714; to = 1764; } # KDE Connect
+          ];
+        };
+        wg0 = {
+          # allow everything bound to the wg0 interface
+          allowedTCPPortRanges = [
+            { from = 1; to = 35565; }
+          ];
+          allowedUDPPortRanges = [
+            { from = 1; to = 35565; }
+          ];
+        };
+      };
     };
   };
 
