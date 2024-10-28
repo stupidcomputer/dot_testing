@@ -18,6 +18,8 @@
       ./franklincce.nix
       ./wireguard.nix
       ./photoprism-bridge.nix
+      ./grafana-bridge.nix
+      ./prometheus.nix
     ];
 
   nix = {

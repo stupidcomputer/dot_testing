@@ -4,5 +4,6 @@
   imports = [
     ./photoprism.nix
     ./wireguard.nix
+    ./grafana.nix
   ];
 }
