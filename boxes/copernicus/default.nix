@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ./nvidia.nix
+    ./services
     ../x230t/special-ssh-magic.nix
     ../../modules/ssh-phone-home.nix
     ../../modules/hosts.nix
