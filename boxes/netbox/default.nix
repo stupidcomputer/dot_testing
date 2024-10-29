@@ -83,7 +83,20 @@
 
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 80 443 ];
+      interfaces = {
+        eth0 = {
+          allowedTCPPorts = [ 80 443 ];
+        };
+        wg0 = {
+          # allow everything bound to the wg0 interface
+          allowedTCPPortRanges = [
+            { from = 1; to = 35565; }
+          ];
+          allowedUDPPortRanges = [
+            { from = 1; to = 35565; }
+          ];
+        };
+      };
     };
   };
 }
