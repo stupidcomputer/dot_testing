@@ -58,6 +58,18 @@
     stateVersion = "23.05"; # don't change this, lol
   };
 
+  system.userActivationScripts = {
+    copyBashRC = {
+      # we don't want to bring in the entirety of home-manager for this, so just
+      # write some files as a hack
+      text = ''
+        ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/.config/bash/bashrc /home/ryan/.bashrc
+        ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/.config/bash/profile /home/ryan/.bash_profile
+      '';
+      deps = [];
+    };
+  };
+
   boot.loader = {
     grub.enable = true;
     grub.device = "/dev/vda";
