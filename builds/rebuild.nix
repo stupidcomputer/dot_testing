@@ -18,6 +18,7 @@ stdenv.mkDerivation rec {
   installPhase = ''
     mkdir -p $out/bin
     cp $src/rebuild $out/bin
+    cp $src/git-rebuild $out/bin
     wrapProgram $out/bin/rebuild --prefix PATH : ${lib.makeBinPath [ bash ]}
   '';
 

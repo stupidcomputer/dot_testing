@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# make sure we're in dot_testing
+cd ~/dot_testing
+
+git pull
+git stash
+git rebase
+
+rebuild
