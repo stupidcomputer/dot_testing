@@ -59,6 +59,10 @@
     stateVersion = "23.05"; # don't change this, lol
   };
 
+  services.journald.extraConfig = ''
+    SystemMaxUse=1G
+  '';
+
   system.userActivationScripts = {
     copyEssentialConfiguration = {
       # we don't want to bring in the entirety of home-manager for this, so just
