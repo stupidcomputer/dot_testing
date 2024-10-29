@@ -1,8 +1,9 @@
 #!/bin/bash
 
+# if not interactive, don't do anything
+[ -z "$PS1" ] && return
+
 # some housekeeping
-shopt -s autocd
-set -o vi # vim mode
 alias ls="ls --color=auto"
 alias ll="ls -lah --color=auto"
 function cd() {
@@ -14,32 +15,45 @@ HISTCONTROL=ignorespace:ignoredups:erasedups
 HISTFILESIZE=9999999999
 HISTSIZE=9999999999
 
+# bash specific settings
+set -o vi # vim mode
+shopt -s autocd
 shopt -s cmdhist
 shopt -s histreedit
 shopt -s histappend
 shopt -s histverify
 
-PS1="\h:\w\$ "
+PS1="\w\$ "
+
+if [ -n "$IN_NIX_SHELL" ]; then
+	NIX_SHELL_PS1="nix:"
+fi
+
+if [ "$USER" = "root" ]; then
+	USER_PREFIX="\[\033[41m\]root:\[\033[0;0m\]"
+elif [ "$USER" != "usr" ]; then
+	USER_PREFIX="$USER:"
+fi
 
 # hostname shenanigans
 case "$HOSTNAME" in
 	"aristotle")
-		PS1="\[\033[36;1m\]$PS1\[\033[0;0m\]"
+		PS1="$USER_PREFIX\[\033[36;1m\]${NIX_SHELL_PS1}arist:$PS1\[\033[0;0m\]"
 		;;
 	"copernicus")
-		PS1="\[\033[92;1m\]$PS1\[\033[0;0m\]"
+		PS1="$USER_PREFIX\[\033[97;1m\]${NIX_SHELL_PS1}coper:$PS1\[\033[0;0m\]"
 		;;
 	"x230t")
-		PS1="\[\033[93;1m\]$PS1\[\033[0;0m\]"
+		PS1="$USER_PREFIX\[\033[93;1m\]${NIX_SHELL_PS1}x230t:$PS1\[\033[0;0m\]"
 		;;
 	"mlg")
-		PS1="\[\033[94;1m\]$PS1\[\033[0;0m\]"
+		PS1="$USER_PREFIX\[\033[94;1m\]${NIX_SHELL_PS1}mlg:$PS1\[\033[0;0m\]"
 		;;
 	"netbox")
-		PS1="\[\033[95;1m\]$PS1\[\033[0;0m\]"
+		PS1="$USER_PREFIX\[\033[95;1m\]${NIX_SHELL_PS1}net:$PS1\[\033[0;0m\]"
 		;;
 	*)
-		PS1="\[\033[96;1m\]$PS1\[\033[0;0m\]"
+		PS1="$USER_PREFIX\[\033[96;1m\]${NIX_SHELL_PS1}unk:$PS1\[\033[0;0m\]"
 		;;
 esac
 

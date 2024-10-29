@@ -55,6 +55,9 @@ export ELINKS_CONFDIR="$HOME/.config/elinks"
 # dbus configuration
 export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
 
+# make nix-shell respect our PS1
+export NIX_SHELL_PRESERVE_PROMPT=1
+
 # source the bashrc(s)
 [ -f $HOME/.config/bash/bashrc ] && . $HOME/.config/bash/bashrc
 [ -f $HOME/.bashrc ] && . $HOME/.bashrc
