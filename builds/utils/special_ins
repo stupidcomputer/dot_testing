@@ -8,6 +8,8 @@ tmenu <<DONE
 Ó O-acute
 á a-acute
 Á a-acute
+é e-acute
+É e-acute
 DONE
 ) | awk -F' ' '{print $1}' \
   | tr -d '\n' \
