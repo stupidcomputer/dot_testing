@@ -29,6 +29,10 @@
             publicKey = "JlH1X4KRT+B8Uau+qTLtBqyapkbGClIj1db7znU77kc=";
             allowedIPs = [ "10.100.0.2/32" ];
           }
+          { # aristotle
+            publicKey = "Sw2yyMhyS8GOCWm1VuGn3Y7cfx606dXOGK5mux8ckQU=";
+            allowedIPs = [ "10.100.0.3/32" ];
+          }
         ];
       };
     };
