@@ -59,12 +59,14 @@
   };
 
   system.userActivationScripts = {
-    copyBashRC = {
+    copyEssentialConfiguration = {
       # we don't want to bring in the entirety of home-manager for this, so just
       # write some files as a hack
       text = ''
         ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/.config/bash/bashrc /home/ryan/.bashrc
         ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/.config/bash/profile /home/ryan/.bash_profile
+        ${pkgs.coreutils}/bin/mkdir -p /home/ryan/.config/nvim
+        ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/.config/nvim/init.min.lua /home/ryan/.config/nvim/init.lua
       '';
       deps = [];
     };
