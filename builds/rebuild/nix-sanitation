@@ -1,0 +1,7 @@
+#!/bin/sh
+
+printf "clearing out nix caches\n"
+
+sudo nix-collect-garbage -d
+nix-collect-garbage -d
+sudo nix-store --optimize

@@ -19,6 +19,7 @@ stdenv.mkDerivation rec {
     mkdir -p $out/bin
     cp $src/rebuild $out/bin
     cp $src/git-rebuild $out/bin
+    cp $src/nix-sanitation $out/bin
     wrapProgram $out/bin/rebuild --prefix PATH : ${lib.makeBinPath [ bash ]}
   '';
 
