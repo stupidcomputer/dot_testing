@@ -73,6 +73,18 @@
     };
   };
 
+  system.activationScripts = {
+    copyEssentialConfiguration = {
+      text = ''
+        ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/.config/bash/bashrc /root/.bashrc
+        ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/.config/bash/profile /root/.bash_profile
+        ${pkgs.coreutils}/bin/mkdir -p /root/.config/nvim
+        ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/.config/nvim/init.min.lua /root/.config/nvim/init.lua
+      '';
+      deps = [];
+    };
+  };
+
   boot.loader = {
     grub.enable = true;
     grub.device = "/dev/vda";
