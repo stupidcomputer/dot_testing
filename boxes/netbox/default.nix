@@ -20,6 +20,7 @@
       ./photoprism-bridge.nix
       ./grafana-bridge.nix
       ./prometheus.nix
+      ./socks.nix
     ];
 
   nix = {
