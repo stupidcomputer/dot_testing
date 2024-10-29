@@ -31,6 +31,8 @@ fi
 
 if [ "$USER" = "root" ]; then
 	USER_PREFIX="\[\033[41m\]root:\[\033[0;0m\]"
+elif [ "$USER" == "ryan" ] && [ "$HOSTNAME" = "netbox" ]; then
+	USER_PREFIX=""
 elif [ "$USER" != "usr" ]; then
 	USER_PREFIX="$USER:"
 fi
