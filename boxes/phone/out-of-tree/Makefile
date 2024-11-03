@@ -15,8 +15,11 @@ st:
 	-cd ../../../builds/st/ && CFLAGS="-DIS_PHONE" CC=clang make && cp st ~/.local/bin/st
 
 utils-sh:
+	mkdir -p ~/.local/bin
 	cp ../../../builds/utils/* ~/.local/bin
+
 rebuild-sh:
+	mkdir -p ~/.local/bin
 	cp ../../../builds/rebuild/* ~/.local/bin
 
 pip-pkgs:
@@ -25,6 +28,10 @@ pip-pkgs:
 #	pip3 install khard
 
 termux-pkgs:
+	pkg install \
+		tur-repo \
+		x11-repo
+		
 	pkg install \
 		neovim \
 		python-pip \
@@ -48,6 +55,7 @@ termux-pkgs:
 		htop \
 		rbw \
 		pkg-config \
+		xorg-xrandr \
 		bspwm \
 		termux-api \
 		jq \
@@ -55,13 +63,14 @@ termux-pkgs:
 		neomutt \
 		pandoc \
 		wget \
-		tur-repo \
-		x11-repo
+		which \
+		openssl
 
 	pkg install \
 		chromium # from tur-repo
 
 termux-dots:
+	mkdir -p ~/.local/bin
 	ln -sf $(CURDIR)/../../../.config ~/.config
 	ln -sf $(CURDIR)/../../../.config/ssh/config ~/.ssh/config
 	ln -sf ~/.config/bash/bashrc ~/.bashrc
@@ -75,5 +84,5 @@ git-annex.linux:
 	bash install-git-annex.sh
 
 sssg:
-	cp ~/git/sssg/sssg.sh ~/.local/bin/sssg
-	chmod +x ~/.local/bin/sssg
+	-cp ~/git/sssg/sssg.sh ~/.local/bin/sssg
+	-chmod +x ~/.local/bin/sssg
