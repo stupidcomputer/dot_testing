@@ -2,6 +2,13 @@
 Escape
 	mode sxhkdrc
 
+w
+	mode sxhkdrc
+
+# send the escape key
+]
+	xdotool key Escape
+
 # move left
 {ctrl +,shift +,_} h
 	xdotool mousemove_relative -- {-5,-50,-20} 0

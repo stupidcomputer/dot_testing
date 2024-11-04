@@ -173,12 +173,8 @@ case "$(hostname)" in
 		phone pair & disown
 		;;
 	"localhost") # phone in termux
-		pkill sxhkd
-		cd ~
-		sxhkd -c ~/.config/sxhkd/phone & disown
-		cd -
 		xrandr --output VNC-0 --mode 1920x1080
-		bspc monitor VNC-0 -d 1 2 3 4 5 6 7 8 9 # the phone uses different desktop descriptors
+		bspc monitor VNC-0 -d 01 02 03 04 05 06 07 08 09
 		feh --bg-fill ~/.local/share/pape.jpg
 		bspc config top_padding 0
 		bspc config bottom_padding 100

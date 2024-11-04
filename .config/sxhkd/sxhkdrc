@@ -2,8 +2,17 @@
 super + Return
 	st
 
+ctrl + b; c
+	st
+
+ctrl + b; Return
+	st
+
 # spawn the launcher
 super + d
+	tmenu_run
+
+ctrl + b; d
 	tmenu_run
 
 # kill sxhkd with USR1 and restart bspwm
@@ -11,6 +20,11 @@ super + r
 	pkill -USR1 -x sxhkd; \
 	bspc wm -r
 
+ctrl + b; r
+	pkill -USR1 -x sxhkd; \
+	bspc wm -r
+
+# show nws radar
 super + {_,shift + }n
 	nws {local,national}
 
@@ -18,12 +32,21 @@ super + {_,shift + }n
 super + m
 	mode mouse
 
+ctrl + b; m
+	mode mouse
+
 # kill the current node
 super + q
 	bspc node -c
 
+ctrl + b; q
+	bspc node -c
+
 # kill bspwm
 super + e
+	bspc quit 0
+
+ctrl + b; e
 	bspc quit 0
 
 # systemctl suspend
@@ -34,12 +57,14 @@ super + shift + e
 super + z
 	passmenu
 
-# start a browser
-super + b
-	chromium
+ctrl + b; z
+	passmenu
 
 # manipulate a node
 super + {_,ctrl +,shift + }{h,j,k,l}
+	bspc node -{f,p,s} {west,south,north,east}
+
+ctrl + b; {_,ctrl +,shift + }{h,j,k,l}
 	bspc node -{f,p,s} {west,south,north,east}
 
 # change to or move a node to a desktop
@@ -49,8 +74,14 @@ super + {_,shift + } {1-9,0}
 super + space; {_,shift + } {1-9,0}
 	bspc {desktop -f,node -d} '1{1-9,0}'
 
+ctrl + b; {_,shift + } {1-9,0}
+	bspc {desktop -f,node -d} '0{1-9,0}'
+
 # change a node to tiling, floating, or fullscreen
 super + {t,f,s}
+	bspc node -t {tiled,floating,fullscreen}
+
+ctrl + b; {t,f,s}
 	bspc node -t {tiled,floating,fullscreen}
 
 # x230t specific -- activate the tablet menu
@@ -59,3 +90,7 @@ XF86RotateWindows
 
 shift + Insert
 	special_ins
+
+# phone specific -- send the escape key since we can't use it
+super + b; [
+	xdotool key Escape
