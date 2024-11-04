@@ -183,6 +183,7 @@ case "$(hostname)" in
 		bspc config top_padding 0
 		bspc config bottom_padding 100
 		mkdir -p ~/.cache/statusbar
+		termux-statusbar-polyfill start_statusbars
 		;;
 esac
 

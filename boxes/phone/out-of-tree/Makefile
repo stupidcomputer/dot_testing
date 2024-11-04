@@ -1,4 +1,4 @@
-termux: termux-pkgs termux-dots utils-sh rebuild-sh st pip-pkgs git-annex.linux sssg
+termux: termux-pkgs termux-dots utils-sh rebuild-sh st pip-pkgs git-annex.linux sssg statusbar-polyfill
 
 list: options # alias
 options:
@@ -87,3 +87,6 @@ git-annex.linux:
 sssg:
 	-cp ~/git/sssg/sssg.sh ~/.local/bin/sssg
 	-chmod +x ~/.local/bin/sssg
+
+statusbar-polyfill:
+	cp ~/dot_testing/builds/statusbar/termux-statusbar-polyfill ~/.local/bin
