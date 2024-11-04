@@ -1,8 +1,8 @@
 from multiprocessing import Process, Queue
 from collections import defaultdict
-from sys import argv
-from sys import stdout
+from sys import argv, stdout
 from math import floor
+from socket import gethostname
 import datetime
 import signal
 import subprocess
@@ -56,7 +56,10 @@ def filemodfactory(filename: str, modname: str):
 
 def new_mail(queue, _):
     while True:
-        dir_output = os.listdir("/home/usr/Mail/main/INBOX/new")
+        try:
+            dir_output = os.listdir("/home/usr/Mail/main/INBOX/new")
+        except FileNotFoundError: # we're on the phone, no mail here
+            return
         dir_output = len(dir_output)
         queue.put({
             "module": "newmail",
@@ -69,7 +72,10 @@ def bspwm(queue, monitor):
         socket.AF_UNIX,
         socket.SOCK_STREAM
     )
-    client.connect("/tmp/bspwm_1_0-socket")
+    try:
+        client.connect("/tmp/bspwm_1_0-socket")
+    except: # perhaps we're on the phone?
+        client.connect("/data/data/com.termux/files/usr/tmp/bspwm_1_0-socket")
 
     message = "subscribe\0".encode()
     client.send(message)
@@ -143,37 +149,57 @@ def render(modules) -> str:
     print(output, end='')
     stdout.flush()
 
+def start_statusbars():
+    # is there an actually good xrandr library?
+    xrandr = subprocess.Popen(['xrandr'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    output = list(xrandr.stdout)
+    output = [i.decode("utf-8") for i in output if " connected" in i.decode("utf-8")]
+    serialized = []
+    for i in output:
+        splitted = i.split(' ')
+        print(splitted)
+        displayname = splitted[0]
+        geometry = splitted[2]
+        if geometry == "primary":
+            geometry = splitted[3]
+
+        try:
+            geometry_splitted = [int(i) for i in geometry.replace('x', '+').split('+')]
+        except ValueError:
+            continue
+        geometry_splitted[1] = 20
+        print(displayname, geometry_splitted)
+        os.system("st -c statusbar -p -g {}x{}+{}+{} -e statusbar {} & disown".format(
+            *map(str, geometry_splitted),
+            displayname
+        ))
+
 def main():
     try:
         os.mkdir("/home/usr/.cache/statusbar")
     except FileExistsError:
         pass
+    except FileNotFoundError:
+        # we're on the phone
+        try:
+            os.mkdir("/data/data/com.termux/files/home/.cache/statusbar")
+        except FileExistsError:
+            pass
 
     if argv[1] == "start_statusbars":
-        # get the monitors
-        xrandr = subprocess.Popen(['xrandr'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-        output = list(xrandr.stdout)
-        output = [i.decode("utf-8") for i in output if " connected" in i.decode("utf-8")]
-        serialized = []
-        for i in output:
-            splitted = i.split(' ')
-            print(splitted)
-            displayname = splitted[0]
-            geometry = splitted[2]
-            if geometry == "primary":
-                geometry = splitted[3]
+        hostname = gethostname()
 
-            try:
-                geometry_splitted = [int(i) for i in geometry.replace('x', '+').split('+')]
-            except ValueError:
-                continue
-            geometry_splitted[1] = 20
-            print(displayname, geometry_splitted)
-            os.system("st -c statusbar -p -g {}x{}+{}+{} -e statusbar {} & disown".format(
-                *map(str, geometry_splitted),
-                displayname
+        if not hostname == "localhost": # if we're not the phone
+            start_statusbars()
+        else:
+            # we are the phone
+            os.system("/data/data/com.termux/files/usr/bin/bash -c 'st -c statusbar -p -g {}x{}+{}+{} -e termux-statusbar-polyfill {} & disown'".format(
+                1920, 50, 0, 980,
+                "VNC-0"
             ))
+
         return
+
     queue = Queue()
     modules = [bspwm, clock, battery, batterystatus, sxhkdmode, new_mail]
     [Process(target=module, args=(queue, argv[1])).start() for module in modules]
