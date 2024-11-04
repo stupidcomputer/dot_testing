@@ -21,18 +21,17 @@ utils-sh:
 rebuild-sh:
 	mkdir -p ~/.local/bin
 	cp ../../../builds/rebuild/* ~/.local/bin
-
 pip-pkgs:
 	pip3 install vdirsyncer
 	pip3 install khal
 #	pip3 install khard
 
 termux-pkgs:
-	pkg install \
+	pkg install -y \
 		tur-repo \
 		x11-repo
 		
-	pkg install \
+	pkg install -y \
 		neovim \
 		python-pip \
 		feh \
@@ -66,10 +65,8 @@ termux-pkgs:
 		wget \
 		which \
 		rsync \
-		openssl
-
-	pkg install \
-		chromium # from tur-repo
+		openssl \
+		chromium
 
 termux-dots:
 	mkdir -p ~/.local/bin
