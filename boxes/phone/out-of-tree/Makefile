@@ -59,6 +59,7 @@ termux-pkgs:
 		bspwm \
 		termux-api \
 		jq \
+		xclip \
 		isync \
 		neomutt \
 		pandoc \
