@@ -10,8 +10,8 @@ tmenu_path () {
 }
 
 export IS_RUNNING_IN_TMENU="yes"
-choice=$(cat $HOME/.local/share/tmenu_cache | tmenu)
-if [ -z "$choice" ]; then
+choice=$(echo regenerate | cat $HOME/.local/share/tmenu_cache - | tmenu)
+if [ "$choice" = "regenerate" ]; then
 	mkdir -p $HOME/.local/share
 	tmenu_path | sort > $HOME/.local/share/tmenu_cache
 else
