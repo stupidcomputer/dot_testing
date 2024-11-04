@@ -47,7 +47,9 @@ super + e
 	bspc quit 0
 
 ctrl + b; e
-	bspc quit 0
+	bspc quit 0; \
+	pkill X # phone starts bspwm differently
+	        # to take everything down, we need to kill X
 
 # systemctl suspend
 super + shift + e
