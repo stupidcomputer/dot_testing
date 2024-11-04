@@ -34,6 +34,10 @@
     libreoffice
     texliveMedium
     kdePackages.kdenlive
+    audacity
+    bespokesynth
+    puddletag
+    musescore
     unzip
     ledger
 
