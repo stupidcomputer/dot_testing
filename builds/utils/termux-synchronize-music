@@ -1,0 +1,3 @@
+#!/bin/sh
+
+rsync -avv usr@192.168.1.210:~/annex/music/audio ~/storage/music

@@ -65,6 +65,7 @@ termux-pkgs:
 		pandoc \
 		wget \
 		which \
+		rsync \
 		openssl
 
 	pkg install \
