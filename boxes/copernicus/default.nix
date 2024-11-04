@@ -55,6 +55,7 @@
     tigervnc
 
     (pkgs.callPackage ../../builds/archutils.nix {})
+    (pkgs.callPackage ../../builds/sssg.nix {})
   ];
 
   services.hardware.bolt.enable = true; # thunderbolt support
