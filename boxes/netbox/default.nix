@@ -17,7 +17,7 @@
       ./nginx.nix
       ./franklincce.nix
       ./wireguard.nix
-      ./photoprism-bridge.nix
+      ./nextcloud-bridge.nix
       ./grafana-bridge.nix
       ./prometheus.nix
       ./socks.nix

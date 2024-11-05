@@ -2,8 +2,8 @@
 
 {
   imports = [
-    ./photoprism.nix
     ./wireguard.nix
     ./grafana.nix
+    ./nextcloud.nix
   ];
 }
