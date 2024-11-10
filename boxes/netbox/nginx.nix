@@ -26,6 +26,9 @@
         absolute_redirect off;
       '';
     };
+    locations."/groupme" = {
+      proxyPass = "http://10.100.0.2:7439";
+    };
   };
 
   security.acme = {
