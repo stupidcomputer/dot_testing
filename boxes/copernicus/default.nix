@@ -117,6 +117,7 @@
           allowedTCPPorts = [ 6000 ];
           allowedTCPPortRanges = [
             { from = 1714; to = 1764; } # KDE Connect
+            { from = 10000; to = 10100; } # temp stuff
           ];
           allowedUDPPortRanges = [
             { from = 1714; to = 1764; } # KDE Connect
