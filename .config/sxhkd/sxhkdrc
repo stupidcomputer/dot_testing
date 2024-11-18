@@ -96,3 +96,56 @@ shift + Insert
 # phone specific -- send the escape key since we can't use it
 super + b; [
 	xdotool key Escape
+
+# mouse keybindings on the keypad
+# move left
+{ctrl +,shift +} KP_6
+	xdotool mousemove_relative -- {5,50} 0
+
+# move down
+{ctrl +,shift +} KP_2
+	xdotool mousemove_relative -- 0 {5,50}
+
+# move up
+{ctrl +,shift +} KP_8
+	xdotool mousemove_relative -- 0 {-5,-50}
+
+# move right
+{ctrl +,shift +} KP_4
+	xdotool mousemove_relative -- {-5,-50} 0
+
+{ctrl +,shift +} KP_Divide
+	xdotool mousedown 1
+
+{ctrl +,shift +} KP_Multiply
+	xdotool mousedown 2
+
+{ctrl +,shift +} KP_Subtract
+	xdotool mousedown 3
+
+{ctrl +,shift +} @KP_Divide
+	xdotool mouseup 1
+
+{ctrl +,shift +} @KP_Multiply
+	xdotool mouseup 2
+
+{ctrl +,shift +} @KP_Subtract
+	xdotool mouseup 3
+
+KP_Divide
+	xdotool mousedown 1
+
+KP_Multiply
+	xdotool mousedown 2
+
+KP_Subtract
+	xdotool mousedown 3
+
+@KP_Divide
+	xdotool mouseup 1
+
+@KP_Multiply
+	xdotool mouseup 2
+
+@KP_Subtract
+	xdotool mouseup 3
