@@ -15,6 +15,10 @@ super + d
 ctrl + b; d
 	tmenu_run
 
+# launch brave with profile selection
+super + b
+	brave-launcher
+
 # kill sxhkd with USR1 and restart bspwm
 super + r
 	pkill -USR1 -x sxhkd; \
@@ -94,7 +98,7 @@ shift + Insert
 	special_ins
 
 # phone specific -- send the escape key since we can't use it
-super + b; [
+ctrl + b; [
 	xdotool key Escape
 
 # mouse keybindings on the keypad
