@@ -6,5 +6,6 @@
     ./grafana.nix
     ./nextcloud.nix
     ./paperless.nix
+    ./guacamole
   ];
 }

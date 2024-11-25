@@ -17,11 +17,13 @@
       ./nginx.nix
       ./franklincce.nix
       ./wireguard.nix
-      ./nextcloud-bridge.nix
-      ./grafana-bridge.nix
-      ./paperless-bridge.nix
       ./prometheus.nix
       ./socks.nix
+
+      ./nextcloud-bridge.nix
+      ./grafana-bridge.nix
+      ./guacamole-bridge.nix
+      ./paperless-bridge.nix
     ];
 
   nix = {

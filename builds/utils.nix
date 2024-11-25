@@ -20,6 +20,7 @@
 , xkbset
 , rbw
 , xclip
+, x11vnc
 , xmessage
 , imagemagick
 }:
@@ -31,14 +32,14 @@ stdenv.mkDerivation rec {
   src = ./utils;
 
   nativeBuildInputs = [ makeWrapper ];
-  buildInputs = [ bash feh xrandr jq curl fzy ytfzf sshuttle svkbd scrcpy rbw xclip ffcast xkbset xmessage imagemagick ];
+  buildInputs = [ bash feh xrandr jq curl fzy ytfzf sshuttle svkbd scrcpy rbw xclip ffcast xkbset xmessage imagemagick x11vnc ];
 
   installPhase = ''
     mkdir -p $out/bin
 
     for i in $(ls $src/); do
       cp $src/$i $out/bin
-      wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ sxhkd bash feh xrandr jq figlet curl fzy xkbset ytfzf sshuttle svkbd scrcpy xrectsel ffcast xmessage imagemagick ]}
+      wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ sxhkd bash feh xrandr jq figlet curl fzy xkbset ytfzf sshuttle svkbd scrcpy xrectsel ffcast xmessage imagemagick x11vnc ]}
     done
   '';
 }

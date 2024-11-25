@@ -19,6 +19,9 @@ ctrl + b; d
 super + b
 	brave-launcher
 
+ctrl + b; b
+	brave-launcher
+
 # kill sxhkd with USR1 and restart bspwm
 super + r
 	pkill -USR1 -x sxhkd; \
@@ -82,6 +85,9 @@ super + space; {_,shift + } {1-9,0}
 
 ctrl + b; {_,shift + } {1-9,0}
 	bspc {desktop -f,node -d} '0{1-9,0}'
+
+ctrl + b; space; {_,shift + } {1-9,0}
+	bspc {desktop -f,node -d} '1{1-9,0}'
 
 # change a node to tiling, floating, or fullscreen
 super + {t,f,s}
@@ -153,3 +159,7 @@ KP_Subtract
 
 @KP_Subtract
 	xdotool mouseup 3
+
+# you're using tmux and you need ctrl+b
+ctrl + b; ~ctrl + b
+	echo ctrlb passthrough

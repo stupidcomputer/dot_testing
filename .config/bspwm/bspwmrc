@@ -8,7 +8,7 @@ bspc rule -a Xmessage border=on state=floating
 bspc rule -a Zathura state=tiled
 bspc rule -a generic-st-window state=floating manage=on sticky=on border=on
 bspc rule -a floating-feh state=floating
-bspc rule -a send-to-9 desktop=9
+bspc rule -a send-to-9 desktop=09
 
 bspc rule -a steam desktop=1
 bspc rule -a discord desktop=2
@@ -27,4 +27,4 @@ bspc config top_padding 20
 # post-wm configuration
 disp
 
-bspc desktop -f 1
+bspc desktop -f 01
