@@ -12,18 +12,12 @@
       ./radicale.nix
       ./vaultwarden.nix
       ./sslh.nix
-      ./rss2email.nix
       ./fail2ban.nix
       ./nginx.nix
       ./franklincce.nix
       ./wireguard.nix
-      ./prometheus.nix
-      ./socks.nix
 
       ./nextcloud-bridge.nix
-      ./grafana-bridge.nix
-      ./guacamole-bridge.nix
-      ./paperless-bridge.nix
     ];
 
   nix = {
