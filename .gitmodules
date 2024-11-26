@@ -1,0 +1,3 @@
+[submodule "lappy/builds/dwm"]
+	path = lappy/builds/dwm
+	url = https://git.beepboop.systems/stupidcomputer/dwm

@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# try to load the sleep builtin dynamically, because otherwise there's
+# a *lot* of overhead (in terms of PID count)
+if [[ $(</proc/cmdline) = *"nixos-system"* ]]; then
+	enable -f /run/current-system/sw/lib/bash/sleep sleep
+else
+	enable -f /lib/bash/sleep sleep
+fi
+
+get_cmus_info () {
+	if [ /dev/shm/status/cmus -nt /dev/shm/status/modified ]; then
+		cmus_status=$(</dev/shm/status/cmus)
+		touch /dev/shm/status/modified
+	fi
+}
+
+while true; do
+	# use /dev/shm to minimize the amount of i/o on disk
+	if [ ! -d /dev/shm/status ]; then
+		mkdir -p /dev/shm/status
+		touch /dev/shm/status/modified
+	fi
+
+	battery=$(</sys/class/power_supply/BAT0/capacity)
+	printf -v date '%(%H)T:%(%M)T' -1
+	get_cmus_info
+
+	printf "%s/%s/%s\n" "$cmus_status" "$date" "$battery"
+	sleep 1
+done | dwm-setstatus

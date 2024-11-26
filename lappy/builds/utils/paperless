@@ -1,0 +1,30 @@
+#!/bin/sh
+
+case "$1" in
+	"start")
+		printf "[] starting paperless\n"
+		systemctl start redis-paperless paperless-scheduler
+		;;
+	"stop")
+		printf "[] stopping paperless\n"
+		systemctl stop paperless-web paperless-task-queue paperless-scheduler paperless-consumer redis-paperless
+		;;
+	"query")
+		exit $([ $(systemctl | grep -c paperless) -gt 0 ])
+		;;
+	*)
+		cat <<EOF
+paperless -- start and stop the paperless web service easily
+
+paperless start
+	start the paperless systemd services if they haven't already
+	been started
+
+paperless stop
+	stop the paperless systemd services
+
+paperless query
+	return 0 if paperless is running, 1 if not
+EOF
+		;;
+esac

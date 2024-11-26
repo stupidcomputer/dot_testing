@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# see original at
+# https://github.com/cmus/cmus/blob/master/cmus-status-display
+
+output()
+{
+	printf "%s" "$*" > /dev/shm/status/cmus 2>&1
+}
+
+while test $# -ge 2
+do
+	eval _$1='$2'
+	shift
+	shift
+done
+
+if test "$_status" = "playing"; then _status=">"; else _status="="; fi
+if test -n "$_file"
+then
+	h=$(($_duration / 3600))
+	m=$(($_duration % 3600))
+
+	duration=""
+	test $h -gt 0 && dur="$h:"
+	duration="$dur$(printf '%02d:%02d' $(($m / 60)) $(($m % 60)))"
+
+	output "${_status}$_artist($_album)-$_title"
+elif test -n "$_url"
+then
+	output "${_status}$_url-$_title"
+else
+	output "${_status}"
+fi

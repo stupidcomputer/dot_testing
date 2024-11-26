@@ -1,0 +1,3 @@
+#!/bin/sh
+
+cd $HOME/dots/lappy; sudo nixos-rebuild switch -I nixos-config=./configuration.nix
