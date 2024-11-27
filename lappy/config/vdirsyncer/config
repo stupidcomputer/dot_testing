@@ -1,0 +1,79 @@
+[general]
+status_path = "~/vdir/status"
+
+[pair contacts]
+a = "contacts_local"
+b = "contacts_remote"
+collections = ["from a", "from b"]
+
+[pair calendar]
+a = "calendar_local"
+b = "calendar_remote"
+collections = ["from a", "from b"]
+
+[pair band_calendar]
+a = "band_calendar_local"
+b = "band_calendar_remote"
+collections = null
+
+[pair pco_calendar]
+a = "pco_local"
+b = "pco_remote"
+collections = null
+
+[pair school_calendar]
+a = "school_local"
+b = "school_remote"
+collections = null
+
+[storage contacts_local]
+type = "filesystem"
+path = "~/vdir/people/main"
+fileext = ".vcf"
+
+[storage calendar_local]
+type = "filesystem"
+path = "~/vdir/calendar/personal"
+fileext = ".ics"
+
+[storage band_calendar_local]
+type = "filesystem"
+path = "~/vdir/calendar/band"
+fileext = ".ics"
+
+[storage pco_local]
+type = "filesystem"
+path = "~/vdir/calendar/pco"
+fileext = ".ics"
+
+[storage school_local]
+type = "filesystem"
+path = "~/vdir/calendar/school"
+fileext = ".ics"
+
+[storage contacts_remote]
+type = "carddav"
+
+url = "https://radicale.beepboop.systems/ryan/20cda0dd-5922-4905-8956-859c989a6519/"
+username = "ryan"
+password.fetch = ["command", "rbw", "get", "radicale"]
+
+[storage band_calendar_remote]
+type = "http"
+url = "https://calendar.google.com/calendar/ical/i6bong6iferbcuf1u25jg47t7k%40group.calendar.google.com/public/basic.ics"
+
+[storage pco_remote]
+type = "http"
+
+url.fetch = ["command", "rbw", "get", "pco-ical-sync"]
+
+[storage school_remote]
+type = "http"
+
+url.fetch = ["command", "rbw", "get", "school-ical-sync"]
+[storage calendar_remote]
+type = "caldav"
+
+url = "https://radicale.beepboop.systems/ryan/edfbeaf1-e9f3-4d94-a512-40cdafdbc7a0/"
+username = "ryan"
+password.fetch = ["command", "rbw", "get", "radicale"]

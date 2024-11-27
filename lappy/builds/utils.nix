@@ -3,6 +3,8 @@
 , pkgs
 # shell scripts stuff
 , makeWrapper
+, xclip
+, rbw
 }:
 
 stdenv.mkDerivation rec {
@@ -12,14 +14,14 @@ stdenv.mkDerivation rec {
   src = ./utils;
 
   nativeBuildInputs = [ makeWrapper ];
-  buildInputs = [ ];
+  buildInputs = [ xclip rbw ];
 
   installPhase = ''
     mkdir -p $out/bin
 
     for i in $(ls $src/); do
       cp $src/$i $out/bin
-      wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ ]}
+      wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ xclip rbw ]}
     done
   '';
 }

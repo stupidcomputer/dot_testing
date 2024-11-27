@@ -1,0 +1,6 @@
+#!/bin/sh
+resp=$(rbw list | dmenu)
+
+rbw get "$resp" | xclip -selection clipboard
+sleep 15
+echo "cleared" | xclip -selection clipboard
