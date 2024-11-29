@@ -1,5 +1,5 @@
 [general]
-status_path = "~/vdir/status"
+status_path = "~/pim/status"
 
 [pair contacts]
 a = "contacts_local"
@@ -28,27 +28,27 @@ collections = null
 
 [storage contacts_local]
 type = "filesystem"
-path = "~/vdir/people/main"
+path = "~/pim/people/main"
 fileext = ".vcf"
 
 [storage calendar_local]
 type = "filesystem"
-path = "~/vdir/calendar/personal"
+path = "~/pim/calendar/personal"
 fileext = ".ics"
 
 [storage band_calendar_local]
 type = "filesystem"
-path = "~/vdir/calendar/band"
+path = "~/pim/calendar/band"
 fileext = ".ics"
 
 [storage pco_local]
 type = "filesystem"
-path = "~/vdir/calendar/pco"
+path = "~/pim/calendar/pco"
 fileext = ".ics"
 
 [storage school_local]
 type = "filesystem"
-path = "~/vdir/calendar/school"
+path = "~/pim/calendar/school"
 fileext = ".ics"
 
 [storage contacts_remote]

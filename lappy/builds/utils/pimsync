@@ -1,6 +1,6 @@
 #!/bin/sh
 
-mkdir -p ~/Mail/main
+mkdir -p ~/pim/mail/main
 mbsync -c ~/.config/isync/config main
 
 vdirsyncer sync

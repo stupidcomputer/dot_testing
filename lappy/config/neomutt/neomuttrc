@@ -4,7 +4,7 @@ set my_name = "Ryan Marina"
 set fast_reply
 
 set mbox_type = Maildir
-set folder = "~/Mail/main"
+set folder = "~/pim/mail/main"
 
 set sidebar_visible
 set sidebar_format = "%B%<F? [%F}>%* %<N?%N/>%S"

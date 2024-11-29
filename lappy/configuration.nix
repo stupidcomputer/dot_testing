@@ -16,6 +16,7 @@
   networking = {
     hostName = "aristotle";
     networkmanager.enable = true;
+    firewall.allowedTCPPorts = [ 24800 ];
   };
   hardware = {
     pulseaudio.enable = true;
@@ -88,6 +89,8 @@
     libinput.enable = true;
     tlp.enable = true;
   };
+
+  powerManagement.powertop.enable = true;
 
   system.stateVersion = "24.05";
 }
