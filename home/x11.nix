@@ -4,10 +4,8 @@
   imports = [
     ./bspwm
     ./brave
-    ./dunst
     ./sx
     ./sxhkd
-    ./tridactyl
     ./zathura
     ./wallpapers
     ./vdirsyncer
@@ -18,7 +16,6 @@
     ./neomutt
     ./msmtp
     ./rbw
-    ./nws
     ./xscreensaver
 
     ./x11-progs.nix
