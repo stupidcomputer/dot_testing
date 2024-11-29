@@ -4,10 +4,10 @@
 [ -z "$PS1" ] && return
 
 # some housekeeping
-alias ls="ls --color=auto"
-alias ll="ls -lah --color=auto"
+alias ls="ls --color=auto --group-directories-first"
+
 function cd() {
-	builtin cd "$@" && ls --color=auto
+	builtin cd "$@" && ls --color=auto --group-directories-first
 }
 
 # history
@@ -45,9 +45,6 @@ case "$HOSTNAME" in
 	"copernicus")
 		PS1="$USER_PREFIX\[\033[97;1m\]${NIX_SHELL_PS1}coper:$PS1\[\033[0;0m\]"
 		;;
-	"x230t")
-		PS1="$USER_PREFIX\[\033[93;1m\]${NIX_SHELL_PS1}x230t:$PS1\[\033[0;0m\]"
-		;;
 	"mlg")
 		PS1="$USER_PREFIX\[\033[94;1m\]${NIX_SHELL_PS1}mlg:$PS1\[\033[0;0m\]"
 		;;
@@ -58,45 +55,3 @@ case "$HOSTNAME" in
 		PS1="$USER_PREFIX\[\033[96;1m\]${NIX_SHELL_PS1}unk:$PS1\[\033[0;0m\]"
 		;;
 esac
-
-repos() {
-	sel="$(ls ~/git | fzy | awk '{print "/home/usr/git/"$1}')"
-	[ "$?" -eq 1 ] && exit
-
-	cd "$sel"
-}
-
-hist() {
-	res=$(cat ~/.config/bash/hist | \
-		sort | \
-		uniq | \
-		shuf | \
-		fzy)
-
-	[ -n "$res" ] && $($res)
-}
-
-search() {
-	if [ "$1" = '-a' ]; then
-		res=$(find /home/usr/ /home/usr/doc/ \
-			-mindepth 1 \
-			-not -path '*/.*' \
-			-not -path './Mail/*' \
-			-not -path './vdir/*' \
-			-not -path '*venv*' \
-			-not -path '*node_modules*' \
-			-not -path '*__pycache__*' \
-			-type d | cut -c 11- | fzy)
-	else
-		res=$(find $(pwd) \
-			-mindepth 1 \
-			-not -path '*/.*' \
-			-not -path './Mail/*' \
-			-not -path './vdir/*' \
-			-not -path '*venv*' \
-			-not -path '*node_modules*' \
-			-not -path '*__pycache__*' \
-			-type d | cut -c 11- | fzy)
-	fi
-	[ -n "$res" ] && cd /home/usr/"$res"
-}

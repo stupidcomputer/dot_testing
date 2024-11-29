@@ -4,14 +4,11 @@
   imports = [
     ./hardware-configuration.nix
     ./nvidia.nix
-    ../../modules/ssh-phone-home.nix
     ../../modules/hosts.nix
     ../../modules/bootstrap.nix
     ../../modules/common.nix
     ../../modules/x11.nix
     ../../modules/pulse.nix
-    ../../modules/discord.nix
-#    ../../modules/gaming.nix
     ../../modules/rbw.nix
   ];
 

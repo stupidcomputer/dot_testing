@@ -5,8 +5,6 @@
     ./hardware-configuration.nix
     ./nvidia.nix
     ./services
-    ../x230t/special-ssh-magic.nix
-    ../../modules/ssh-phone-home.nix
     ../../modules/hosts.nix
     ../../modules/bootstrap.nix
     ../../modules/common.nix
@@ -14,10 +12,7 @@
     ../../modules/rbw.nix
   ];
 
-  virtualisation.docker.enable = true;
-
   users.users.usr.extraGroups = [
-    "docker"
     "adbusers"
   ];
 
@@ -28,7 +23,6 @@
     qemu
     virt-manager
     libreoffice
-    nomacs
     vscodium
     thunderbird
     libreoffice
@@ -53,6 +47,7 @@
     mdadm
     git-annex
     tigervnc
+    input-leap
 
     (pkgs.callPackage ../../builds/archutils.nix {})
     (pkgs.callPackage ../../builds/sssg.nix {})
@@ -63,9 +58,9 @@
     enable = true;
     settings = {
       General = {
-        AutoEnable = true;
+#        AutoEnable = true;
         Enable = "Source,Sink,Media,Socket";
-        ControllerMode = "bredr";
+#        ControllerMode = "bredr";
       };
     };
   };
@@ -136,7 +131,7 @@
     };
   };
 
-  programs.kdeconnect.enable = true;
+  services.getty.autologinUser = "usr";
 
   system.stateVersion = "24.05"; # don't change this, lol
 }
