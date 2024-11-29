@@ -1,0 +1,7 @@
+#!/bin/sh
+
+mkdir -p ~/Mail/main
+mbsync -c ~/.config/isync/config main
+
+vdirsyncer sync
+rbw sync

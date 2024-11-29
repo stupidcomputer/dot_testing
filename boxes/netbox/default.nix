@@ -12,7 +12,6 @@
       ./radicale.nix
       ./vaultwarden.nix
       ./sslh.nix
-      ./fail2ban.nix
       ./nginx.nix
       ./franklincce.nix
       ./wireguard.nix

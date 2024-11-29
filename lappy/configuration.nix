@@ -38,25 +38,43 @@
   nixpkgs.config.allowUnfree = true;
 
   environment.systemPackages = with pkgs; [
-    neovim
-    git
-
+    # x11
     brave
-    (pkgs.st.overrideAttrs (old: {
+    (pkgs.st.overrideAttrs (oldAttrs: rec {
         patches = [
           ./builds/st/scrollback.patch
           ./builds/st/clipboard.patch
         ];
-        conf = ./builds/st/config.h;
-      })
-    )
+        conf = builtins.readFile ./builds/st/config.h;
+    }))
     dmenu
+    pinentry-qt
+
+    # tui/cli programs
+    # devel
+    gh
+    tea
+    neovim
+    git
+
+    # audio
     cmus
-    htop
-    rbw
-    pinentry-tty
     ncpamixer
     bluetuith
+
+    # pimtools
+    khard
+    khal
+    vdirsyncer
+    neomutt
+    isync
+    msmtp
+
+    # utilities
+    htop
+    tmux
+    rbw
+    usbutils # for lsusb
   ];
 
   services = {

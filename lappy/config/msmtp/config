@@ -1,0 +1,12 @@
+defaults
+auth on
+tls on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+
+account default
+host mail.beepboop.systems
+port 587
+tls_starttls on
+from ryan@beepboop.systems
+user ryan@beepboop.systems
+passwordeval rbw get "mail.beepboop.systems"

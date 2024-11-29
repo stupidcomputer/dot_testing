@@ -1,0 +1,23 @@
+[calendars]
+[[home]]
+path = "~/vdir/calendar/personal/edfbeaf1-e9f3-4d94-a512-40cdafdbc7a0"
+color = dark green
+
+[[band]]
+path = "~/vdir/calendar/band"
+color = light cyan
+
+[[pco]]
+path = "~/vdir/calendar/pco"
+color = yellow
+
+[[school]]
+path = "~/vdir/calendar/school"
+color = dark red
+
+[locale]
+timeformat = %H:%M
+dateformat = %Y-%m-%d
+longdateformat = %Y-%m-%d %a
+datetimeformat = %Y-%m-%d %H:%M
+longdatetimeformat = %Y-%m-%d %H:%M

@@ -1,0 +1,4 @@
+Host netbox
+	HostName beepboop.systems
+	User ryan
+	Port 443
