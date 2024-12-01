@@ -50,6 +50,7 @@
     input-leap
 
     (pkgs.callPackage ../../builds/archutils.nix {})
+    (pkgs.callPackage ../../builds/jsfw.nix {})
     (pkgs.callPackage ../../builds/sssg.nix {})
   ];
 

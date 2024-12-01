@@ -1,0 +1,13 @@
+{
+	"slots": [
+		{
+			"controllers": [
+				{
+					"tag": ["keyboard"],
+					"vendor": "dead",
+					"product": "beef"
+				}
+			]
+		}
+	]
+}

@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   imports = [
@@ -32,7 +32,7 @@
   users.users.usr = {
     isNormalUser = true;
     description = "usr";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "input" ];
     packages = with pkgs; [];
   };
 
@@ -91,6 +91,10 @@
   };
 
   powerManagement.powertop.enable = true;
+
+  # make sshd a `systemctl start sshd` command away
+  services.openssh.enable = true;
+  systemd.services.sshd.wantedBy = lib.mkForce [];
 
   system.stateVersion = "24.05";
 }

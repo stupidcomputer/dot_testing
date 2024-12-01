@@ -1,0 +1,10 @@
+{
+	"controllers": [
+		{
+			"tag": "keyboard",
+			"filter": {
+				"name": "AT Translated Set 2 Keyboard"
+			}
+		}
+	]
+}
