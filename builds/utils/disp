@@ -132,6 +132,9 @@ case "$(hostname)" in
 				;;
 		esac
 		phone pair & disown
+		pkill jsfw
+		st -e sudo /run/current-system/sw/bin/jsfw client 192.168.1.211 24800 ~/dot_testing/boxes/copernicus/jsfw.json & disown
+		st -e sudo /run/current-system/sw/bin/jsfw client 192.168.1.211 24800 ~/dot_testing/boxes/copernicus/jsfw.json & disown
 		;;
 	"localhost") # phone in termux
 		xrandr --output VNC-0 --mode 1920x1080

@@ -68,6 +68,19 @@
 
   virtualisation.virtualbox.host.enable = true;
 
+  security.sudo.extraRules = [
+    {
+      users = [ "usr" ];
+      runAs = "root";
+      commands = [
+        {
+          command = "/run/current-system/sw/bin/jsfw";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
+
   boot.loader = {
     efi = {
       canTouchEfiVariables = true;
