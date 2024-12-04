@@ -8,11 +8,59 @@ else
 	enable -f /lib/bash/sleep sleep
 fi
 
+schedule_needs_update="yes"
+
+get_schedule_info () {
+	if [ "$schedule_needs_update" = "yes" ]; then
+		output=$(
+			khal at now --format '{title}|{end-time}|{categories}' | \
+				awk -F'|' '{if($3 == "school") { print $1 "|" $2 }}'
+		)
+
+		if [ -z "$output" ]; then
+			schedule_needs_update="no"
+			schedule_status=""
+			return
+		fi
+
+		class_name=${output%%|*}
+		schedule_time=${output##*|}
+		schedule_time_hours=${schedule_time%%:*}
+		schedule_time_minutes=${schedule_time##*:}
+		schedule_time_unix=$(date --date "$schedule_time" "+%s")
+
+		schedule_needs_update="no"
+	fi
+
+	printf -v current_time '%(%s)T' -1
+	difference=$(($schedule_time_unix - $current_time))
+	if [ "$difference" -lt 0 ]; then
+		schedule_needs_update="yes"
+		get_schedule_info
+	fi
+	until_end=$(($difference / 60))
+
+	if [ "$until_end" -le 5 ]; then
+		until_end_seconds=$(($difference % 60))
+		schedule_status=$(printf "%02d:%02d left in %s/" "$until_end" "$until_end_seconds" "$class_name")
+	else
+		schedule_status=$(printf "%d minutes left in %s/" "$until_end" "$class_name")
+	fi
+}
+
 get_cmus_info () {
 	if [ /dev/shm/status/cmus -nt /dev/shm/status/modified ]; then
-		cmus_status=$(</dev/shm/status/cmus)
+		cmus_status="$(</dev/shm/status/cmus)/"
 		touch /dev/shm/status/modified
 	fi
+}
+
+get_battery_info () {
+	battery_status=$(</sys/class/power_supply/BAT0/capacity)
+}
+
+get_time_info () {
+	printf -v date_status '%(%d(%a)-%m(%b)-%y)T %(%H)T:%(%M)T:%(%S)T/' -1
 }
 
 while true; do
@@ -22,10 +70,11 @@ while true; do
 		touch /dev/shm/status/modified
 	fi
 
-	battery=$(</sys/class/power_supply/BAT0/capacity)
-	printf -v date '%(%H)T:%(%M)T' -1
+	get_time_info
+	get_battery_info
 	get_cmus_info
+	get_schedule_info
 
-	printf "%s/%s/%s\n" "$cmus_status" "$date" "$battery"
+	printf "%s%s%s%s\n" "$schedule_status" "$cmus_status" "$date_status" "$battery_status"
 	sleep 1
 done | dwm-setstatus

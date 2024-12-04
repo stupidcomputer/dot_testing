@@ -57,6 +57,9 @@
         mkdir -p /home/usr/.config/sx
         ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/lappy/config/sx/sxrc /home/usr/.config/sx/sxrc
 
+        mkdir -p /home/usr/.config/todoman
+        ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/lappy/config/todoman/config.py /home/usr/.config/todoman/config.py
+
         mkdir -p /home/usr/.config/vdirsyncer
         ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/lappy/config/vdirsyncer/config /home/usr/.config/vdirsyncer/config
       '';

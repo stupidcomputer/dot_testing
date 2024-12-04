@@ -70,6 +70,7 @@
     neomutt
     isync
     msmtp
+    todoman
 
     # utilities
     htop
@@ -91,6 +92,11 @@
   };
 
   powerManagement.powertop.enable = true;
+
+  systemd.services."getty@tty6" = {
+    overrideStrategy = "asDropin";
+    serviceConfig.ExecStart = ["" "@${pkgs.coreutils}/bin/cat"];
+  };
 
   # make sshd a `systemctl start sshd` command away
   services.openssh.enable = true;

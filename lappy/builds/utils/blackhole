@@ -1,0 +1,7 @@
+#!/bin/sh
+
+sudo echo ""
+chvt 6
+sleep 2
+sudo stty -echo -F /dev/tty6
+sudo /run/current-system/sw/bin/jsfw server 24800 /home/usr/dots/lappy/jsfw.json >/dev/null

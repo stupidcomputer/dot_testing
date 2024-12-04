@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
   };
 
   buildPhase = ''
-    make jsfw
+    VERBOSE=1 make jsfw
   '';
 
   installPhase = ''

@@ -3,7 +3,22 @@
 		{
 			"tag": "keyboard",
 			"filter": {
-				"name": "AT Translated Set 2 Keyboard"
+				"vendor": "0001",
+				"product": "0001"
+			}
+		},
+		{
+			"tag": "mouse",
+			"filter": {
+				"vendor": "0002",
+				"product": "000e",
+				"name": "ETPS/2 Elantech Touchpad"
+			}
+		},
+		{
+			"tag": "mousebuttons",
+			"filter": {
+				"name": "ETPS/2 Elantech TrackPoint"
 			}
 		}
 	]
