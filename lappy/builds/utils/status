@@ -9,43 +9,101 @@ else
 fi
 
 schedule_needs_update="yes"
+utc_today=$(date --date '00:00:00 today' '+%s')
 
 get_schedule_info () {
-	if [ "$schedule_needs_update" = "yes" ]; then
-		output=$(
-			khal at now --format '{title}|{end-time}|{categories}' | \
-				awk -F'|' '{if($3 == "school") { print $1 "|" $2 }}'
-		)
-
-		if [ -z "$output" ]; then
-			schedule_needs_update="no"
-			schedule_status=""
-			return
-		fi
-
-		class_name=${output%%|*}
-		schedule_time=${output##*|}
-		schedule_time_hours=${schedule_time%%:*}
-		schedule_time_minutes=${schedule_time##*:}
-		schedule_time_unix=$(date --date "$schedule_time" "+%s")
-
-		schedule_needs_update="no"
+	if [ -z "$schedule_state" ]; then
+		schedule_state="needs_init"
 	fi
 
-	printf -v current_time '%(%s)T' -1
-	difference=$(($schedule_time_unix - $current_time))
-	if [ "$difference" -lt 0 ]; then
-		schedule_needs_update="yes"
-		get_schedule_info
-	fi
-	until_end=$(($difference / 60))
+	case "$schedule_state" in
+		"needs_init")
+			readarray -t lines < <(
+				khal list today 1d --format '{categories}|{title}|{start-time}|{end-time}' |
+					grep '^school.*' |
+					sed 's/school|//g'
+			)
 
-	if [ "$until_end" -le 5 ]; then
-		until_end_seconds=$(($difference % 60))
-		schedule_status=$(printf "%02d:%02d left in %s/" "$until_end" "$until_end_seconds" "$class_name")
-	else
-		schedule_status=$(printf "%d minutes left in %s/" "$until_end" "$class_name")
-	fi
+			for ((i=0; i < ${#lines[@]}; i++)); do
+				readarray -t -d'|' line <<<"${lines[i]}"
+				class_names+=("${line[0]}")
+				starts=${line[1]}
+				ends=${line[2]}
+
+				# convert to unix time
+				class_starts_hours=${starts%%:*}
+				class_starts_hours=$((10#$class_starts_hours))
+				class_starts_hours=$((class_starts_hours * 3600))
+				class_starts_minutes=${starts##*:}
+				class_starts_minutes=$((10#$class_starts_minutes))
+				class_starts_minutes=$((class_starts_minutes * 60))
+				class_starts_offset=$((class_starts_hours + class_starts_minutes))
+				class_starts_final=$((utc_today + class_starts_offset))
+
+				class_ends_hours=${ends%%:*}
+				class_ends_hours=$((10#$class_ends_hours))
+				class_ends_hours=$((class_ends_hours * 3600))
+				class_ends_minutes=${ends##*:}
+				class_ends_minutes=$((10#$class_ends_minutes))
+				class_ends_minutes=$((class_ends_minutes * 60))
+				class_ends_offset=$((class_ends_hours + class_ends_minutes))
+				class_ends_final=$((utc_today + class_ends_offset))
+
+				class_starts+=("$class_starts_final")
+				class_ends+=("$class_ends_final")
+			done
+
+			schedule_state="needs_recalc"
+			;;
+		"needs_recalc")
+			schedule_enabled="no"
+			printf -v ctime '%(%s)T' -1
+			for ((i=0; i < ${#class_names[@]}; i++)); do
+				if [ $ctime -lt ${class_starts[$i]} ] && [ $ctime -gt ${class_ends[$(($i - 1))]} ]; then
+					class_secs_left=$((${class_starts[$i]} - $ctime))
+					current_class_until_event="$class_secs_left"
+					current_class_name="${class_names[$i]}"
+					current_class_status="waiting"
+					schedule_enabled="yes"
+				elif [ $ctime -gt ${class_starts[$i]} ] && [ $ctime -lt ${class_ends[$i]} ]; then
+					class_secs_left=$((${class_ends[$i]} - $ctime))
+					current_class_until_event="$class_secs_left"
+					current_class_name="${class_names[$i]}"
+					current_class_status="inside"
+					schedule_enabled="yes"
+				fi
+			done
+
+			if [ "$schedule_enabled" = "no" ]; then
+				current_class_status="finished"
+			fi
+
+			schedule_state="needs_dec"
+			;;
+		"needs_dec")
+			if [ "$current_class_status" = "inside" ]; then
+				if [ "$((current_class_until_event / 60))" -le 5 ]; then
+					printf -v schedule_status "%02d:%02d left in %s/" "$((current_class_until_event / 60))" "$((current_class_until_event % 60))" "$current_class_name"
+				else
+					printf -v schedule_status "%s minutes left in %s/" "$((current_class_until_event / 60))" "$current_class_name"
+				fi
+			elif [ "$current_class_status" = "outside" ]; then
+				if [ "$((current_class_until_event / 60))" -le 5 ]; then
+					printf -v schedule_status "%02d:%02d until %s/" "$((current_class_until_event / 60))" "$((current_class_until_event % 60))" "$current_class_name"
+				else
+					printf -v schedule_status "%s minutes until %s/" "$((current_class_until_event / 60))" "$current_class_name"
+				fi
+			elif [ "$current_class_status" = "finished" ]; then
+				printf -v schedule_status ""
+				return
+			fi
+
+			current_class_until_event=$((current_class_until_event - 1))
+			if [ "$current_class_until_event" -eq 0 ]; then
+				schedule_state="needs_recalc"
+			fi
+			;;
+	esac
 }
 
 get_cmus_info () {
