@@ -1,3 +1,3 @@
 #!/bin/sh
 
-cd $HOME/dots/lappy; sudo nixos-rebuild switch -I nixos-config=./configuration.nix
+cd $HOME/dots; sudo nixos-rebuild switch --flake .?submodules=1

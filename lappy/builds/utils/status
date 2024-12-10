@@ -8,9 +8,6 @@ else
 	enable -f /lib/bash/sleep sleep
 fi
 
-schedule_needs_update="yes"
-utc_today=$(date --date '00:00:00 today' '+%s')
-
 get_schedule_info () {
 	if [ -z "$schedule_state" ]; then
 		schedule_state="needs_init"
@@ -23,6 +20,17 @@ get_schedule_info () {
 					grep '^school.*' |
 					sed 's/school|//g'
 			)
+
+			# calculate the start-of-date time without shelling out to the date utility
+			printf -v unix '%(%s)T'
+			printf -v hours '%(%H)T'
+			printf -v mins '%(%M)T'
+			printf -v seconds '%(%S)T'
+			hours=$((10#$hours))
+			mins=$((10#$mins))
+			seconds=$((10#$seconds))
+			today_offset=$((hours * 60 * 60 + mins * 60 + seconds))
+			today=$((unix - today_offset))
 
 			for ((i=0; i < ${#lines[@]}; i++)); do
 				readarray -t -d'|' line <<<"${lines[i]}"
@@ -38,7 +46,7 @@ get_schedule_info () {
 				class_starts_minutes=$((10#$class_starts_minutes))
 				class_starts_minutes=$((class_starts_minutes * 60))
 				class_starts_offset=$((class_starts_hours + class_starts_minutes))
-				class_starts_final=$((utc_today + class_starts_offset))
+				class_starts_final=$((today + class_starts_offset))
 
 				class_ends_hours=${ends%%:*}
 				class_ends_hours=$((10#$class_ends_hours))
@@ -47,7 +55,7 @@ get_schedule_info () {
 				class_ends_minutes=$((10#$class_ends_minutes))
 				class_ends_minutes=$((class_ends_minutes * 60))
 				class_ends_offset=$((class_ends_hours + class_ends_minutes))
-				class_ends_final=$((utc_today + class_ends_offset))
+				class_ends_final=$((today + class_ends_offset))
 
 				class_starts+=("$class_starts_final")
 				class_ends+=("$class_ends_final")
@@ -106,6 +114,10 @@ get_schedule_info () {
 	esac
 }
 
+get_loadavg_info () {
+	loadavg_status="$(</proc/loadavg)/"
+}
+
 get_cmus_info () {
 	if [ /dev/shm/status/cmus -nt /dev/shm/status/modified ]; then
 		cmus_status="$(</dev/shm/status/cmus)/"
@@ -129,10 +141,11 @@ while true; do
 	fi
 
 	get_time_info
+	get_loadavg_info
 	get_battery_info
 	get_cmus_info
 	get_schedule_info
 
-	printf "%s%s%s%s\n" "$schedule_status" "$cmus_status" "$date_status" "$battery_status"
+	printf "%s%s%s%s%s\n" "$schedule_status" "$cmus_status" "$loadavg_status" "$date_status" "$battery_status"
 	sleep 1
 done | dwm-setstatus

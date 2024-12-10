@@ -17,6 +17,10 @@
     hostName = "aristotle";
     networkmanager.enable = true;
     firewall.allowedTCPPorts = [ 24800 ];
+
+    hosts = {
+      "127.0.0.1" = [ "news.ycombinator.com" ]; # i'm finally free
+    };
   };
   hardware = {
     pulseaudio.enable = true;
@@ -37,6 +41,9 @@
   };
 
   nixpkgs.config.allowUnfree = true;
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+  };
 
   environment.systemPackages = with pkgs; [
     # x11
@@ -96,6 +103,14 @@
   systemd.services."getty@tty6" = {
     overrideStrategy = "asDropin";
     serviceConfig.ExecStart = ["" "@${pkgs.coreutils}/bin/cat"];
+  };
+
+  systemd.user.services.ssh-socks5-proxy = {
+    enable = true;
+    description = "SOCKS5 proxy over ssh";
+
+    serviceConfig.ExecStart = "${pkgs.openssh}/bin/ssh -ND 127.0.0.1:4000 netbox";
+    wantedBy = []; # start only when I say so
   };
 
   # make sshd a `systemctl start sshd` command away
