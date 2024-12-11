@@ -125,6 +125,18 @@ get_cmus_info () {
 	fi
 }
 
+get_days_until_21 () {
+	if [ -z "$birthday" ]; then
+		birthday=$(cat ~/.config/birthdate)
+		twenty_one=$((birthday + (21 * 365 * 24 * 60 * 60)))
+	fi
+
+	printf -v now "%(%s)T"
+
+	days_until_21_status=$(((twenty_one - now) / 24 / 60 / 60))
+	days_until_21_status="$days_until_21_status/"
+}
+
 get_battery_info () {
 	battery_status=$(</sys/class/power_supply/BAT0/capacity)
 }
@@ -142,10 +154,11 @@ while true; do
 
 	get_time_info
 	get_loadavg_info
+	get_days_until_21
 	get_battery_info
 	get_cmus_info
 	get_schedule_info
 
-	printf "%s%s%s%s%s\n" "$schedule_status" "$cmus_status" "$loadavg_status" "$date_status" "$battery_status"
+	printf "%s%s%s%s%s%s\n" "$schedule_status" "$cmus_status" "$loadavg_status" "$days_until_21_status" "$date_status" "$battery_status"
 	sleep 1
 done | dwm-setstatus
