@@ -35,6 +35,9 @@ export GTK_THEME="earth"
 # elinks
 export ELINKS_CONFDIR="$XDG_CONFIG_HOME/elinks"
 
+# lynx
+export LYNX_CFG_PATH="$XDG_CONFIG_HOME/lynx"
+
 # dbus configuration
 export DBUS_SESSION_BUS_ADDRESS="unix:path=$XDG_RUNTIME_DIR/bus"
 

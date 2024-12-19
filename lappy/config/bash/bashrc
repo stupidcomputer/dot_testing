@@ -5,6 +5,11 @@
 
 # some housekeeping
 alias ls="ls --color=auto --group-directories-first"
+alias weather="curl https://wttr.in"
+alias lynx="lynx -cfg=$LYNX_CFG_PATH/lynx.cfg"
+alias elinks="TERM='xterm-color' elinks"
+alias pkgsearch="nix search nixpkgs"
+alias reload=". ~/.config/bash/profile"
 
 function cd() {
 	builtin cd "$@" && ls --color=auto --group-directories-first

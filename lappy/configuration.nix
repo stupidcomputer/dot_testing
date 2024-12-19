@@ -64,6 +64,7 @@
     tea
     neovim
     git
+    git-annex
 
     # audio
     cmus
@@ -83,7 +84,21 @@
     htop
     tmux
     rbw
+    elinks
+    lynx
+    jq
+    peaclock
     usbutils # for lsusb
+    pciutils # for lspci
+    kjv
+    epr
+    poppler_utils
+    ledger
+    gnuplot
+    anki-bin
+
+    # for the remote access functionality
+    vscode-fhs
   ];
 
   services = {
