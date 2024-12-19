@@ -19,6 +19,19 @@
   services.nginx.virtualHosts."tfb.beepboop.systems" = {
     forceSSL = true;
     enableACME = true;
+    locations."/" = {
+      extraConfig = ''
+        return 301 https://marching.beepboop.systems;
+      '';
+    };
+    locations."/groupme" = {
+      proxyPass = "http://10.100.0.2:7439";
+    };
+  };
+
+  services.nginx.virtualHosts."marching.beepboop.systems" = {
+    forceSSL = true;
+    enableACME = true;
     root = "/var/www/tfb.beepboop.systems";
     locations."/" = {
       extraConfig = ''
