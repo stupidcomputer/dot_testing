@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, machines, ... }:
 
 {
   imports =
@@ -92,12 +92,9 @@
 
   users.users.ryan = {
     openssh.authorizedKeys.keys = [
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKbhM3wj0oqjR3pUaZgpfX4Xo4dlzvBTbQ48zHyg7Pwx usr" # x230t
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILBGh1FHPneg7PCDkhMs2BCJPTIRVJkRTKpOj1w02ydD usr" # copernicus
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIGrpVDLQszFKoYbvYKRyVTTpehxR0BVU47SXkz39l2wK usr" # mainsail
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2xUbQw9+RCPVw7qCFm4NNCP/MpS2BIArcwMv0KdKOI usr" # mlg
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILuVT5W3kzjzsuMIWk1oeGtL8jZGtAhRSx8dK8oBJQcG u0_a291" # phone
-      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKTDyKneaM44I5to883ghEnnPonedCKDbCX+OnrQ9vO5 usr" # aristotle
+      machines.copernicus.pubkey
+      machines.aristotle.pubkey
+      machines.phone.pubkey
     ];
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" ];

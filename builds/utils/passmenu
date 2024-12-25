@@ -1,9 +1,0 @@
-# wrapper around rbw
-
-prompt_for_rbw_password
-
-resp=$(rbw list | tmenu)
-
-rbw get "$resp" | xclip -selection clipboard
-sleep 15
-echo "cleared" | xclip -selection clipboard

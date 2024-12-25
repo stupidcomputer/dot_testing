@@ -1,0 +1,19 @@
+#!/bin/sh
+
+[ -z "$1" ] && exit 1
+
+# wrap rbw get $1 --full to output in the git credential helper
+# format
+
+# assume we're running xorg
+rbw-x11-prompt
+
+# username=yourusername
+# password=yourpassword
+
+output=$(rbw get $1 --full)
+echo "$output" | \
+	sed '1{s/^/password=/}' | \
+	sed 's/Username: /username=/g' | \
+	grep -E 'username|password' | \
+	tac

@@ -7,6 +7,7 @@
 , fontconfig
 , freetype
 , ncurses
+, fantasque-sans-mono
 , lightMode ? false
 , extraLibs ? [ ]
 }:

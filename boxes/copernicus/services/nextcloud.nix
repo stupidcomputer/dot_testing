@@ -8,7 +8,7 @@
     config.adminpassFile = "/etc/nextcloud-admin";
     settings.overwriteprotocol = "https";
     extraApps = {
-      inherit (config.services.nextcloud.package.packages.apps) contacts calendar tasks mail;
+      inherit (config.services.nextcloud.package.packages.apps) calendar tasks mail;
       phonetrack = pkgs.fetchNextcloudApp {
         sha256 = "sha256-V92f+FiS5vZEkq15A51pHoDpUOBfUOEVIcsXdP/rSMQ=";
         license = "agpl3Only";

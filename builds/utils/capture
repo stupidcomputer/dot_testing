@@ -1,11 +1,5 @@
 #!/bin/sh
 
-if [ "$IS_RUNNING_IN_TMENU" = "yes" ]; then
-	unset IS_RUNNING_IN_TMENU
-	st -c tmenu-prompt -e "$0"
-	exit
-fi
-
 display=$(xrandr \
 	| grep ' connected' \
 	| awk -F ' ' '{print $1}' \
