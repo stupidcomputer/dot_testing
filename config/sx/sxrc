@@ -1,0 +1,3 @@
+# start the wm
+sxhkd-mode sxhkdrc
+bspwm

@@ -1,0 +1,98 @@
+# spawn a terminal
+super + Return
+	st
+
+ctrl + b; c
+	st
+
+ctrl + b; Return
+	st
+
+# spawn the launcher
+super + d
+	dmenu_run
+
+ctrl + b; d
+	dmenu_run
+
+# kill sxhkd with USR1 and restart bspwm
+super + r
+	pkill -USR1 -x sxhkd; \
+	bspc wm -r
+
+ctrl + b; r
+	pkill -USR1 -x sxhkd; \
+	bspc wm -r
+
+# switch to "mouse mode"
+super + m
+	sxhkd-mode mouse
+
+ctrl + b; m
+	sxhkd-mode mouse
+
+# switch to "nodemanip" mode
+super + n
+	sxhkd-mode nodemanip
+
+ctrl + b; n
+	sxhkd-mode nodemanip
+
+# kill the current node
+super + q
+	bspc node -c
+
+ctrl + b; q
+	bspc node -c
+
+# kill bspwm
+super + e
+	bspc quit 0
+
+ctrl + b; e
+	bspc quit 0; \
+	pkill X # phone starts bspwm differently
+	        # to take everything down, we need to kill X
+
+# systemctl suspend
+super + shift + e
+	systemctl suspend
+
+# password menu
+super + z
+	rbw-dmenu-list
+
+ctrl + b; z
+	rbw-dmenu-list
+
+# manipulate a node
+super + {_,ctrl +,shift + }{h,j,k,l}
+	bspc node -{f,p,s} {west,south,north,east}
+
+ctrl + b; {_,ctrl +,shift + }{h,j,k,l}
+	bspc node -{f,p,s} {west,south,north,east}
+
+# change to or move a node to a desktop
+super + {_,shift + } {1-9,0}
+	bspc {desktop -f,node -d} '0{1-9,0}'
+
+ctrl + b; {_,shift + } {1-9,0}
+	bspc {desktop -f,node -d} '0{1-9,0}'
+
+# change a node to tiling, floating, or fullscreen
+super + {t,f,s}
+	bspc node -t {tiled,floating,fullscreen}
+
+ctrl + b; {t,f,s}
+	bspc node -t {tiled,floating,fullscreen}
+
+shift + Insert
+	dmenu-special
+
+# phone specific -- send the escape key since we can't use it
+ctrl + b; [
+	xdotool key Escape
+
+# you're using tmux and you need ctrl+b
+ctrl + b; ~ctrl + b
+	echo ctrlb passthrough

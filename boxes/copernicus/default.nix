@@ -5,32 +5,20 @@
     ./hardware-configuration.nix
     ./nvidia.nix
     ./services
+    ../../config
     ../../modules/hosts.nix
     ../../modules/bootstrap.nix
-    ../../modules/common.nix
-    ../../modules/x11.nix
-    ../../modules/rbw.nix
-  ];
-
-  users.users.usr.extraGroups = [
-    "adbusers"
   ];
 
   environment.systemPackages = with pkgs; [
     wine
     xdotool
 
-    qemu
-    virt-manager
-    libreoffice
-    vscodium
-    thunderbird
     libreoffice
     texliveMedium
     kdePackages.kdenlive
     audacity
     bespokesynth
-    puddletag
     musescore
     unzip
     ledger
@@ -39,18 +27,15 @@
     imagemagick
     pciutils
     usbutils
-    pwvucontrol
 
-    dunst
-    libnotify
     ffmpeg
     mdadm
     git-annex
     tigervnc
-    input-leap
+
+    dmenu
 
     (pkgs.callPackage ../../builds/archutils.nix {})
-    (pkgs.callPackage ../../builds/jsfw.nix {})
     (pkgs.callPackage ../../builds/sssg.nix {})
   ];
 
@@ -65,21 +50,6 @@
       };
     };
   };
-
-  virtualisation.virtualbox.host.enable = true;
-
-  security.sudo.extraRules = [
-    {
-      users = [ "usr" ];
-      runAs = "root";
-      commands = [
-        {
-          command = "/run/current-system/sw/bin/jsfw";
-          options = [ "NOPASSWD" ];
-        }
-      ];
-    }
-  ];
 
   boot.loader = {
     efi = {
@@ -103,6 +73,15 @@
 
     pipewire = {
       enable = true;
+      extraConfig.pipewire = {
+        "properties" = {
+          default.clock.allowed-rates = [ 44100 48000 96000 ];
+          "log.level" = 4;
+          "default.clock.quantum" = 256;
+          "default.clock.min-quantum" = 256;
+          "default.clock.max-quantum" = 256;
+        };
+      };
       alsa = {
         enable = true;
         support32Bit = true;
@@ -110,7 +89,6 @@
       pulse.enable = true;
     };
   };
-
 
   programs.adb.enable = true;
 
@@ -146,6 +124,20 @@
   };
 
   services.getty.autologinUser = "usr";
+
+  time.timeZone = "America/Chicago";
+
+  i18n.defaultLocale = "en_US.UTF-8";
+  console = {
+    font = "Lat2-Terminus16";
+    keyMap = "us";
+  };
+
+  users.users.usr = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "networkmanager" "adbusers" ];
+    initialPassword = "usr";
+  };
 
   system.stateVersion = "24.05"; # don't change this, lol
 }

@@ -1,0 +1,16 @@
+# insert special characters universally in xorg
+
+(
+dmenu <<DONE
+í i-acute
+Í I-acute
+ó o-acute
+Ó O-acute
+á a-acute
+Á a-acute
+é e-acute
+É e-acute
+DONE
+) | awk -F' ' '{print $1}' \
+  | tr -d '\n' \
+  | xclip -in -selection clipboard
