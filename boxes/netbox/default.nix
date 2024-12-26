@@ -64,10 +64,10 @@
       # we don't want to bring in the entirety of home-manager for this, so just
       # write some files as a hack
       text = ''
-        ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/.config/bash/bashrc /home/ryan/.bashrc
-        ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/.config/bash/profile /home/ryan/.bash_profile
-        ${pkgs.coreutils}/bin/mkdir -p /home/ryan/.config/nvim
-        ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/.config/nvim/init.min.lua /home/ryan/.config/nvim/init.lua
+        ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/config/bash/bashrc /home/ryan/.bashrc
+        ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/config/bash/profile /home/ryan/.bash_profile
+        ${pkgs.coreutils}/bin/mkdir -p /home/ryan/config/nvim
+        ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/config/nvim/init.min.lua /home/ryan/.config/nvim/init.lua
       '';
       deps = [];
     };
@@ -76,10 +76,10 @@
   system.activationScripts = {
     copyEssentialConfiguration = {
       text = ''
-        ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/.config/bash/bashrc /root/.bashrc
-        ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/.config/bash/profile /root/.bash_profile
-        ${pkgs.coreutils}/bin/mkdir -p /root/.config/nvim
-        ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/.config/nvim/init.min.lua /root/.config/nvim/init.lua
+        ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/config/bash/bashrc /root/.bashrc
+        ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/config/bash/profile /root/.bash_profile
+        ${pkgs.coreutils}/bin/mkdir -p /root/config/nvim
+        ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/config/nvim/init.min.lua /root/.config/nvim/init.lua
       '';
       deps = [];
     };
@@ -91,11 +91,6 @@
   };
 
   users.users.ryan = {
-    openssh.authorizedKeys.keys = [
-      machines.copernicus.pubkey
-      machines.aristotle.pubkey
-      machines.phone.pubkey
-    ];
     isNormalUser = true;
     extraGroups = [ "wheel" "docker" ];
   };

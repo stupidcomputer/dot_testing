@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ lib, config, pkgs, machines, ... }:
 
 {
   services.openssh = {
@@ -10,4 +10,10 @@
       PasswordAuthentication = false;
     };
   };
+
+  users.users.ryan.openssh.authorizedKeys.keys = [
+    machines.copernicus.pubkey
+    machines.aristotle.pubkey
+    machines.phone.pubkey
+  ];
 }
