@@ -6,8 +6,8 @@
     ./nvidia.nix
     ./services
     ../../config/copernicus.nix
-    ../../modules/hosts.nix
-    ../../modules/bootstrap.nix
+    ../../lib/hosts.nix
+    ../../lib/bootstrap.nix
   ];
 
   environment.systemPackages = with pkgs; [

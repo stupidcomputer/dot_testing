@@ -1,23 +1,21 @@
 { lib, config, pkgs, machines, ... }:
 
 {
-  imports =
-    [
-      ./hardware-configuration.nix
-      ../../modules/bootstrap.nix
+  imports = [
+    ./hardware-configuration.nix
+    ../../lib/bootstrap.nix
 
-      ./radicale.nix
-      ./ssh.nix
-      ./gitea.nix
-      ./radicale.nix
-      ./vaultwarden.nix
-      ./sslh.nix
-      ./nginx.nix
-      ./franklincce.nix
-      ./wireguard.nix
-      ./nextcloud.nix
-      ./mail.nix
-    ];
+    ./franklincce.nix
+    ./gitea.nix
+    ./mail.nix
+    ./nextcloud.nix
+    ./nginx.nix
+    ./radicale.nix
+    ./ssh.nix
+    ./sslh.nix
+    ./vaultwarden.nix
+    ./wireguard.nix
+  ];
 
   nix = {
     optimise = {
