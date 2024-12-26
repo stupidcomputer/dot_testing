@@ -5,6 +5,7 @@ things to do
 ------------
 
 * [ ] integrate `disko` and `sops-nix` into the setup
+* [ ] write an app that replaces the nextcloud phonetrack setup
 * [ ] establish backup infrastructure for `netbox`
 
 license

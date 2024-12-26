@@ -15,8 +15,7 @@
       ./nginx.nix
       ./franklincce.nix
       ./wireguard.nix
-
-      ./nextcloud-bridge.nix
+      ./nextcloud.nix
     ];
 
   nix = {

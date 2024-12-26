@@ -1,8 +1,8 @@
-{ lib, config, pkgs, ...}:
-
+{ lib, config, pkgs, ... }:
 {
   services.nextcloud = {
     enable = true;
+    https = true;
     package = pkgs.nextcloud30;
     hostName = "nextcloud.beepboop.systems";
     config.adminpassFile = "/etc/nextcloud-admin";
@@ -17,8 +17,8 @@
     extraAppsEnable = true;
   };
 
-  services.nginx.virtualHosts."${config.services.nextcloud.hostName}".listen = [ {
-    addr = "10.100.0.2";
-    port = 5028;
-  } ];
+  services.nginx.virtualHosts."${config.services.nextcloud.hostName}" = {
+    forceSSL = true;
+    enableACME = true;
+  };
 }

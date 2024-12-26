@@ -3,6 +3,5 @@
 {
   imports = [
     ./wireguard.nix
-    ./nextcloud.nix
   ];
 }
