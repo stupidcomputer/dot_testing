@@ -16,6 +16,7 @@
       ./franklincce.nix
       ./wireguard.nix
       ./nextcloud.nix
+      ./mail.nix
     ];
 
   nix = {
