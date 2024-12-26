@@ -5,7 +5,7 @@
     ./hardware-configuration.nix
     ./nvidia.nix
     ./services
-    ../../config
+    ../../config/copernicus.nix
     ../../modules/hosts.nix
     ../../modules/bootstrap.nix
   ];
