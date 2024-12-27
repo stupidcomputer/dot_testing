@@ -17,6 +17,19 @@
     machines.phone.pubkey
   ];
 
+  # save ip addresses in cache from repeat logins
+  services.nginx.virtualHosts."localhost" = {
+    listen = [{ addr = "127.0.0.1"; port = 9414; }];
+    extraConfig = ''
+      location / {
+        proxy_pass_request_headers off;
+        proxy_pass https://ipinfo.io/;
+        proxy_cache_key $scheme://$host$uri$is_args$query_string;
+        proxy_cache_valid 203 1d;
+      }
+    '';
+  };
+
   environment.etc."ssh/sshrc".text = ''
     login_ip="''${SSH_CLIENT%% *}"
     is_in_ignored=$(grep "$login_ip" /etc/ssh/ignored_ips -c)
@@ -26,7 +39,7 @@
     fi
     time=$(date "+%T%:z")
     geodata=$(
-      curl -s ipinfo.io/$login_ip |
+      curl -s 127.0.0.1:9414/$login_ip |
       sed '1d;$d;/readme/d;s/^  //g'
     )
     ${pkgs.mailutils}/bin/mail \
