@@ -2,8 +2,7 @@
 
 {
   imports = [
-    ./builds
-    ./config
+    ../../lappy-config
     ./paperless.nix
     ./hardware-configuration.nix
   ];
@@ -50,11 +49,14 @@
     brave
     (pkgs.st.overrideAttrs (oldAttrs: rec {
         patches = [
-          ./builds/st/scrollback.patch
-          ./builds/st/clipboard.patch
+          ../../builds/lappy-st/scrollback.patch
+          ../../builds/lappy-st/clipboard.patch
         ];
-        conf = builtins.readFile ./builds/st/config.h;
+        conf = builtins.readFile ../../builds/lappy-st/config.h;
     }))
+    (callPackage ../../builds/lappy-utils.nix {})
+    (callPackage ../../builds/dwm.nix {})
+    (callPackage ../../builds/sssg.nix {})
     dmenu
     pinentry-qt
 

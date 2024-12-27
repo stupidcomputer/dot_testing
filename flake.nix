@@ -32,8 +32,6 @@
           }) configurations
         );
     in {
-      nixosConfigurations = generateNixosConfigurations [ "netbox" "copernicus" ] // {
-        aristotle = mkSystem [ ./lappy/configuration.nix ];
-      };
+      nixosConfigurations = generateNixosConfigurations [ "netbox" "copernicus" "aristotle" ];
     };
 }

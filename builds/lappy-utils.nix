@@ -9,10 +9,10 @@
 }:
 
 stdenv.mkDerivation rec {
-  pname = "utils";
+  pname = "lappy-utils";
   version = "1.01";
 
-  src = ./utils;
+  src = ./lappy-utils;
 
   nativeBuildInputs = [ makeWrapper ];
   buildInputs = [ xclip kbd rbw ];
