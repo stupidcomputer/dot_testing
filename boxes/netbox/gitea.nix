@@ -1,11 +1,11 @@
-{ lib, config, pkgs, ... }:
+{ config, ... }:
 {
   services.gitea = {
     enable = true;
     appName = "beepboop.systems"; # Give the site a name
     database = {
       type = "postgres";
-      passwordFile = "/etc/gittea-pass"; 
+      passwordFile = config.age.secrets.gitea-postgres-password.path;
     };
     settings.security.INSTALL_LOCK = true;
     settings.service = {
