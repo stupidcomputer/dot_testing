@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ config, machines, pkgs, ... }:
 
 {
   networking = {
@@ -22,15 +22,15 @@
           ${pkgs.iptables}/bin/iptables -t nat -D POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
         '';
 
-        privateKeyFile = "/home/ryan/wg-keys/private";
+        privateKeyFile = config.age.secrets.netbox-wg-priv.path;
 
         peers = [
           { # copernicus
-            publicKey = "JlH1X4KRT+B8Uau+qTLtBqyapkbGClIj1db7znU77kc=";
+            publicKey = machines.copernicus.wg-pubkey;
             allowedIPs = [ "10.100.0.2/32" ];
           }
           { # aristotle
-            publicKey = "Sw2yyMhyS8GOCWm1VuGn3Y7cfx606dXOGK5mux8ckQU=";
+            publicKey = machines.aristotle.wg-pubkey;
             allowedIPs = [ "10.100.0.3/32" ];
           }
         ];

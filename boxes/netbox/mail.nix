@@ -1,4 +1,4 @@
-{ inputs, ...}:
+{ config, inputs, ... }:
 {
   imports = [
     inputs.simple-nixos-mailserver.nixosModule
@@ -11,15 +11,12 @@
     loginAccounts = {
       "ryan@beepboop.systems" = {
         # nix-shell -p mkpasswd --run 'mkpasswd -sm bcrypt' > /hashed/password/file/location
-        hashedPasswordFile = "/etc/ryan-beepboop-systemsuser-pass";
-  
+        hashedPasswordFile = config.age.secrets.mailaccount.path;
+
         aliases = [
             "info@beepboop.systems"
             "postmaster@beepboop.systems"
         ];
-      };
-      "machines@beepboop.systems" = {
-        hashedPasswordFile = "/etc/ryan-beepboop-systemsuser-pass";
       };
     };
     certificateScheme = "acme-nginx";
