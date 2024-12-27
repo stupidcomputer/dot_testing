@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ../../lib/bootstrap.nix
 
+    ./agenix.nix
     ./franklincce.nix
     ./gitea.nix
     ./mail.nix

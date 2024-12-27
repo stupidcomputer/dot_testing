@@ -2,17 +2,16 @@
   description = "stupidcomputer's nixos flake";
 
   inputs = {
-    # regular nixos stuff
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-    simple-nixos-mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.05";
-    };
+    simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.05";
+    agenix.url = "github:ryantm/agenix";
   };
 
   outputs = {
       self,
       nixpkgs,
       simple-nixos-mailserver,
+      agenix,
       ...
     }@inputs: let
       mkSystem = modules:
@@ -28,7 +27,13 @@
         builtins.listToAttrs (
           map (name: {
             inherit name;
-            value = mkSystem [ (./boxes/. + "/${name}") ];
+            value = mkSystem [
+              (./boxes/. + "/${name}")
+              agenix.nixosModules.default
+              {
+                environment.systemPackages = [ agenix.packages."x86_64-linux".default ];
+              }
+            ];
           }) configurations
         );
     in {
