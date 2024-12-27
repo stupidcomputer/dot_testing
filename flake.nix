@@ -5,7 +5,6 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.11";
     simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.11";
     agenix.url = "github:ryantm/agenix";
-    deploy-rs.url = "github:serokell/deploy-rs";
   };
 
   outputs = {
@@ -13,7 +12,6 @@
       nixpkgs,
       simple-nixos-mailserver,
       agenix,
-      deploy-rs,
       ...
     }@inputs: let
       mkSystem = modules:
@@ -40,22 +38,5 @@
         );
     in {
       nixosConfigurations = generateNixosConfigurations [ "netbox" "copernicus" "aristotle" ];
-      deploy = {
-        sshUser = "ryan";
-        user = "ryan";
-        sshOpts = [ "-p" "433" ];
-
-        autoRollback = false;
-        magicRollback = false;
-
-        nodes = {
-          "netbox" = {
-            hostname = "beepboop.systems";
-            profiles.system = {
-              path = deploy-rs.lib.x86_64-linux.activate.nixos self.nixosConfigurations."netbox";
-            };
-          };
-        };
-      };
     };
 }

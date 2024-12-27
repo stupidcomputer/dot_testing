@@ -50,7 +50,6 @@
   ];
 
   system = {
-    copySystemConfiguration = true;
     stateVersion = "23.05"; # don't change this, lol
   };
 
