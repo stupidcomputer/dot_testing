@@ -2,11 +2,9 @@
   description = "stupidcomputer's nixos flake";
 
   inputs = {
-    # regular nixos stuff
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-    simple-nixos-mailserver = {
-      url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.05";
-    };
+    simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-24.05";
+    sops-nix.url = "github:Mic92/sops-nix";
   };
 
   outputs = {
