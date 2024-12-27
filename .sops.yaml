@@ -1,9 +1,0 @@
-keys:
-  - &admin age13flq29rfu03np26ujargsjml3wdhlruvhqyjnfhlq87s56lrxy2sgl8z6h
-  - &server_netbox: age1y5y2k2zn9w3ss2drqw3d295ny0t0xww5855dkuh4g2f934gt74eqxgmhvh
-creation_rules:
-  - path_regex: boxes/netbox/secrets.yaml
-    key_groups:
-      - age:
-        - *admin
-        - *server_netbox

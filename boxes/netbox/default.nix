@@ -4,7 +4,6 @@
   imports = [
     ./hardware-configuration.nix
     ../../lib/bootstrap.nix
-    ./sops.nix
 
     ./franklincce.nix
     ./gitea.nix
