@@ -20,5 +20,11 @@
       owner = "radicale";
       group = "radicale";
     };
+
+    nextcloud-passwd = {
+      file = ../../secrets/nextcloud-admin-passwd.age;
+      owner = "nextcloud";
+      group = "nextcloud";
+    };
   };
 }

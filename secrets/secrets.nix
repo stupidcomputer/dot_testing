@@ -16,4 +16,7 @@ in {
 
   # radicale
   "radicale-passwd.age".publicKeys = all;
+
+  # nextcloud
+  "nextcloud-admin-passwd.age".publicKeys = all;
 }

@@ -1,11 +1,11 @@
-{ lib, config, pkgs, ... }:
+{ config, pkgs, ... }:
 {
   services.nextcloud = {
     enable = true;
     https = true;
     package = pkgs.nextcloud30;
     hostName = "nextcloud.beepboop.systems";
-    config.adminpassFile = "/etc/nextcloud-admin";
+    config.adminpassFile = config.age.secrets.nextcloud-passwd.path;
     settings.overwriteprotocol = "https";
     extraApps = {
       phonetrack = pkgs.fetchNextcloudApp {
