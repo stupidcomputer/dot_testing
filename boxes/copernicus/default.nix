@@ -97,6 +97,15 @@
   nixpkgs.config.allowUnfree = true;
   networking = {
     hostName = "copernicus";
+    interfaces.eno1 = {
+      useDHCP = true;
+      ipv4.addresses = [
+        {
+          address = "192.168.1.201";
+          prefixLength = 24;
+        }
+      ];
+    };
     firewall = {
       enable = true;
       interfaces = {
