@@ -50,6 +50,7 @@
   environment.systemPackages = with pkgs; [
     # x11
     brave
+    qutebrowser
     (callPackage ../../builds/st.nix { aristotle = true; })
     (callPackage ../../builds/lappy-utils.nix {})
     (callPackage ../../builds/dwm.nix {})
