@@ -22,7 +22,6 @@
     };
   };
   hardware = {
-    pulseaudio.enable = true;
     bluetooth = {
       enable = true;
       settings.General.ControllerMode = "bredr";
@@ -44,16 +43,14 @@
     experimental-features = [ "nix-command" "flakes" ];
   };
 
+  fonts.packages = with pkgs; [
+    fantasque-sans-mono
+  ];
+
   environment.systemPackages = with pkgs; [
     # x11
     brave
-    (pkgs.st.overrideAttrs (oldAttrs: rec {
-        patches = [
-          ../../builds/lappy-st/scrollback.patch
-          ../../builds/lappy-st/clipboard.patch
-        ];
-        conf = builtins.readFile ../../builds/lappy-st/config.h;
-    }))
+    (callPackage ../../builds/st.nix { aristotle = true; })
     (callPackage ../../builds/lappy-utils.nix {})
     (callPackage ../../builds/dwm.nix {})
     (callPackage ../../builds/sssg.nix {})
