@@ -9,7 +9,7 @@
     settings.overwriteprotocol = "https";
     extraApps = {
       phonetrack = pkgs.fetchNextcloudApp {
-        sha256 = "sha256-V92f+FiS5vZEkq15A51pHoDpUOBfUOEVIcsXdP/rSMQ=";
+        sha256 = "sha256-zQt+3t86HZJVT/wiETHkPdTwV6Qy+iNkH3/THtTe1Xs=";
         license = "agpl3Only";
         url = "https://github.com/julien-nc/phonetrack/releases/download/v0.8.1/phonetrack-0.8.1.tar.gz";
       };
