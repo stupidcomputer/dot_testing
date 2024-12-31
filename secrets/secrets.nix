@@ -19,4 +19,7 @@ in {
 
   # nextcloud
   "nextcloud-admin-passwd.age".publicKeys = all;
+
+  # networkmanager
+  "nm-home-net-config.age".publicKeys = with machines; [ copernicus.pubkey aristotle.pubkey ];
 }

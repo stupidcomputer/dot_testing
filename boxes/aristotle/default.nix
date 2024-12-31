@@ -4,6 +4,7 @@
   imports = [
     ../../lappy-config
     ./paperless.nix
+    ./agenix.nix
     ./hardware-configuration.nix
   ];
 
