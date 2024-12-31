@@ -12,3 +12,7 @@ Host copernicus-proxy
 Host copernicus
 	User usr
 	Port 2222
+
+Host aristotle
+	User usr
+	Port 2222

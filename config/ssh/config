@@ -1,30 +1,18 @@
-Host mainsail
-	User usr
-	Port 22
-
-Host phone
-	User u0_a193
-	Port 8022
-
 Host netbox
 	HostName beepboop.systems
 	User ryan
 	Port 443
 
-Host mainsail-prox
-	HostName localhost
-	User usr
-	Port 55554
-	ProxyJump netbox
-
-Host mlg-prox
-	HostName localhost
+Host copernicus-proxy
+	HostName 10.100.0.2
 	User usr
 	Port 2222
-	ProxyJump mainsail-prox
+	ProxyJump netbox
 
-Host x230t-prox
-	HostName x230t
+Host copernicus
 	User usr
-	Port 22
-	ProxyJump mainsail-prox
+	Port 2222
+
+Host aristotle
+	User usr
+	Port 2222

@@ -4,6 +4,7 @@
   imports = [
     ../../lappy-config
     ./paperless.nix
+    ./sshd.nix
     ./agenix.nix
     ./hardware-configuration.nix
   ];
@@ -101,6 +102,7 @@
     ledger
     gnuplot
     anki-bin
+    x11vnc
 
     # for the remote access functionality
     vscode-fhs
@@ -132,10 +134,6 @@
     serviceConfig.ExecStart = "${pkgs.openssh}/bin/ssh -ND 127.0.0.1:4000 netbox";
     wantedBy = []; # start only when I say so
   };
-
-  # make sshd a `systemctl start sshd` command away
-  services.openssh.enable = true;
-  systemd.services.sshd.wantedBy = lib.mkForce [];
 
   system.stateVersion = "24.05";
 }
