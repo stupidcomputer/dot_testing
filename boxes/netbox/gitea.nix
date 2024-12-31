@@ -12,7 +12,6 @@
       SHOW_REGISTRATION_BUTTON = false;
       DISABLE_REGISTRATION = true;
     };
-    settings.ui.DEFAULT_THEME = "arc-green";
     settings.api.ENABLE_SWAGGER = false;
     settings.server = {
       DOMAIN = "git.beepboop.systems";

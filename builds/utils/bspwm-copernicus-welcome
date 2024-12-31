@@ -26,7 +26,7 @@ EOF
 	"run-scrcpy")
 		while true; do
 			if ! pkill -c scrcpy; then
-				nohup scrcpy --window-title="phonercon" > /dev/null &
+				nohup scrcpy -Sw --window-title="phonercon" > /dev/null &
 				sleep 1
 				num_jobs=$(jobs | wc -l)
 				if [ $num_jobs -gt 0 ]; then
