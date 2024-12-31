@@ -1,4 +1,4 @@
-{ config, pkgs, lib, ... }:
+{ pkgs, lib, machines, ... }:
 
 {
   imports = [
@@ -17,8 +17,13 @@
     networkmanager.enable = true;
     firewall.allowedTCPPorts = [ 24800 ];
 
-    hosts = {
-      "127.0.0.1" = [ "news.ycombinator.com" ]; # i'm finally free
+    hosts = lib.attrsets.mergeAttrsList [
+      (machines.mkHosts machines "router" "localnet")
+      (machines.mkHosts machines "copernicus" "localnet")
+      (machines.mkHosts machines "phone" "localnet")
+      (machines.mkHosts machines "netbox" "internet")
+    ] // {
+      "127.0.0.1" = [ "news.ycombinator.com" ];
     };
   };
   hardware = {
@@ -35,7 +40,6 @@
     isNormalUser = true;
     description = "usr";
     extraGroups = [ "networkmanager" "wheel" "input" ];
-    packages = with pkgs; [];
   };
 
   nixpkgs.config.allowUnfree = true;

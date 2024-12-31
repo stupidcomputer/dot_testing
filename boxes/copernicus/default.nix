@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ...}:
+{ pkgs, lib, machines, ...}:
 
 {
   imports = [
@@ -6,7 +6,6 @@
     ./nvidia.nix
     ./services
     ../../config/copernicus.nix
-    ../../lib/hosts.nix
     ../../lib/bootstrap.nix
   ];
 
@@ -130,6 +129,12 @@
         };
       };
     };
+    hosts = lib.attrsets.mergeAttrsList [
+      (machines.mkHosts machines "aristotle" "localnet")
+      (machines.mkHosts machines "router" "localnet")
+      (machines.mkHosts machines "phone" "localnet")
+      (machines.mkHosts machines "netbox" "internet")
+    ];
   };
 
   services.getty.autologinUser = "usr";

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, lib, machines, ... }:
 
 {
   imports = [
@@ -115,5 +115,9 @@
         };
       };
     };
+    hosts = lib.attrsets.mergeAttrsList [
+      (machines.mkHosts machines "copernicus" "wgnet")
+      (machines.mkHosts machines "aristotle" "wgnet")
+    ];
   };
 }
