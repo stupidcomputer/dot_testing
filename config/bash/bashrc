@@ -5,6 +5,11 @@
 
 # some housekeeping
 alias ls="ls --color=auto --group-directories-first"
+alias weather="curl https://wttr.in"
+alias lynx="lynx -cfg=$LYNX_CFG_PATH/lynx.cfg"
+alias elinks="TERM='xterm-color' elinks"
+alias pkgsearch="nix search nixpkgs"
+alias reload=". ~/.config/bash/profile"
 
 function cd() {
 	builtin cd "$@" && ls --color=auto --group-directories-first
@@ -44,9 +49,6 @@ case "$HOSTNAME" in
 		;;
 	"copernicus")
 		PS1="$USER_PREFIX\[\033[97;1m\]${NIX_SHELL_PS1}coper:$PS1\[\033[0;0m\]"
-		;;
-	"mlg")
-		PS1="$USER_PREFIX\[\033[94;1m\]${NIX_SHELL_PS1}mlg:$PS1\[\033[0;0m\]"
 		;;
 	"netbox")
 		PS1="$USER_PREFIX\[\033[95;1m\]${NIX_SHELL_PS1}net:$PS1\[\033[0;0m\]"

@@ -1,0 +1,3 @@
+set show_current_bitrate=true
+set pause_on_output_change=true
+set status_display_program=cmus-status-update

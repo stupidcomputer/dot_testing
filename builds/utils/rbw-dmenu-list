@@ -1,6 +1,8 @@
 # wrapper around rbw
 
-rbw-x11-prompt
+if [ "$HOSTNAME" != "aristotle" ]; then
+	rbw-x11-prompt
+fi
 
 resp=$(rbw list | dmenu)
 

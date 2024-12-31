@@ -1,20 +1,15 @@
 #!/bin/sh
 
-cd ~/dot_testing
-if [ "$(hostname)" = "localhost" ]; then
-	# we're on a phone
-	cd boxes/phone/out-of-tree
-	make $@
-	exit
+if [ -d "$HOME/dot_testing" ]; then
+	cd ~/dot_testing
+elif [ -d "$HOME/dots" ]; then
+	cd ~/dots
 fi
 
-if [ -f "boxes/$(hostname)/custom_command" ]; then
-	eval "$(cat boxes/$(hostname)/custom_command)"
-	exit
+machine=$(hostname)
+
+if [ "$machine" = "localhost" ]; then
+	machine="phone"
 fi
 
-if [ -f "flake.nix" ]; then
-	sudo nixos-rebuild --flake . switch $@
-else
-	sudo nixos-rebuild -I nixos-config=./boxes/$(hostname).nix switch $@
-fi
+sh boxes/$machine/custom_command $@

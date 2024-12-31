@@ -99,6 +99,11 @@ vim.api.nvim_create_autocmd({"TermOpen"}, {
 		vim.wo.number = false
 	end
 })
+
+vim.api.nvim_create_autocmd({"TermOpen"}, {
+	pattern = {"*"},
+	command = "setlocal nospell",
+})
 -- }}}
 
 -- netrw options {{{

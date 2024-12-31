@@ -2,7 +2,7 @@
 
 {
   imports = [
-    ../../lappy-config
+    ../../config/aristotle.nix
     ./paperless.nix
     ./sshd.nix
     ./agenix.nix
@@ -58,7 +58,8 @@
     brave
     qutebrowser
     (callPackage ../../builds/st.nix { aristotle = true; })
-    (callPackage ../../builds/lappy-utils.nix {})
+    (callPackage ../../builds/utils.nix {})
+    (callPackage ../../builds/rebuild.nix {})
     (callPackage ../../builds/dwm.nix {})
     (callPackage ../../builds/sssg.nix {})
     dmenu

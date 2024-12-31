@@ -1,7 +1,0 @@
-#!/bin/sh
-
-mkdir -p ~/pim/mail/main
-mbsync -c ~/.config/isync/config main
-
-vdirsyncer sync
-rbw sync

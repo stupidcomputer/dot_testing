@@ -1,0 +1,9 @@
+# sx configuration for aristotle
+aristotle-status &
+
+xset r rate 200 80
+setxkbmap -option caps:super
+pkill xcape
+xcape -e 'Super_L=Escape'
+
+dwm
