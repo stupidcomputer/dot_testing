@@ -1,5 +1,4 @@
 { pkgs, lib, machines, ...}:
-
 {
   imports = [
     ./hardware-configuration.nix
@@ -35,7 +34,6 @@
 
     dmenu
 
-    (pkgs.callPackage ../../builds/archutils.nix {})
     (pkgs.callPackage ../../builds/sssg.nix {})
   ];
 

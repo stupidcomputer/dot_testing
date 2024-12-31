@@ -25,4 +25,3 @@ stdenv.mkDerivation rec {
 
   phases = [ "buildPhase" "installPhase" ];
 }
-

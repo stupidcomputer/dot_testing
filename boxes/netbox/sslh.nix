@@ -1,4 +1,3 @@
-{ lib, config, pkgs, ... }:
 {
   services.sslh = {
     enable = true;

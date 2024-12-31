@@ -1,4 +1,4 @@
-{ lib, config, pkgs, ... }:
+{ config, ... }:
 {
   services.radicale = {
     enable = true;

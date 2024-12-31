@@ -1,6 +1,4 @@
 { stdenv
-, lib
-, pkgs
 , libX11
 , libXinerama
 , libXft

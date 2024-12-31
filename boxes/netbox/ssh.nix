@@ -1,5 +1,4 @@
 { pkgs, machines, ... }:
-
 {
   services.openssh = {
     enable = true;

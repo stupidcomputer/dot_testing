@@ -1,6 +1,5 @@
 { stdenv
 , lib
-, pkgs
 , fetchgit
 , makeWrapper
 , bash

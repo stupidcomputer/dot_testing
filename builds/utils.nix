@@ -1,6 +1,5 @@
 { stdenv
 , lib
-, pkgs
 # shell scripts stuff
 , makeWrapper
 , sshuttle

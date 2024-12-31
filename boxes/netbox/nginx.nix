@@ -1,4 +1,3 @@
-{ lib, config, pkgs, ... }:
 {
   services.nginx.enable = true;
   services.nginx.clientMaxBodySize = "100m";

@@ -1,5 +1,4 @@
 { pkgs, ... }:
-
 {
   # this is the default x11 configuration
   environment.etc = {

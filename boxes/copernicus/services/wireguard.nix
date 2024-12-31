@@ -1,5 +1,4 @@
 { config, machines, ... }:
-
 {
   networking = {
     firewall.allowedUDPPorts = [ 50000 ];

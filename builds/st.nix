@@ -1,13 +1,11 @@
 { stdenv
 , lib
-, fetchgit
 , pkg-config
 , libX11
 , libXft
 , fontconfig
 , freetype
 , ncurses
-, fantasque-sans-mono
 , lightMode ? false
 , aristotle ? false
 , extraLibs ? [ ]

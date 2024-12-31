@@ -1,4 +1,3 @@
-{ machines, ... }:
 {
   age = {
     secrets = {

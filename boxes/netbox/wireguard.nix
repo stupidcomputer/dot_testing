@@ -1,5 +1,4 @@
 { config, machines, pkgs, ... }:
-
 {
   networking = {
     nat = {

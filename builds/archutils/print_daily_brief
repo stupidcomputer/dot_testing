@@ -1,3 +1,0 @@
-#!/bin/sh
-
-generate_daily_brief | tail -1 | sed 's|file://||g' | xargs lp -d EPSONTHING

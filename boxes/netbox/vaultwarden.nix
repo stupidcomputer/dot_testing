@@ -1,4 +1,3 @@
-{ lib, config, pkgs, ... }:
 {
   services.vaultwarden.enable = true;
   services.vaultwarden.config = {
