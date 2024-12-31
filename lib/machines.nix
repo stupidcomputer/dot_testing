@@ -6,6 +6,7 @@
   };
   copernicus = {
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILBGh1FHPneg7PCDkhMs2BCJPTIRVJkRTKpOj1w02ydD usr";
+    wg-privkey = ../secrets/copernicus-wg-priv.age;
     wg-pubkey = "JlH1X4KRT+B8Uau+qTLtBqyapkbGClIj1db7znU77kc=";
     ip-addrs = {
       localnet = "192.168.1.201";

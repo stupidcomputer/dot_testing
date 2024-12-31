@@ -1,3 +1,4 @@
+{ machines, ... }:
 {
   age.secrets = {
     gitea-postgres-password = {
@@ -12,7 +13,7 @@
     };
 
     netbox-wg-priv = {
-      file = ../../secrets/netbox-wg-priv.age;
+      file = machines.netbox.wg-privkey;
     };
 
     radicale-passwd = {

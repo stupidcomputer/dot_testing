@@ -4,6 +4,7 @@
   imports = [
     ./hardware-configuration.nix
     ./nvidia.nix
+    ./agenix.nix
     ./services
     ../../config/copernicus.nix
     ../../lib/bootstrap.nix

@@ -1,4 +1,4 @@
-{ machines, ... }:
+{ config, machines, ... }:
 
 {
   networking = {
@@ -9,7 +9,7 @@
         ips = [ "10.100.0.2/24" ];
         listenPort = 50000;
 
-        privateKeyFile = "/home/usr/wg-keys/private";
+        privateKeyFile = config.age.secrets.copernicus-wg-priv.path;
         peers = [
           { # netbox
             publicKey = machines.netbox.wg-pubkey;
