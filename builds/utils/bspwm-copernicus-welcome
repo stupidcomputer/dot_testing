@@ -1,0 +1,48 @@
+# splash screen for bspwm on copernicus
+
+set -x
+
+if [ -z "$1" ]; then
+	st -g 78x11+0+0 -c st-gpg-menu -e bspwm-copernicus-welcome inner & disown
+	exit
+fi
+
+case "$1" in
+	"helptext")
+		cat | less <<EOF
+welcome to x11, usr!
+this is copernicus, the tower computer.
+
+if you're a new user of this system, open a terminal (win+enter) and run \`man
+stupidsystem\` for more information. if you don't know what man pages are, try
+\`man man-intro\` first so you're not lost.
+
+this window will close automatically when scrcpy and x11vnc connections are
+established to phone and aristotle, respectively. to close this window now,
+press win+q.
+EOF
+		exit
+		;;
+	"run-scrcpy")
+		while true; do
+			if ! pkill -c scrcpy; then
+				nohup scrcpy --window-title="phonercon" > /dev/null &
+				sleep 1
+				num_jobs=$(jobs | wc -l)
+				if [ $num_jobs -gt 0 ]; then
+					# scrcpy started successfully
+					disown %-
+					break
+				fi
+			fi
+		done
+		exit
+		;;
+	"inner")
+		tmux \
+			new-session "bspwm-copernicus-welcome run-scrcpy" \; \
+			split-window "bspwm-copernicus-welcome run-x11vnc" \; \
+			new-window "bspwm-copernicus-welcome helptext" \; \
+			set -g status off
+		;;
+esac

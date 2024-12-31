@@ -73,11 +73,21 @@ ctrl + b; {_,ctrl +,shift + }{h,j,k,l}
 	bspc node -{f,p,s} {west,south,north,east}
 
 # change to or move a node to a desktop
-super + {_,shift + } {1-9,0}
-	bspc {desktop -f,node -d} '0{1-9,0}'
+super + {_,shift + } {1-9}
+	bspc {desktop -f,node -d} '0{1-9}'
 
-ctrl + b; {_,shift + } {1-9,0}
-	bspc {desktop -f,node -d} '0{1-9,0}'
+ctrl + b; {_,shift + } {1-9}
+	bspc {desktop -f,node -d} '0{1-9}'
+
+# on copernicus: phone and aristotle remote controls
+super + 0
+	bspc desktop -f phonercon
+super + shift + 0
+	bspc node -d phonercon
+super + ctrl + 0
+	bspc desktop -f aristrcon
+super + ctrl + shift + 0
+	bspc node -d aristrcon
 
 # change a node to tiling, floating, or fullscreen
 super + {t,f,s}
