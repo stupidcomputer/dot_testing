@@ -1,4 +1,4 @@
-{ lib, config, pkgs, machines, ... }:
+{ pkgs, machines, ... }:
 
 {
   services.openssh = {
@@ -6,6 +6,7 @@
     ports = [55555];
     settings = {
       X11Forwarding = false;
+      AllowTcpForwarding = true;
       PermitRootLogin = "no";
       PasswordAuthentication = false;
     };
@@ -34,7 +35,6 @@
     login_ip="''${SSH_CLIENT%% *}"
     is_in_ignored=$(grep "$login_ip" /etc/ssh/ignored_ips -c)
     if [ "$is_in_ignored" -gt 0 ]; then
-      echo "Your login has been ignored based on your IP address."
       exit
     fi
     time=$(date "+%T%:z")

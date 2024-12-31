@@ -2,3 +2,13 @@ Host netbox
 	HostName beepboop.systems
 	User ryan
 	Port 443
+
+Host copernicus-proxy
+	HostName 10.100.0.2
+	User usr
+	Port 2222
+	ProxyJump netbox
+
+Host copernicus
+	User usr
+	Port 2222
