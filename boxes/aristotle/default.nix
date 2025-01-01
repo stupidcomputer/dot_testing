@@ -48,66 +48,6 @@
     experimental-features = [ "nix-command" "flakes" ];
   };
 
-  fonts.packages = with pkgs; [
-    fantasque-sans-mono
-  ];
-
-  environment.systemPackages = with pkgs; [
-    # x11
-    brave
-    qutebrowser
-    (callPackage ../../builds/st.nix { aristotle = true; })
-    (callPackage ../../builds/utils.nix {})
-    (callPackage ../../builds/rebuild.nix {})
-    (callPackage ../../builds/dwm.nix {})
-    (callPackage ../../builds/sssg.nix {})
-    dmenu
-    pinentry-qt
-
-    # tui/cli programs
-    # devel
-    gh
-    tea
-    neovim
-    git
-    git-annex
-
-    # audio
-    cmus
-    ncpamixer
-    bluetuith
-
-    # pimtools
-    khard
-    khal
-    vdirsyncer
-    neomutt
-    isync
-    msmtp
-    todoman
-
-    # utilities
-    htop
-    tmux
-    rbw
-    elinks
-    lynx
-    jq
-    peaclock
-    usbutils # for lsusb
-    pciutils # for lspci
-    kjv
-    epr
-    poppler_utils
-    ledger
-    gnuplot
-    anki-bin
-    x11vnc
-
-    # for the remote access functionality
-    vscode-fhs
-  ];
-
   services = {
     xserver = {
       enable = true;
