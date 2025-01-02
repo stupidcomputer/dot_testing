@@ -89,6 +89,10 @@ super + ctrl + 0
 super + ctrl + shift + 0
 	bspc node -d aristrcon
 
+# advance anki conjugation
+super + bracketright
+	anki-advance-conjugation
+
 # change a node to tiling, floating, or fullscreen
 super + {t,f,s}
 	bspc node -t {tiled,floating,fullscreen}

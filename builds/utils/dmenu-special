@@ -10,6 +10,10 @@ dmenu <<DONE
 Á a-acute
 é e-acute
 É e-acute
+ú u-acute
+Ú U-acute
+ñ n-tilde
+Ñ N-tilde
 DONE
 ) | awk -F' ' '{print $1}' \
   | tr -d '\n' \

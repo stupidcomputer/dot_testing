@@ -43,6 +43,7 @@
     vdirsyncer
     xscreensaver
     zathura
+    anki
 
     # misc x11 progs
     xclip
