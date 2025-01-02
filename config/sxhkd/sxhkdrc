@@ -103,6 +103,10 @@ ctrl + b; {t,f,s}
 shift + Insert
 	dmenu-special
 
+# switch to vnc passthrough mode
+super + v
+	sxhkd-mode vnc
+
 # phone specific -- send the escape key since we can't use it
 ctrl + b; [
 	xdotool key Escape

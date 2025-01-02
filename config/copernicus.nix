@@ -147,6 +147,7 @@
         ${pkgs.coreutils}/bin/ln -sf $config_prefix/sxhkd/sxhkdrc /home/usr/.config/sxhkd/sxhkdrc
         ${pkgs.coreutils}/bin/ln -sf $config_prefix/sxhkd/mouse /home/usr/.config/sxhkd/mouse
         ${pkgs.coreutils}/bin/ln -sf $config_prefix/sxhkd/nodemanip /home/usr/.config/sxhkd/nodemanip
+        ${pkgs.coreutils}/bin/ln -sf $config_prefix/sxhkd/vnc /home/usr/.config/sxhkd/vnc
 
         mkdir -p /home/usr/.config/todoman
         ${pkgs.coreutils}/bin/ln -sf $config_prefix/todoman/config.py /home/usr/.config/todoman/config.py
