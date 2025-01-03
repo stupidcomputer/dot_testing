@@ -83,6 +83,7 @@
 
     # custom builds
     (pkgs.callPackage ../builds/st.nix { lightMode = false; })
+    (pkgs.callPackage ../builds/dmenu.nix {})
     (pkgs.callPackage ../builds/utils.nix {})
     (pkgs.callPackage ../builds/statusbar {})
   ];

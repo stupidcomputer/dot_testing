@@ -23,11 +23,11 @@
     brave
     qutebrowser
     (callPackage ../builds/st.nix { aristotle = true; })
+    (callPackage ../builds/dmenu.nix {})
     (callPackage ../builds/utils.nix {})
     (callPackage ../builds/rebuild.nix {})
     (callPackage ../builds/dwm.nix {})
     (callPackage ../builds/sssg.nix {})
-    dmenu
     pinentry-qt
 
     # tui/cli programs
