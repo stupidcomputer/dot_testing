@@ -1,27 +1,13 @@
-{ stdenv
-, lib
-, fetchgit
-, makeWrapper
-, bash
-, pandoc
-}:
-
-stdenv.mkDerivation rec {
+{ python3Packages, fetchgit }:
+with python3Packages;
+buildPythonApplication {
   pname = "sssg";
-  version = "1.00";
+  version = "1.1";
+
+  propagatedBuildInputs = [ markdown jinja2 watchdog ];
 
   src = fetchgit {
     url = "https://git.beepboop.systems/stupidcomputer/sssg";
-    hash = "sha256-b0lbHsu628CKPNC6HDLApZQ4HsinTrXCoFqr1KdVIYE=";
+    hash = "sha256-EPw9zylvRcwYHwBIVhuGRY5YvER6cF7Jdy+pLFojoKA=";
   };
-
-  nativeBuildInputs = [ makeWrapper ];
-  buildInputs = [ bash pandoc ];
-
-  installPhase = ''
-    mkdir -p $out/bin
-
-    cp $src/sssg.sh $out/bin/sssg
-    wrapProgram $out/bin/sssg --prefix PATH : ${lib.makeBinPath [ bash pandoc ]}
-  '';
 }
