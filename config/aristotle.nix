@@ -100,7 +100,7 @@
         ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/msmtp/config /home/usr/.config/msmtp/config
 
         mkdir -p /home/usr/.config/neomutt
-        ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/neomutt/neomuttrc /home/usr/.config/neomutt/neomuttrc
+        ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/neomutt/aristotle_neomuttrc /home/usr/.config/neomutt/neomuttrc
 
         mkdir -p /home/usr/.config/nvim
         ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/nvim/init.min.lua /home/usr/.config/nvim/init.lua
