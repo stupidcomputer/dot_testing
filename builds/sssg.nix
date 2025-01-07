@@ -8,6 +8,6 @@ buildPythonApplication {
 
   src = fetchgit {
     url = "https://git.beepboop.systems/stupidcomputer/sssg";
-    hash = "sha256-EPw9zylvRcwYHwBIVhuGRY5YvER6cF7Jdy+pLFojoKA=";
+    hash = "sha256-PJCa1hO24ctM0RFiBCNt2rZkIaDO77zYgxOp3EE337c=";
   };
 }
