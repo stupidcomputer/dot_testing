@@ -8,6 +8,8 @@
     ./hardware-configuration.nix
   ];
 
+  programs.adb.enable = true;
+
   boot.loader.grub = {
     enable = true;
     device = "/dev/nvme0n1";
@@ -40,7 +42,7 @@
   users.users.usr = {
     isNormalUser = true;
     description = "usr";
-    extraGroups = [ "networkmanager" "wheel" "input" ];
+    extraGroups = [ "networkmanager" "wheel" "input" "adbusers" ];
   };
 
   nixpkgs.config.allowUnfree = true;

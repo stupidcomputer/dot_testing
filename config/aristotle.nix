@@ -68,6 +68,7 @@
     ledger
     gnuplot
     anki-bin
+    scrcpy
     x11vnc
 
     # for the remote access functionality
