@@ -89,7 +89,7 @@
         ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/git/config /home/usr/.config/git/config
 
         mkdir -p /home/usr/.config/isync
-        ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/isync/config /home/usr/.config/isync/config
+        ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/isync/aristotle-config /home/usr/.config/isync/config
 
         mkdir -p /home/usr/.config/khal
         ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/khal/config /home/usr/.config/khal/config

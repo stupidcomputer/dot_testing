@@ -1,0 +1,20 @@
+IMAPStore main-remote
+Host mail.beepboop.systems
+Port 993
+User ryan@beepboop.systems
+PassCmd "rbw get mail.beepboop.systems"
+TLSType IMAPS
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+MaildirStore main-local
+Path ~/pim/mail/main/
+Inbox ~/pim/mail/main/INBOX
+Subfolders Verbatim
+
+Channel main
+Far :main-remote:
+Near :main-local:
+Create Both
+Expunge Both
+Patterns *
+SyncState *
