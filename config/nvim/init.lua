@@ -135,6 +135,7 @@ require("lazy").setup({
 	spec = {
 		{ "nvim-lua/plenary.nvim" },
 		{ "nvim-telescope/telescope.nvim" },
+		{ "nvim-tree/nvim-tree.lua" },
 		{ "octarect/telescope-menu.nvim" },
 		{ "VonHeikemen/lsp-zero.nvim" },
 		{ "neovim/nvim-lspconfig" },
@@ -207,6 +208,10 @@ luasnip.add_snippets("tex", {
 		luasnip.text_node({ "", "\\end{description}" })
 	})
 })
+-- }}}
+
+-- nvim-tree {{{
+require('nvim-tree').setup()
 -- }}}
 
 -- nvim-cmp setup {{{
