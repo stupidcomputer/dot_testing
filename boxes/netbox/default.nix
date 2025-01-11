@@ -10,6 +10,7 @@
     ./mail.nix
     ./nextcloud.nix
     ./nginx.nix
+    ./pcomon.nix
     ./radicale.nix
     ./ssh.nix
     ./sslh.nix
