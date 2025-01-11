@@ -16,4 +16,4 @@ all materials in this repository, except for:
 * `./config/pape.jpg`, which is of unknown license, and
 * `./builds/st`, which is licensed under MIT, pursuant to `./builds/st/LICENSE`,
 
-is (c) rndusr, randomuser, stupidcomputer, etc 2024 and licensed under the GPLv3 (see `./LICENSE`)
+is (c) rndusr, randomuser, stupidcomputer, etc 2024-2025 and licensed under the GPLv3 (see `./LICENSE`)
