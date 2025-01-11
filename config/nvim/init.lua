@@ -136,6 +136,7 @@ require("lazy").setup({
 		{ "nvim-lua/plenary.nvim" },
 		{ "nvim-telescope/telescope.nvim" },
 		{ "nvim-tree/nvim-tree.lua" },
+		{ 'dinhhuy258/git.nvim' },
 		{ "octarect/telescope-menu.nvim" },
 		{ "VonHeikemen/lsp-zero.nvim" },
 		{ "neovim/nvim-lspconfig" },
@@ -232,4 +233,8 @@ cmp.setup({
 		['<C-Space>'] = cmp.mapping.confirm({select = false}),
 	}),
 })
+-- }}}
+
+-- git.nvim setup {{{
+require('git').setup()
 -- }}}
