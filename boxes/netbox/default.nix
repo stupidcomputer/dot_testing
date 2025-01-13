@@ -5,6 +5,7 @@
     ../../lib/bootstrap.nix
 
     ./agenix.nix
+    ./flasktrack.nix
     ./franklincce.nix
     ./gitea.nix
     ./mail.nix
