@@ -22,6 +22,6 @@ in {
   systemd.timers.pcomon = {
     wantedBy = [ "timers.target" ];
     partOf = [ "pcomon.service" ];
-    timerConfig.OnCalendar = "*:*:0/30";
+    timerConfig.OnCalendar = "*:0/30:*";
   };
 }
