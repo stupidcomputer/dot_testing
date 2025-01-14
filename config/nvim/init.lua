@@ -140,6 +140,7 @@ require("lazy").setup({
 		{ "octarect/telescope-menu.nvim" },
 		{ "VonHeikemen/lsp-zero.nvim" },
 		{ "neovim/nvim-lspconfig" },
+		{ "serenevoid/kiwi.nvim" },
 		{ "hrsh7th/nvim-cmp" },
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "L3MON4D3/LuaSnip" },

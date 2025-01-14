@@ -104,7 +104,8 @@
         ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/neomutt/aristotle_neomuttrc /home/usr/.config/neomutt/neomuttrc
 
         mkdir -p /home/usr/.config/nvim
-        ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/nvim/init.min.lua /home/usr/.config/nvim/init.lua
+        ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/nvim/init.lua /home/usr/.config/nvim/init.lua
+        ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/nvim/colors /home/usr/.config/nvim/colors
 
         mkdir -p /home/usr/.config/python
         ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/python/pythonrc.py /home/usr/.config/python/pythonrc.py
