@@ -71,6 +71,8 @@
     scrcpy
     x11vnc
 
+    feh
+
     # for the remote access functionality
     vscode-fhs
   ];
