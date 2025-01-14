@@ -74,6 +74,7 @@
     rsync
     man-pages
     fzy
+    x11vnc
 
     # for neovim support
     lua-language-server
