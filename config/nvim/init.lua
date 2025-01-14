@@ -133,14 +133,27 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
 	spec = {
-		{ "nvim-lua/plenary.nvim" },
+		{ "nvim-lua/plenary.nvim", lazy = true },
 		{ "nvim-telescope/telescope.nvim" },
 		{ "nvim-tree/nvim-tree.lua" },
-		{ 'dinhhuy258/git.nvim' },
-		{ "octarect/telescope-menu.nvim" },
+		{ 'dinhhuy258/git.nvim', lazy = true },
+		{ "octarect/telescope-menu.nvim", lazy = true },
 		{ "VonHeikemen/lsp-zero.nvim" },
 		{ "neovim/nvim-lspconfig" },
-		{ "serenevoid/kiwi.nvim" },
+		{
+			"serenevoid/kiwi.nvim",
+			opts = {
+					{
+							name = "wiki",
+							path = "/home/usr/wiki"
+					}
+			},
+			keys = {
+					{ "<leader>ww", ":lua require(\"kiwi\").open_wiki_index()<cr>", desc = "Open Wiki index" },
+					{ "T", ":lua require(\"kiwi\").todo.toggle()<cr>", desc = "Toggle Markdown Task" }
+			},
+			lazy = true
+		},
 		{ "hrsh7th/nvim-cmp" },
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "L3MON4D3/LuaSnip" },
@@ -148,7 +161,6 @@ require("lazy").setup({
 		{ "lervag/vimtex" },
 		{ "https://github.com/protex/better-digraphs.nvim" },
 	},
-	checker = { enabled = true },
 })
 -- }}}
 
