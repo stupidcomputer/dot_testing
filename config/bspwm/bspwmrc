@@ -45,7 +45,7 @@ keyboard () {
 	xkbset exp =bo
 	xset -q | grep "Caps Lock:\s*on" && xdotool key Caps_Lock
 	xset -r 161 # tablet rotate key doesn't need repeat
-	xset r rate 200 80
+	xset r rate 300 80
 }
 
 desktops="01 02 03 04 05 06 07 08 09"
