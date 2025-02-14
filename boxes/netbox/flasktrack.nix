@@ -1,8 +1,8 @@
 { pkgs, ... }:
 let
   appEnv = pkgs.python3.withPackages (p: with p; [
-    waitress
     (callPackage ../../builds/flasktrack.nix {})
+    waitress
   ]);
 in {
   systemd.services.flasktrack = {
