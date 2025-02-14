@@ -28,6 +28,7 @@
     (callPackage ../builds/rebuild.nix {})
     (callPackage ../builds/dwm.nix {})
     (callPackage ../builds/sssg.nix {})
+    (callPackage ../builds/tilp.nix {})
     pinentry-qt
 
     # tui/cli programs
@@ -70,8 +71,18 @@
     anki-bin
     scrcpy
     x11vnc
-
     feh
+    jdk21
+    xbrightness
+
+    # for neovim support
+    lua-language-server
+    python311Packages.python-lsp-server
+    texlab
+    nixd
+
+    texliveFull
+    zathura
 
     # for the remote access functionality
     vscode-fhs

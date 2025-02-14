@@ -23,21 +23,21 @@ case $1 in
 	"regular")
 		khal new -g school -a home $2 07:40 08:27 AP Computer Science
 		khal new -g school -a home $2 08:34 09:19 Chemistry I H
-		khal new -g school -a home $2 09:29 10:14 AP Precalculus
-		khal new -g school -a home $2 10:21 11:06 AP European History
-		khal new -g school -a home $2 11:06 11:08 Flex Check time
-		khal new -g school -a home $2 11:15 12:05 Wind Ensemble H
-		khal new -g school -a home $2 12:12 12:37 SAIL
-		khal new -g school -a home $2 12:37 13:02 Lunch
-		khal new -g school -a home $2 13:09 13:54 English II H
-		khal new -g school -a home $2 14:01 14:47 Spanish III H
+		khal new -g school -a home $2 09:26 10:11 AP Precalculus
+		khal new -g school -a home $2 10:18 11:03 AP European History
+		khal new -g school -a home $2 11:03 11:08 "'ANCHOR' time"
+		khal new -g school -a home $2 11:15 12:02 Wind Ensemble H
+		khal new -g school -a home $2 12:02 12:07 "'ANCHOR' time"
+		khal new -g school -a home $2 12:14 12:36 SAIL
+		khal new -g school -a home $2 12:36 13:02 Lunch
+		khal new -g school -a home $2 13:09 13:53 English II H
+		khal new -g school -a home $2 14:00 14:47 Spanish III H
 		;;
 	"late")
 		khal new -g school -a home $2 08:25 09:08 AP Computer Science
 		khal new -g school -a home $2 09:15 09:56 Chemistry I H
 		khal new -g school -a home $2 10:06 10:47 AP Precalculus
-		khal new -g school -a home $2 10:54 11:33 AP European History
-		khal new -g school -a home $2 11:33 11:35 Flex Check time
+		khal new -g school -a home $2 10:54 11:35 AP European History
 		khal new -g school -a home $2 11:41 12:22 Wind Ensemble H
 		khal new -g school -a home $2 12:29 13:10 Lunch
 		khal new -g school -a home $2 13:17 13:58 English II H
