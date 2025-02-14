@@ -6,13 +6,13 @@
       externalInterface = "eth0";
       internalInterfaces = [ "wg0" ];
     };
-    firewall.allowedUDPPorts = [ 50000 ];
+    firewall.allowedUDPPorts = [ 50001 ];
 
     wireguard.interfaces = {
       wg0 = {
         ips = [ "10.100.0.1/24" ];
 
-        listenPort = 50000;
+        listenPort = 50001;
 
         postSetup = ''
           ${pkgs.iptables}/bin/iptables -t nat -A POSTROUTING -s 10.100.0.0/24 -o eth0 -j MASQUERADE
