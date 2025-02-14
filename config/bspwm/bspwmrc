@@ -54,7 +54,7 @@ case "$(hostname)" in
 		bspc monitor eDP-1 -d $desktops
 		;;
 	"copernicus")
-		bspc monitor HDMI-0 -d $desktops phonercon aristrcon
+		bspc monitor DP-0 -d $desktops phonercon aristrcon
 		if ! pkill -c scrcpy; then
 			bspwm-copernicus-welcome
 		fi

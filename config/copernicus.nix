@@ -56,6 +56,7 @@
     xscreensaver
     ffmpeg # not x11 but close enough
     tigervnc
+    brave
 
     # misc tty progs
     tmux

@@ -61,6 +61,3 @@ export NIX_SHELL_PRESERVE_PROMPT=1
 # source the bashrc(s)
 [ -f $HOME/.config/bash/bashrc ] && . $HOME/.config/bash/bashrc
 [ -f $HOME/.bashrc ] && . $HOME/.bashrc
-
-# if we're interactive and the tty is /dev/tty1 then start xorg
-[ "$(tty)" = "/dev/tty1" ] && sx

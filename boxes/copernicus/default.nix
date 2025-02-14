@@ -21,11 +21,24 @@
     musescore
     unzip
     ledger
+    scrcpy
+    inotify-tools
+    thunderbird
+    libsForQt5.kaccounts-integration
+    libsForQt5.kaccounts-providers
+    libsForQt5.krunner
+    libsForQt5.kalarm
+    redshift
+    davinci-resolve
+    gimp
+    inkscape
+    steam
 
     unzip
     imagemagick
     pciutils
     usbutils
+    kdePackages.kmail
 
     ffmpeg
     mdadm
@@ -37,6 +50,9 @@
     (pkgs.callPackage ../../builds/sssg.nix {})
   ];
 
+  virtualisation.virtualbox.host.enable = true;
+
+  programs.kdeconnect.enable = true;
   services.hardware.bolt.enable = true; # thunderbolt support
   hardware.bluetooth = {
     enable = true;
@@ -136,8 +152,6 @@
     ];
   };
 
-  services.getty.autologinUser = "usr";
-
   time.timeZone = "America/Chicago";
 
   i18n.defaultLocale = "en_US.UTF-8";
@@ -151,6 +165,10 @@
     extraGroups = [ "wheel" "networkmanager" "adbusers" ];
     initialPassword = "usr";
   };
+
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sx.addAsSession = true;
+  services.xserver.desktopManager.plasma5.enable = true;
 
   system.stateVersion = "24.05"; # don't change this, lol
 }
