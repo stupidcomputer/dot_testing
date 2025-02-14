@@ -4,9 +4,6 @@ let
 
   all = [ server-netbox machines.copernicus.pubkey machines.aristotle.pubkey ];
 in {
-  # gitea
-  "gitea-postgres-password.age".publicKeys = all;
-
   # mailserver
   "mailaccount.age".publicKeys = all;
 

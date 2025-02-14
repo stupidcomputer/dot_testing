@@ -43,6 +43,16 @@
     };
   };
 
+  services.nginx.virtualHosts."git.beepboop.systems" = {
+    forceSSL = true;
+    enableACME = true;
+    locations."/" = {
+      extraConfig = ''
+        return 301 https://github.com/stupidcomputer;
+      '';
+    };
+  };
+
   security.acme = {
     acceptTerms = true;
     defaults.email = "nickforanick@protonmail.com";
