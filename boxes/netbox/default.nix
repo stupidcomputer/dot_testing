@@ -7,7 +7,6 @@
     ./agenix.nix
     ./flasktrack.nix
     ./franklincce.nix
-    ./gitea.nix
     ./mail.nix
     ./nextcloud.nix
     ./nginx.nix
