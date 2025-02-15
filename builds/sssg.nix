@@ -7,7 +7,7 @@ buildPythonApplication {
   propagatedBuildInputs = [ markdown jinja2 watchdog ];
 
   src = fetchgit {
-    url = "https://git.beepboop.systems/stupidcomputer/sssg";
+    url = "https://github.com/stupidcomputer/sssg";
     hash = "sha256-17FRRgOGH/ZF6IrTprubiaZI/ihFSB4zu1spoxUZ2bA=";
   };
 }

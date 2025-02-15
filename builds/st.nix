@@ -34,7 +34,7 @@ stdenv.mkDerivation rec {
 
   meta = with lib; {
     description = "Customized builds of the st terminal emulator";
-    homepage = "https://git.beepboop.systems/rndusr/st";
+    homepage = "https://github.com/stupidcomputer/st";
     license = licenses.mit;
   };
 }

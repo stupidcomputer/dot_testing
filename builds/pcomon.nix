@@ -7,7 +7,7 @@ buildPythonApplication {
   propagatedBuildInputs = [ requests system-sendmail ];
 
   src = fetchgit {
-    url = "https://git.beepboop.systems/stupidcomputer/pcomon";
+    url = "https://github.com/stupidcomputer/pcomon";
     hash = "sha256-XxPb1WWq5YQz+UZ7P5dgInPweSD+52R2XVmoVrV0GMQ=";
   };
 }

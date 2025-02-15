@@ -5,7 +5,7 @@ setup(
     version = '1.0.0',
     author = 'stupidcomputer',
     author_email = 'ryan@beepboop.systems',
-    url = 'https://git.beepboop.systems/stupidcomputer/dot_testing',
+    url = 'https://github.com/stupidcomputer/dot_testing',
     description = 'simple statusbar content program',
     license = 'GPLv3',
     entry_points = {

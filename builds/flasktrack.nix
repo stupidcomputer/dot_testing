@@ -17,7 +17,7 @@ buildPythonApplication rec {
   shellHook = "export FLASK_APP=${pname}";
 
   src = fetchgit {
-    url = "https://git.beepboop.systems/stupidcomputer/flasktrack";
+    url = "https://github.com/stupidcomputer/flasktrack";
     hash = "sha256-ezR+Y0ciA5+SVEOIWYUtmVxMeNpcVKXOBe1OSgYm0sA=";
   };
 }
