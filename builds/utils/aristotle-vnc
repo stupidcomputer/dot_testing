@@ -1,4 +1,4 @@
-ssh aristotle -L 5900:localhost:5900 "x11vnc -display :1 -noxdamage -auth ~/.local/share/sx/xauthority" & disown
+ssh aristotle -L 5900:localhost:5900 "pkill x11vnc; x11vnc -display :1 -noxdamage -auth ~/.local/share/sx/xauthority -rfbport 5900" & disown
 sleep 3
 bspc rule -a Vncviewer desktop=aristrcon
 vncviewer localhost:5900

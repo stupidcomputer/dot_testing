@@ -166,9 +166,13 @@
     initialPassword = "usr";
   };
 
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.displayManager.sx.addAsSession = true;
-  services.xserver.desktopManager.plasma5.enable = true;
+  services = {
+    xserver = {
+      displayManager.sx.addAsSession = true;
+      desktopManager.plasma5.enable = true;
+    };
+    displayManager.sddm.enable = true;
+  };
 
   system.stateVersion = "24.05"; # don't change this, lol
 }
