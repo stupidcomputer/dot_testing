@@ -8,12 +8,12 @@
       "beepboop.systems" = {
         forceSSL = true;
         enableACME = true;
-        root = "/var/www/beepboop.systems";
         locations."/" = {
           extraConfig = ''
             port_in_redirect off;
             absolute_redirect off;
           '';
+          proxyPass = "https://stupidcomputer.github.io/stupidcomputer/";
         };
       };
 
