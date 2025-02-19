@@ -14,7 +14,7 @@
     xdotool
 
     libreoffice
-    texliveMedium
+    texliveFull
     kdePackages.kdenlive
     audacity
     bespokesynth
@@ -33,6 +33,7 @@
     gimp
     inkscape
     steam
+    zoom-us
 
     unzip
     imagemagick
