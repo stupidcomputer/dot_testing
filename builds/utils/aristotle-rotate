@@ -1,0 +1,20 @@
+case "$1" in
+	"normal")
+		xinput set-prop 9 'Coordinate Transformation Matrix' 1 0 0 0 1 0 0 0 1
+		xinput set-prop 12 'Coordinate Transformation Matrix' 1 0 0 0 1 0 0 0 1
+		xrandr -o normal
+		;;
+	"left")
+		xinput set-prop 9 'Coordinate Transformation Matrix' 0 -1 1 1 0 0 0 0 1
+		xinput set-prop 12 'Coordinate Transformation Matrix' 0 -1 1 1 0 0 0 0 1
+		xrandr -o left
+		;;
+	"right")
+		xinput set-prop 9 'Coordinate Transformation Matrix' 0 1 0 -1 0 1 0 0 1
+		xinput set-prop 12 'Coordinate Transformation Matrix' 0 1 0 -1 0 1 0 0 1
+		xrandr -o right
+		;;
+	*)
+		echo "you didn't specify a rotation direction -- what's up?"
+		;;
+esac

@@ -74,6 +74,13 @@
     feh
     jdk21
     xbrightness
+    tigervnc
+    emacs
+    redshift
+    sshuttle
+    gnuplot
+    kdenlive
+    unzip
 
     # for neovim support
     lua-language-server

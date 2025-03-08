@@ -1,0 +1,5 @@
+xrandr --addmode HDMI-1 1920x1080
+xrandr --output HDMI-1 --mode 1920x1080 --above eDP-1
+while true; do ssh copernicus "sh -c \"echo $(cat /sys/class/power_supply/BAT0/capacity) > /tmp/aristotle_battery\""; sleep 15; done &
+sh -c "sleep 1; vncviewer localhost:5900 -fullscreen -FullScreenMode=selected -FullScreenSelectedMonitors 1" &
+ssh -TL 5900:localhost:5900 copernicus

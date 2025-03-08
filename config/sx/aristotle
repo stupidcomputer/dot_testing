@@ -6,5 +6,6 @@ xset r rate 200 80
 setxkbmap -option caps:super
 pkill xcape
 xcape -e 'Super_L=Escape'
+redshift -l 35.9652247:-86.8918421 -t 6500:1000 -b 1:0.8 &
 
 dwm
