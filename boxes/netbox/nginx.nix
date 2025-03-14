@@ -3,6 +3,17 @@
     enable = true;
     clientMaxBodySize = "100m";
     defaultSSLListenPort = 442;
+    appendHttpConfig = ''
+      proxy_cache_path /tmp/proxy_cache levels=1:2 keys_zone=cachecache:100m max_size=1g inactive=365d use_temp_path=off;
+      map $status $cache_header {
+        200     "public";
+        302     "public";
+        default "no-cache";
+      }
+
+      error_log stderr;
+      access_log syslog:server=unix:/dev/log combined;
+    '';
 
     virtualHosts = {
       "beepboop.systems" = {
