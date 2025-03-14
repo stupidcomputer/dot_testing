@@ -1,23 +1,25 @@
 { python3Packages, fetchgit }:
 with python3Packages;
-buildPythonApplication rec {
+let
+  repo = fetchgit {
+    url = "https://github.com/stupidcomputer/flasktrack";
+    hash = "sha256-qa1VqlRlmayZ13j21/jwH7m4OFsu9tdb2AvCkcBXG8w=";
+  };
+in buildPythonApplication rec {
   pname = "flasktrack";
-  version = "1.0.0";
-  format = "other";
+  version = "0.01";
 
   propagatedBuildInputs = [ flask ];
   installPhase = ''
     runHook preInstall
 
-    mkdir -p $out/${pythonPackages.python.sitePackages}
-    cp -r ./${pname} $out/${pythonPackages.python.sitePackages}/${pname}
+    mkdir -p $out/${python.sitePackages}
+    cp -r . $out/${python.sitePackages}/flasktrack
 
     runHook postInstall
   '';
-  shellHook = "export FLASK_APP=${pname}";
+  shellHook = "export FLASK_APP=flasktrack";
+  format = "other";
 
-  src = fetchgit {
-    url = "https://github.com/stupidcomputer/flasktrack";
-    hash = "sha256-ezR+Y0ciA5+SVEOIWYUtmVxMeNpcVKXOBe1OSgYm0sA=";
-  };
+  src = "${repo}/flasktrack";
 }

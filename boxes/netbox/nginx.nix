@@ -55,6 +55,18 @@
           proxyPass = "http://10.100.0.2:7439";
         };
       };
+
+      "tools.beepboop.systems" = {
+        forceSSL = true;
+        enableACME = true;
+        root = "/var/www/tools.beepboop.systems";
+        locations."/" = {
+          extraConfig = ''
+            port_in_redirect off;
+            absolute_redirect off;
+          '';
+        };
+      };
     };
   };
 

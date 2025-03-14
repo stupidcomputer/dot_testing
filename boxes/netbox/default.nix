@@ -77,7 +77,7 @@
         ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/config/bash/bashrc /root/.bashrc
         ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/config/bash/profile /root/.bash_profile
         ${pkgs.coreutils}/bin/mkdir -p /root/config/nvim
-        ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/config/nvim/init.min.lua /root/.config/nvim/init.lua
+        ${pkgs.coreutils}/bin/cp /home/ryan/dot_testing/config/nvim/init.lua /root/.config/nvim/init.lua
       '';
       deps = [];
     };
@@ -95,7 +95,6 @@
 
   networking = {
     usePredictableInterfaceNames = false;
-    networkmanager.enable = true;
     hostName = "netbox";
 
     firewall = {
