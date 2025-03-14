@@ -77,5 +77,19 @@
     wantedBy = []; # start only when I say so
   };
 
+  systemd.services.syncthing = {
+    enable = true;
+    description = "start syncthing on network startup";
+    after = [ "network-online.target" ];
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig = {
+      ExecStart = "${pkgs.syncthing}/bin/syncthing";
+      User = "usr";
+      Restart = "on-failure";
+      RestartSec = "3";
+    };
+  };
+
   system.stateVersion = "24.05";
 }

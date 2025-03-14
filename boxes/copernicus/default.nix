@@ -34,17 +34,25 @@
     inkscape
     steam
     zoom-us
+    tor-browser
+    kdenlive
+    kdePackages.partitionmanager
+    cryptsetup
+    age
 
     unzip
     imagemagick
     pciutils
     usbutils
     kdePackages.kmail
+    kdePackages.kgpg
+    emacs
 
     ffmpeg
     mdadm
     git-annex
     tigervnc
+    i3
 
     dmenu
 

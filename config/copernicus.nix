@@ -57,6 +57,9 @@
     ffmpeg # not x11 but close enough
     tigervnc
     brave
+    mdadm
+    veracrypt
+    syncthing
 
     # misc tty progs
     tmux
@@ -94,8 +97,22 @@
     fantasque-sans-mono
   ];
 
+  systemd.services.syncthing = {
+    enable = true;
+    description = "start syncthing on network startup";
+    after = [ "network-online.target" ];
+    wantedBy = [ "multi-user.target" ];
+
+    serviceConfig = {
+      ExecStart = "${pkgs.syncthing}/bin/syncthing";
+      User = "usr";
+      Restart = "on-failure";
+      RestartSec = "3";
+    };
+  };
+
   system.userActivationScripts = {
-    copyConfiguretion = {
+    copyConfiguration = {
       text = ''
         if [ -d /home/usr/dots ]; then
           config_prefix="/home/usr/dots/config"
