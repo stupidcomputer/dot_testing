@@ -81,6 +81,9 @@
     gnuplot
     kdenlive
     unzip
+    syncthing
+    emacsPackages.pdf-tools
+    qpdf
 
     # for neovim support
     lua-language-server
