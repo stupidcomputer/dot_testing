@@ -15,12 +15,6 @@
       group = "radicale";
     };
 
-    nextcloud-passwd = {
-      file = ../../secrets/nextcloud-admin-passwd.age;
-      owner = "nextcloud";
-      group = "nextcloud";
-    };
-
     pcomon-secrets-file = {
       file = ../../secrets/pcomon-secrets-file.age;
       owner = "pcomon";

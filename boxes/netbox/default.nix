@@ -8,7 +8,6 @@
     ./flasktrack.nix
     ./franklincce.nix
     ./mail.nix
-    ./nextcloud.nix
     ./nginx.nix
     ./pcomon.nix
     ./radicale.nix
