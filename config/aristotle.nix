@@ -108,6 +108,9 @@
         mkdir -p /home/usr/.config/cmus
         ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/cmus/rc /home/usr/.config/cmus/rc
 
+        mkdir -p /home/usr/.emacs.d
+        ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/emacs/init.el /home/usr/.emacs.d/init.el
+
         mkdir -p /home/usr/.config/git
         ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/git/config /home/usr/.config/git/config
 

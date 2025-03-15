@@ -60,6 +60,7 @@
     mdadm
     veracrypt
     syncthing
+    emacsPackages.pdf-tools
 
     # misc tty progs
     tmux
@@ -129,6 +130,9 @@
 
         mkdir -p /home/usr/.config/cmus
         ${pkgs.coreutils}/bin/ln -sf $config_prefix/cmus/rc /home/usr/.config/cmus/rc
+
+        mkdir -p /home/usr/.emacs.d
+        ${pkgs.coreutils}/bin/ln -sf $config_prefix/emacs/init.el /home/usr/.emacs.d/init.el
 
         mkdir -p /home/usr/.config/git
         ${pkgs.coreutils}/bin/ln -sf $config_prefix/git/config /home/usr/.config/git/config
