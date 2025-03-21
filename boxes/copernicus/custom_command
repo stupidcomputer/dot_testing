@@ -1,1 +1,0 @@
-sudo nixos-rebuild --flake .?submodules=1 switch --impure -I nixos-config=./
