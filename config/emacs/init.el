@@ -30,14 +30,60 @@
 (use-package org :ensure t)
 (use-package org-drill :ensure t)
 (use-package org-journal :ensure t)
+(use-package org-drill-table :ensure t)
 (use-package gnuplot :ensure t)
+(use-package org-contacts
+  :ensure t
+  :after org
+  :custom (org-contacts-files '("~/org/contacts.org")))
 (require 'org)
 (require 'org-journal)
+; see https://emacs.stackexchange.com/questions/13360/org-habit-graph-on-todo-list-agenda-view
+(defvar u:org-habit-show-graphs-everywhere nil
+  "If non-nil, show habit graphs in all types of agenda buffers.
+
+Normally, habits display consistency graphs only in
+\"agenda\"-type agenda buffers, not in other types of agenda
+buffers.  Set this variable to any non-nil variable to show
+consistency graphs in all Org mode agendas.")
+
+(defun u:org-agenda-mark-habits ()
+  "Mark all habits in current agenda for graph display.
+
+This function enforces `u:org-habit-show-graphs-everywhere' by
+marking all habits in the current agenda as such.  When run just
+before `org-agenda-finalize' (such as by advice; unfortunately,
+`org-agenda-finalize-hook' is run too late), this has the effect
+of displaying consistency graphs for these habits.
+
+When `u:org-habit-show-graphs-everywhere' is nil, this function
+has no effect."
+  (when (and u:org-habit-show-graphs-everywhere
+         (not (get-text-property (point) 'org-series)))
+    (let ((cursor (point))
+          item data) 
+      (while (setq cursor (next-single-property-change cursor 'org-marker))
+        (setq item (get-text-property cursor 'org-marker))
+        (when (and item (org-is-habit-p item)) 
+          (with-current-buffer (marker-buffer item)
+            (setq data (org-habit-parse-todo item))) 
+          (put-text-property cursor
+                             (next-single-property-change cursor 'org-marker)
+                             'org-habit-p data))))))
+
+(advice-add #'org-agenda-finalize :before #'u:org-agenda-mark-habits)
+(setq u:org-habit-show-graphs-everywhere 1)
 (setq org-directory "~/org")
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
 (setq org-agenda-files (directory-files-recursively "~/org/" "\\.org$"))
 (setq org-journal-dir "~/org/journal")
 (setq calendar-week-start-day 1)
+(setq org-treat-insert-todo-heading-as-state-change t)
+(setq org-log-into-drawer t)
+(setq org-agenda-span 14)
+(setq org-agenda-custom-commands
+      '(("h" "Habits" tags-todo "STYLE=\"habit\"")))
+(add-to-list 'org-modules 'org-habit t)
 ;; define some sane maps
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
@@ -47,15 +93,20 @@
   (find-file "~/org/main.org"))
 (define-key global-map "\C-co" 'u:org:edit-main)
 (setq org-todo-keywords
-      '((sequence "TODO(t)" "PLANNING(p)" "IN-PROGRESS(i@/!)" "VERIFYING(v!)" "BLOCKED(b@)"  "|" "DONE(d!)" "OBE(o@!)" "WONT-DO(w@/!)" "DUE-PASSED(a@!)" )))
+      '((sequence "TODO(t!)" "PLANNING(p!)" "IN-PROGRESS(i@/!)" "VERIFYING(v!)" "BLOCKED(b@)"  "|" "DONE(d!)" "OBE(o@!)" "WONT-DO(w@/!)" "DUE-PASSED(a@!)" )))
 ;; make executing bash blocks work
 (org-babel-do-load-languages
     'org-babel-load-languages
         '(
             (shell . t)
 	    (gnuplot . t)
+	    (python . t)
         )
     )
+;; org-agenda doesn't show that annoying dialog
+(custom-set-variables
+ '(safe-local-variable-values '((type . org))))
+
 
 ;; latex
 (use-package auctex

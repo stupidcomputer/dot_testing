@@ -57,3 +57,5 @@ case "$HOSTNAME" in
 		PS1="$USER_PREFIX\[\033[96;1m\]${NIX_SHELL_PS1}unk:$PS1\[\033[0;0m\]"
 		;;
 esac
+
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then exec sx; fi

@@ -26,7 +26,7 @@
       (machines.mkHosts machines "phone" "localnet")
       (machines.mkHosts machines "netbox" "internet")
     ] // {
-      "127.0.0.1" = [ "news.ycombinator.com" ];
+      "127.0.0.2" = [ "cups.l" ];
     };
   };
   hardware = {
@@ -57,6 +57,7 @@
         layout = "us";
         variant = "";
       };
+      videoDrivers = [ "displaylink" "modesetting" ];
     };
     libinput.enable = true;
     tlp.enable = true;
@@ -77,18 +78,24 @@
     wantedBy = []; # start only when I say so
   };
 
-  systemd.services.syncthing = {
-    enable = true;
-    description = "start syncthing on network startup";
-    after = [ "network-online.target" ];
-    wantedBy = [ "multi-user.target" ];
-
-    serviceConfig = {
-      ExecStart = "${pkgs.syncthing}/bin/syncthing";
-      User = "usr";
-      Restart = "on-failure";
-      RestartSec = "3";
+  systemd = {
+    user.services.polkit-gnome-authentication-agent-1 = {
+      description = "polkit-gnome-authentication-agent-1";
+      wantedBy = [ "graphical-session.target" ];
+      wants = [ "graphical-session.target" ];
+      after = [ "graphical-session.target" ];
+      serviceConfig = {
+          Type = "simple";
+          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
+          Restart = "on-failure";
+          RestartSec = 1;
+          TimeoutStopSec = 10;
+        };
     };
+  };
+
+  security.polkit = {
+    enable = true;
   };
 
   system.stateVersion = "24.05";

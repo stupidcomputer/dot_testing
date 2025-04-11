@@ -1,6 +1,7 @@
 set editor = "nvim"
 
 set my_name = "Ryan Marina"
+set realname = "Ryan Marina"
 set fast_reply
 
 set mbox_type = Maildir

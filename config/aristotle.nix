@@ -84,6 +84,28 @@
     syncthing
     emacsPackages.pdf-tools
     qpdf
+    i3
+    i3pystatus
+    i3lock
+    networkmanagerapplet
+    blueberry
+    patray
+    arandr
+    qutebrowser
+    mpv
+    yt-dlp
+    ffmpeg
+    mdadm
+    cryptsetup
+    ranger
+    tor-browser
+    ical2orgpy
+    python3
+    nmap
+    hueadm
+    pw-volume
+    dunst
+    xdotool
 
     # for neovim support
     lua-language-server
@@ -93,9 +115,6 @@
 
     texliveFull
     zathura
-
-    # for the remote access functionality
-    vscode-fhs
   ];
 
   system.userActivationScripts = {
