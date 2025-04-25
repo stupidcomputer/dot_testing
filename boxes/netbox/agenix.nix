@@ -14,11 +14,5 @@
       owner = "radicale";
       group = "radicale";
     };
-
-    pcomon-secrets-file = {
-      file = ../../secrets/pcomon-secrets-file.age;
-      owner = "pcomon";
-      group = "pcomon";
-    };
   };
 }

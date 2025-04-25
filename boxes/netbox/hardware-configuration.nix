@@ -21,9 +21,9 @@
       fsType = "ext4";
     };
   };
-
   swapDevices = [
     { device = "/dev/disk/by-uuid/57fbd850-1ced-4e21-9e52-4f3b529c61b0"; }
+    { device = "/annex/swap2"; }
   ];
 
   networking.useDHCP = lib.mkDefault true;

@@ -9,7 +9,6 @@
     ./franklincce.nix
     ./mail.nix
     ./nginx.nix
-    ./pcomon.nix
     ./radicale.nix
     ./ssh.nix
     ./sslh.nix
@@ -46,6 +45,7 @@
     dig
     htop
     neovim
+    tmux
   ];
 
   system = {
