@@ -80,6 +80,7 @@
     man-pages
     fzy
     x11vnc
+    dig
 
     # for neovim support
     lua-language-server

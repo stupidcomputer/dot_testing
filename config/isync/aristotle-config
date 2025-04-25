@@ -7,8 +7,8 @@ TLSType IMAPS
 CertificateFile /etc/ssl/certs/ca-certificates.crt
 
 MaildirStore main-local
-Path ~/pim/mail/main/
-Inbox ~/pim/mail/main/INBOX
+Path ~/mail/main/
+Inbox ~/mail/main/INBOX
 Subfolders Verbatim
 
 Channel main

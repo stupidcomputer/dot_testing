@@ -4,5 +4,4 @@ else
 	mbsync --config=$HOME/.config/isync/config main
 fi
 
-vdirsyncer sync
 rbw sync
