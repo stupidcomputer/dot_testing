@@ -10,6 +10,7 @@ alias lynx="lynx -cfg=$LYNX_CFG_PATH/lynx.cfg"
 alias elinks="TERM='xterm-color' elinks"
 alias pkgsearch="nix search nixpkgs"
 alias reload=". ~/.config/bash/profile"
+alias shuttle="sshuttle -r ryan@beepboop.systems:443 0/0 --dns"
 
 function cd() {
 	builtin cd "$@" && ls --color=auto --group-directories-first

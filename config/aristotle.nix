@@ -106,6 +106,13 @@
     pw-volume
     dunst
     xdotool
+    syncthing
+    prismlauncher
+    xonotic
+    kid3-cli
+    sshfs
+    inkscape
+    gimp
 
     # for neovim support
     lua-language-server
