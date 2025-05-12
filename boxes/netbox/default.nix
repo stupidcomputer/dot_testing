@@ -9,7 +9,6 @@
     ./franklincce.nix
     ./mail.nix
     ./nginx.nix
-    ./radicale.nix
     ./ssh.nix
     ./sslh.nix
     ./vaultwarden.nix

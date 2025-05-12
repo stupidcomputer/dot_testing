@@ -11,9 +11,6 @@ in {
   "netbox-wg-priv.age".publicKeys = all;
   "copernicus-wg-priv.age".publicKeys = with machines; [ copernicus.pubkey aristotle.pubkey ];
 
-  # radicale
-  "radicale-passwd.age".publicKeys = all;
-
   # networkmanager
   "nm-home-net-config.age".publicKeys = with machines; [ copernicus.pubkey aristotle.pubkey ];
 
