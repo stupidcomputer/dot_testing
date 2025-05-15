@@ -107,6 +107,14 @@ has no effect."
 (custom-set-variables
  '(safe-local-variable-values '((type . org))))
 
+;; elfeed
+(use-package elfeed :ensure t)
+(use-package elfeed-org :ensure t)
+(require 'elfeed)
+(require 'elfeed-org)
+(elfeed)
+(elfeed-org)
+(setq rmh-elfeed-org-files (list "~/org/elfeed.org"))
 
 ;; latex
 (use-package auctex
@@ -141,7 +149,7 @@ has no effect."
 (toggle-scroll-bar -1)
 (setq custom-safe-themes t)
 (load-theme 'gruvbox)
-(set-frame-font "Fantasque Sans Mono 14" nil t)
+(set-frame-font "Fantasque Sans Mono 13" nil t)
 ;; prevent the simulated terminal bell from ringing
 (setq visible-bell t)
 (setq ring-bell-function 'ignore)

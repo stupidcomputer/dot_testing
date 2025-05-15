@@ -113,6 +113,8 @@
     sshfs
     inkscape
     gimp
+    dig
+    picom
 
     # for neovim support
     lua-language-server

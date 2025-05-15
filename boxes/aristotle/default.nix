@@ -9,6 +9,7 @@
   ];
 
   programs.adb.enable = true;
+  programs.kdeconnect.enable = true;
 
   boot.loader.grub = {
     enable = true;
@@ -19,6 +20,8 @@
     hostName = "aristotle";
     networkmanager.enable = true;
     firewall.allowedTCPPorts = [ 24800 ];
+    firewall.allowedTCPPortRanges = [ { from = 1714; to = 1764; } ];
+    firewall.allowedUDPPortRanges = [ { from = 1714; to = 1764; } ];
 
     hosts = lib.attrsets.mergeAttrsList [
       (machines.mkHosts machines "router" "localnet")
@@ -77,6 +80,8 @@
     serviceConfig.ExecStart = "${pkgs.openssh}/bin/ssh -ND 127.0.0.1:4000 netbox";
     wantedBy = []; # start only when I say so
   };
+
+  programs.steam.enable = true;
 
   systemd = {
     user.services.polkit-gnome-authentication-agent-1 = {
