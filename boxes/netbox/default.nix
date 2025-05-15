@@ -11,7 +11,6 @@
     ./ssh.nix
     ./sslh.nix
     ./vaultwarden.nix
-    ./wireguard.nix
   ];
 
   nix = {
