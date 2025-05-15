@@ -4,6 +4,12 @@
     inputs.simple-nixos-mailserver.nixosModule
   ];
 
+  age.secrets = {
+    mailaccount = {
+      file = ../../secrets/mailaccount.age;
+    };
+  };
+
   mailserver = {
     enable = true;
     fqdn = "mail.beepboop.systems";

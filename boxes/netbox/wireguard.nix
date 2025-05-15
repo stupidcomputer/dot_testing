@@ -1,5 +1,11 @@
 { config, machines, pkgs, ... }:
 {
+  age.secrets = {
+    netbox-wg-priv = {
+      file = machines.netbox.wg-privkey;
+    };
+  };
+
   networking = {
     nat = {
       enable = true;

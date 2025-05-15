@@ -4,7 +4,6 @@
     ./hardware-configuration.nix
     ../../lib/bootstrap.nix
 
-    ./agenix.nix
     ./flasktrack.nix
     ./franklincce.nix
     ./mail.nix
