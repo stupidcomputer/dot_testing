@@ -16,4 +16,7 @@ in {
 
   # router configuration
   "r8000-config.cfg.age".publicKeys = [ machines.copernicus.pubkey machines.aristotle.pubkey ];
+
+  # vaultwarden
+  "vaultwarden-secret.age".publicKeys = all;
 }
