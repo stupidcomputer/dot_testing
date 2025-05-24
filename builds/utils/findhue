@@ -1,0 +1,22 @@
+# find philips hue bridges on the local network
+# assume a netmask of 192.168.1.0/24
+
+printf "[!] here's a hint: it's probably 192.168.1.211!\n"
+
+printf "[!] scanning 192.168.1.0/24\n"
+canididates=$(nmap -sn 192.168.1.0/24 -oG - |
+	grep 'Status: ' |
+	awk -F' ' '{print $2}')
+
+IFS='
+'
+
+for canididate in $canididates; do
+	is_ok=$(curl -s -I "$canididate"/hue-color-line.png |
+		grep -c '200 OK')
+
+	if [ "$is_ok" -eq 1 ]; then
+		echo "[!] got $canididate"
+		echo "[!] you should probably quit now"
+	fi
+done
