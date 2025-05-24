@@ -1,14 +1,48 @@
 { pkgs, lib, machines, ... }:
 {
   imports = [
-    ../../config/aristotle.nix
     ./paperless.nix
     ./sshd.nix
     ./agenix.nix
     ./hardware-configuration.nix
+
+    ../../config/sx
+    ../../config/git
+    ../../config/bash
+    ../../config/nvim
+    ../../config/emacs
+    ../../config/khal
+    ../../config/ssh
+    ../../config/khard
+    ../../config/isync
+    ../../config/msmtp
+    ../../config/neomutt
+    ../../config/python
+    ../../config/vdirsyncer
+    ../../config/todoman
+    ../../config/rbw
+    ../../config/zathura
+    ../../config/htop
+    ../../config/games
+    ../../config/termutils
+    ../../config/productionutils
+    ../../config/brave
+    ../../config/tor-browser
+    ../../config/scrcpy
+    ../../config/hueadm
+    ../../config/syncthing
+    ../../config/ledger
   ];
 
-  programs.adb.enable = true;
+  environment.systemPackages = with pkgs; [
+    (callPackage ../../builds/st.nix { aristotle = true; })
+    (callPackage ../../builds/dmenu.nix {})
+    (callPackage ../../builds/utils.nix {})
+    (callPackage ../../builds/rebuild.nix {})
+    (callPackage ../../builds/sssg.nix {})
+    (callPackage ../../builds/tilp.nix {})
+  ];
+
   programs.kdeconnect.enable = true;
 
   boot.loader.grub = {
@@ -68,35 +102,12 @@
 
   powerManagement.powertop.enable = true;
 
-  systemd.services."getty@tty6" = {
-    overrideStrategy = "asDropin";
-    serviceConfig.ExecStart = ["" "@${pkgs.coreutils}/bin/cat"];
-  };
-
   systemd.user.services.ssh-socks5-proxy = {
     enable = true;
     description = "SOCKS5 proxy over ssh";
 
     serviceConfig.ExecStart = "${pkgs.openssh}/bin/ssh -ND 127.0.0.1:4000 netbox";
     wantedBy = []; # start only when I say so
-  };
-
-  programs.steam.enable = true;
-
-  systemd = {
-    user.services.polkit-gnome-authentication-agent-1 = {
-      description = "polkit-gnome-authentication-agent-1";
-      wantedBy = [ "graphical-session.target" ];
-      wants = [ "graphical-session.target" ];
-      after = [ "graphical-session.target" ];
-      serviceConfig = {
-          Type = "simple";
-          ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
-          Restart = "on-failure";
-          RestartSec = 1;
-          TimeoutStopSec = 10;
-        };
-    };
   };
 
   fonts.packages = with pkgs; [
@@ -112,10 +123,6 @@
     vistafonts
     proggyfonts
   ];
-
-  security.polkit = {
-    enable = true;
-  };
 
   system.stateVersion = "24.05";
 }
