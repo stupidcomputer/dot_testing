@@ -84,4 +84,9 @@
     acceptTerms = true;
     defaults.email = "nickforanick@protonmail.com";
   };
+
+  users.groups.nginx-data = {
+    name = "nginx-data";
+    members = [ "nginx" "ryan" ];
+  };
 }
