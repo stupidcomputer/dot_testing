@@ -115,6 +115,8 @@
     gimp
     dig
     picom
+    ghostscript
+    musescore
 
     # for neovim support
     lua-language-server
