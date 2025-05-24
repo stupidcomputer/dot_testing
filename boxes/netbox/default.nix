@@ -43,6 +43,8 @@
     htop
     neovim
     tmux
+
+    syncthing
   ];
 
   system = {
