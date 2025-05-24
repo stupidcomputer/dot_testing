@@ -82,7 +82,14 @@ has no effect."
 (setq org-log-into-drawer t)
 (setq org-agenda-span 14)
 (setq org-agenda-custom-commands
-      '(("h" "Habits" tags-todo "STYLE=\"habit\"")))
+      '(("p" "Generate PDF agenda page" agenda ""
+         ((ps-number-of-columns 2)
+          (ps-landscape-mode t)
+          (org-agenda-prefix-format " [ ] ")
+          (org-agenda-with-colors nil)
+          (org-agenda-remove-tags t))
+         ("agenda.ps"))
+        ("h" "Habits" tags-todo "STYLE=\"habit\"")))
 (add-to-list 'org-modules 'org-habit t)
 ;; define some sane maps
 (define-key global-map "\C-cl" 'org-store-link)
