@@ -144,6 +144,12 @@
         mkdir -p /home/usr/.config/git
         ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/git/config /home/usr/.config/git/config
 
+        mkdir -p /home/usr/.config/i3
+        ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/i3/config /home/usr/.config/i3/config
+
+        mkdir -p /home/usr/.config/i3pystatus
+        ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/i3pystatus/config.py /home/usr/.config/i3pystatus/config.py
+
         mkdir -p /home/usr/.config/isync
         ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/isync/aristotle-config /home/usr/.config/isync/config
 
