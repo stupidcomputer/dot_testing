@@ -25,6 +25,9 @@
     feh
     picom
     arandr
+
+    mpv
+    sxiv
   ];
 
   system.userActivationScripts.copySxConfiguration = {

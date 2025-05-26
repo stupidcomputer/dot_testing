@@ -5,5 +5,9 @@
     inkscape
     gimp
     musescore
+    bespokesynth
+    audacity
+    kdePackages.kdenlive
+    texliveFull
   ];
 }
