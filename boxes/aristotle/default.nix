@@ -1,7 +1,6 @@
 { pkgs, lib, machines, ... }:
 {
   imports = [
-    ./paperless.nix
     ./sshd.nix
     ./agenix.nix
     ./hardware-configuration.nix
