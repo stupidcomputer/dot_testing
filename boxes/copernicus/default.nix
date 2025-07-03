@@ -29,18 +29,11 @@
     ledger
     scrcpy
     inotify-tools
-    thunderbird
-    libsForQt5.kaccounts-integration
-    libsForQt5.kaccounts-providers
-    libsForQt5.krunner
-    libsForQt5.kalarm
     redshift
-    davinci-resolve
     gimp
     inkscape
     steam
     zoom-us
-    tor-browser
     kdePackages.partitionmanager
     cryptsetup
     age
@@ -49,8 +42,6 @@
     imagemagick
     pciutils
     usbutils
-    kdePackages.kmail
-    kdePackages.kgpg
     emacs
 
     ffmpeg
@@ -58,8 +49,6 @@
     git-annex
     tigervnc
     i3
-
-    dmenu
 
     (pkgs.callPackage ../../builds/sssg.nix {})
   ];

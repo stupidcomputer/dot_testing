@@ -58,7 +58,6 @@
     tigervnc
     brave
     mdadm
-    veracrypt
     syncthing
     emacsPackages.pdf-tools
 
