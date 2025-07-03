@@ -1,0 +1,5 @@
+sudo mdadm --assemble /dev/md0 \
+	/dev/disk/by-partuuid/41739499-4248-c146-a2df-2f37640f61ea \
+	/dev/disk/by-partuuid/b486cfd1-201b-4fae-84c3-8e35e558f848
+
+sudo cryptsetup open /dev/md0 crypted
