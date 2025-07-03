@@ -99,7 +99,7 @@
       windowManager.i3.enable = true;
       desktopManager.lxqt.enable = true;
 
-      videoDrivers = [ "displaylink" "modesetting" ];
+      videoDrivers = [ "modesetting" ];
     };
     displayManager.sddm.enable = true;
     libinput.enable = true;
