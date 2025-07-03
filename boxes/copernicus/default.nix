@@ -41,7 +41,6 @@
     steam
     zoom-us
     tor-browser
-    kdenlive
     kdePackages.partitionmanager
     cryptsetup
     age
