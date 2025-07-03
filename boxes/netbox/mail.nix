@@ -77,4 +77,14 @@
     };
     certificateScheme = "acme-nginx";
   };
+
+  services.roundcube = {
+    enable = true;
+    hostName = "mail.beepboop.systems";
+    extraConfig = ''
+      $config['smtp_host'] = "tls://mail.beepboop.systems";
+      $config['smtp_user'] = "%u";
+      $config['smtp_pass'] = "%p";
+    '';
+  };
 }
