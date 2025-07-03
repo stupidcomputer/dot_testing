@@ -79,8 +79,7 @@ has no effect."
 (setq u:org-habit-show-graphs-everywhere 1)
 (setq org-directory "~/org")
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
-;; valid org files must start with an alphanumeric character, and end in .org
-(setq org-agenda-files (directory-files-recursively "~/org/" "[[:alnum:]].*\\.org$"))
+(setq org-agenda-files '("~/org/agenda.org" "~/org/body.org" "~/org/inbox.org" "~/org/main.org" "~/org/pco.org" "~/org/tfb.org"))
 (setq org-journal-dir "~/org/journal")
 (setq calendar-week-start-day 1)
 (setq org-treat-insert-todo-heading-as-state-change t)
