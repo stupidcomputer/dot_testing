@@ -103,6 +103,7 @@
     description = "start syncthing on network startup";
     after = [ "network-online.target" ];
     wantedBy = [ "multi-user.target" ];
+    requires = [ "network-online.target" ];
 
     serviceConfig = {
       ExecStart = "${pkgs.syncthing}/bin/syncthing";
