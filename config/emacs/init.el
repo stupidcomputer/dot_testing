@@ -31,13 +31,17 @@
 (use-package org-drill :ensure t)
 (use-package org-journal :ensure t)
 (use-package org-drill-table :ensure t)
+(use-package evil-org :ensure t)
 (use-package gnuplot :ensure t)
+(use-package org-ql :ensure t)
+(use-package ox-json :ensure t)
 (use-package org-contacts
   :ensure t
   :after org
   :custom (org-contacts-files '("~/org/contacts.org")))
 (require 'org)
 (require 'org-journal)
+(require 'ox-json)
 ; see https://emacs.stackexchange.com/questions/13360/org-habit-graph-on-todo-list-agenda-view
 (defvar u:org-habit-show-graphs-everywhere nil
   "If non-nil, show habit graphs in all types of agenda buffers.
@@ -75,7 +79,8 @@ has no effect."
 (setq u:org-habit-show-graphs-everywhere 1)
 (setq org-directory "~/org")
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
-(setq org-agenda-files (directory-files-recursively "~/org/" "\\.org$"))
+;; valid org files must start with an alphanumeric character, and end in .org
+(setq org-agenda-files (directory-files-recursively "~/org/" "[[:alnum:]].*\\.org$"))
 (setq org-journal-dir "~/org/journal")
 (setq calendar-week-start-day 1)
 (setq org-treat-insert-todo-heading-as-state-change t)
@@ -102,6 +107,7 @@ has no effect."
 (setq org-todo-keywords
       '((sequence "TODO(t!)" "PLANNING(p!)" "IN-PROGRESS(i@/!)" "VERIFYING(v!)" "BLOCKED(b@)"  "|" "DONE(d!)" "OBE(o@!)" "WONT-DO(w@/!)" "DUE-PASSED(a@!)" )))
 ;; make executing bash blocks work
+(setq org-confirm-babel-evaluate nil)
 (org-babel-do-load-languages
     'org-babel-load-languages
         '(
@@ -113,15 +119,16 @@ has no effect."
 ;; org-agenda doesn't show that annoying dialog
 (custom-set-variables
  '(safe-local-variable-values '((type . org))))
+;; evil-org-mode
+(require 'evil-org)
+(add-hook 'org-mode-hook 'evil-org-mode)
+(evil-org-set-key-theme '(navigation insert textobjects additional calendar))
+(require 'evil-org-agenda)
+(evil-org-agenda-set-keys)
 
 ;; elfeed
 (use-package elfeed :ensure t)
-(use-package elfeed-org :ensure t)
 (require 'elfeed)
-(require 'elfeed-org)
-(elfeed)
-(elfeed-org)
-(setq rmh-elfeed-org-files (list "~/org/elfeed.org"))
 
 ;; latex
 (use-package auctex
@@ -175,3 +182,8 @@ has no effect."
 (defun terminal ()
   (interactive)
   (term "/run/current-system/sw/bin/bash"))
+
+;; load private additions in org directory
+;; (but if we fail -- it's no problem; that's
+;; what all the t symbols are for)
+(load "~/org/private.el" t t t)
