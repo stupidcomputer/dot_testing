@@ -192,17 +192,13 @@
   services = {
     xserver = {
       displayManager.sx.addAsSession = true;
-      desktopManager.plasma5.enable = true;
       windowManager.i3 = {
         enable = true;
-        extraPackages = with pkgs; [
-          dmenu
-          i3status
-          i3lock
-        ];
       };
     };
+    desktopManager.plasma6.enable = true;
     displayManager.sddm.enable = true;
+    displayManager.sddm.wayland.enable = false;
   };
 
   services.coredns = {
