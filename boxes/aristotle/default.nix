@@ -7,6 +7,8 @@
     ./hardware-configuration.nix
 
     ../../config/sx
+    ../../config/i3
+    ../../config/i3pystatus
     ../../config/git
     ../../config/bash
     ../../config/nvim
@@ -15,6 +17,7 @@
     ../../config/ssh
     ../../config/khard
     ../../config/isync
+    ../../config/cmus
     ../../config/msmtp
     ../../config/neomutt
     ../../config/python
@@ -94,8 +97,12 @@
         layout = "us";
         variant = "";
       };
+      windowManager.i3.enable = true;
+      desktopManager.lxqt.enable = true;
+
       videoDrivers = [ "displaylink" "modesetting" ];
     };
+    displayManager.sddm.enable = true;
     libinput.enable = true;
     tlp.enable = true;
   };
