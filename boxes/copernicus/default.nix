@@ -6,6 +6,8 @@
     ./agenix.nix
     ./config.nix
     ./sshd.nix
+    ../../config/i3pystatus
+    ../../config/i3
     ../../lib/bootstrap.nix
   ];
 
@@ -49,11 +51,14 @@
     git-annex
     tigervnc
     i3
+    i3pystatus
 
     (pkgs.callPackage ../../builds/sssg.nix {})
   ];
 
   virtualisation.virtualbox.host.enable = true;
+  boot.kernelParams = [ "kvm.enable_virt_at_load=0" ]; # virtualbox doesn't like kvm
+
   systemd.services.x11vnc = {
     description = "Remote desktop service (VNC)";
 

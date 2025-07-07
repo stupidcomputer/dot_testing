@@ -85,8 +85,12 @@ bindsym $mod+Shift+5 move container to workspace number $ws5
 bindsym $mod+Shift+6 move container to workspace number $ws6
 bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
+# for some reason, on copernicus the traditional $mod+Shift+num construction
+# doesn't work -- so we have to bind to parenleft and parenright, too
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+parenleft move container to workspace number $ws9
+bindsym $mod+Shift+parenright move container to workspace number $ws10
 
 for_window [title="Bluetooth"] floating enable
 for_window [class="st_floating"] floating enable
