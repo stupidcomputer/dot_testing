@@ -52,6 +52,7 @@
     tigervnc
     i3
     i3pystatus
+    hueadm
 
     (pkgs.callPackage ../../builds/sssg.nix {})
   ];
