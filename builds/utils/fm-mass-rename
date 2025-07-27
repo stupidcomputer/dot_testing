@@ -52,13 +52,14 @@ paste "$originals" "$modified" -d'|' | while read input; do
 		read result
 		if [ x"$result" = "xy" ]; then
 			printf "clobbering '%s'\n" "$dest"
-			mv "$orig" "$dest"
+			mv -- "$orig" "$dest"
 			continue
 		else
 			printf "skipping copying '%s' to '%s'\n" "$orig" "$dest"
+			continue
 		fi
 	fi
 
 	printf "moving '%s' to '%s'\n" "$orig" "$dest"
-	mv "$orig" "$dest"
+	mv -- "$orig" "$dest"
 done
