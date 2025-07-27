@@ -1,12 +1,5 @@
-randomuser's dotfiles
+stupidcomputer's dotfiles
 =====================
-
-things to do
-------------
-
-* [ ] integrate `disko` and `sops-nix` into the setup
-* [ ] write an app that replaces the nextcloud phonetrack setup
-* [ ] establish backup infrastructure for `netbox`
 
 license
 -------
@@ -16,4 +9,4 @@ all materials in this repository, except for:
 * `./config/pape.jpg`, which is of unknown license, and
 * `./builds/st`, which is licensed under MIT, pursuant to `./builds/st/LICENSE`,
 
-is (c) rndusr, randomuser, stupidcomputer, etc 2024-2025 and licensed under the GPLv3 (see `./LICENSE`)
+is (c) Ryan Marina 2019-2025 and licensed under the GPLv3 (see `./LICENSE`)
