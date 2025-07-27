@@ -1,0 +1,35 @@
+# fm-split-cues
+# split a media file based on timestamps
+
+help () {
+	cat <<EOF
+$0 - split a media file based on timestamps
+
+usage: $0 <media_file> <HH:MM:SS> <HH:MM:SS> <HH:MM:SS> (...)
+
+some notes:
+	- timestamps are in HH:MM:SS
+	- you must provide the ending timestamp
+EOF
+}
+
+if [ "$1" = "-h" ] || [ -z "$1" ]; then
+	help
+	exit
+fi
+
+target_file="$1"
+shift
+
+segment=0
+while true; do
+	if [ -z "$1" ] || [ -z "$2" ]; then
+		exit
+	fi
+
+	ffmpeg -i "$target_file" -ss "$1" -to "$2" -c copy "output_seg_${segment}_${target_file}"
+	segment=$(($segment + 1))
+	echo "$1 $2"
+	shift
+	sleep 1
+done
