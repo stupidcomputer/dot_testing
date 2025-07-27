@@ -6,35 +6,26 @@
     ./hardware-configuration.nix
 
     ../../config/aerc
-    ../../config/sx
+    ../../config/bash
+    ../../config/brave
+    ../../config/cmus
+    ../../config/emacs
+    ../../config/git
+    ../../config/htop
+    ../../config/hueadm
     ../../config/i3
     ../../config/i3pystatus
-    ../../config/git
-    ../../config/bash
     ../../config/nvim
-    ../../config/emacs
-    ../../config/khal
-    ../../config/ssh
-    ../../config/khard
-    ../../config/isync
-    ../../config/cmus
-    ../../config/msmtp
-    ../../config/neomutt
-    ../../config/python
-    ../../config/vdirsyncer
-    ../../config/todoman
-    ../../config/rbw
-    ../../config/zathura
-    ../../config/htop
-    ../../config/games
-    ../../config/termutils
     ../../config/productionutils
-    ../../config/brave
-    ../../config/tor-browser
+    ../../config/python
+    ../../config/rbw
     ../../config/scrcpy
-    ../../config/hueadm
+    ../../config/ssh
+    ../../config/sx
     ../../config/syncthing
-    ../../config/ledger
+    ../../config/termutils
+    ../../config/tor-browser
+    ../../config/zathura
   ];
 
   environment.systemPackages = with pkgs; [
@@ -45,8 +36,6 @@
     (callPackage ../../builds/sssg.nix {})
     (callPackage ../../builds/tilp.nix {})
   ];
-
-  programs.kdeconnect.enable = true;
 
   boot.loader.grub = {
     enable = true;
@@ -98,7 +87,6 @@
         variant = "";
       };
       windowManager.i3.enable = true;
-      desktopManager.lxqt.enable = true;
 
       videoDrivers = [ "modesetting" ];
     };
@@ -108,14 +96,6 @@
   };
 
   powerManagement.powertop.enable = true;
-
-  systemd.user.services.ssh-socks5-proxy = {
-    enable = true;
-    description = "SOCKS5 proxy over ssh";
-
-    serviceConfig.ExecStart = "${pkgs.openssh}/bin/ssh -ND 127.0.0.1:4000 netbox";
-    wantedBy = []; # start only when I say so
-  };
 
   fonts.packages = with pkgs; [
     noto-fonts
