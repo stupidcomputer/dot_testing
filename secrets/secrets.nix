@@ -19,4 +19,7 @@ in {
 
   # vaultwarden
   "vaultwarden-secret.age".publicKeys = all;
+
+  # aerc
+  "aerc-account-config.age".publicKeys = with machines; [ copernicus.pubkey aristotle.pubkey ];
 }

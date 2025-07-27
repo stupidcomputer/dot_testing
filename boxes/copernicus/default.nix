@@ -8,6 +8,7 @@
     ../../lib/bootstrap.nix
 
     # individual program configs
+    ../../config/aerc
     ../../config/bash
     ../../config/brave
     ../../config/cmus

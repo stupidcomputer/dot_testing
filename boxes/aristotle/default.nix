@@ -5,6 +5,7 @@
     ./agenix.nix
     ./hardware-configuration.nix
 
+    ../../config/aerc
     ../../config/sx
     ../../config/i3
     ../../config/i3pystatus
