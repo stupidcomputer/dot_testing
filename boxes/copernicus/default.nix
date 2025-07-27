@@ -4,77 +4,47 @@
     ./hardware-configuration.nix
     ./nvidia.nix
     ./agenix.nix
-    ./config.nix
     ./sshd.nix
-    ../../config/i3pystatus
-    ../../config/i3
     ../../lib/bootstrap.nix
+
+    # individual program configs
+    ../../config/bash
+    ../../config/brave
+    ../../config/cmus
+    ../../config/emacs
+    ../../config/git
+    ../../config/hueadm
+    ../../config/i3
+    ../../config/i3pystatus
+    ../../config/nvim
+    ../../config/productionutils
+    ../../config/rbw
+    ../../config/ssh
+    ../../config/sx
+    ../../config/termutils
+    ../../config/zathura
   ];
 
   programs.wireshark.enable = true;
   programs.wireshark.package = pkgs.wireshark-qt;
 
   environment.systemPackages = with pkgs; [
-    ical2orgpy
-    wine
-    xdotool
+    syncthing
 
-    htop
-    dmidecode
-    libreoffice
-    texliveFull
-    kdePackages.kdenlive
-    audacity
-    bespokesynth
-    musescore
-    unzip
-    ledger
-    scrcpy
-    inotify-tools
-    redshift
-    gimp
-    inkscape
-    steam
-    zoom-us
-    kdePackages.partitionmanager
-    cryptsetup
-    age
-
-    unzip
-    imagemagick
-    pciutils
-    usbutils
-    emacs
-
-    ffmpeg
-    mdadm
-    git-annex
-    tigervnc
-    i3
-    i3pystatus
-    hueadm
-
+    # custom builds
+    (pkgs.callPackage ../../builds/st.nix { lightMode = false; })
+    (pkgs.callPackage ../../builds/dmenu.nix {})
+    (pkgs.callPackage ../../builds/utils.nix {})
+    (pkgs.callPackage ../../builds/statusbar {})
     (pkgs.callPackage ../../builds/sssg.nix {})
+  ];
+
+  fonts.packages = with pkgs; [
+    fantasque-sans-mono
   ];
 
   virtualisation.virtualbox.host.enable = true;
   boot.kernelParams = [ "kvm.enable_virt_at_load=0" ]; # virtualbox doesn't like kvm
-
-  systemd.services.x11vnc = {
-    description = "Remote desktop service (VNC)";
-
-    unitConfig = {
-      After = "display-manager.service";
-    };
-
-    serviceConfig = {
-      Type = "simple";
-      User = "sddm";
-      ExecStart = "${pkgs.x11vnc}/bin/x11vnc -display :0";
-      Restart = "always";
-      RestartSec = 3;
-    };
-  };
 
   programs.kdeconnect.enable = true;
   services.hardware.bolt.enable = true; # thunderbolt support
@@ -201,30 +171,32 @@
       windowManager.i3 = {
         enable = true;
       };
+      enable = true;
+      xkb.layout = "us";
     };
-    desktopManager.plasma6.enable = true;
     displayManager.sddm.enable = true;
     displayManager.sddm.wayland.enable = false;
+    libinput.enable = true;
   };
 
-  services.coredns = {
+  programs.gnupg.agent = {
     enable = true;
-    config =
-      ''
-        . {
-          hosts {
-            192.168.1.201 copernicus.snacknet
-            192.168.1.202 aristotle.snacknet
-            192.168.1.210 jumpbox.snacknet
-            192.168.1.1 router.snacknet
-            192.168.1.11 hue.snacknet
-          }
+    enableSSHSupport = true;
+  };
 
-          # forward traffic onward
-          forward . 1.1.1.1 1.0.0.1 8.8.8.8 8.8.4.4
-          cache
-        }
-      '';
+  systemd.services.syncthing = {
+    enable = true;
+    description = "start syncthing on network startup";
+    after = [ "network-online.target" ];
+    wantedBy = [ "multi-user.target" ];
+    requires = [ "network-online.target" ];
+
+    serviceConfig = {
+      ExecStart = "${pkgs.syncthing}/bin/syncthing";
+      User = "usr";
+      Restart = "on-failure";
+      RestartSec = "3";
+    };
   };
 
   system.stateVersion = "24.05"; # don't change this, lol

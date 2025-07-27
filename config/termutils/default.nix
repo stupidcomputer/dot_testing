@@ -1,28 +1,38 @@
 { pkgs, ... }:
 {
   environment.systemPackages = with pkgs; [
-    tmux
-    jq
-    curl
-    tree
-    rsync
-    man-pages
-    peaclock
-    usbutils
-    pciutils
-    unzip
-    mdadm
+    age
     cryptsetup
-    ranger
+    curl
     dig
-    nmap
-    yt-dlp
+    dig
+    dmidecode
     ffmpeg
-    qpdf
-    poppler_utils
-    kjv
     fzy
+    fzy
+    htop
+    hueadm
     imagemagick
+    inotify-tools
+    jq
+    kjv
+    man-pages
+    mdadm
+    nmap
+    pciutils
+    peaclock
+    peaclock
+    poppler_utils
+    python3
+    qpdf
+    ranger
+    rsync
+    tmux
+    tree
+    tree
     unzip
+    unzip
+    usbutils
+    yt-dlp
   ];
 }

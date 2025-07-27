@@ -19,6 +19,7 @@
     xclip
     x11vnc
     xbrightness
+    xwallpaper
     xdotool
     tigervnc
 
@@ -28,6 +29,7 @@
 
     mpv
     sxiv
+    scrcpy
   ];
 
   system.userActivationScripts.copySxConfiguration = {
