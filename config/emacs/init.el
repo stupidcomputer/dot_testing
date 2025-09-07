@@ -26,6 +26,9 @@
 (require 'evil-collection)
 (evil-collection-init)
 
+;; htmlize
+(use-package htmlize :ensure t)
+
 ;; org-mode
 (use-package org :ensure t)
 (use-package org-drill :ensure t)
@@ -79,12 +82,14 @@ has no effect."
 (setq u:org-habit-show-graphs-everywhere 1)
 (setq org-directory "~/org")
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
-(setq org-agenda-files '("~/org/agenda.org" "~/org/body.org" "~/org/inbox.org" "~/org/main.org" "~/org/pco.org" "~/org/tfb.org"))
+(setq org-agenda-files '("~/org/agenda.org" "~/org/body.org" "~/org/inbox.org" "~/org/main.org" "~/org/pco.org" "~/org/tfb.org" "~/org/school-calendar.org"))
 (setq org-journal-dir "~/org/journal")
 (setq calendar-week-start-day 1)
 (setq org-treat-insert-todo-heading-as-state-change t)
 (setq org-log-into-drawer t)
 (setq org-agenda-span 14)
+(setq org-agenda-sticky t)
+(setq org-agenda-show-future-repeats 'next)
 (setq org-agenda-custom-commands
       '(("p" "Generate PDF agenda page" agenda ""
          ((ps-number-of-columns 2)

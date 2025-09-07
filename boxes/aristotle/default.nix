@@ -35,6 +35,7 @@
     (callPackage ../../builds/rebuild.nix {})
     (callPackage ../../builds/sssg.nix {})
     (callPackage ../../builds/tilp.nix {})
+    appimage-run
   ];
 
   boot.loader.grub = {
