@@ -90,6 +90,7 @@ has no effect."
 (setq org-agenda-span 14)
 (setq org-agenda-sticky t)
 (setq org-agenda-show-future-repeats 'next)
+(setq org-read-date-force-compatible-dates nil)
 (setq org-agenda-custom-commands
       '(("p" "Generate PDF agenda page" agenda ""
          ((ps-number-of-columns 2)
