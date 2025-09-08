@@ -14,7 +14,7 @@
     };
   };
   phone = {
-    pubkey = "SHA256:rbHP6wQsdRrxLsVEkUT4If7kQbZpLh44l3L3aVOzxG0 u0_a291";
+    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM5f9Cg3m/cp9nSb+lfEx/8a/p2xi90s8hZnSwT6NDEw u0_a336";
     ip-addrs = {
       localnet = "192.168.1.203";
     };
