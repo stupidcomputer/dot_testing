@@ -1,3 +1,9 @@
+from i3pystatus import IntervalModule, Status
+from dataclasses import dataclass
+from enum import Enum, auto
+from datetime import date, datetime
+from typing import Optional
+
 class ScheduleItemState(Enum):
     BEFORE = auto()
     ACTIVE = auto()
