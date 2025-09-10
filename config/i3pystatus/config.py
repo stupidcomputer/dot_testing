@@ -197,7 +197,7 @@ status.register("clock",
 status.register(ClassMonitor)
 
 status.register("battery",
-    format="{status}{percentage:.2f}%{remaining:%E%h:%M}",
+    format="{percentage:.2f}{status}{remaining:%E%h:%M}",
     alert=True,
     alert_percentage=5,
     status={
