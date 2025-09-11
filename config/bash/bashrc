@@ -11,6 +11,7 @@ alias elinks="TERM='xterm-color' elinks"
 alias pkgsearch="nix search nixpkgs"
 alias reload=". ~/.config/bash/profile"
 alias shuttle="sshuttle -r ryan@beepboop.systems:443 0/0 --dns"
+alias synctunnel="ssh -N -L localhost:22001:localhost:22000 -R localhost:22001:localhost:22000 netbox & syncthing"
 
 function cd() {
 	builtin cd "$@" && ls --color=auto --group-directories-first
