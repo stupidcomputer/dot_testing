@@ -36,6 +36,8 @@
     (callPackage ../../builds/sssg.nix {})
     (callPackage ../../builds/tilp.nix {})
     appimage-run
+    sage
+    libreoffice
   ];
 
   boot.loader.grub = {
