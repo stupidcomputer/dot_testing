@@ -4,6 +4,7 @@
     ./sshd.nix
     ./agenix.nix
     ./hardware-configuration.nix
+    ../copernicus/printing.nix
 
     ../../config/aerc
     ../../config/bash
@@ -38,6 +39,7 @@
     appimage-run
     sage
     libreoffice
+    prismlauncher
   ];
 
   boot.loader.grub = {
@@ -113,6 +115,8 @@
     vistafonts
     proggyfonts
   ];
+
+  services.printing.enable = true;
 
   system.stateVersion = "24.05";
 }

@@ -5,6 +5,7 @@
     ./nvidia.nix
     ./agenix.nix
     ./sshd.nix
+    ./printing.nix
     ../../lib/bootstrap.nix
 
     # individual program configs
@@ -31,6 +32,7 @@
 
   environment.systemPackages = with pkgs; [
     syncthing
+    prismlauncher
 
     # custom builds
     (pkgs.callPackage ../../builds/st.nix { lightMode = false; })
@@ -72,14 +74,6 @@
   };
 
   services = {
-    # enable printing
-    printing.enable = true;
-    avahi = {
-      enable = true; # runs the Avahi daemon
-      nssmdns4 = true; # enables the mDNS NSS plug-in
-      openFirewall = true; # opens the firewall for UDP port 5353
-    };
-
     pipewire = {
       enable = true;
       extraConfig.pipewire = {

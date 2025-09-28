@@ -3,6 +3,10 @@
 # if not interactive, don't do anything
 [ -z "$PS1" ] && return
 
+open-port () {
+	sudo iptables -A INPUT -p tcp --dport $1 -j ACCEPT
+}
+
 # some housekeeping
 alias ls="ls --color=auto --group-directories-first"
 alias weather="curl https://wttr.in"
