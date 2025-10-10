@@ -27,9 +27,6 @@
     ../../config/zathura
   ];
 
-  programs.wireshark.enable = true;
-  programs.wireshark.package = pkgs.wireshark-qt;
-
   environment.systemPackages = with pkgs; [
     syncthing
     prismlauncher
@@ -117,22 +114,8 @@
       enable = true;
       interfaces = {
         eno1 = {
-          allowedTCPPorts = [ 6000 5900 ];
           allowedTCPPortRanges = [
-            { from = 1714; to = 1764; } # KDE Connect
             { from = 10000; to = 10100; } # temp stuff
-          ];
-          allowedUDPPortRanges = [
-            { from = 1714; to = 1764; } # KDE Connect
-          ];
-        };
-        wg0 = {
-          # allow everything bound to the wg0 interface
-          allowedTCPPortRanges = [
-            { from = 1; to = 35565; }
-          ];
-          allowedUDPPortRanges = [
-            { from = 1; to = 35565; }
           ];
         };
       };
@@ -162,15 +145,13 @@
 
   services = {
     xserver = {
-      displayManager.sx.addAsSession = true;
       windowManager.i3 = {
         enable = true;
       };
       enable = true;
       xkb.layout = "us";
     };
-    displayManager.sddm.enable = true;
-    displayManager.sddm.wayland.enable = false;
+    displayManager.ly.enable = true;
     libinput.enable = true;
   };
 
