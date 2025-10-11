@@ -12,12 +12,18 @@
       localnet = "192.168.1.201";
       wgnet = "10.100.0.2";
     };
+    description = ''
+      The main desktop PC.
+    '';
   };
   phone = {
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM5f9Cg3m/cp9nSb+lfEx/8a/p2xi90s8hZnSwT6NDEw u0_a336";
     ip-addrs = {
       localnet = "192.168.1.203";
     };
+    description = ''
+      A Pixel 8a running termux and some other things.
+    '';
   };
   aristotle = {
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKTDyKneaM44I5to883ghEnnPonedCKDbCX+OnrQ9vO5 usr";
@@ -26,6 +32,9 @@
       localnet = "192.168.1.202";
       wgnet = "10.100.0.3";
     };
+    description = ''
+      A Lenovo Thinkpad Yoga 260. Power supply seems to have died.
+    '';
   };
   netbox = {
     wg-privkey = ../secrets/netbox-wg-priv.age;
@@ -34,9 +43,15 @@
       internet = "beepboop.systems";
       wgnet = "10.100.0.1";
     };
+    description = ''
+      Just a tiny VPS, nothing much.
+    '';
   };
   plato = {
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIABAuisY7QufTrcPkBvHcPTtCLg4/SY+r4nCh3fqdua7 usr";
+    description = ''
+      A Lenovo Thinkpad X230.
+    '';
   };
 
   mkHosts = machines: hostname: network:
