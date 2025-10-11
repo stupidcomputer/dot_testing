@@ -180,20 +180,14 @@ lsp_zero.on_attach(function(client, bufnr)
   lsp_zero.default_keymaps({buffer = bufnr})
 end)
 
-local lspconfig = require("lspconfig")
-
-lspconfig.lua_ls.setup({})
-lspconfig.texlab.setup({})
-lspconfig.nixd.setup({})
-lspconfig.pylsp.setup({
-	settings = {
-		pylsp = {
-			plugins = {
-				pycodestyle = {
-					ignore = {"W391"},
-					maxLineLength = 100,
-				}
-			}
+vim.lsp.config('lua_ls', {})
+vim.lsp.config('texlab', {})
+vim.lsp.config('nixd', {})
+vim.lsp.config('pylsp', {
+	plugins = {
+		pycodestyle = {
+			ignore = {"W391"},
+			maxLineLength = 100,
 		}
 	}
 })
