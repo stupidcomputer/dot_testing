@@ -33,7 +33,6 @@
 (use-package org :ensure t)
 (use-package org-drill :ensure t)
 (use-package org-journal :ensure t)
-(use-package org-drill-table :ensure t)
 (use-package evil-org :ensure t)
 (use-package gnuplot :ensure t)
 (use-package org-ql :ensure t)
@@ -168,7 +167,16 @@ has no effect."
 (toggle-scroll-bar -1)
 (setq custom-safe-themes t)
 (load-theme 'gruvbox)
-(set-frame-font "Fantasque Sans Mono 13" nil t)
+;; plato and aristotle have low-dpi displays, so we need to
+;; ;reduce font size accordingly
+(set-frame-font "Fantasque Sans Mono" nil t)
+(cond
+ ((string-equal (system-name) "plato")
+  (set-face-attribute 'default nil :height 100))
+ ((string-equal (system-name) "copernicus")
+  (set-face-attribute 'default nil :height 100))
+ (t
+  (set-face-attribute 'default nil :height 130)))
 ;; prevent the simulated terminal bell from ringing
 (setq visible-bell t)
 (setq ring-bell-function 'ignore)
