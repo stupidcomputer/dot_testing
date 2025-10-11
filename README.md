@@ -1,6 +1,11 @@
 stupidcomputer's dotfiles
 =====================
 
+some notes
+----------
+
+- if submodules are misbehaving, do `git submodule update --force --recursive --init --remote` because we don't care about keeping a particular version of submodule contents
+
 license
 -------
 
