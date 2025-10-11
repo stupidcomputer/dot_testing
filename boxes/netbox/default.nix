@@ -6,7 +6,6 @@
 
     ./flasktrack.nix
     ./franklincce.nix
-    ./mail.nix
     ./nginx.nix
     ./ssh.nix
     ./sslh.nix

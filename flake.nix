@@ -3,14 +3,12 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
-    simple-nixos-mailserver.url = "gitlab:simple-nixos-mailserver/nixos-mailserver/nixos-25.05";
     agenix.url = "github:ryantm/agenix";
   };
 
   outputs = {
       self,
       nixpkgs,
-      simple-nixos-mailserver,
       agenix,
       ...
     }@inputs: let
