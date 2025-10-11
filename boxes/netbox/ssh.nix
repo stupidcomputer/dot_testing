@@ -15,6 +15,7 @@
     machines.copernicus.pubkey
     machines.aristotle.pubkey
     machines.phone.pubkey
+    machines.plato.pubkey
   ];
 
   # save ip addresses in cache from repeat logins

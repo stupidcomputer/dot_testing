@@ -35,6 +35,9 @@
       wgnet = "10.100.0.1";
     };
   };
+  plato = {
+    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIABAuisY7QufTrcPkBvHcPTtCLg4/SY+r4nCh3fqdua7 usr";
+  };
 
   mkHosts = machines: hostname: network:
     builtins.listToAttrs [
