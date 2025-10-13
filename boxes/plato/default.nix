@@ -31,6 +31,7 @@
 
   environment.systemPackages = with pkgs; [
     (callPackage ../../builds/st.nix {})
+    (callPackage ../../builds/dmenu.nix {})
     (callPackage ../../builds/utils.nix {})
     (callPackage ../../builds/rebuild.nix {})
     (callPackage ../../builds/sssg.nix {})
@@ -39,7 +40,6 @@
     sage
     libreoffice
     prismlauncher
-    dmenu
   ];
 
   boot.loader.grub = {

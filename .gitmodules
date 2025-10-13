@@ -1,6 +1,3 @@
 [submodule "builds/dwm"]
 	path = builds/dwm
 	url = https://github.com/stupidcomputer/dwm
-[submodule "builds/dmenu"]
-	path = builds/dmenu
-	url = https://git.suckless.org/dmenu

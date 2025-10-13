@@ -1,10 +1,13 @@
 { lib, stdenv, fetchurl, libX11, libXinerama, libXft, zlib }:
 
 stdenv.mkDerivation rec {
-  pname = "dmenu";
+  pname = "stupid-dmenu";
   version = "5.2";
 
-  src = ./dmenu;
+  src = builtins.fetchGit {
+    url = "https://github.com/stupidcomputer/dmenu.git";
+    rev = "bc3aad5943208972ff1bee43f8e732e0c355c8fd";
+  };
 
   buildInputs = [ libX11 libXinerama zlib libXft ];
 
