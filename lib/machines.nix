@@ -12,6 +12,7 @@
       localnet = "192.168.1.201";
       wgnet = "10.100.0.2";
     };
+    syncthing-id = "M7DSXSL-FRPZQ2Z-32XEIE2-T4XPU76-OL4AMXS-UPM3R2L-WRIHWUO-2RNMEAQ";
     description = ''
       The main desktop PC.
     '';
@@ -21,6 +22,7 @@
     ip-addrs = {
       localnet = "192.168.1.203";
     };
+    syncthing-id = "WR2IVGD-7XKTMTR-FDI74B4-PLDNIXR-TV5OEAJ-ESB75H7-RADC4NR-DGSWDAU";
     description = ''
       A Pixel 8a running termux and some other things.
     '';
@@ -43,12 +45,14 @@
       internet = "beepboop.systems";
       wgnet = "10.100.0.1";
     };
+    syncthing-id = "O7K4VBQ-N5ENCDW-YMGMQP7-MADCKHK-T5OBSNH-4B3BE7W-Z3DK2G5-DH22NQQ";
     description = ''
       Just a tiny VPS, nothing much.
     '';
   };
   plato = {
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIABAuisY7QufTrcPkBvHcPTtCLg4/SY+r4nCh3fqdua7 usr";
+    syncthing-id = "A6LQULQ-AVUHHN5-EAT3JWW-O6VZATV-LAHQB6X-RLEGWMD-NQJKT6L-WUAOJAZ";
     description = ''
       A Lenovo Thinkpad X230.
     '';

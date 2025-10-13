@@ -45,11 +45,21 @@
   boot.loader.grub = {
     enable = true;
     device = "/dev/sda";
+    timeoutStyle = "hidden";
   };
 
   networking = {
     hostName = "plato";
     networkmanager.enable = true;
+
+    hosts = lib.attrsets.mergeAttrsList [
+      (machines.mkHosts machines "router" "localnet")
+      (machines.mkHosts machines "copernicus" "localnet")
+      (machines.mkHosts machines "phone" "localnet")
+      (machines.mkHosts machines "netbox" "internet")
+    ] // {
+      "127.0.0.2" = [ "cups.l" ];
+    };
   };
   hardware = {
     bluetooth = {
