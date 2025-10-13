@@ -4,8 +4,6 @@ tiling_drag modifier titlebar
 
 font pango:Fantasque Sans Mono 12
 
-exec --no-startup-id feh --bg-fill /home/usr/dots/config/pape.jpg
-exec --no-startup-id feh --bg-fill /home/usr/down/workbench_2.png
 exec --no-startup-id xset r rate 200 80
 exec --no-startup-id setxkbmap -option caps:super
 exec --no-startup-id pkill xcape
