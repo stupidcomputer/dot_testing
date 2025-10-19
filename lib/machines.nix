@@ -57,6 +57,13 @@
       A Lenovo Thinkpad X230.
     '';
   };
+  hammurabi = {
+    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJaUHLYuEgmNWQTQUB9nZA3L2QCOaQyqrcRv+8xGkdAM usr";
+    syncthing-id = "MTWVSQK-A7BYY7G-I35WEPP-O7MFMTD-CB4CIEN-7ZBUJ5C-LVGMPQ3-JACXNQK";
+    description = ''
+      A Lenovo Thinkpad L13 Yoga.
+    '';
+  };
 
   mkHosts = machines: hostname: network:
     builtins.listToAttrs [

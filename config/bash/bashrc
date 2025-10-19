@@ -62,6 +62,9 @@ case "$HOSTNAME" in
 	"plato")
 		PS1="$USER_PREFIX\[\033[32;1m\]${NIX_SHELL_PS1}plato:$PS1\[\033[0;0m\]"
 		;;
+	"hammurabi")
+		PS1="$USER_PREFIX\[\033[33;1m\]${NIX_SHELL_PS1}ham:$PS1\[\033[0;0m\]"
+		;;
 	*)
 		PS1="$USER_PREFIX\[\033[96;1m\]${NIX_SHELL_PS1}unk:$PS1\[\033[0;0m\]"
 		;;
