@@ -35,6 +35,6 @@
           }) configurations
         );
     in {
-      nixosConfigurations = generateNixosConfigurations [ "netbox" "copernicus" "aristotle" "plato" ];
+      nixosConfigurations = generateNixosConfigurations [ "netbox" "copernicus" "aristotle" "plato" "hammurabi" ];
     };
 }
