@@ -15,7 +15,7 @@ in {
 
   # wireguard
   "netbox-wg-priv.age".publicKeys = all;
-  "copernicus-wg-priv.age".publicKeys = userfacing
+  "copernicus-wg-priv.age".publicKeys = userfacing;
 
   # networkmanager
   "nm-home-net-config.age".publicKeys = userfacing;
