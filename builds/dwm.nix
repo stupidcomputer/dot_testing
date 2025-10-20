@@ -8,7 +8,11 @@ stdenv.mkDerivation rec {
   pname = "dwm";
   version = "6.5";
 
-  src = ./dwm;
+  src = builtins.fetchGit {
+    url = "https://github.com/stupidcomputer/dwm.git";
+    rev = "7248b43424def635e2a6194281e84ec0689fd7ba";
+
+  };
 
   buildInputs = [ libX11 libXinerama libXft ];
 
