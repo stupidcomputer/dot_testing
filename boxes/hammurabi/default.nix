@@ -25,6 +25,8 @@
     (callPackage ../../builds/tilp.nix {})
     musescore
     vscodium-fhs
+    kdePackages.kdenlive
+    obs-studio
   ];
 
   # Bootloader.
