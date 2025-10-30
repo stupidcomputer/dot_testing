@@ -4,6 +4,7 @@
   imports = [
     ./agenix.nix
     ./hardware-configuration.nix
+    ../copernicus/printing.nix
 
     ../../config/aerc
     ../../config/bash
@@ -27,7 +28,11 @@
     vscodium-fhs
     kdePackages.kdenlive
     obs-studio
+    gimp
+    prismlauncher
   ];
+
+  programs.steam.enable = true;
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
