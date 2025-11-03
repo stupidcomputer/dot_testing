@@ -37,7 +37,12 @@
     (pkgs.callPackage ../../builds/utils.nix {})
     (pkgs.callPackage ../../builds/statusbar {})
     (pkgs.callPackage ../../builds/sssg.nix {})
+
+    i3-swallow
   ];
+
+  services.ollama.enable = true;
+  services.open-webui.enable = true;
 
   fonts.packages = with pkgs; [
     fantasque-sans-mono
