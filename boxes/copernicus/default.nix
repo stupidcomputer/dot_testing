@@ -27,6 +27,10 @@
     ../../config/zathura
   ];
 
+  services.tailscale = {
+    enable = true;
+  };
+
   environment.systemPackages = with pkgs; [
     syncthing
     prismlauncher
