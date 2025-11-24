@@ -30,7 +30,14 @@
     obs-studio
     gimp
     prismlauncher
+    rofi-wayland
+    wl-clipboard
+    anki-bin
+    sshuttle
+    scrcpy
   ];
+
+  programs.adb.enable = true;
 
   programs.steam.enable = true;
 
