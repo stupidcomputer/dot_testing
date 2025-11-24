@@ -38,7 +38,7 @@
   ];
 
   programs.adb.enable = true;
-
+  services.tailscale.enable = true;
   programs.steam.enable = true;
 
   # Bootloader.

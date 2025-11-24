@@ -32,6 +32,8 @@
     keyMap = "us";
   };
 
+  services.tailscale.enable = true;
+
   environment.systemPackages = with pkgs; [
     python3
     curl

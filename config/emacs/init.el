@@ -81,7 +81,7 @@ has no effect."
 (setq u:org-habit-show-graphs-everywhere 1)
 (setq org-directory "~/org")
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
-(setq org-agenda-files '("~/org/agenda.org" "~/org/body.org" "~/org/inbox.org" "~/org/main.org" "~/org/pco.org" "~/org/tfb.org" "~/org/school-calendar.org"))
+(setq org-agenda-files '("~/org/agenda.org" "~/org/body.org" "~/org/inbox.org" "~/org/main.org" "~/org/pco.org" "~/org/tfb.org" "~/org/school-calendar.org" "~/org/phone-inbox.org"))
 (setq org-journal-dir "~/org/journal")
 (setq calendar-week-start-day 1)
 (setq org-treat-insert-todo-heading-as-state-change t)
@@ -168,7 +168,7 @@ has no effect."
 (setq custom-safe-themes t)
 (load-theme 'gruvbox)
 ;; plato and aristotle have low-dpi displays, so we need to
-;; ;reduce font size accordingly
+;; reduce font size accordingly
 (set-frame-font "Fantasque Sans Mono" nil t)
 (cond
  ((string-equal (system-name) "plato")

@@ -27,6 +27,17 @@
     ../../config/zathura
   ];
 
+  nix.settings = {
+    cores = 16;
+    max-jobs = 24;
+    download-buffer-size = 10000000000;
+    warn-dirty = false;
+  };
+
+  services.tailscale = {
+    enable = true;
+  };
+
   environment.systemPackages = with pkgs; [
     syncthing
     prismlauncher
@@ -37,10 +48,25 @@
     (pkgs.callPackage ../../builds/utils.nix {})
     (pkgs.callPackage ../../builds/statusbar {})
     (pkgs.callPackage ../../builds/sssg.nix {})
+
+    i3-swallow
   ];
+
+  nixpkgs.config.cudaSupport = true;
 
   fonts.packages = with pkgs; [
     fantasque-sans-mono
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    mplus-outline-fonts.githubRelease
+    dina-font
+    corefonts
+    vistafonts
+    proggyfonts
   ];
 
   virtualisation.virtualbox.host.enable = true;
