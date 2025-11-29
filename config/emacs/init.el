@@ -29,14 +29,27 @@
 ;; htmlize
 (use-package htmlize :ensure t)
 
+;; vterm
+(use-package vterm :ensure t)
+(defun u:new-frame-with-vterm ()
+  "Create a new frame and immediately open vterm in it."
+  (interactive)
+  (require 'vterm)
+  (let ((new-frame (make-frame '((explicit-vterm . t)))))
+    (select-frame new-frame)
+    (delete-other-windows)
+    ;; Force vterm to take full window
+    (let ((default-directory "~"))
+      (let ((vterm-buffer (vterm (format "*vterm-%s*" (frame-parameter new-frame 'name)))))
+	(switch-to-buffer vterm-buffer)
+	(delete-other-windows)))))
+
 ;; org-mode
 (use-package org :ensure t)
 (use-package org-drill :ensure t)
 (use-package org-journal :ensure t)
 (use-package evil-org :ensure t)
 (use-package gnuplot :ensure t)
-(use-package org-ql :ensure t)
-(use-package ox-json :ensure t)
 (use-package org-contacts
   :ensure t
   :after org
@@ -81,7 +94,14 @@ has no effect."
 (setq u:org-habit-show-graphs-everywhere 1)
 (setq org-directory "~/org")
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
-(setq org-agenda-files '("~/org/agenda.org" "~/org/body.org" "~/org/inbox.org" "~/org/main.org" "~/org/pco.org" "~/org/tfb.org" "~/org/school-calendar.org" "~/org/phone-inbox.org"))
+(setq org-agenda-files '("~/org/agenda.org"
+			 "~/org/body.org"
+			 "~/org/inbox.org"
+			 "~/org/main.org"
+			 "~/org/pco.org"
+			 "~/org/tfb.org"
+			 "~/org/school-calendar.org"
+			 "~/org/phone-inbox.org"))
 (setq org-journal-dir "~/org/journal")
 (setq calendar-week-start-day 1)
 (setq org-treat-insert-todo-heading-as-state-change t)
