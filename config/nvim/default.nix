@@ -5,7 +5,7 @@
 
     # for various lsp things
     lua-language-server
-    python311Packages.python-lsp-server
+#    python311Packages.python-lsp-server
     texlab
     nixd
   ];
