@@ -1,21 +1,20 @@
 { pkgs, ...}:
 {
-  environment.systemPackages = with pkgs; [
-    emacs
-    emacsPackages.pdf-tools
-
-    # for pdf export of org-agenda
-    ghostscript
-
-    # plot stuff in org-mode
-    gnuplot
-
-    # import ical files from other sources
-    ical2orgpy
-
-    # latex support
-    texliveFull
-  ];
+#  environment.systemPackages = with pkgs; [
+#    emacsPackages.pdf-tools
+#
+#    # for pdf export of org-agenda
+#    ghostscript
+#
+#    # plot stuff in org-mode
+#    gnuplot
+#
+#    # import ical files from other sources
+#    ical2orgpy
+#
+#    # latex support
+#    texliveFull
+#  ];
 
   system.userActivationScripts.copyEmacsConfiguration = {
     text = ''

@@ -9,16 +9,21 @@
     ../../config/aerc
     ../../config/bash
     ../../config/brave
-    ../../config/cmus
     ../../config/emacs
     ../../config/git
     ../../config/nvim
-    ../../config/rbw
-    ../../config/ssh
     ../../config/syncthing
 
     ../../config/termutils
   ];
+
+  programs.hyprland.enable = true;
+  programs.hyprland.withUWSM = true;
+
+  nix.settings = {
+    download-buffer-size = 10000000000;
+    warn-dirty = false;
+  };
 
   environment.systemPackages = with pkgs; [
     (callPackage ../../builds/utils.nix {})
@@ -37,6 +42,7 @@
     scrcpy
   ];
 
+  nixpkgs.config.allowUnfree = true;
   programs.adb.enable = true;
   services.tailscale.enable = true;
   programs.steam.enable = true;
@@ -102,7 +108,6 @@
     ];
   };
 
-  nixpkgs.config.allowUnfree = true;
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
   };

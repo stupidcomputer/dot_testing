@@ -1,0 +1,28 @@
+(defwidget left-bar []
+  (box :orientation "vertical"
+       :class "indicator"
+       :space-evenly false
+       (box :orientation "vertical"
+            :space-evenly false
+            :valign "start"
+            :class "topbox"
+            (label :text "${formattime(EWW_TIME, "%H")}"
+                   :class "hours")
+            (label :text "${formattime(EWW_TIME, "%M")}"
+                   :class "minutes")
+            (label :text "${EWW_BATTERY.BAT0.capacity}"
+                   :wrap false
+                   :limit-width 2
+                   :class "battery ${EWW_BATTERY.BAT0.status}")
+            (systray :orientation "v"))))
+(defwindow example
+           :monitor 0
+           :geometry (geometry :x "1px"
+                               :y "1px"
+                               :width "20px"
+                               :height "41px"
+                               :anchor "top left")
+           :stacking "fg"
+           :exclusive true
+           :wm-ignore false
+           (left-bar))

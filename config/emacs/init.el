@@ -164,7 +164,7 @@ has no effect."
 (setq inhibit-splash-screen t)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
-(toggle-scroll-bar -1)
+(setq scroll-bar-mode nil)
 (setq custom-safe-themes t)
 (load-theme 'gruvbox)
 ;; plato and aristotle have low-dpi displays, so we need to
@@ -175,6 +175,8 @@ has no effect."
   (set-face-attribute 'default nil :height 100))
  ((string-equal (system-name) "copernicus")
   (set-face-attribute 'default nil :height 100))
+ ((string-equal (system-name) "hammurabi")
+  (set-face-attribute 'default nil :height 90))
  (t
   (set-face-attribute 'default nil :height 130)))
 ;; prevent the simulated terminal bell from ringing
@@ -184,6 +186,11 @@ has no effect."
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'text-mode-hook 'display-line-numbers-mode)
 (setq linum-format "%d")
+(defun u:disable-scroll-bars (frame)
+  (modify-frame-parameters frame
+                           '((vertical-scroll-bars . nil)
+                             (horizontal-scroll-bars . nil))))
+(add-hook 'after-make-frame-functions 'u:disable-scroll-bars)
 
 ;; custom commands
 (defun u:init:edit ()

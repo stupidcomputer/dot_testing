@@ -1,11 +1,17 @@
 # wrapper around rbw
 
-if [ "$HOSTNAME" != "aristotle" ]; then
-	rbw-x11-prompt
+rbw list
+
+if [ "$1" == "2fa" ]; then
+	resp=$(rbw list | rofi -dmenu -case-smart -mesg "2fa")
+else
+	resp=$(rbw list | rofi -dmenu -case-smart -mesg "password")
 fi
 
-resp=$(rbw list | dmenu)
-
-rbw get "$resp" | xclip -selection clipboard
+if [ "$1" == "2fa" ]; then
+	rbw code "$resp" | wl-copy
+else
+	rbw get "$resp" | wl-copy
+fi
 sleep 15
-echo "cleared" | xclip -selection clipboard
+echo "cleared" | wl-copy
