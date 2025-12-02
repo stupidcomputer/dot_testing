@@ -18,7 +18,6 @@
     xcape
     xclip
     x11vnc
-    xbrightness
     xwallpaper
     xdotool
     tigervnc

@@ -7,7 +7,7 @@
   };
 
   environment.systemPackages = with pkgs; [
-    glxinfo
+    mesa-demos
   ];
 
   # Tell Xorg to use the nvidia driver (also valid for Wayland)

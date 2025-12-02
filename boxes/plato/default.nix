@@ -34,7 +34,6 @@
     (callPackage ../../builds/dmenu.nix {})
     (callPackage ../../builds/utils.nix {})
     (callPackage ../../builds/rebuild.nix {})
-    (callPackage ../../builds/sssg.nix {})
     (callPackage ../../builds/tilp.nix {})
     appimage-run
     sage
@@ -101,14 +100,14 @@
   fonts.packages = with pkgs; [
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     liberation_ttf
     fira-code
     fira-code-symbols
     mplus-outline-fonts.githubRelease
     dina-font
     corefonts
-    vistafonts
+    vista-fonts
     proggyfonts
   ];
 

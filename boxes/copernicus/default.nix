@@ -46,8 +46,6 @@
     (pkgs.callPackage ../../builds/st.nix { lightMode = false; })
     (pkgs.callPackage ../../builds/dmenu.nix {})
     (pkgs.callPackage ../../builds/utils.nix {})
-    (pkgs.callPackage ../../builds/statusbar {})
-    (pkgs.callPackage ../../builds/sssg.nix {})
 
     i3-swallow
   ];
@@ -58,14 +56,14 @@
     fantasque-sans-mono
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-emoji
+    noto-fonts-color-emoji
     liberation_ttf
     fira-code
     fira-code-symbols
     mplus-outline-fonts.githubRelease
     dina-font
     corefonts
-    vistafonts
+    vista-fonts
     proggyfonts
   ];
 
