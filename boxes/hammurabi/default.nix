@@ -26,6 +26,8 @@
   };
 
   environment.systemPackages = with pkgs; [
+    (callPackage ../../builds/st.nix {})
+    (callPackage ../../builds/dmenu.nix {})
     (callPackage ../../builds/utils.nix {})
     (callPackage ../../builds/rebuild.nix {})
     (callPackage ../../builds/tilp.nix {})
@@ -40,12 +42,36 @@
     anki-bin
     sshuttle
     scrcpy
+    i3pystatus
+    i3
+
+    xorg.xset
+    xorg.setxkbmap
+    xcape
+    xclip
+    x11vnc
+    xbrightness
+    xwallpaper
+    xdotool
+    tigervnc
+
+    feh
+    picom
+    arandr
+
+    mpv
+    sxiv
+    scrcpy
   ];
 
   nixpkgs.config.allowUnfree = true;
   programs.adb.enable = true;
   services.tailscale.enable = true;
   programs.steam.enable = true;
+  services.xserver = {
+    windowManager.i3.enable = true;
+    enable = true;
+  };
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -79,8 +105,6 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  services.xserver.enable = true;
-
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
@@ -112,4 +136,19 @@
     experimental-features = [ "nix-command" "flakes" ];
   };
   system.stateVersion = "25.05";
+
+  system.userActivationScripts.copyI3pystatusConfiguration = {
+    text = ''
+      mkdir -p /home/usr/.config/i3pystatus
+      ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/i3pystatus/config.py /home/usr/.config/i3pystatus/config.py
+    '';
+    deps = [];
+  };
+  system.userActivationScripts.copyI3wmConfiguration = {
+    text = ''
+      mkdir -p /home/usr/.config/i3
+      ${pkgs.coreutils}/bin/ln -sf /home/usr/dots/config/i3/config /home/usr/.config/i3/config
+    '';
+    deps = [];
+  };
 }
