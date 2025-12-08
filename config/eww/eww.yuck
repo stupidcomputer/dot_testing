@@ -14,6 +14,14 @@
                    :wrap false
                    :limit-width 2
                    :class "battery ${EWW_BATTERY.BAT0.status}")
+            (label :text "${formattime(EWW_TIME, "%d")}"
+                   :class "day")
+            (label :text "${formattime(EWW_TIME, "%a")}"
+                   :class "day_name")
+            (label :text "${formattime(EWW_TIME, "%m")}"
+                   :class "month")
+            (label :text "${formattime(EWW_TIME, "%b")}"
+                   :class "month_name")
             (systray :orientation "v"))))
 (defwindow example
            :monitor 0

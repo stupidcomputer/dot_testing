@@ -26,7 +26,7 @@
       exec-once = [
         "eww open example"
         "emacs --daemon"
-        "emacsclient"
+        "emacsclient -c"
       ];
       general = {
         gaps_in = "0";
