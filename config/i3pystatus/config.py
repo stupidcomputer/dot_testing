@@ -183,13 +183,13 @@ status.register("text",
 
 status.register("text",
     text="✇",
-    on_leftclick="hueadm group 83 on",
-    on_rightclick="hueadm group 83 off")
+    on_leftclick="openhue set light f0258cd9-40bf-486d-ba17-0f3452ed534e --on",
+    on_rightclick="openhue set light f0258cd9-40bf-486d-ba17-0f3452ed534e --off")
 
 status.register("text",
     text="🔆",
-    on_leftclick="hueadm group 14 on",
-    on_rightclick="hueadm group 14 off")
+    on_leftclick="openhue set light 34942881-b3be-4065-b604-bf3068cc182e --on",
+    on_rightclick="openhue set light 34942881-b3be-4065-b604-bf3068cc182e --off")
 
 status.register("clock",
     format="%a %-d%b (%m) %X",)

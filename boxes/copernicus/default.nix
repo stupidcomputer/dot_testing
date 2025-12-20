@@ -48,6 +48,7 @@
     (pkgs.callPackage ../../builds/utils.nix {})
 
     i3-swallow
+    openhue-cli
   ];
 
   nixpkgs.config.cudaSupport = true;
