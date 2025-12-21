@@ -3,12 +3,17 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    home-manager = {
+      url = "github:nix-community/home-manager/release-25.11";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     agenix.url = "github:ryantm/agenix";
   };
 
   outputs = {
       self,
       nixpkgs,
+      home-manager,
       agenix,
       ...
     }@inputs: {
@@ -39,6 +44,12 @@
             {
               environment.systemPackages = [ agenix.packages."x86_64-linux".default ];
             }
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.usr = import ./boxes/copernicus/home.nix;
+            }
           ];
         };
         hammurabi = nixpkgs.lib.nixosSystem {
@@ -52,6 +63,12 @@
             agenix.nixosModules.default
             {
               environment.systemPackages = [ agenix.packages."x86_64-linux".default ];
+            }
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+              home-manager.users.usr = import ./boxes/hammurabi/home.nix;
             }
           ];
         };
