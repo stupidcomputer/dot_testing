@@ -11,30 +11,78 @@
       nixpkgs,
       agenix,
       ...
-    }@inputs: let
-      mkSystem = modules:
-        nixpkgs.lib.nixosSystem {
+    }@inputs: {
+      nixosConfigurations = {
+        netbox = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {
             inherit inputs;
             machines = import ./lib/machines.nix;
           };
-          inherit modules;
+          modules = [
+            ./boxes/netbox
+            agenix.nixosModules.default
+            {
+              environment.systemPackages = [ agenix.packages."x86_64-linux".default ];
+            }
+          ];
         };
-      generateNixosConfigurations = configurations:
-        builtins.listToAttrs (
-          map (name: {
-            inherit name;
-            value = mkSystem [
-              (./boxes/. + "/${name}")
-              agenix.nixosModules.default
-              {
-                environment.systemPackages = [ agenix.packages."x86_64-linux".default ];
-              }
-            ];
-          }) configurations
-        );
-    in {
-      nixosConfigurations = generateNixosConfigurations [ "netbox" "copernicus" "aristotle" "plato" "hammurabi" ];
+        copernicus = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
+            machines = import ./lib/machines.nix;
+          };
+          modules = [
+            ./boxes/copernicus
+            agenix.nixosModules.default
+            {
+              environment.systemPackages = [ agenix.packages."x86_64-linux".default ];
+            }
+          ];
+        };
+        aristotle = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
+            machines = import ./lib/machines.nix;
+          };
+          modules = [
+            ./boxes/aristotle
+            agenix.nixosModules.default
+            {
+              environment.systemPackages = [ agenix.packages."x86_64-linux".default ];
+            }
+          ];
+        };
+        plato = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
+            machines = import ./lib/machines.nix;
+          };
+          modules = [
+            ./boxes/plato
+            agenix.nixosModules.default
+            {
+              environment.systemPackages = [ agenix.packages."x86_64-linux".default ];
+            }
+          ];
+        };
+        hammurabi = nixpkgs.lib.nixosSystem {
+          system = "x86_64-linux";
+          specialArgs = {
+            inherit inputs;
+            machines = import ./lib/machines.nix;
+          };
+          modules = [
+            ./boxes/hammurabi
+            agenix.nixosModules.default
+            {
+              environment.systemPackages = [ agenix.packages."x86_64-linux".default ];
+            }
+          ];
+        };
+      };
     };
 }
