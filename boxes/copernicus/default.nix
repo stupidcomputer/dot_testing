@@ -146,8 +146,6 @@
       };
     };
     hosts = lib.attrsets.mergeAttrsList [
-      (machines.mkHosts machines "aristotle" "localnet")
-      (machines.mkHosts machines "router" "localnet")
       (machines.mkHosts machines "phone" "localnet")
       (machines.mkHosts machines "netbox" "internet")
     ];

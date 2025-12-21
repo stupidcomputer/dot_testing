@@ -41,34 +41,6 @@
             }
           ];
         };
-        aristotle = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit inputs;
-            machines = import ./lib/machines.nix;
-          };
-          modules = [
-            ./boxes/aristotle
-            agenix.nixosModules.default
-            {
-              environment.systemPackages = [ agenix.packages."x86_64-linux".default ];
-            }
-          ];
-        };
-        plato = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit inputs;
-            machines = import ./lib/machines.nix;
-          };
-          modules = [
-            ./boxes/plato
-            agenix.nixosModules.default
-            {
-              environment.systemPackages = [ agenix.packages."x86_64-linux".default ];
-            }
-          ];
-        };
         hammurabi = nixpkgs.lib.nixosSystem {
           system = "x86_64-linux";
           specialArgs = {

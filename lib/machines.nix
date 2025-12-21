@@ -28,12 +28,6 @@
     '';
   };
   aristotle = {
-    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIKTDyKneaM44I5to883ghEnnPonedCKDbCX+OnrQ9vO5 usr";
-    wg-pubkey = "Sw2yyMhyS8GOCWm1VuGn3Y7cfx606dXOGK5mux8ckQU=";
-    ip-addrs = {
-      localnet = "192.168.1.202";
-      wgnet = "10.100.0.3";
-    };
     description = ''
       A Lenovo Thinkpad Yoga 260. Power supply seems to have died.
     '';
@@ -54,7 +48,7 @@
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIABAuisY7QufTrcPkBvHcPTtCLg4/SY+r4nCh3fqdua7 usr";
     syncthing-id = "A6LQULQ-AVUHHN5-EAT3JWW-O6VZATV-LAHQB6X-RLEGWMD-NQJKT6L-WUAOJAZ";
     description = ''
-      A Lenovo Thinkpad X230.
+      A Lenovo Thinkpad X230. Retired.
     '';
   };
   hammurabi = {

@@ -12,11 +12,9 @@
   };
 
   users.users.ryan.openssh.authorizedKeys.keys = [
-    machines.aristotle.pubkey
     machines.copernicus.pubkey
     machines.hammurabi.pubkey
     machines.phone.pubkey
-    machines.plato.pubkey
   ];
 
   # save ip addresses in cache from repeat logins
