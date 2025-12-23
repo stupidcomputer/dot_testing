@@ -1,0 +1,279 @@
+{ config, lib, pkgs, ... }:
+let
+  cfg = config.services.ryande;
+in {
+  imports = [];
+
+  options.services.ryande = {
+    enable = lib.mkEnableOption "ryande";
+    username = lib.mkOption {
+      default = "usr";
+      description = "Change the username for the user";
+    };
+    adb = lib.mkOption {
+      type = lib.types.bool;
+      default = true;
+      description = "Enable adb and scrcpy";
+    };
+  };
+
+  config = lib.mkIf cfg.enable {
+    environment.systemPackages = with pkgs; [
+      (callPackage ./builds/st.nix {})
+      (callPackage ./builds/dmenu.nix {})
+      (callPackage ./builds/utils.nix {})
+      (callPackage ./builds/rebuild.nix {})
+    ];
+
+    fonts.packages = with pkgs; [
+      fantasque-sans-mono
+    ];
+
+    # this is required for home-manager to share window managers to ly
+    environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
+
+    # enable syncthing
+    systemd.services.syncthing = {
+      enable = true;
+      description = "start syncthing on network startup";
+      after = [ "network-online.target" ];
+      wantedBy = [ "multi-user.target" ];
+      requires = [ "network-online.target" ];
+
+      serviceConfig = {
+        ExecStart = "${pkgs.syncthing}/bin/syncthing";
+        User = cfg.username;
+        Restart = "on-failure";
+        RestartSec = "3";
+      };
+    };
+
+    security.rtkit.enable = true;
+    services = {
+      pulseaudio.enable = false;
+      pipewire = {
+        enable = true;
+        alsa.enable = true;
+        alsa.support32Bit = true;
+        pulse.enable = true;
+      };
+      tailscale.enable = true;
+
+      # xorg/graphical environment
+      displayManager.ly.enable = true;
+      xserver = {
+        windowManager.i3.enable = true;
+        enable = true;
+        xkb = {
+          layout = "us";
+          variant = "";
+        };
+      };
+    };
+
+    i18n = {
+      defaultLocale = "en_US.UTF-8";
+      extraLocaleSettings = {
+        LC_ADDRESS = "en_US.UTF-8";
+        LC_IDENTIFICATION = "en_US.UTF-8";
+        LC_MEASUREMENT = "en_US.UTF-8";
+        LC_MONETARY = "en_US.UTF-8";
+        LC_NAME = "en_US.UTF-8";
+        LC_NUMERIC = "en_US.UTF-8";
+        LC_PAPER = "en_US.UTF-8";
+        LC_TELEPHONE = "en_US.UTF-8";
+        LC_TIME = "en_US.UTF-8";
+      };
+    };
+
+    # enable adb and scrcpy
+#    config = lib.mkMerge [
+#      {}
+#      (lib.mkIf cfg.adb {
+#        services.adb.enable = true;
+#        environment.systemPackages = [ pkgs.scrcpy ];
+#      })
+#    ];
+
+    environment.etc = {
+      "profile.local" = {
+        text = "source /home/${cfg.username}/.config/bash/profile";
+      };
+      "bashrc.local" = {
+        text = "source /home/${cfg.username}/.config/bash/bashrc";
+      };
+    };
+
+    age = {
+      secrets = {
+        aerc-account-config = {
+          file = ./secrets/aerc-account-config.age;
+          mode = "600";
+          owner = cfg.username;
+          group = "users";
+        };
+      };
+    };
+
+    system.userActivationScripts.copyAercConfiguration = {
+      text = ''
+        mkdir -p /home/${cfg.username}/.config/aerc
+        ${pkgs.coreutils}/bin/ln -sf ${config.age.secrets.aerc-account-config.path} /home/${cfg.username}/.config/aerc/accounts.conf
+      '';
+    };
+
+    home-manager.users."${cfg.username}" = {
+      imports = [
+        ./i3pystatus.nix
+      ];
+      home.username = cfg.username;
+      home.homeDirectory = "/home/${cfg.username}";
+
+      home.packages = with pkgs; [
+        # media manipulation
+        musescore
+        kdePackages.kdenlive
+        gimp
+
+        # minecraft
+        prismlauncher
+
+        # org utilities
+        xorg.xset
+        xorg.setxkbmap
+        xcape
+        xclip
+        x11vnc
+        xwallpaper
+        xdotool
+        tigervnc
+
+        ncpamixer
+        bluetuith
+        kid3-cli
+
+        # terminal utilities
+        age
+        cryptsetup
+        curl
+        dig
+        dmidecode
+        ffmpeg
+        fzy
+        htop
+        imagemagick
+        jq
+        kjv
+        man-pages
+        mdadm
+        nmap
+        pciutils
+        peaclock
+        poppler-utils
+        python3
+        qpdf
+        ranger
+        rsync
+        tmux
+        tree
+        unzip
+        usbutils
+        yt-dlp
+      ];
+
+      fonts.fontconfig = {
+        enable = true;
+        antialiasing = true;
+      };
+
+      services.picom.enable = true;
+      programs.mpv.enable = true;
+      programs.feh.enable = true;
+
+      programs.i3pystatus = {
+        enable = true;
+        configuration = builtins.readFile ./config/i3pystatus/config.py;
+      };
+      xdg.configFile."i3/config".text = builtins.readFile ./config/i3/config;
+
+      programs.htop.enable = true;
+      programs.emacs = {
+        enable = true;
+        extraPackages = epkgs: with epkgs; [
+          auctex
+          evil
+          evil-collection
+          org-evil
+          org-journal
+          org-drill
+          elfeed
+          pdf-tools
+          vterm
+          nix-mode
+          python-mode
+          gruvbox-theme
+        ] ++ [
+          pkgs.ghostscript
+          pkgs.gnuplot
+          pkgs.ical2orgpy
+          pkgs.texliveFull
+        ];
+      };
+      home.file.".emacs.d".text = builtins.readFile ./config/emacs/init.el;
+
+      programs.rbw = {
+        enable = true;
+        settings = {
+          base_url = "https://bitwarden.beepboop.systems";
+          identity_url = "https://bitwarden.beepboop.systems";
+          email = "bit@beepboop.systems";
+          pinentry = pkgs.pinentry-curses;
+        };
+      };
+
+      programs.cmus = {
+        enable = true;
+        extraConfig = ''
+set show_current_bitrate=true
+set pause_on_output_change=true
+set status_display_program=cmus-status-update
+        '';
+      };
+
+      programs.bash.enable = true;
+      xdg.configFile = {
+        "bash/bashrc".text = builtins.readFile ./config/bash/bashrc;
+        "bash/profile".text = builtins.readFile ./config/bash/profile;
+      };
+
+      programs.chromium = {
+        enable = true;
+        package = pkgs.brave;
+      };
+
+      programs.git.enable = true;
+      xdg.configFile."git/config".text = builtins.readFile ./config/git/config;
+
+      programs.neovim = {
+        enable = true;
+        extraLuaConfig = builtins.readFile ./config/nvim/init.lua;
+        extraPackages = with pkgs; [
+          lua-language-server
+          texlab
+#          python311Packages.python-lsp-server
+          nixd
+        ];
+      };
+      home.file.".config/nvim/colors" = {
+        source = ./config/nvim/colors;
+        recursive = true;
+      };
+
+      programs.aerc = {
+        enable = true;
+        extraConfig = builtins.readFile ./config/aerc/aerc.conf;
+        extraBinds = builtins.readFile ./config/aerc/binds.conf;
+      };
+    };
+  };
+}
