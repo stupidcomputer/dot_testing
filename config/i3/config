@@ -8,7 +8,7 @@ exec --no-startup-id xset r rate 200 80
 exec --no-startup-id setxkbmap -option caps:super
 exec --no-startup-id pkill xcape
 exec --no-startup-id xcape -e 'Super_L=Escape'
-exec --no-startup-id emacs
+exec emacs
 
 bindsym $mod+Return exec st
 bindsym $mod+q kill
@@ -37,9 +37,9 @@ bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+e layout toggle split
 
-bindsym $mod+b exec --no-startup-id "brave-x11-wrapper regular"
-bindsym $mod+Control+b exec --no-startup-id "brave-x11-wrapper guest"
-bindsym $mod+Shift+b exec --no-startup-id "brave-x11-wrapper"
+bindsym $mod+b exec "brave-x11-wrapper regular"
+bindsym $mod+Control+b exec "brave-x11-wrapper guest"
+bindsym $mod+Shift+b exec "brave-x11-wrapper"
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle

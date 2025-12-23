@@ -5,7 +5,9 @@
 
     # for various lsp things
     lua-language-server
-    python311Packages.python-lsp-server
+    # TODO: inclusion of this package causes a build error due to a long-running
+    # test on package 'whatthepatch'. Need to contribute a fix to this.
+#    python311Packages.python-lsp-server
     texlab
     nixd
   ];

@@ -11,7 +11,7 @@
 , fzy
 , figlet
 , curl
-, ytfzf
+#, ytfzf
 , xrandr
 , xrectsel
 , ffcast
@@ -31,14 +31,14 @@ stdenv.mkDerivation rec {
   src = ./utils;
 
   nativeBuildInputs = [ makeWrapper ];
-  buildInputs = [ bash feh xrandr jq curl fzy ytfzf sshuttle svkbd scrcpy rbw xclip ffcast xkbset xmessage imagemagick x11vnc ];
+  buildInputs = [ bash feh xrandr jq curl fzy sshuttle svkbd scrcpy rbw xclip ffcast xkbset xmessage imagemagick x11vnc ];
 
   installPhase = ''
     mkdir -p $out/bin
 
     for i in $(ls $src/); do
       cp $src/$i $out/bin
-      wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ sxhkd bash feh xrandr jq figlet curl fzy xkbset ytfzf sshuttle svkbd scrcpy xrectsel ffcast xmessage imagemagick x11vnc ]}
+      wrapProgram $out/bin/$i --prefix PATH : ${lib.makeBinPath [ sxhkd bash feh xrandr jq figlet curl fzy xkbset sshuttle svkbd scrcpy xrectsel ffcast xmessage imagemagick x11vnc ]}
     done
   '';
 }

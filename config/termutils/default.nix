@@ -22,7 +22,7 @@
     pciutils
     peaclock
     peaclock
-    poppler_utils
+    poppler-utils
     python3
     qpdf
     ranger
