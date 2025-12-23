@@ -7,7 +7,7 @@
 , freetype
 , ncurses
 , lightMode ? false
-, aristotle ? false
+, hammurabi ? false
 , extraLibs ? [ ]
 }:
 
@@ -22,7 +22,7 @@ stdenv.mkDerivation rec {
 
   buildPhase =
     lib.optionalString (lightMode == true) "cp lightmode.h colors.h; " +
-    lib.optionalString (aristotle == true) "CFLAGS='-DARISTOTLE' " +
+    lib.optionalString (hammurabi == true) "CFLAGS='-DARISTOTLE' " +
     ''
       make
     '';

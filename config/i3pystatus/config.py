@@ -192,7 +192,7 @@ status.register("text",
     on_rightclick="openhue set light 34942881-b3be-4065-b604-bf3068cc182e --off")
 
 status.register("clock",
-    format="%a %-d%b (%m) %X",)
+    format="%a%-d%b%m/%H%M%S",)
 
 status.register(ClassMonitor)
 

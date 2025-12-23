@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, options, ... }:
 
 {
   imports = [
@@ -17,9 +17,6 @@
     ../../config/termutils
   ];
 
-  programs.hyprland.enable = true;
-  programs.hyprland.withUWSM = true;
-
   nix.settings = {
     download-buffer-size = 10000000000;
     warn-dirty = false;
@@ -37,7 +34,6 @@
     obs-studio
     gimp
     prismlauncher
-    rofi-wayland
     wl-clipboard
     anki-bin
     sshuttle
@@ -50,7 +46,6 @@
     xcape
     xclip
     x11vnc
-    xbrightness
     xwallpaper
     xdotool
     tigervnc
@@ -64,10 +59,10 @@
     scrcpy
   ];
 
+  services.power-profiles-daemon.enable = true;
   nixpkgs.config.allowUnfree = true;
   programs.adb.enable = true;
   services.tailscale.enable = true;
-  programs.steam.enable = true;
   services.xserver = {
     windowManager.i3.enable = true;
     enable = true;
@@ -76,6 +71,9 @@
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernel.sysctl = {
+    "net.ipv4.tcp_ecn" = 0;
+  };
 
   networking.hostName = "hammurabi"; # Define your hostname.
   networking.networkmanager.enable = true;
@@ -105,8 +103,7 @@
     LC_TIME = "en_US.UTF-8";
   };
 
-  services.displayManager.sddm.enable = true;
-  services.desktopManager.plasma6.enable = true;
+  services.displayManager.ly.enable = true;
 
   services.xserver.xkb = {
     layout = "us";
@@ -135,6 +132,7 @@
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
   };
+  services.ntp.enable = true;
   system.stateVersion = "25.05";
 
   system.userActivationScripts.copyI3pystatusConfiguration = {
@@ -151,4 +149,21 @@
     '';
     deps = [];
   };
+
+  systemd.services.syncthing = {
+    enable = true;
+    description = "start syncthing on network startup";
+    after = [ "network-online.target" ];
+    wantedBy = [ "multi-user.target" ];
+    requires = [ "network-online.target" ];
+
+    serviceConfig = {
+      ExecStart = "${pkgs.syncthing}/bin/syncthing";
+      User = "usr";
+      Restart = "on-failure";
+      RestartSec = "3";
+    };
+  };
+
+  environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
 }

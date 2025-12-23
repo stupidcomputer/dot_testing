@@ -177,11 +177,9 @@ set status_display_program=cmus-status-update
   };
   programs.rofi = {
     enable = true;
-    package = pkgs.rofi-wayland;
   };
   programs.emacs = {
     enable = true;
-    package = pkgs.emacs-pgtk;
     extraPackages = epkgs: with epkgs; [
 #      auctex
 #      evil
