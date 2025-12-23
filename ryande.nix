@@ -23,10 +23,22 @@ in {
       (callPackage ./builds/dmenu.nix {})
       (callPackage ./builds/utils.nix {})
       (callPackage ./builds/rebuild.nix {})
+      scrcpy
     ];
 
     fonts.packages = with pkgs; [
       fantasque-sans-mono
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-color-emoji
+      liberation_ttf
+      fira-code
+      fira-code-symbols
+      mplus-outline-fonts.githubRelease
+      dina-font
+      corefonts
+      vista-fonts
+      proggyfonts
     ];
 
     # this is required for home-manager to share window managers to ly
@@ -49,6 +61,7 @@ in {
     };
 
     security.rtkit.enable = true;
+    programs.adb.enable = true;
     services = {
       pulseaudio.enable = false;
       pipewire = {
@@ -85,15 +98,10 @@ in {
         LC_TIME = "en_US.UTF-8";
       };
     };
-
-    # enable adb and scrcpy
-#    config = lib.mkMerge [
-#      {}
-#      (lib.mkIf cfg.adb {
-#        services.adb.enable = true;
-#        environment.systemPackages = [ pkgs.scrcpy ];
-#      })
-#    ];
+    console = {
+      font = "Lat2-Terminus16";
+      keyMap = "us";
+    };
 
     environment.etc = {
       "profile.local" = {
@@ -122,6 +130,17 @@ in {
       '';
     };
 
+    users.users."${cfg.username}" = {
+      isNormalUser = true;
+      extraGroups = [ "wheel" "networkmanager" "adbusers" "wireshark" "audio" ];
+      initialPassword = "usr";
+    };
+
+    programs.gnupg.agent = {
+      enable = true;
+      enableSSHSupport = true;
+    };
+
     home-manager.users."${cfg.username}" = {
       imports = [
         ./i3pystatus.nix
@@ -147,6 +166,7 @@ in {
         xwallpaper
         xdotool
         tigervnc
+        i3-swallow
 
         ncpamixer
         bluetuith
@@ -167,6 +187,7 @@ in {
         man-pages
         mdadm
         nmap
+        openhue-cli
         pciutils
         peaclock
         poppler-utils
