@@ -30,7 +30,6 @@
     obs-studio
     gimp
     prismlauncher
-    rofi-wayland
     wl-clipboard
     anki-bin
     sshuttle

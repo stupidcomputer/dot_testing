@@ -1,5 +1,6 @@
 from i3pystatus import IntervalModule, Status
 from dataclasses import dataclass
+from socket import gethostname
 from enum import Enum, auto
 from datetime import date, datetime
 from typing import Optional
@@ -196,22 +197,22 @@ status.register("clock",
 
 status.register(ClassMonitor)
 
-status.register("battery",
-    format="{percentage:.2f}{status}{remaining:%E%h:%M}",
-    alert=True,
-    alert_percentage=5,
-    status={
-        "DIS": "↓",
-        "CHR": "↑",
-        "FULL": "=",
-    },)
+if gethostname() == "hammurabi":
+    status.register("battery",
+        format="{percentage:.2f}{status}{remaining:%E%h:%M}",
+        alert=True,
+        alert_percentage=5,
+        status={
+            "DIS": "↓",
+            "CHR": "↑",
+            "FULL": "=",
+        },)
 
-status.register("network",
-    interface="wlp4s0",
-    on_leftclick="st -c st_floating -e nmtui",
-    format_up="{essid} {quality:02.0f}",
-    format_down="",)
-
+    status.register("network",
+        interface="wlp4s0",
+        on_leftclick="st -c st_floating -e nmtui",
+        format_up="{essid} {quality:02.0f}",
+        format_down="",)
 
 status.register("cmus",
     format="{status} {song_elapsed}/{song_length} {title}",
