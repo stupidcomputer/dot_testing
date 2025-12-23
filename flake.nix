@@ -22,7 +22,7 @@
           system = "x86_64-linux";
           specialArgs = {
             inherit inputs;
-            machiens = import ./lib/machines.nix;
+            machines = import ./lib/machines.nix;
           };
           modules = [
             ./boxes/netbox
@@ -36,7 +36,7 @@
           system = "x86_64-linux";
           specialArgs = {
             inherit inputs;
-            machiens = import ./lib/machines.nix;
+            machines = import ./lib/machines.nix;
           };
           modules = [
             ./boxes/copernicus
@@ -50,7 +50,7 @@
           system = "x86_64-linux";
           specialArgs = {
             inherit inputs;
-            machiens = import ./lib/machines.nix;
+            machines = import ./lib/machines.nix;
           };
           modules = [
             ./boxes/aristotle
@@ -64,7 +64,7 @@
           system = "x86_64-linux";
           specialArgs = {
             inherit inputs;
-            machiens = import ./lib/machines.nix;
+            machines = import ./lib/machines.nix;
           };
           modules = [
             ./boxes/hammurabi
