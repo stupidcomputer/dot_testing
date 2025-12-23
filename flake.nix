@@ -44,19 +44,10 @@
             {
               environment.systemPackages = [ agenix.packages."x86_64-linux".default ];
             }
-          ];
-        };
-        aristotle = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
-          specialArgs = {
-            inherit inputs;
-            machines = import ./lib/machines.nix;
-          };
-          modules = [
-            ./boxes/aristotle
-            agenix.nixosModules.default
+            home-manager.nixosModules.home-manager
             {
-              environment.systemPackages = [ agenix.packages."x86_64-linux".default ];
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
             }
           ];
         };
