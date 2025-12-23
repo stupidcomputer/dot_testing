@@ -24,6 +24,7 @@
 
   services.power-profiles-daemon.enable = true;
   nixpkgs.config.allowUnfree = true;
+  time.timeZone = "America/Chicago";
 
   # Bootloader.
   boot.loader.systemd-boot.enable = true;
@@ -44,20 +45,17 @@
 
   services.printing.enable = true;
 
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-
   users.users.usr = {
     isNormalUser = true;
     description = "Ryan Marina";
     extraGroups = [ "networkmanager" "wheel" ];
-    packages = with pkgs; [
-    ];
   };
 
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
   };
   services.ntp.enable = true;
+
   system.stateVersion = "25.05";
+  home-manager.users.usr.home.stateVersion = "25.05";
 }

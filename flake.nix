@@ -76,7 +76,6 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.users.usr.imports = [ ./boxes/hammurabi/home.nix ];
             }
           ];
         };

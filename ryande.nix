@@ -219,7 +219,8 @@ in {
           pkgs.texliveFull
         ];
       };
-      home.file.".emacs.d".text = builtins.readFile ./config/emacs/init.el;
+      home.file.".emacs.d/init.el".text = builtins.readFile ./config/emacs/init.el;
+      home.file.".emacs.d/early-init.el".text = builtins.readFile ./config/emacs/early-init.el;
 
       programs.rbw = {
         enable = true;
@@ -274,6 +275,13 @@ set status_display_program=cmus-status-update
         extraConfig = builtins.readFile ./config/aerc/aerc.conf;
         extraBinds = builtins.readFile ./config/aerc/binds.conf;
       };
+
+      programs.zathura = {
+        enable = true;
+        extraConfig = builtins.readFile ./config/zathura/zathurarc;
+      };
+
+      home.file.".config/python/pythonrc.py".text = builtins.readFile ./config/python/pythonrc.py;
     };
   };
 }
