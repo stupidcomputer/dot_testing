@@ -2,8 +2,8 @@
 	email = ryan@beepboop.systems
 	name = stupidcomputer
 
-[credential "https://git.beepboop.systems"]
-	helper = !rbw-git-handler gitea
+[credential "https://github.com"]
+	helper = !rbw-git-handler github-pat
 
 [advice]
 	addIgnoredFile = false

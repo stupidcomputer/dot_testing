@@ -5,7 +5,7 @@
 # wrap rbw get $1 --full to output in the git credential helper
 # format
 
-rbw list > /dev/null
+st -e "rbw list"
 
 # username=yourusername
 # password=yourpassword

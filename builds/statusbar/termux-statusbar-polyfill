@@ -1,3 +1,0 @@
-#!/bin/sh
-
-python3 ~/dot_testing/builds/statusbar/statusbar/statusbar.py $@

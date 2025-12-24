@@ -1,17 +1,17 @@
 # wrapper around rbw
 
-rbw list
+st -e "rbw list"
 
 if [ "$1" == "2fa" ]; then
-	resp=$(rbw list | rofi -dmenu -case-smart -mesg "2fa")
+	resp=$(rbw list | dmenu)
 else
-	resp=$(rbw list | rofi -dmenu -case-smart -mesg "password")
+	resp=$(rbw list | dmenu)
 fi
 
 if [ "$1" == "2fa" ]; then
-	rbw code "$resp" | wl-copy
+	rbw code "$resp" | xclip -in -selection clipboard
 else
-	rbw get "$resp" | wl-copy
+	rbw get "$resp" | xclip -in -selection clipboard
 fi
 sleep 15
-echo "cleared" | wl-copy
+echo "cleared" | xclip -in -selection clipboard
