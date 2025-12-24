@@ -10,11 +10,6 @@ in {
       default = "usr";
       description = "Change the username for the user";
     };
-    adb = lib.mkOption {
-      type = lib.types.bool;
-      default = true;
-      description = "Enable adb and scrcpy";
-    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -167,10 +162,12 @@ in {
         xdotool
         tigervnc
         i3-swallow
-
         ncpamixer
         bluetuith
         kid3-cli
+        hledger
+        hledger-web
+        hledger-ui
 
         # terminal utilities
         age

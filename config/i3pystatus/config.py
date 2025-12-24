@@ -1,5 +1,6 @@
 from i3pystatus import IntervalModule, Status
 from dataclasses import dataclass
+from socket import gethostname
 from enum import Enum, auto
 from datetime import date, datetime
 from typing import Optional
@@ -165,29 +166,29 @@ class ClassMonitor(IntervalModule):
 status = Status(logfile="$HOME/.cache/i3status.log")
 
 status.register("text",
-    text="ᛒ",
+    text="BL",
     on_leftclick="st -c st_floating -e bluetuith")
 
 status.register("text",
-    text="🎵",
+    text="CM",
     on_leftclick="st -e cmus",
     on_rightclick="st -c desktop10 -e bash -c 'CMUS_SOCKET=/run/user/1000/cmus2-socket cmus'")
 
 status.register("text",
-    text="🎛️",
+    text="MI",
     on_leftclick="st -c st_floating -e ncpamixer")
 
 status.register("text",
-    text="🪟",
+    text="XR",
     on_leftclick="arandr")
 
 status.register("text",
-    text="✇",
+    text="FA",
     on_leftclick="openhue set light f0258cd9-40bf-486d-ba17-0f3452ed534e --on",
     on_rightclick="openhue set light f0258cd9-40bf-486d-ba17-0f3452ed534e --off")
 
 status.register("text",
-    text="🔆",
+    text="DN",
     on_leftclick="openhue set light 34942881-b3be-4065-b604-bf3068cc182e --on",
     on_rightclick="openhue set light 34942881-b3be-4065-b604-bf3068cc182e --off")
 
@@ -196,22 +197,22 @@ status.register("clock",
 
 status.register(ClassMonitor)
 
-status.register("battery",
-    format="{percentage:.2f}{status}{remaining:%E%h:%M}",
-    alert=True,
-    alert_percentage=5,
-    status={
-        "DIS": "↓",
-        "CHR": "↑",
-        "FULL": "=",
-    },)
+if gethostname() == "hammurabi":
+    status.register("battery",
+        format="{percentage:.2f}{status}{remaining:%E%h:%M}",
+        alert=True,
+        alert_percentage=5,
+        status={
+            "DIS": "↓",
+            "CHR": "↑",
+            "FULL": "=",
+        },)
 
-status.register("network",
-    interface="wlp4s0",
-    on_leftclick="st -c st_floating -e nmtui",
-    format_up="{essid} {quality:02.0f}",
-    format_down="",)
-
+    status.register("network",
+        interface="wlp4s0",
+        on_leftclick="st -c st_floating -e nmtui",
+        format_up="{essid} {quality:02.0f}",
+        format_down="",)
 
 status.register("cmus",
     format="{status} {song_elapsed}/{song_length} {title}",

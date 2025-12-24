@@ -19,6 +19,10 @@
     warn-dirty = false;
   };
 
+  environment.systemPackages = with pkgs; [
+    soundwireserver
+  ];
+
   nixpkgs.config.cudaSupport = true;
 
   virtualisation.virtualbox.host.enable = true;
@@ -90,6 +94,8 @@
           allowedTCPPortRanges = [
             { from = 10000; to = 10100; } # temp stuff
           ];
+          allowedUDPPorts = [ 59010 ];
+          allowedTCPPorts = [ 59010 ];
         };
       };
     };
