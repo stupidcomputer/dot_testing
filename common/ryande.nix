@@ -162,7 +162,7 @@ in {
         # minecraft
         prismlauncher
 
-        # org utilities
+        # xorg utilities
         xorg.xset
         xorg.setxkbmap
         xcape
@@ -172,6 +172,9 @@ in {
         xdotool
         tigervnc
         i3-swallow
+        arandr
+
+        # other stuff
         ncpamixer
         bluetuith
         kid3-cli
