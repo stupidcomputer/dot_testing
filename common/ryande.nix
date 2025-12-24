@@ -215,6 +215,13 @@ in {
       };
 
       services.picom.enable = true;
+      services.redshift = {
+        enable = true;
+        latitude = 35.9;
+        longitude = -86.9;
+        temperature.day = 6500;
+        temperature.night = 2800;
+      };
       programs.mpv.enable = true;
       programs.feh.enable = true;
 
