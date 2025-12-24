@@ -12,18 +12,6 @@
         addr = "192.168.1.201";
         port = 2222;
       }
-      {
-        addr = "10.100.0.2";
-        port = 2222;
-      }
-      {
-        addr = "127.0.0.1";
-        port = 2222;
-      }
-      {
-        addr = "127.0.0.2";
-        port = 2222;
-      }
     ];
   };
 
@@ -34,8 +22,6 @@
   users.users.usr.openssh.authorizedKeys.keys = [
     machines.aristotle.pubkey
     machines.copernicus.pubkey
-    machines.hammurabi.pubkey
     machines.phone.pubkey
-    machines.plato.pubkey
   ];
 }

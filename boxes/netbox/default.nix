@@ -2,7 +2,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../lib/bootstrap.nix
+    ../../common/bootstrap.nix
 
     ./flasktrack.nix
     ./franklincce.nix

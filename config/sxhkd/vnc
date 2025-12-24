@@ -1,3 +1,0 @@
-# allow us to transmit meta commands over vnc
-super + v
-	sxhkd-mode sxhkdrc

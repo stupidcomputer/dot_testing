@@ -29,14 +29,27 @@
 ;; htmlize
 (use-package htmlize :ensure t)
 
+;; vterm
+(use-package vterm :ensure t)
+(defun u:new-frame-with-vterm ()
+  "Create a new frame and immediately open vterm in it."
+  (interactive)
+  (require 'vterm)
+  (let ((new-frame (make-frame '((explicit-vterm . t)))))
+    (select-frame new-frame)
+    (delete-other-windows)
+    ;; Force vterm to take full window
+    (let ((default-directory "~"))
+      (let ((vterm-buffer (vterm (format "*vterm-%s*" (frame-parameter new-frame 'name)))))
+	(switch-to-buffer vterm-buffer)
+	(delete-other-windows)))))
+
 ;; org-mode
 (use-package org :ensure t)
 (use-package org-drill :ensure t)
 (use-package org-journal :ensure t)
 (use-package evil-org :ensure t)
 (use-package gnuplot :ensure t)
-(use-package org-ql :ensure t)
-(use-package ox-json :ensure t)
 (use-package org-contacts
   :ensure t
   :after org
@@ -81,7 +94,6 @@ has no effect."
 (setq u:org-habit-show-graphs-everywhere 1)
 (setq org-directory "~/org")
 (setq org-default-notes-file (concat org-directory "/inbox.org"))
-(setq org-agenda-files '("~/org/agenda.org" "~/org/body.org" "~/org/inbox.org" "~/org/main.org" "~/org/pco.org" "~/org/tfb.org" "~/org/school-calendar.org" "~/org/phone-inbox.org"))
 (setq org-journal-dir "~/org/journal")
 (setq calendar-week-start-day 1)
 (setq org-treat-insert-todo-heading-as-state-change t)
@@ -164,17 +176,16 @@ has no effect."
 (setq inhibit-splash-screen t)
 (menu-bar-mode -1)
 (tool-bar-mode -1)
-(toggle-scroll-bar -1)
 (setq custom-safe-themes t)
 (load-theme 'gruvbox)
 ;; plato and aristotle have low-dpi displays, so we need to
 ;; reduce font size accordingly
 (set-frame-font "Fantasque Sans Mono" nil t)
 (cond
- ((string-equal (system-name) "plato")
-  (set-face-attribute 'default nil :height 100))
  ((string-equal (system-name) "copernicus")
   (set-face-attribute 'default nil :height 100))
+ ((string-equal (system-name) "hammurabi")
+  (set-face-attribute 'default nil :height 110))
  (t
   (set-face-attribute 'default nil :height 130)))
 ;; prevent the simulated terminal bell from ringing
@@ -184,6 +195,12 @@ has no effect."
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'text-mode-hook 'display-line-numbers-mode)
 (setq linum-format "%d")
+(defun u:disable-scroll-bars (frame)
+  (modify-frame-parameters frame
+                           '((vertical-scroll-bars . nil)
+                             (horizontal-scroll-bars . nil))))
+(add-hook 'after-make-frame-functions 'u:disable-scroll-bars)
+(which-key-mode)
 
 ;; custom commands
 (defun u:init:edit ()
