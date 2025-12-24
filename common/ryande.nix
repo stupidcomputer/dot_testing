@@ -264,7 +264,6 @@ in {
         enable = true;
         settings = {
           base_url = "https://bitwarden.beepboop.systems";
-          identity_url = "https://bitwarden.beepboop.systems";
           email = "bit@beepboop.systems";
           pinentry = pkgs.pinentry-curses;
         };

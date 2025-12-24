@@ -1,6 +1,6 @@
 # wrapper around rbw
 
-st -e "rbw list"
+st -c st_floating -e rbw list
 
 if [ "$1" == "2fa" ]; then
 	resp=$(rbw list | dmenu)
