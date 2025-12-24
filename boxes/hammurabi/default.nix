@@ -3,7 +3,7 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../ryande.nix
+    ../../common/ryande.nix
 
     ./agenix.nix
     ../copernicus/printing.nix

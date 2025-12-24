@@ -1,3 +1,4 @@
+# this is a tiny, stupid home-manager module for i3pystatus
 { config, lib, pkgs, ... }:
 with lib;
 

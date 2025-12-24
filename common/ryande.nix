@@ -14,10 +14,10 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      (callPackage ./builds/st.nix {})
-      (callPackage ./builds/dmenu.nix {})
-      (callPackage ./builds/utils.nix {})
-      (callPackage ./builds/rebuild.nix {})
+      (callPackage ../builds/st.nix {})
+      (callPackage ../builds/dmenu.nix {})
+      (callPackage ../builds/utils.nix {})
+      (callPackage ../builds/rebuild.nix {})
       scrcpy
     ];
 
@@ -110,7 +110,7 @@ in {
     age = {
       secrets = {
         aerc-account-config = {
-          file = ./secrets/aerc-account-config.age;
+          file = ../secrets/aerc-account-config.age;
           mode = "600";
           owner = cfg.username;
           group = "users";
@@ -210,9 +210,9 @@ in {
 
       programs.i3pystatus = {
         enable = true;
-        configuration = builtins.readFile ./config/i3pystatus/config.py;
+        configuration = builtins.readFile ../config/i3pystatus/config.py;
       };
-      xdg.configFile."i3/config".text = builtins.readFile ./config/i3/config;
+      xdg.configFile."i3/config".text = builtins.readFile ../config/i3/config;
 
       programs.htop.enable = true;
       programs.emacs = {
@@ -237,8 +237,8 @@ in {
           pkgs.texliveFull
         ];
       };
-      home.file.".emacs.d/init.el".text = builtins.readFile ./config/emacs/init.el;
-      home.file.".emacs.d/early-init.el".text = builtins.readFile ./config/emacs/early-init.el;
+      home.file.".emacs.d/init.el".text = builtins.readFile ../config/emacs/init.el;
+      home.file.".emacs.d/early-init.el".text = builtins.readFile ../config/emacs/early-init.el;
 
       programs.rbw = {
         enable = true;
@@ -261,8 +261,8 @@ set status_display_program=cmus-status-update
 
       programs.bash.enable = true;
       xdg.configFile = {
-        "bash/bashrc".text = builtins.readFile ./config/bash/bashrc;
-        "bash/profile".text = builtins.readFile ./config/bash/profile;
+        "bash/bashrc".text = builtins.readFile ../config/bash/bashrc;
+        "bash/profile".text = builtins.readFile ../config/bash/profile;
       };
 
       programs.chromium = {
@@ -271,11 +271,11 @@ set status_display_program=cmus-status-update
       };
 
       programs.git.enable = true;
-      xdg.configFile."git/config".text = builtins.readFile ./config/git/config;
+      xdg.configFile."git/config".text = builtins.readFile ../config/git/config;
 
       programs.neovim = {
         enable = true;
-        extraLuaConfig = builtins.readFile ./config/nvim/init.lua;
+        extraLuaConfig = builtins.readFile ../config/nvim/init.lua;
         extraPackages = with pkgs; [
           lua-language-server
           texlab
@@ -284,22 +284,22 @@ set status_display_program=cmus-status-update
         ];
       };
       home.file.".config/nvim/colors" = {
-        source = ./config/nvim/colors;
+        source = ../config/nvim/colors;
         recursive = true;
       };
 
       programs.aerc = {
         enable = true;
-        extraConfig = builtins.readFile ./config/aerc/aerc.conf;
-        extraBinds = builtins.readFile ./config/aerc/binds.conf;
+        extraConfig = builtins.readFile ../config/aerc/aerc.conf;
+        extraBinds = builtins.readFile ../config/aerc/binds.conf;
       };
 
       programs.zathura = {
         enable = true;
-        extraConfig = builtins.readFile ./config/zathura/zathurarc;
+        extraConfig = builtins.readFile ../config/zathura/zathurarc;
       };
 
-      home.file.".config/python/pythonrc.py".text = builtins.readFile ./config/python/pythonrc.py;
+      home.file.".config/python/pythonrc.py".text = builtins.readFile ../config/python/pythonrc.py;
     };
   };
 }

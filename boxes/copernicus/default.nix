@@ -2,12 +2,12 @@
 {
   imports = [
     ./hardware-configuration.nix
-    ../../ryande.nix
+    ../../common/ryande.nix
     ./nvidia.nix
     ./agenix.nix
     ./sshd.nix
     ./printing.nix
-    ../../lib/bootstrap.nix
+    ../../common/bootstrap.nix
   ];
 
   services.ryande.enable = true;
