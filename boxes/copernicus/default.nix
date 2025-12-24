@@ -3,11 +3,9 @@
   imports = [
     ./hardware-configuration.nix
     ../../common/ryande.nix
-    ./nvidia.nix
+    ../../common/bootstrap.nix
     ./agenix.nix
     ./sshd.nix
-    ./printing.nix
-    ../../common/bootstrap.nix
   ];
 
   services.ryande.enable = true;
@@ -15,20 +13,16 @@
   nix.settings = {
     cores = 16;
     max-jobs = 24;
-    download-buffer-size = 10000000000;
-    warn-dirty = false;
   };
+  nixpkgs.config.cudaSupport = true;
 
   environment.systemPackages = with pkgs; [
     soundwireserver
   ];
 
-  nixpkgs.config.cudaSupport = true;
-
   virtualisation.virtualbox.host.enable = true;
   boot.kernelParams = [ "kvm.enable_virt_at_load=0" ]; # virtualbox doesn't like kvm
 
-  services.hardware.bolt.enable = true; # thunderbolt support
   hardware.bluetooth = {
     enable = true;
     settings = {
@@ -49,29 +43,26 @@
     };
   };
 
-  services = {
-    pipewire = {
-      enable = true;
-      extraConfig.pipewire = {
-        "properties" = {
-          default.clock.allowed-rates = [ 44100 48000 96000 ];
-          "log.level" = 4;
-          "default.clock.quantum" = 256;
-          "default.clock.min-quantum" = 256;
-          "default.clock.max-quantum" = 256;
-        };
+  services.pipewire = {
+    enable = true;
+    extraConfig.pipewire = {
+      "properties" = {
+        default.clock.allowed-rates = [ 44100 48000 96000 ];
+        "log.level" = 4;
+        "default.clock.quantum" = 256;
+        "default.clock.min-quantum" = 256;
+        "default.clock.max-quantum" = 256;
       };
-      alsa = {
-        enable = true;
-        support32Bit = true;
-      };
-      pulse.enable = true;
     };
+    alsa = {
+      enable = true;
+      support32Bit = true;
+    };
+    pulse.enable = true;
   };
 
   powerManagement.cpuFreqGovernor = "performance";
 
-  nixpkgs.config.allowUnfree = true;
   networking = {
     hostName = "copernicus";
     interfaces.eno1 = {
@@ -99,11 +90,9 @@
         };
       };
     };
-    nameservers = [ "8.8.8.8" "8.4.4.8" ];
   };
 
-  time.timeZone = "America/Chicago";
-
-  system.stateVersion = "24.05"; # don't change this, lol
+  # don't touch these
+  system.stateVersion = "24.05";
   home-manager.users.usr.home.stateVersion = "25.11";
 }

@@ -20,6 +20,7 @@ in {
       (callPackage ../builds/rebuild.nix {})
       scrcpy
     ];
+    nix.settings.download-buffer-size = 10000000000;
 
     fonts.packages = with pkgs; [
       fantasque-sans-mono
@@ -67,6 +68,14 @@ in {
       };
       tailscale.enable = true;
 
+      # configure printing
+      printing.enable = true;
+      avahi = {
+        enable = true;
+        nssmdns4 = true;
+        openFirewall = true;
+      };
+
       # xorg/graphical environment
       displayManager.ly.enable = true;
       xserver = {
@@ -97,6 +106,7 @@ in {
       font = "Lat2-Terminus16";
       keyMap = "us";
     };
+    time.timeZone = "America/Chicago";
 
     environment.etc = {
       "profile.local" = {
