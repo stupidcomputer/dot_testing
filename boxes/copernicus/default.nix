@@ -92,6 +92,11 @@
     };
   };
 
+  services.ollama = {
+    enable = true;
+    package = pkgs.ollama-cuda;
+  };
+
   # don't touch these
   system.stateVersion = "24.05";
   home-manager.users.usr.home.stateVersion = "25.11";
