@@ -113,19 +113,43 @@ bindsym $mod+Shift+r restart
 bindsym $mod+Shift+q exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 mode "resize" {
-        bindsym h resize shrink width 10 px or 10 ppt
-        bindsym j resize grow height 10 px or 10 ppt
-        bindsym k resize shrink height 10 px or 10 ppt
-        bindsym l resize grow width 10 px or 10 ppt
-
-        # back to normal: Enter or Escape or $mod+r
-        bindsym Return mode "default"
-        bindsym Escape mode "default"
-        bindsym $mod+r mode "default"
+     bindsym Shift+h resize shrink width 10 px or 10 ppt
+     bindsym Shift+j resize grow height 10 px or 10 ppt
+     bindsym Shift+k resize shrink height 10 px or 10 ppt
+     bindsym Shift+l resize grow width 10 px or 10 ppt
+     
+     bindsym h resize shrink width 5 px or 5 ppt
+     bindsym j resize grow height 5 px or 5 ppt
+     bindsym k resize shrink height 5 px or 5 ppt
+     bindsym l resize grow width 5 px or 5 ppt
+     
+     bindsym Ctrl+h resize shrink width 1 px or 1 ppt
+     bindsym Ctrl+j resize grow height 1 px or 1 ppt
+     bindsym Ctrl+k resize shrink height 1 px or 1 ppt
+     bindsym Ctrl+l resize grow width 1 px or 1 ppt
+     
+     bindsym q mode "default"
+     bindsym Return mode "default"
+     bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
 
+mode "browser" {
+     bindsym --release h exec xdotool key alt+Left
+     bindsym --release j exec xdotool key ctrl+Tab
+     bindsym --release k exec xdotool key ctrl+shift+Tab
+     bindsym --release l exec xdotool key alt+Right
+     
+     bindsym q mode "default"
+     bindsym Return mode "default"
+     bindsym Escape mode "default"
+}
+
+bindsym $mod+n mode "browser"
+
+bindsym $mod+m exec warpd --hint
+
 bar {
-        status_command i3pystatus -c ~/.config/i3pystatus/config.py
+    status_command i3pystatus -c ~/.config/i3pystatus/config.py
 }

@@ -173,6 +173,7 @@ in {
         tigervnc
         i3-swallow
         arandr
+        warpd
 
         # other stuff
         ncpamixer
