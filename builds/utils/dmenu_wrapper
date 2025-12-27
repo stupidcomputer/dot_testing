@@ -28,6 +28,8 @@ phone: open messaging
 phone: silent notifications
 phone: vibrate notifications
 phone: sound notifications
+phone: place phone call
+phone: compose message
 cmus: another session
 second_cmus
 bluetooth
@@ -119,6 +121,12 @@ case "$response" in
 	;;
     "phone: sound notifications")
 	adb shell cmd audio set-ringer-mode NORMAL
+	;;
+    "phone: place phone call")
+	scrcpy-phone-dialer phone
+	;;
+    "phone: compose message")
+	scrcpy-phone-dialer messaging
 	;;
     "calc:"*)
 	command="${response#*:}"

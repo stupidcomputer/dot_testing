@@ -1,0 +1,24 @@
+phone_number=$(emacsclient --eval '
+  (mapconcat
+   (lambda (contact)
+     (let* ((name (substring-no-properties (car contact)))
+            (phone (cdr (assoc "PHONE" (nth 2 contact)))))
+       (when phone
+         (format "%s: %s" name (substring-no-properties phone)))))
+   (org-contacts-filter)
+   "\n")' -n |
+   sed 's/^"//;s/"$//;s/\\n/\n/g;s/-//g' |
+   grep -v '^$' |
+   dmenu |
+   awk -F': ' '{print $2}')
+
+echo "$phone_number"
+adb shell am start -a android.intent.action.SENDTO -d "sms:$phone_number"
+
+case "$1" in
+    "messaging")
+	adb shell am start -a android.intent.action.SENDTO -d "sms:$phone_number"
+	;;
+    "phone")
+	adb shell am start -a android.intent.action.CALL -d "tel:$phone_number"
+esac
