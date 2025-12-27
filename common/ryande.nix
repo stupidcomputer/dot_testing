@@ -18,23 +18,23 @@ in {
       (callPackage ../builds/dmenu.nix {})
       (callPackage ../builds/utils.nix {})
       (callPackage ../builds/rebuild.nix {})
+      anki-bin
       scrcpy
     ];
     nix.settings.download-buffer-size = 10000000000;
 
     fonts.packages = with pkgs; [
+      corefonts
+      dina-font
       fantasque-sans-mono
+      fira-code
+      fira-code-symbols liberation_ttf
+      mplus-outline-fonts.githubRelease
       noto-fonts
       noto-fonts-cjk-sans
       noto-fonts-color-emoji
-      liberation_ttf
-      fira-code
-      fira-code-symbols
-      mplus-outline-fonts.githubRelease
-      dina-font
-      corefonts
-      vista-fonts
       proggyfonts
+      vista-fonts
     ];
 
     # this is required for home-manager to share window managers to ly
@@ -239,26 +239,38 @@ in {
         enable = true;
         extraPackages = epkgs: with epkgs; [
           auctex
+          company
+          elfeed
           evil
           evil-collection
+          gruvbox-theme
+          htmlize
+          ledger-mode
+          lsp-mode
+          lsp-ui
+          nix-mode
+          org-drill
           org-evil
           org-journal
-          org-drill
-          elfeed
           pdf-tools
-          vterm
-          nix-mode
           python-mode
-          gruvbox-theme
+          vterm
         ] ++ [
+          # org support packages
           pkgs.ghostscript
           pkgs.gnuplot
           pkgs.ical2orgpy
           pkgs.texliveFull
+
+          # lsp
+          pkgs.lua-language-server
+          pkgs.nixd
+          pkgs.texlab
+          pkgs.python313Packages.python-lsp-server
         ];
       };
-      home.file.".emacs.d/init.el".text = builtins.readFile ../config/emacs/init.el;
-      home.file.".emacs.d/early-init.el".text = builtins.readFile ../config/emacs/early-init.el;
+      home.file.".emacs.d/init.el".source =  ../config/emacs/init.el;
+      home.file.".emacs.d/early-init.el".source =  ../config/emacs/early-init.el;
 
       programs.rbw = {
         enable = true;
@@ -298,7 +310,7 @@ set status_display_program=cmus-status-update
         extraPackages = with pkgs; [
           lua-language-server
           texlab
-#          python311Packages.python-lsp-server
+          python313Packages.python-lsp-server
           nixd
         ];
       };
