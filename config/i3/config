@@ -9,11 +9,12 @@ exec --no-startup-id xset r rate 200 80
 exec --no-startup-id setxkbmap -option caps:super
 exec --no-startup-id pkill xcape
 exec --no-startup-id xcape -e 'Super_L=Escape'
-exec emacs
+exec emacs --daemon
 
 bindsym $mod+Return exec st
+bindsym $mod+e exec emacsclient -c -a ""
 bindsym $mod+q kill
-bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec --no-startup-id dmenu_wrapper
 bindsym $mod+z exec --no-startup-id rbw-dmenu-list
 bindsym $mod+Shift+z exec --no-startup-id rbw-dmenu-list 2fa
 
@@ -30,6 +31,7 @@ bindsym $mod+Shift+l move right
 
 bindsym $mod+v split v
 bindsym $mod+shift+v split h
+bindsym $mod+ctrl+v toggle split
 
 # enter fullscreen mode for the focused container
 bindsym $mod+f fullscreen toggle
@@ -37,7 +39,6 @@ bindsym $mod+f fullscreen toggle
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
-bindsym $mod+e layout toggle split
 
 bindsym $mod+b exec "brave"
 bindsym $mod+Control+b exec "brave-x11-wrapper guest"

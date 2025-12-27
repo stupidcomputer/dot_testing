@@ -1,0 +1,135 @@
+cachedir="${XDG_CACHE_HOME:-"$HOME/.cache"}"
+cache="$cachedir/dmenu_run"
+
+[ ! -e "$cachedir" ] && mkdir -p "$cachedir"
+
+IFS=:
+if stest -dqr -n "$cache" $PATH; then
+	stest -flx $PATH | sort -u > "$cache"
+fi
+
+extra_choices="fan: turn off
+fan: turn on
+downstairs: turn off
+downstairs: turn on
+scrcpy: default
+scrcpy: with audio
+phone: open termux
+phone: open antennapod
+phone: open email
+phone: open vlc
+phone: open planningcenter
+phone: open orgzly
+phone: open dialer
+phone: open graph89
+phone: open cone
+phone: open newpipe
+phone: open messaging
+phone: silent notifications
+phone: vibrate notifications
+phone: sound notifications
+cmus: another session
+second_cmus
+bluetooth
+volume"
+
+response="$(echo "$extra_choices" | cat - "$cache" | dmenu)"
+case "$response" in
+    "bluetooth")
+	st -c st_floating -e bluetuith
+	;;
+    "bluetuith")
+	st -c st_floating -e bluetuith
+	;;
+    "cmus")
+	st -e cmus
+	;;
+    "second_cmus")
+	st -e bash -c 'CMUS_SOCKET=/run/user/1000/cmus2-socket cmus'
+	;;
+    "volume")
+	st -c st_floating -e ncpamixer
+	;;
+    "ncpamixer")
+	st -c st_floating -e ncpamixer
+	;;
+    "nmtui")
+	st -c st_floating -e nmtui
+	;;
+    "fan: turn off")
+	openhue set light f0258cd9-40bf-486d-ba17-0f3452ed534e --off
+	;;
+    "fan: turn on")
+	openhue set light f0258cd9-40bf-486d-ba17-0f3452ed534e --on
+	;;
+    "downstairs: turn off")
+	openhue set room 34942881-b3be-4065-b604-bf3068cc182e --off
+	openhue set room 726deff6-2b56-4010-a714-454d4bc2fb7c --off
+	openhue set room bce91c38-adbc-4b6c-9097-1385be01dd64 --off
+	;;
+    "downstairs: turn on")
+	openhue set room 34942881-b3be-4065-b604-bf3068cc182e --on
+	openhue set room 726deff6-2b56-4010-a714-454d4bc2fb7c --on
+	openhue set room bce91c38-adbc-4b6c-9097-1385be01dd64 --on
+	;;
+    "scrcpy: default")
+	scrcpy --render-driver=opengles2 --no-audio
+	;;
+    "scrcpy: with audio")
+	scrcpy --render-driver=opengles2
+	;;
+    "phone: open termux")
+	adb shell monkey -p com.termux -c android.intent.category.LAUNCHER 1
+	;;
+    "phone: open antennapod")
+	adb shell monkey -p de.danoeh.antennapod -c android.intent.category.LAUNCHER 1
+	;;
+    "phone: open email")
+	adb shell monkey -p eu.faircode.email -c android.intent.category.LAUNCHER 1
+	;;
+    "phone: open vlc")
+	adb shell monkey -p org.videolan.vlc -c android.intent.category.LAUNCHER 1
+	;;
+    "phone: open planningcenter")
+	adb shell monkey -p com.ministrycentered.PlanningCenter -c android.intent.category.LAUNCHER 1
+	;;
+    "phone: open orgzly")
+	adb shell monkey -p com.orgzlyrevived -c android.intent.category.LAUNCHER 1
+	;;
+    "phone: open dialer")
+	adb shell am start -n com.google.android.dialer/com.google.android.dialer.extensions.GoogleDialtactsActivity
+	;;
+    "phone: open graph89")
+	adb shell monkey -p com.eanema.graph89 -c android.intent.category.LAUNCHER 1
+	;;
+    "phone: open cone")
+	adb shell monkey -p info.tangential.cone -c android.intent.category.LAUNCHER 1
+	;;
+    "phone: open newpipe")
+	adb shell monkey -p org.schabi.newpipe -c android.intent.category.LAUNCHER 1
+	;;
+    "phone: open messaging")
+	adb shell monkey -p com.google.android.apps.messaging -c android.intent.category.LAUNCHER 1
+	;;
+    "phone: silent notifications")
+	adb shell cmd audio set-ringer-mode SILENT
+	;;
+    "phone: vibrate notifications")
+	adb shell cmd audio set-ringer-mode VIBRATE
+	;;
+    "phone: sound notifications")
+	adb shell cmd audio set-ringer-mode NORMAL
+	;;
+    "calc:"*)
+	command="${response#*:}"
+	session_name="dmenu_wrapper-$RANDOM"
+	tmux new-session -d -s "$session_name" 'python3'
+	tmux send-keys -t "$session_name" "from math import *" Enter
+	tmux send-keys -t "$session_name" "$command" Enter
+	st -c st_floating -e tmux attach-session -t "$session_name"
+	tmux kill-session -t "$session_name"
+	;;
+    *)
+	RUNNING_FROM_DMENU=1 "$response"
+	;;
+esac
