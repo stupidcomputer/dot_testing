@@ -165,33 +165,6 @@ class ClassMonitor(IntervalModule):
 
 status = Status(logfile="$HOME/.cache/i3status.log")
 
-status.register("text",
-    text="BL",
-    on_leftclick="st -c st_floating -e bluetuith")
-
-status.register("text",
-    text="CM",
-    on_leftclick="st -e cmus",
-    on_rightclick="st -c desktop10 -e bash -c 'CMUS_SOCKET=/run/user/1000/cmus2-socket cmus'")
-
-status.register("text",
-    text="MI",
-    on_leftclick="st -c st_floating -e ncpamixer")
-
-status.register("text",
-    text="XR",
-    on_leftclick="arandr")
-
-status.register("text",
-    text="FA",
-    on_leftclick="openhue set light f0258cd9-40bf-486d-ba17-0f3452ed534e --on",
-    on_rightclick="openhue set light f0258cd9-40bf-486d-ba17-0f3452ed534e --off")
-
-status.register("text",
-    text="DN",
-    on_leftclick="openhue set light 34942881-b3be-4065-b604-bf3068cc182e --on",
-    on_rightclick="openhue set light 34942881-b3be-4065-b604-bf3068cc182e --off")
-
 status.register("clock",
     format="%a%-d%b%m/%H%M%S",)
 
