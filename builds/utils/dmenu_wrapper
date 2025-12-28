@@ -30,6 +30,7 @@ phone: vibrate notifications
 phone: sound notifications
 phone: place phone call
 phone: compose message
+syncthing: view logs
 cmus: another session
 second_cmus
 bluetooth
@@ -127,6 +128,9 @@ case "$response" in
 	;;
     "phone: compose message")
 	scrcpy-phone-dialer messaging
+	;;
+    "syncthing: view logs")
+	st -c st_floating -e journalctl -xefu syncthing
 	;;
     "calc:"*)
 	command="${response#*:}"
