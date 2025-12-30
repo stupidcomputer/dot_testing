@@ -1,4 +1,4 @@
-{ config, pkgs, options, ... }:
+{ config, lib, pkgs, options, ... }:
 
 {
   imports = [
@@ -42,6 +42,9 @@
       settings.General.ControllerMode = "dual";
     };
   };
+
+  # temporary
+  time.timeZone = lib.mkForce "America/Los_Angeles";
 
   # don't touch these
   system.stateVersion = "25.05";
