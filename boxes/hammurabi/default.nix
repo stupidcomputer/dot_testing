@@ -44,7 +44,7 @@
   };
 
   # temporary
-  time.timeZone = lib.mkForce "America/Los_Angeles";
+  time.timeZone = lib.mkForce "America/Chicago";
 
   # don't touch these
   system.stateVersion = "25.05";
