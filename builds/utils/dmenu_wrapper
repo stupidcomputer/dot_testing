@@ -25,6 +25,7 @@ phone: open graph89
 phone: open cone
 phone: open newpipe
 phone: open messaging
+phone: open syncthing
 phone: silent notifications
 phone: vibrate notifications
 phone: sound notifications
@@ -113,6 +114,9 @@ case "$response" in
 	;;
     "phone: open messaging")
 	adb shell monkey -p com.google.android.apps.messaging -c android.intent.category.LAUNCHER 1
+	;;
+    "phone: open syncthing")
+	adb shell monkey -p com.github.catfriend1.syncthingandroid -c android.intent.category.LAUNCHER 1
 	;;
     "phone: silent notifications")
 	adb shell cmd audio set-ringer-mode SILENT
