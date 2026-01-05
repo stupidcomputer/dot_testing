@@ -211,6 +211,8 @@ in {
         unzip
         usbutils
         yt-dlp
+        ical2orgpy
+        texliveFull
       ];
 
       fonts.fontconfig = {
@@ -260,8 +262,6 @@ in {
           # org support packages
           pkgs.ghostscript
           pkgs.gnuplot
-          pkgs.ical2orgpy
-          pkgs.texliveFull
 
           # lsp
           pkgs.lua-language-server
