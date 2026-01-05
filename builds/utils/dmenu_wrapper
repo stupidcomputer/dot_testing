@@ -32,7 +32,6 @@ phone: sound notifications
 phone: place phone call
 phone: compose message
 syncthing: view logs
-cmus: another session
 second_cmus
 bluetooth
 volume"
