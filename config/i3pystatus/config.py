@@ -78,9 +78,8 @@ class ClassMonitor(IntervalModule):
             if item == "":
                 del splitted[index]
                 continue
-            new_item = item.replace(f" :{self._schedule_tag}:", "")
-            new_item = new_item.lstrip().rstrip()
-            splitted[index] = new_item
+            item = item.lstrip().rstrip()
+            splitted[index] = item
         del splitted[-1]
 
         if len(splitted) == 3:
@@ -104,6 +103,8 @@ class ClassMonitor(IntervalModule):
 
         for line in contents:
             if not f":{self._schedule_tag}:" in line:
+                continue
+            elif ',' == line[0]:
                 continue
             elif not now in line:
                 continue
