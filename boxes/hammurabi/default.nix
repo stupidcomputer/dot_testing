@@ -43,9 +43,6 @@
     };
   };
 
-  # temporary
-  time.timeZone = lib.mkForce "America/Chicago";
-
   # don't touch these
   system.stateVersion = "25.05";
   home-manager.users.usr.home.stateVersion = "25.05";
