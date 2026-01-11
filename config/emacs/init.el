@@ -174,6 +174,8 @@
   :config
   (add-to-list 'auto-mode-alist '("\\.ledger\\'" . ledger-mode)))
 
+(use-package magit :ensure t)
+
 ;; eye-candy and aesthetics
 (use-package gruvbox-theme :ensure t)
 (setq custom-file "~/.emacs.d/custom.el")

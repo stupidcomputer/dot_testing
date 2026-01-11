@@ -251,6 +251,7 @@ in {
           ledger-mode
           lsp-mode
           lsp-ui
+          magit
           nix-mode
           org-drill
           org-evil
