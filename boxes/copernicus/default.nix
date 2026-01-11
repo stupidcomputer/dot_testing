@@ -86,7 +86,7 @@
             { from = 10000; to = 10100; } # temp stuff
           ];
           allowedUDPPorts = [ 59010 ];
-          allowedTCPPorts = [ 59010 ];
+          allowedTCPPorts = [ 59010 2342 ];
         };
       };
     };

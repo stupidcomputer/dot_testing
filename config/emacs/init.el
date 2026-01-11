@@ -114,6 +114,7 @@
 					       'org-habit-p data)))))
   
   (advice-add #'org-agenda-finalize :before #'u:org-agenda-mark-habits)
+  (add-hook 'org-mode-hook 'visual-line-mode)
 
   :bind
   (("C-c o" . (lambda () (interactive) (find-file "~/org/main.org")))))
@@ -215,6 +216,8 @@
 ;; display line numbers in programming modes
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'text-mode-hook 'display-line-numbers-mode)
+;; I don't want line numbers in org-mode, though
+(add-hook 'org-mode-hook (lambda () (display-line-numbers-mode -1)))
 (add-hook 'pdf-view-mode-hook (lambda () (display-line-numbers-mode -1)))
 (setq linum-format "%d")
 (defun u:disable-scroll-bars (frame)
