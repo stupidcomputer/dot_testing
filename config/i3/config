@@ -5,10 +5,10 @@ tiling_drag modifier titlebar
 font pango:Fantasque Sans Mono 12
 
 # initial comfy settings
-exec --no-startup-id xset r rate 200 80
-exec --no-startup-id setxkbmap -option caps:super
-exec --no-startup-id pkill xcape
-exec --no-startup-id xcape -e 'Super_L=Escape'
+exec_always --no-startup-id xset r rate 200 80
+exec_always --no-startup-id setxkbmap -option caps:super
+exec_always --no-startup-id pkill xcape
+exec_always --no-startup-id xcape -e 'Super_L=Escape'
 exec emacs --daemon
 
 bindsym $mod+Return exec st
