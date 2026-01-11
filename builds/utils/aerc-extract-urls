@@ -1,0 +1,3 @@
+choice=$(grep -Eow "http[s]?://\S+" | dmenu)
+
+xdg-open "$choice"

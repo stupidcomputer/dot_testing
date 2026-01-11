@@ -5,10 +5,10 @@ tiling_drag modifier titlebar
 font pango:Fantasque Sans Mono 12
 
 # initial comfy settings
-exec --no-startup-id xset r rate 200 80
-exec --no-startup-id setxkbmap -option caps:super
-exec --no-startup-id pkill xcape
-exec --no-startup-id xcape -e 'Super_L=Escape'
+exec_always --no-startup-id xset r rate 200 80
+exec_always --no-startup-id setxkbmap -option caps:super
+exec_always --no-startup-id pkill xcape
+exec_always --no-startup-id xcape -e 'Super_L=Escape'
 exec emacs --daemon
 
 bindsym $mod+Return exec st
@@ -149,6 +149,30 @@ mode "browser" {
 
 bindsym $mod+n mode "browser"
 
+mode "move" {
+     bindsym Shift+h move left 40 px
+     bindsym Shift+j move down 40 px
+     bindsym Shift+k move up 40 px
+     bindsym Shift+l move right 40 px
+
+     bindsym h move left 20 px
+     bindsym j move down 20 px
+     bindsym k move up 20 px
+     bindsym l move right 20 px
+
+     bindsym Ctrl+h move left 1 px
+     bindsym Ctrl+j move down 1 px
+     bindsym Ctrl+k move up 1 px
+     bindsym Ctrl+l move right 1 px
+
+     bindsym c move absolute position center
+
+     bindsym q mode "default"
+     bindsym Return mode "default"
+     bindsym Escape mode "default"
+}
+
+bindsym $mod+Shift+m mode "move"
 bindsym $mod+m exec warpd --hint
 
 bar {

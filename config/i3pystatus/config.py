@@ -114,7 +114,9 @@ class ClassMonitor(IntervalModule):
 
         schedule_items = []
         for line in relevant_lines:
-            self._schedule_items.append(self._parse_schedule_line(line))
+            schedule_item = self._parse_schedule_line(line)
+            if schedule_item:
+                self._schedule_items.append(schedule_item)
 
     def _calculate_schedule_states(self, now):
         return [i.get_state(now) for i in self._schedule_items]

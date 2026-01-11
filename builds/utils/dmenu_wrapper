@@ -31,6 +31,9 @@ phone: vibrate notifications
 phone: sound notifications
 phone: place phone call
 phone: compose message
+select a wallpaper
+i3: enable gaps
+i3: disable gaps
 syncthing: view logs
 second_cmus
 bluetooth
@@ -131,6 +134,16 @@ case "$response" in
 	;;
     "phone: compose message")
 	scrcpy-phone-dialer messaging
+	;;
+    "select a wallpaper")
+	choice=$(ls ~/media/wallpapers | dmenu)
+	feh --bg-fill "${HOME}/media/wallpapers/${choice}"
+	;;
+    "i3: enable gaps")
+	i3-msg gaps inner all set 10
+	;;
+    "i3: disable gaps")
+	i3-msg gaps inner all set 0
 	;;
     "syncthing: view logs")
 	st -c st_floating -e journalctl -xefu syncthing
