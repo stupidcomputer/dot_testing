@@ -94,6 +94,10 @@
      (python . t)))
   ;; org-agenda doesn't show that annoying dialog
   (custom-set-variables '(safe-local-variable-values '((type . org))))
+  ;; Don't show line numbers, wrap lines
+  (add-hook 'org-mode-hook (lambda () (display-line-numbers-mode -1)
+			     (setq truncate-lines t)
+			     (company-mode -1)))
   ;; see https://emacs.stackexchange.com/questions/13360/org-habit-graph-on-todo-list-agenda-view
   ;; show consistency graphs for org-habits
   (defun u:org-agenda-mark-habits ()
@@ -175,6 +179,15 @@
   (add-to-list 'auto-mode-alist '("\\.ledger\\'" . ledger-mode)))
 
 (use-package magit :ensure t)
+(use-package helm
+  :ensure t
+  :config
+  (helm-mode 1)
+  (setq helm-M-x-fuzzy-match 1
+	helm-buffers-fuzzy-matching 1)
+  :bind
+  (("C-<SPC>" . helm-buffers-list)
+   ("C-x C-f" . helm-find-files)))
 
 ;; eye-candy and aesthetics
 (use-package gruvbox-theme :ensure t)
@@ -202,8 +215,6 @@
 ;; display line numbers in programming modes
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'text-mode-hook 'display-line-numbers-mode)
-;; I don't want line numbers in org-mode, though
-(add-hook 'org-mode-hook (lambda () (display-line-numbers-mode -1)))
 (add-hook 'pdf-view-mode-hook (lambda () (display-line-numbers-mode -1)))
 (setq linum-format "%d")
 (defun u:disable-scroll-bars (frame)
