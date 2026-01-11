@@ -110,6 +110,7 @@
 					       'org-habit-p data)))))
   
   (advice-add #'org-agenda-finalize :before #'u:org-agenda-mark-habits)
+  (add-hook 'org-mode-hook 'visual-line-mode)
 
   :bind
   (("C-c o" . (lambda () (interactive) (find-file "~/org/main.org")))))
