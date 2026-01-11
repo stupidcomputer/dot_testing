@@ -185,8 +185,9 @@
 (tool-bar-mode -1)
 (setq custom-safe-themes t)
 (load-theme 'gruvbox)
-;; plato and aristotle have low-dpi displays, so we need to
-;; reduce font size accordingly
+;; make warnings not force the warning box open
+(setq warning-minimum-level :error)
+
 (set-frame-font "Fantasque Sans Mono" nil t)
 (cond
  ((string-equal (system-name) "copernicus")
@@ -201,6 +202,8 @@
 ;; display line numbers in programming modes
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'text-mode-hook 'display-line-numbers-mode)
+;; I don't want line numbers in org-mode, though
+(add-hook 'org-mode-hook (lambda () (display-line-numbers-mode -1)))
 (add-hook 'pdf-view-mode-hook (lambda () (display-line-numbers-mode -1)))
 (setq linum-format "%d")
 (defun u:disable-scroll-bars (frame)
