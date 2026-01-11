@@ -226,7 +226,7 @@ in {
         latitude = 35.9;
         longitude = -86.9;
         temperature.day = 6500;
-        temperature.night = 2800;
+        temperature.night = 2200;
       };
       programs.mpv.enable = true;
       programs.feh.enable = true;
