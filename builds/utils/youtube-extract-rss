@@ -1,0 +1,22 @@
+if [ "$1" == "-c" ] || [ "$1" == "--continuous" ]; then
+  while true; do
+    read
+    "$0" "$REPLY"
+  done
+fi
+if [ "$1" == "-h" ] || [ "$1" == "--help" ] || [ -z "$1" ]; then
+  cat <<EOF
+youtube-extract-rss [url]        => [rss feed for url]
+youtube-extract-rss -c           => accept urls continuously on stdin
+                    --continuous
+youtube-extract-rss -h           => show this message
+                    --help
+EOF
+  exit
+fi
+
+# for some reason, this command outputs the url twice. not sure why.
+# that's why the head -n1 is there.
+curl --silent "$1" | \
+  grep -oE "https://www.youtube.com/feeds/videos.xml\?channel_id=[a-zA-Z0-9_-]+" | \
+  head -n1
