@@ -34,6 +34,7 @@ phone: compose message
 select a wallpaper
 i3: enable gaps
 i3: disable gaps
+i3: rename workspace
 syncthing: view logs
 second_cmus
 bluetooth
@@ -145,6 +146,15 @@ case "$response" in
     "i3: disable gaps")
 	i3-msg gaps inner all set 0
 	;;
+    "i3: rename workspace")
+	current_workspace=$(i3-msg -t 'get_workspaces' | jq -r '.[] | select(.focused==true).num')
+	new_name=$(echo "" | dmenu)
+	if [ -z "$new_name" ]; then
+	    i3-msg "rename workspace to \"${current_workspace}\""
+	else
+	    i3-msg "rename workspace to \"${current_workspace}: ${new_name}\""
+	fi
+	;;
     "syncthing: view logs")
 	st -c st_floating -e journalctl -xefu syncthing
 	;;
@@ -158,6 +168,8 @@ case "$response" in
 	tmux kill-session -t "$session_name"
 	;;
     *)
-	RUNNING_FROM_DMENU=1 "$response"
+	if [ -n "$response" ]; then
+	    RUNNING_FROM_DMENU=1 "$response"
+	fi
 	;;
 esac

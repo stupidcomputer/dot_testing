@@ -94,6 +94,10 @@
      (python . t)))
   ;; org-agenda doesn't show that annoying dialog
   (custom-set-variables '(safe-local-variable-values '((type . org))))
+  ;; Don't show line numbers, wrap lines
+  (add-hook 'org-mode-hook (lambda () (display-line-numbers-mode -1)
+			     (setq truncate-lines t)
+			     (company-mode -1)))
   ;; see https://emacs.stackexchange.com/questions/13360/org-habit-graph-on-todo-list-agenda-view
   ;; show consistency graphs for org-habits
   (defun u:org-agenda-mark-habits ()
@@ -176,6 +180,15 @@
   (add-to-list 'auto-mode-alist '("\\.ledger\\'" . ledger-mode)))
 
 (use-package magit :ensure t)
+(use-package helm
+  :ensure t
+  :config
+  (helm-mode 1)
+  (setq helm-M-x-fuzzy-match 1
+	helm-buffers-fuzzy-matching 1)
+  :bind
+  (("C-<SPC>" . helm-buffers-list)
+   ("C-x C-f" . helm-find-files)))
 
 ;; eye-candy and aesthetics
 (use-package gruvbox-theme :ensure t)
@@ -188,6 +201,7 @@
 (load-theme 'gruvbox)
 ;; make warnings not force the warning box open
 (add-to-list 'warning-suppress-types '(t))
+(setq warning-minimum-level :error)
 
 (set-frame-font "Fantasque Sans Mono" nil t)
 (cond

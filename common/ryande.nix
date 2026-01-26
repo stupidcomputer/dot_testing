@@ -247,6 +247,7 @@ in {
           evil
           evil-collection
           gruvbox-theme
+          helm
           htmlize
           ledger-mode
           lsp-mode
