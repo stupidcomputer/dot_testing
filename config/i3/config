@@ -11,6 +11,8 @@ exec_always --no-startup-id pkill xcape
 exec_always --no-startup-id xcape -e 'Super_L=Escape'
 exec emacs --daemon
 
+exec --no-startup-id [ "$(hostname)" = "copernicus" ] && xrandr --output HDMI-0 --primary --left-of DP-0
+
 bindsym $mod+Return exec st
 bindsym $mod+e exec emacsclient -c -a ""
 bindsym $mod+q kill
