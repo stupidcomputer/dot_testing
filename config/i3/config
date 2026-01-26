@@ -93,6 +93,12 @@ bindsym $mod+Shift+0 move container to workspace number $ws10
 bindsym $mod+Shift+parenleft move container to workspace number $ws9
 bindsym $mod+Shift+parenright move container to workspace number $ws10
 
+# move entire desktops from one output to another
+bindsym $mod+Left move workspace to output left
+bindsym $mod+Right move workspace to output right
+bindsym $mod+Up move workspace to output up
+bindsym $mod+Down move workspace to output down
+
 for_window [title="Bluetooth"] floating enable
 for_window [class="st_floating"] floating enable
 for_window [class="desktop10"] move container to workspace number $ws10, workspace number $ws10
