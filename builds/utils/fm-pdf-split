@@ -1,0 +1,64 @@
+set -x
+# assume we need to open the pdf in $1 with zathura
+our_window=$(xdotool getactivewindow)
+zathura "$1" >/dev/null 2>&1 & disown
+sleep 0.5
+zathura_wid=$(xdotool search --onlyvisible --class zathura)
+send_to_zathura() {
+    # $1 - keys to send
+    xdotool windowactivate "${zathura_wid}"
+    xdotool type --window "${zathura_wid}" --clearmodifiers "$1"
+    xdotool windowactivate "${our_window}"
+}
+goto_page() {
+    send_to_zathura "${1}gg"
+}
+
+segments=""
+names=""
+starting=1
+ending=1
+
+batch="$RANDOM"
+printf "this is batch %s\n" "${batch}"
+
+send_to_zathura "gg"
+while true; do
+    printf "start: %s; end: %s\n" "${starting}" "${ending}"
+    read -p "? "
+    case "$REPLY" in
+	"n"|"next")
+	    ending=$(( ending + 1 ))
+	    goto_page "${ending}"
+	    printf "advancing to page %s\n" "${ending}"
+	    ;;
+	"p"|"prev")
+	    ending=$(( ending - 1 ))
+	    goto_page "${ending}"
+	    printf "returning to page %s\n" "${ending}"
+	    ;;
+	"new")
+	    segments="${starting}-${ending}|$segments"
+	    goto_page "${starting}"
+	    read -p "name of previous segment? "
+	    names="${REPLY}|${names}"
+	    printf "added segment %s-%s with name '%s'\n" "${starting}" "${ending}" "${REPLY}"
+	    starting=$(( ending + 1 ))
+	    ending="${starting}"
+	    goto_page "${starting}"
+	    ;;
+	"done")
+	    printf "$segments" | tr '|' '\n' > ./.fm-pdf-split-tmp-1
+	    printf "$names" | tr '|' '\n' > ./.fm-pdf-split-tmp-2
+	    results=$(paste -d'|' ./.fm-pdf-split-tmp-1 ./.fm-pdf-split-tmp-2 | tac)
+	    rm ./.fm-pdf-split-tmp-1 ./.fm-pdf-split-tmp-2
+	    break
+	    ;;
+    esac
+done
+echo "$results" | while IFS="|" read -r segment name; do
+    printf "segment: %s\n" "${segment}"
+    printf "name: %s\n" "${name}"
+    qpdf "${1}" --pages . "${segment}" -- "EASILYSORTABLE-${batch}-${name}.pdf"
+done
+
