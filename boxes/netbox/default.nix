@@ -5,7 +5,7 @@
     ../../common/bootstrap.nix
 
     ./flasktrack.nix
-    ./franklincce.nix
+#    ./franklincce.nix
     ./nginx.nix
     ./ssh.nix
     ./sslh.nix
