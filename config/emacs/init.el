@@ -78,6 +78,7 @@
 				      "VERIFYING(v!)" "BLOCKED(b@)"  "|" "DONE(d!)"
 				      "OBE(o@!)" "WONT-DO(w@/!)" "DUE-PASSED(a@!)" ))
 	org-confirm-babel-evaluate nil
+	org-element-use-cache nil
 	org-read-date-force-compatible-dates nil)
   :config
   (add-to-list 'org-modules 'org-habit)
