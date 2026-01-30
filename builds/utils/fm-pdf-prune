@@ -1,0 +1,50 @@
+set -x
+# assume we need to open the pdf in $1 with zathura
+our_window=$(xdotool getactivewindow)
+zathura "$1" >/dev/null 2>&1 & disown
+sleep 0.5
+zathura_wid=$(xdotool search --onlyvisible --class zathura)
+send_to_zathura() {
+    # $1 - keys to send
+    xdotool windowactivate "${zathura_wid}"
+    xdotool type --window "${zathura_wid}" --clearmodifiers "$1"
+    xdotool windowactivate "${our_window}"
+}
+goto_page() {
+    send_to_zathura "${1}gg"
+}
+
+pages_to_remove=""
+current=1
+
+send_to_zathura "gg"
+while true; do
+    read -p "? "
+    case "$REPLY" in
+	"n"|"next")
+	    current=$(( current + 1 ))
+	    goto_page "${current}"
+	    printf "advancing to page %s\n" "${current}"
+	    ;;
+	"p"|"prev")
+	    current=$(( current - 1 ))
+	    goto_page "${current}"
+	    printf "returning to page %s\n" "${current}"
+	    ;;
+	"d"|"m"|"mark")
+	    printf "added page %s to deletion queue\n" "${current}"
+	    pages_to_remove="${pages_to_remove}x${current},"
+	    current=$(( current + 1 ))
+	    
+	    goto_page "${current}"
+	    ;;
+	"done")
+	    break
+	    ;;
+    esac
+done
+
+# remove the trailing comma
+pages_to_remove="${pages_to_remove%?}"
+echo "$pages_to_remove"
+qpdf "$1" --pages . "1-z,${pages_to_remove}" -- "PRUNED-$1"
