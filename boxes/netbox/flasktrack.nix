@@ -14,8 +14,8 @@ in {
       FLASK_DATABASE_LOCATION = "/run/flasktrack/database.json";
     };
     serviceConfig = {
-      WorkingDirectory = "${flasktrack}/lib/python3.12/site-packages";
-      RuntimeDirectory = "${flasktrack}/lib/python3.12/site-packages";
+      WorkingDirectory = "${flasktrack}/lib/python${pkgs.lib.versions.majorMinor appEnv.python.version}/site-packages";
+      RuntimeDirectory = "${flasktrack}/lib/python${pkgs.lib.versions.majorMinor appEnv.python.version}/site-packages";
       ExecStart = "${appEnv}/bin/waitress-serve --port=8042 flasktrack:app";
       StandardOutput = "journal";
       User = "flasktrack";
