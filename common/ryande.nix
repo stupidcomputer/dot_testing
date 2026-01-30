@@ -284,6 +284,20 @@ in {
         };
       };
 
+      programs.ssh = {
+        enable = true;
+
+        matchBlocks = {
+          "netbox.s" = {
+            host = "netbox.s";
+
+            user = "ryan";
+            port = 443;
+            hostname = "beepboop.systems";
+          };
+        };
+      };
+
       programs.cmus = {
         enable = true;
         extraConfig = ''

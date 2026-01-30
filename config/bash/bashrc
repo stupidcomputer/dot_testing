@@ -14,7 +14,7 @@ alias lynx="lynx -cfg=$LYNX_CFG_PATH/lynx.cfg"
 alias elinks="TERM='xterm-color' elinks"
 alias pkgsearch="nix search nixpkgs"
 alias reload=". ~/.config/bash/profile"
-alias shuttle="sshuttle -r ryan@beepboop.systems:443 0/0 --dns"
+alias shuttle="sshuttle -r netbox.s 0/0 --dns"
 alias synctunnel="ssh -N -L localhost:22001:localhost:22000 -R localhost:22001:localhost:22000 netbox & syncthing"
 alias e="emacsclient"
 
