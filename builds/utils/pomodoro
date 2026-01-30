@@ -1,0 +1,35 @@
+set -x
+POMODORO_LOCK="${HOME}/.cache/pomodoro-lock"
+POMODORO_DB="${HOME}/org/pomodoro.csv"
+
+if [ -n "${RUNNING_FROM_DMENU}" ]; then
+    PROMPTER="dmenu"
+else
+    PROMPTER="fzy"
+fi
+
+if [ -e "${POMODORO_LOCK}" ]; then
+    # check when the lockfile was created; then figure out how long ago that was
+    # note that on filesystems without file creation metadata this will fail
+    lockcreation=$(stat -c %W "${POMODORO_LOCK}")
+    now=$(date +%s)
+    diff=$((now - lockcreation))
+    minutes=$((diff / 60))
+    originallength=$(cat ${POMODORO_LOCK})
+
+    decision=$(printf "no\nyes\n" | ${PROMPTER} -p "remove lock? (${minutes}a/${originallength})")
+
+    [ "$decision" = "yes" ] && rm "${POMODORO_LOCK}" || exit 1
+fi
+
+minutes=$(printf "15\n30\n45\n" | ${PROMPTER} -p "minutes?")
+echo "$minutes" > "${POMODORO_LOCK}"
+now=$(date +%s)
+sleep $(( minutes * 60 ))
+rating=$(printf "1\n2\n3\n4\n5\nterminate\n" | ${PROMPTER} -p "focus rating or terminate?")
+
+if [ "${rating}" != "terminate" ]; then
+    printf "%s\t%s\t%s\n" "${now}" "${minutes}" "${rating}" >> "${POMODORO_DB}"
+fi
+
+rm "${POMODORO_LOCK}"
