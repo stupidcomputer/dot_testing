@@ -1,0 +1,1 @@
+qpdf --empty --pages "$@" -- "${RANDOM}-combined.pdf"
