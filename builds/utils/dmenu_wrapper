@@ -35,6 +35,8 @@ select a wallpaper
 i3: enable gaps
 i3: disable gaps
 i3: rename workspace
+hammurabi: desk monitor setup
+hammurabi: one screen
 syncthing: view logs
 second_cmus
 bluetooth
@@ -154,6 +156,16 @@ case "$response" in
 	else
 	    i3-msg "rename workspace to \"${current_workspace}: ${new_name}\""
 	fi
+	;;
+    "hammurabi: desk monitor setup")
+	xrandr --output eDP-1 --primary --mode 1920x1080 --pos 653x900 \
+	       --output HDMI-1 --mode 1600x900 --pos 1600x0 \
+	       --output DP-2 --mode 1600x900 --pos 0x0
+	;;
+    "hammurabi: one screen")
+	xrandr --output eDP-1 --auto --primary \
+	       --output HDMI-1 --off \
+	       --output DP-2 --off
 	;;
     "syncthing: view logs")
 	st -c st_floating -e journalctl -xefu syncthing
