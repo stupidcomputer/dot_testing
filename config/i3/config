@@ -14,6 +14,7 @@ exec emacs --daemon
 exec --no-startup-id [ "$(hostname)" = "copernicus" ] && xrandr --output HDMI-0 --primary --left-of DP-0
 
 bindsym $mod+Return exec st
+bindsym $mod+Shift+Return exec emacsclient -n -e '(u:new-frame-with-vterm)'
 bindsym $mod+e exec emacsclient -c -a ""
 bindsym $mod+q kill
 bindsym $mod+d exec --no-startup-id dmenu_wrapper

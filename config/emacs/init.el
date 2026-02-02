@@ -43,7 +43,7 @@
     (delete-other-windows)
     ;; Force vterm to take full window
     (let ((default-directory "~"))
-      (let ((vterm-buffer (vterm (format "*vterm-%s*" (frame-parameter new-frame 'name)))))
+      (let ((vterm-buffer (vterm (format "vterm (emacs)" (frame-parameter new-frame 'name)))))
 	(switch-to-buffer vterm-buffer)
 	(delete-other-windows)))))
 
