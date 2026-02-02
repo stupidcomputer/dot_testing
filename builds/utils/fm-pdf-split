@@ -1,4 +1,21 @@
-set -x
+print_help_text () {
+    cat <<EOF
+fm-pdf-split: interactive tool for splitting multi-document PDFs
+
+usage: fm-pdf-split <file>
+interactive commands:
+  "n", "next": select the next page for consideration
+  "p", "prev": select the previous page for consideration
+  "new": create a new split group
+  "done": actualize the split groups
+EOF
+}
+
+if [ -z "$1" ]; then
+    print_help_text
+    exit 1
+fi
+
 # assume we need to open the pdf in $1 with zathura
 our_window=$(xdotool getactivewindow)
 zathura "$1" >/dev/null 2>&1 & disown
@@ -40,7 +57,11 @@ while true; do
 	"new")
 	    segments="${starting}-${ending}|$segments"
 	    goto_page "${starting}"
-	    read -p "name of previous segment? "
+	    read -p "name of previous segment? (type 'no' to abort) "
+	    if [ "${REPLY}" = "no" ]; then
+		goto_page "${ending}"
+		continue
+	    fi
 	    names="${REPLY}|${names}"
 	    printf "added segment %s-%s with name '%s'\n" "${starting}" "${ending}" "${REPLY}"
 	    starting=$(( ending + 1 ))
@@ -54,11 +75,16 @@ while true; do
 	    rm ./.fm-pdf-split-tmp-1 ./.fm-pdf-split-tmp-2
 	    break
 	    ;;
+	*)
+	    print_help_text
+	    ;;
     esac
 done
+counter=0
 echo "$results" | while IFS="|" read -r segment name; do
     printf "segment: %s\n" "${segment}"
     printf "name: %s\n" "${name}"
-    qpdf "${1}" --pages . "${segment}" -- "EASILYSORTABLE-${batch}-${name}.pdf"
+    qpdf "${1}" --pages . "${segment}" -- "$(printf %03d ${counter})-${batch}-${name}.pdf"
+    counter=$(( counter + 1 ))
 done
 
