@@ -3,10 +3,12 @@ cache="$cachedir/dmenu_run"
 
 [ ! -e "$cachedir" ] && mkdir -p "$cachedir"
 
+OLD_IFS="$IFS"
 IFS=:
 if stest -dqr -n "$cache" $PATH; then
 	stest -flx $PATH | sort -u > "$cache"
 fi
+IFS="$OLD_IFS"
 
 extra_choices="fan: turn off
 fan: turn on
@@ -139,8 +141,27 @@ case "$response" in
 	scrcpy-phone-dialer messaging
 	;;
     "select a wallpaper")
-	choice=$(ls ~/media/wallpapers | dmenu)
-	feh --bg-fill "${HOME}/media/wallpapers/${choice}"
+	wallpapers=$(ls ~/media/wallpapers)
+	choice=$(printf "random\nrandom per monitor\n${wallpapers}" | dmenu)
+	case "${choice}" in
+	    "random")
+		random_monitor=$(ls ~/media/wallpapers/ | shuf | head -n1)
+		feh --bg-fill "${HOME}/media/wallpapers/$random_monitor"
+	        ;;
+	    "random per monitor")
+		number_of_monitors=$(xrandr --listmonitors | grep -v "Monitors" | wc -l)
+		args=""
+		for i in $(seq "$number_of_monitors"); do
+		    random_monitor=$(ls ~/media/wallpapers/ | shuf | head -n1)
+		    args="$args --bg-fill ${HOME}/media/wallpapers/$random_monitor"
+		done
+		args="feh$args"
+		eval "$args"
+	        ;;
+	    *)
+		feh --bg-fill "${HOME}/media/wallpapers/${choice}"
+		;;
+	esac
 	;;
     "i3: enable gaps")
 	i3-msg gaps inner all set 10
