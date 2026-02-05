@@ -47,6 +47,14 @@
 	(switch-to-buffer vterm-buffer)
 	(delete-other-windows)))))
 
+(defun u:vterm-run-command (command)
+  "Execute string COMMAND in a new vterm buffer."
+  (interactive "sCommand: ")
+  (let ((buffer (vterm (concat "*" command "*"))))
+    (with-current-buffer buffer
+      (vterm-send-string command)
+      (vterm-send-return))))
+
 ;; lsps and friends
 (use-package company
   :ensure t
@@ -177,8 +185,15 @@
 	ledger-report-links-in-register nil
 	ledger-report-auto-width nil
 	ledger-default-date-format "%Y-%m-%d")
+  (defun u:start-hledger-web-interface ()
+    "Start the hledger web interface in a vterm."
+    (interactive)
+    (u:vterm-run-command "hledger-web -f /home/usr/org/ledger/main.ledger --serve"))
   :config
-  (add-to-list 'auto-mode-alist '("\\.ledger\\'" . ledger-mode)))
+  (add-to-list 'auto-mode-alist '("\\.ledger\\'" . ledger-mode))
+  :bind
+  (:map ledger-mode-map
+	("C-c h" . u:start-hledger-web-interface)))
 
 (use-package magit :ensure t)
 (use-package helm
