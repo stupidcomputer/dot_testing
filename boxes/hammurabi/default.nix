@@ -14,6 +14,7 @@
     (callPackage ../../builds/tilp.nix {})
     anki-bin
     sshuttle
+    vscode
   ];
 
   services = {

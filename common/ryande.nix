@@ -128,6 +128,8 @@ in {
       };
     };
 
+    services.xscreensaver.enable = true;
+
     system.userActivationScripts.copyAercConfiguration = {
       text = ''
         mkdir -p /home/${cfg.username}/.config/aerc
@@ -316,6 +318,10 @@ set status_display_program=cmus-status-update
       programs.chromium = {
         enable = true;
         package = pkgs.brave;
+      };
+
+      programs.qutebrowser = {
+        enable = true;
       };
 
       programs.git.enable = true;

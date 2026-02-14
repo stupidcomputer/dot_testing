@@ -45,6 +45,10 @@ bindsym $mod+w layout tabbed
 
 bindsym $mod+b exec "brave-select-profile"
 
+# very useful keybindings
+bindsym $mod+x exec mpv "/home/usr/dots/common/best audio.mp3"
+bindsym $mod+Shift+x exec mpv "/home/usr/dots/common/carolinacrown.mp3"
+
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
 

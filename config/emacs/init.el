@@ -202,8 +202,24 @@
   (helm-mode 1)
   (setq helm-M-x-fuzzy-match 1
 	helm-buffers-fuzzy-matching 1)
+  (defun u:helm-multi-configs ()
+    "Bring up a Helm menu for important files"
+    (interactive)
+    (let ((config-dirs '("~/org/" 
+			 "~/dots/")))
+      (helm :sources (helm-build-sync-source "Multi-Repo Configs"
+                       :candidates (lambda () 
+                                     (mapcan (lambda (dir) 
+                                               (directory-files-recursively dir "")) 
+                                             config-dirs))
+                       :fuzzy-match t
+                       :action (helm-make-actions
+				"Open file" #'find-file
+				"Open in other window" #'find-file-other-window))
+            :buffer "*helm-multi-configs*")))
   :bind
   (("C-<SPC>" . helm-buffers-list)
+   ("M-<SPC>" . #'u:helm-multi-configs)
    ("C-x C-f" . helm-find-files)))
 
 ;; eye-candy and aesthetics
