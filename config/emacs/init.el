@@ -121,12 +121,30 @@
 		        (put-text-property cursor
 					     (next-single-property-change cursor 'org-marker)
 					       'org-habit-p data)))))
-  
+
   (advice-add #'org-agenda-finalize :before #'u:org-agenda-mark-habits)
   (add-hook 'org-mode-hook 'visual-line-mode)
 
+  (defun u:helm-org-jump ()
+    "Jump to an Org-mode heading in the current buffer using Helm."
+    (interactive)
+    (unless (derived-mode-p 'org-mode)
+      (user-error "This function only works in Org-mode buffers."))
+    (let ((candidates (org-map-entries
+                       (lambda ()
+			 (let ((hl-title (org-get-heading t t t t)))
+                           (cons hl-title (point)))))))
+      (helm :sources (helm-build-sync-source "Org Headings"
+                       :candidates candidates
+                       :action (lambda (candidate)
+				 (goto-char candidate)
+				 (org-show-entry)
+				 (recenter)))
+            :buffer "*helm org jump*")))
+  
   :bind
-  (("C-c o" . (lambda () (interactive) (find-file "~/org/main.org")))))
+   (("C-c o" . (lambda () (interactive) (find-file "~/org/main.org")))
+    (:map org-mode-map ("<C-tab>" . u:helm-org-jump))))
 
 (use-package org-drill :ensure t)
 (use-package org-journal :ensure t)
