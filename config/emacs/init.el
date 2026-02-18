@@ -237,7 +237,7 @@
             :buffer "*helm-multi-configs*")))
   :bind
   (("C-<SPC>" . helm-buffers-list)
-   ("M-<SPC>" . #'u:helm-multi-configs)
+   ("M-<SPC>" . u:helm-multi-configs)
    ("C-x C-f" . helm-find-files)))
 
 ;; eye-candy and aesthetics
