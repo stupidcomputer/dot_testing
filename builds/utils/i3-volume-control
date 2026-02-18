@@ -1,0 +1,51 @@
+# get list of nodes (sinks + sources)
+# this is a jq warcrime
+node_list=$(pw-dump | jq -r '.[] | 
+    select(.type == "PipeWire:Interface:Node" and (
+        .info.props["media.class"] == "Audio/Sink" or 
+        .info.props["media.class"] == "Audio/Source" or 
+        .info.props["media.class"] == "Stream/Output/Audio"
+    )) | 
+    (.info.params.Props[]? | select(.channelVolumes)) as $p |
+    (.info.props["media.class"] | split("/")[-1]) as $type |
+    (.info.props["application.name"] // .info.props["node.description"] // .info.props["node.name"]) as $name |
+    ($p.mute | if . == true then "/MUTE" else "" end) as $m |
+    ($p.channelVolumes[0] // 0 | pow(.; 1/3) * 100 | round | "\(.)%") as $v |
+    "[\($type)/\($v)\($m)] \(.id): \($name)"')
+
+selected_node=$(echo "$node_list" | dmenu)
+[ -z "$selected_node" ] && exit 0
+node_id=$(echo "$selected_node" | grep -oP '\d+(?=:)' )
+
+actions="default
+mute
+unmute
+10%
+20%
+30%
+40%
+50%
+60%
+70%
+80%
+90%
+100%"
+
+selected_action=$(echo -e "$actions" | dmenu)
+[ -z "$selected_action" ] && exit 0
+
+case "$selected_action" in
+    "default")
+	wpctl set-default "$node_id"
+	;;
+    "mute")
+	wpctl set-mute "$node_id" 1
+	;;
+    "unmute")
+	wpctl set-mute "$node_id" 0
+	;;
+    *)
+        volume=$(echo "$selected_action" | tr -d '%')
+        wpctl set-volume "$node_id" "$volume%"
+	;;
+esac

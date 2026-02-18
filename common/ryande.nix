@@ -184,6 +184,7 @@ in {
         hledger
         hledger-web
         hledger-ui
+        wireplumber
 
         # terminal utilities
         age
