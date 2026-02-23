@@ -56,6 +56,11 @@ in {
       };
     };
 
+    programs.firefox = {
+      enable = true;
+      package = pkgs.librewolf;
+    };
+
     security.rtkit.enable = true;
     programs.adb.enable = true;
     services = {
