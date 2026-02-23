@@ -18,6 +18,7 @@
 
   environment.systemPackages = with pkgs; [
     soundwireserver
+    vscode
   ];
 
   virtualisation.virtualbox.host.enable = true;
