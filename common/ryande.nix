@@ -192,6 +192,7 @@ in {
         i3-swallow
         arandr
         warpd
+        sxiv
 
         # other stuff
         ncpamixer
