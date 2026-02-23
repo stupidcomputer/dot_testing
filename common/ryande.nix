@@ -305,30 +305,7 @@ in {
 
       programs.ssh = {
         enable = true;
-        enableDefaultConfig = false; # disable configuration warning
-
-        matchBlocks = {
-          "*" = {
-            forwardAgent = false;
-            addKeysToAgent = "no";
-            compression = false;
-            serverAliveInterval = 0;
-            serverAliveCountMax = 3;
-            hashKnownHosts = false;
-            userKnownHostsFile = "~/.ssh/known_hosts";
-            controlMaster = "no";
-            controlPath = "~/.ssh/master-%r@%n:%p";
-            controlPersist = "no";
-          };
-
-          "netbox.s" = {
-            host = "netbox.s";
-
-            user = "ryan";
-            port = 443;
-            hostname = "beepboop.systems";
-          };
-        };
+        extraConfig = builtins.readFile ../config/ssh/sshrc;
       };
 
       programs.cmus = {

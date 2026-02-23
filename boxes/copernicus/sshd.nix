@@ -6,6 +6,8 @@
     settings = {
       PermitRootLogin = "no";
       PasswordAuthentication = false;
+      X11Forwarding = "yes";
+      X11DisplayOffset = "10";
     };
     listenAddresses = [
       {
@@ -23,5 +25,6 @@
     machines.aristotle.pubkey
     machines.copernicus.pubkey
     machines.phone.pubkey
+    machines.hammurabi.pubkey
   ];
 }

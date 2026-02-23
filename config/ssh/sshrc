@@ -1,0 +1,14 @@
+Host *
+     Compression yes
+
+Host netbox
+     HostName beepboop.systems
+     User ryan
+     Port 443
+
+Host copernicus
+     HostName 192.168.1.201
+     User usr
+     Port 2222
+     ForwardX11 yes
+
