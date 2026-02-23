@@ -41,19 +41,35 @@ in {
     environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
 
     # enable syncthing
-    systemd.services.syncthing = {
+    systemd.user.services.syncthing = {
       enable = true;
       description = "start syncthing on network startup";
-      after = [ "network-online.target" ];
-      wantedBy = [ "multi-user.target" ];
-      requires = [ "network-online.target" ];
+      after = [ "network.target" ];
+      wantedBy = [ "default.target" ];
 
+      unitConfig.conditionUser = "usr";
       serviceConfig = {
         ExecStart = "${pkgs.syncthing}/bin/syncthing";
-        User = cfg.username;
         Restart = "on-failure";
         RestartSec = "3";
       };
+    };
+
+    systemd.user.services.hledger-web = {
+      enable = true;
+      description = "start hledger-web";
+
+      unitConfig.conditionUser = "usr";
+      serviceConfig = {
+        ExecStart = "${pkgs.hledger-web}/bin/hledger-web -f /home/usr/org/ledger/main.ledger --serve";
+        Restart = "on-failure";
+        RestartSec = "3";
+      };
+    };
+
+    programs.firefox = {
+      enable = true;
+      package = pkgs.librewolf;
     };
 
     security.rtkit.enable = true;
@@ -289,30 +305,7 @@ in {
 
       programs.ssh = {
         enable = true;
-        enableDefaultConfig = false; # disable configuration warning
-
-        matchBlocks = {
-          "*" = {
-            forwardAgent = false;
-            addKeysToAgent = "no";
-            compression = false;
-            serverAliveInterval = 0;
-            serverAliveCountMax = 3;
-            hashKnownHosts = false;
-            userKnownHostsFile = "~/.ssh/known_hosts";
-            controlMaster = "no";
-            controlPath = "~/.ssh/master-%r@%n:%p";
-            controlPersist = "no";
-          };
-
-          "netbox.s" = {
-            host = "netbox.s";
-
-            user = "ryan";
-            port = 443;
-            hostname = "beepboop.systems";
-          };
-        };
+        extraConfig = builtins.readFile ../config/ssh/sshrc;
       };
 
       programs.cmus = {
