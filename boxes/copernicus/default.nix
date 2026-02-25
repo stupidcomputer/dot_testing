@@ -20,6 +20,7 @@
   environment.systemPackages = with pkgs; [
     soundwireserver
     vscode
+    moonlight-qt
   ];
 
   virtualisation.virtualbox.host.enable = true;
