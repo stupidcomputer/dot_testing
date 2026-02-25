@@ -11,7 +11,7 @@ exec_always --no-startup-id pkill xcape
 exec_always --no-startup-id xcape -e 'Super_L=Escape'
 exec emacs --daemon
 
-exec --no-startup-id [ "$(hostname)" = "copernicus" ] && xrandr --output HDMI-0 --primary --left-of DP-0
+exec --no-startup-id [ "$(hostname)" = "copernicus" ] && xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --auto
 
 bindsym $mod+Return exec st
 bindsym $mod+Shift+Return exec emacsclient -n -e '(u:new-frame-with-vterm)'

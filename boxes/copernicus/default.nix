@@ -6,6 +6,7 @@
     ../../common/bootstrap.nix
     ./agenix.nix
     ./sshd.nix
+    ./sunshine.nix
   ];
 
   services.ryande.enable = true;
@@ -14,7 +15,7 @@
     cores = 16;
     max-jobs = 24;
   };
-  nixpkgs.config.cudaSupport = true;
+#  nixpkgs.config.cudaSupport = true;
 
   environment.systemPackages = with pkgs; [
     soundwireserver

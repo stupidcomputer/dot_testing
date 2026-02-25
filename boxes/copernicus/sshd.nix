@@ -6,7 +6,7 @@
     settings = {
       PermitRootLogin = "no";
       PasswordAuthentication = false;
-      X11Forwarding = "yes";
+      X11Forwarding = true;
       X11DisplayOffset = "10";
     };
     listenAddresses = [
