@@ -82,11 +82,14 @@
 	org-agenda-span 14
 	org-agenda-sticky t
 	org-agenda-show-future-repeats 'next
+	org-agenda-dim-blocked-tasks nil
+	org-agenda-inhibit-startup t
+	org-agenda-ignore-properties '(stats)
 	org-todo-keywords '((sequence "TODO(t!)" "PLANNING(p!)" "IN-PROGRESS(i@/!)"
 				      "VERIFYING(v!)" "BLOCKED(b@)"  "|" "DONE(d!)"
 				      "OBE(o@!)" "WONT-DO(w@/!)" "DUE-PASSED(a@!)" ))
 	org-confirm-babel-evaluate nil
-	org-element-use-cache nil
+	org-element-use-cache t
 	org-read-date-force-compatible-dates nil)
   :config
   (add-to-list 'org-modules 'org-habit)
