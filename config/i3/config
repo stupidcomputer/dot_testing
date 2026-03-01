@@ -11,8 +11,6 @@ exec_always --no-startup-id pkill xcape
 exec_always --no-startup-id xcape -e 'Super_L=Escape'
 exec emacs --daemon
 
-exec --no-startup-id [ "$(hostname)" = "copernicus" ] && xrandr --output HDMI-0 --primary --mode 1920x1080 --pos 0x0 --rotate normal --auto
-
 bindsym $mod+Return exec st
 bindsym $mod+Shift+Return exec emacsclient -n -e '(u:new-frame-with-vterm)'
 bindsym $mod+e exec emacsclient -c -a ""
@@ -148,19 +146,6 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-mode "browser" {
-     bindsym --release h exec xdotool key alt+Left
-     bindsym --release j exec xdotool key ctrl+Tab
-     bindsym --release k exec xdotool key ctrl+shift+Tab
-     bindsym --release l exec xdotool key alt+Right
-     
-     bindsym q mode "default"
-     bindsym Return mode "default"
-     bindsym Escape mode "default"
-}
-
-bindsym $mod+n mode "browser"
-
 mode "move" {
      bindsym Shift+h move left 40 px
      bindsym Shift+j move down 40 px
@@ -184,8 +169,8 @@ mode "move" {
      bindsym Escape mode "default"
 }
 
-bindsym $mod+Shift+m mode "move"
-bindsym $mod+m exec warpd --hint
+bindsym $mod+m mode "move"
+bindsym $mod+n exec warpd --hint
 
 bar {
     status_command i3pystatus -c ~/.config/i3pystatus/config.py
