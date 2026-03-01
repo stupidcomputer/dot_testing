@@ -234,6 +234,20 @@
    ("M-<SPC>" . u:helm-multi-configs)
    ("C-x C-f" . helm-find-files)))
 
+(use-package projectile
+  :ensure t
+  :init
+  (setq projectile-project-search-path '("~/git/" "~/dots/"))
+  :config
+  (global-set-key (kbd "C-c p") 'projectile-command-map)
+  (projectile-mode +1))
+
+(use-package helm-projectile
+  :ensure t
+  :config
+  (define-key projectile-mode-map (kbd "C-c p f") 'helm-projectile-find-file)
+  (define-key projectile-mode-map (kbd "C-c p p") 'helm-projectile-switch-project))
+
 ;; eye-candy and aesthetics
 (use-package gruvbox-theme :ensure t)
 (setq custom-file "~/.emacs.d/custom.el")

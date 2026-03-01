@@ -268,6 +268,7 @@ in {
           evil-collection
           gruvbox-theme
           helm
+          helm-projectile
           htmlize
           ledger-mode
           lsp-mode
@@ -278,6 +279,7 @@ in {
           org-evil
           org-journal
           pdf-tools
+          projectile
           python-mode
           use-package
           vterm
