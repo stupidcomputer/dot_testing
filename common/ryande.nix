@@ -279,6 +279,7 @@ in {
           org-journal
           pdf-tools
           python-mode
+          use-package
           vterm
         ] ++ [
           # org support packages

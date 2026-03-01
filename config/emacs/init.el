@@ -1,12 +1,3 @@
-(require 'package)
-(add-to-list 'package-archives
-		'("melpa" . "https://melpa.org/packages/"))
-(package-initialize)
-
-;; use-package boilerplate
-(unless (package-installed-p 'use-package)
-  (package-refresh-contents)
-  (package-install 'use-package))
 (require 'use-package)
 (setq use-package-verbose t
       gc-cons-threshold (* 50 1024 1024))
@@ -256,6 +247,7 @@
 (add-to-list 'warning-suppress-types '(t))
 (setq warning-minimum-level :error)
 
+(add-to-list 'default-frame-alist '(font . "Fantasque Sans Mono-13"))
 (set-frame-font "Fantasque Sans Mono" nil t)
 (cond
  ((string-equal (system-name) "copernicus")
