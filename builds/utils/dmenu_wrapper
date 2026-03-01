@@ -43,6 +43,7 @@ i3: disable gaps
 i3: rename workspace
 hammurabi: desk monitor setup
 hammurabi: one screen
+hammurabi: brightness
 syncthing: view logs
 second_cmus
 bluetooth
@@ -203,6 +204,10 @@ case "$response" in
 	xrandr --output eDP-1 --auto --primary \
 	       --output HDMI-1 --off \
 	       --output DP-2 --off
+	;;
+    "hammurabi: brightness")
+	choice=$(printf "5000\n10000\n15000" | dmenu)
+	echo "$choice" > /sys/class/backlight/intel_backlight/brightness
 	;;
     "syncthing: view logs")
 	st -c st_floating -e journalctl -xefu syncthing

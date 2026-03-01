@@ -155,7 +155,15 @@ in {
 
     users.users."${cfg.username}" = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" "adbusers" "wireshark" "audio" "vboxusers" ];
+      extraGroups = [
+        "adbusers"
+        "audio"
+        "networkmanager"
+        "vboxusers"
+        "video"
+        "wheel"
+        "wireshark"
+      ];
       initialPassword = "usr";
     };
 
