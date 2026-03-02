@@ -120,22 +120,34 @@
   (add-hook 'org-mode-hook 'visual-line-mode)
 
   (defun u:helm-org-jump ()
-    "Jump to an Org-mode heading in the current buffer using Helm."
+    "Jump to an Org-mode heading or Babel source block in the current buffer."
     (interactive)
     (unless (derived-mode-p 'org-mode)
       (user-error "This function only works in Org-mode buffers."))
-    (let ((candidates (org-map-entries
-                       (lambda ()
-			 (let ((hl-title (org-get-heading t t t t)))
-                           (cons hl-title (point)))))))
-      (helm :sources (helm-build-sync-source "Org Headings"
+    (let* ((ast (org-element-parse-buffer))
+           (candidates
+            (org-element-map ast '(headline src-block)
+              (lambda (el)
+		(let* ((type (org-element-type el))
+                       (pos (org-element-property :begin el))
+                       (title (cond
+                               ((eq type 'headline)
+				(org-element-property :raw-value el))
+                               ((eq type 'src-block)
+				(let ((name (org-element-property :name el))
+                                      (lang (org-element-property :language el)))
+                                  (if name 
+                                      (format "SRC: %s [%s]" name lang)
+                                    (format "SRC: (%s block)" lang)))))))
+                  (cons title pos))))))
+      (helm :sources (helm-build-sync-source "Org Jump"
                        :candidates candidates
                        :action (lambda (candidate)
 				 (goto-char candidate)
 				 (org-show-entry)
 				 (recenter)))
             :buffer "*helm org jump*")))
-  
+
   :bind
    (("C-c o" . (lambda () (interactive) (find-file "~/org/main.org")))
     (:map org-mode-map ("<C-tab>" . u:helm-org-jump))))
