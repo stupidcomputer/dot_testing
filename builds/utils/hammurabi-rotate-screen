@@ -1,0 +1,14 @@
+SCREEN="eDP-1"
+TOUCH="Wacom Pen and multitouch sensor Finger"
+STYLUS="Wacom Pen and multitouch sensor Pen Pen (0xb34f41f1)"
+ERASER="Wacom Pen and multitouch sensor Pen Eraser (0xb34f41f1)"
+
+ORIENTATION="$1"
+
+[ -z "$ORIENTATION" ] && exit 1
+
+xrandr --output "$SCREEN" --rotate "$ORIENTATION"
+
+xinput map-to-output "$TOUCH" "$SCREEN"
+xinput map-to-output "$STYLUS" "$SCREEN"
+xinput map-to-output "$ERASER" "$SCREEN"

@@ -15,6 +15,7 @@
     anki-bin
     sshuttle
     vscode
+    styluslabs-write
   ];
 
   services = {

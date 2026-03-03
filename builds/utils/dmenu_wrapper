@@ -44,6 +44,9 @@ i3: rename workspace
 hammurabi: desk monitor setup
 hammurabi: one screen
 hammurabi: brightness
+hammurabi: rotate screen normal
+hammurabi: rotate screen left
+hammurabi: rotate screen right
 syncthing: view logs
 second_cmus
 bluetooth
@@ -208,6 +211,15 @@ case "$response" in
     "hammurabi: brightness")
 	choice=$(printf "5000\n10000\n15000" | dmenu)
 	echo "$choice" > /sys/class/backlight/intel_backlight/brightness
+	;;
+    "hammurabi: rotate screen normal")
+	hammurabi-rotate-screen normal
+	;;
+    "hammurabi: rotate screen left")
+	hammurabi-rotate-screen left
+	;;
+    "hammurabi: rotate screen right")
+	hammurabi-rotate-screen right
 	;;
     "syncthing: view logs")
 	st -c st_floating -e journalctl -xefu syncthing
