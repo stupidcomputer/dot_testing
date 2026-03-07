@@ -150,6 +150,7 @@
 
   :bind
    (("C-c o" . (lambda () (interactive) (find-file "~/org/main.org")))
+    ("M-x" . 'helm-M-x)
     (:map org-mode-map ("<C-tab>" . u:helm-org-jump))))
 
 (use-package org-drill :ensure t)
@@ -225,6 +226,7 @@
   :config
   (helm-mode 1)
   (setq helm-M-x-fuzzy-match 1
+	helm-input-idle-delay 0.01
 	helm-buffers-fuzzy-matching 1)
   (defun u:helm-multi-configs ()
     "Bring up a Helm menu for important files"
@@ -273,8 +275,7 @@
 (add-to-list 'warning-suppress-types '(t))
 (setq warning-minimum-level :error)
 
-(add-to-list 'default-frame-alist '(font . "Fantasque Sans Mono-13"))
-(set-frame-font "Fantasque Sans Mono" nil t)
+(set-frame-font "Fantasque Sans Mono-13" nil t)
 (cond
  ((string-equal (system-name) "copernicus")
   (set-face-attribute 'default nil :height 100))
