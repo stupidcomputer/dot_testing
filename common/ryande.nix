@@ -263,7 +263,6 @@ in {
         enable = true;
         configuration = builtins.readFile ../config/i3pystatus/config.py;
       };
-      programs.gh.enable = true;
       xdg.configFile."i3/config".text = builtins.readFile ../config/i3/config;
 
       programs.htop.enable = true;
@@ -345,8 +344,14 @@ set status_display_program=cmus-status-update
         enable = true;
       };
 
-      programs.git.enable = true;
+      programs.git = {
+        enable = true;
+      };
       xdg.configFile."git/config".text = builtins.readFile ../config/git/config;
+      programs.gh = {
+        enable = true;
+        gitCredentialHelper.enable = false;
+      };
 
       programs.neovim = {
         enable = true;
