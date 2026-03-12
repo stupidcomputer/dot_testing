@@ -211,6 +211,9 @@ in {
         hledger-ui
         wireplumber
 
+        # nix utilities
+        nixpkgs-review
+        nix-update
         # terminal utilities
         age
         cryptsetup
