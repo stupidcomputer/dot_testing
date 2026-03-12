@@ -263,6 +263,7 @@ in {
         enable = true;
         configuration = builtins.readFile ../config/i3pystatus/config.py;
       };
+      programs.gh.enable = true;
       xdg.configFile."i3/config".text = builtins.readFile ../config/i3/config;
 
       programs.htop.enable = true;
