@@ -122,7 +122,7 @@ in {
       font = "Lat2-Terminus16";
       keyMap = "us";
     };
-    time.timeZone = "America/Chicago";
+    time.timeZone = "America/New_York";
 
     environment.etc = {
       "profile.local" = {
