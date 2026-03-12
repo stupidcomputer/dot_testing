@@ -1,4 +1,4 @@
-{ config, lib, pkgs, options, ... }:
+{ pkgs, ppkgs, ... }:
 
 {
   imports = [
@@ -11,7 +11,7 @@
   services.ryande.enable = true;
 
   environment.systemPackages = with pkgs; [
-    (callPackage ../../builds/tilp.nix {})
+    ppkgs.tilp
     anki-bin
     sshuttle
     vscode

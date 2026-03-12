@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, ppkgs, ... }:
 let
   cfg = config.services.ryande;
 in {
@@ -14,10 +14,10 @@ in {
 
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
-      (callPackage ../builds/st.nix {})
-      (callPackage ../builds/dmenu.nix {})
-      (callPackage ../builds/utils.nix {})
-      (callPackage ../builds/rebuild.nix {})
+      ppkgs.st
+      ppkgs.dmenu
+      ppkgs.utils
+      ppkgs.rebuild
       anki-bin
       scrcpy
     ];

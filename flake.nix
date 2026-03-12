@@ -16,13 +16,18 @@
       home-manager,
       agenix,
       ...
-    }@inputs: {
+  }@inputs:
+  let
+    system = "x86_64-linux";
+    pkgs = nixpkgs.legacyPackages.${system};
+    ppkgs = import ./ppkgs { inherit pkgs; };
+    machines = import ./common/machines.nix;
+  in {
       nixosConfigurations = {
         netbox = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          inherit system;
           specialArgs = {
-            inherit inputs;
-            machines = import ./common/machines.nix;
+            inherit inputs ppkgs machines;
           };
           modules = [
             ./boxes/netbox
@@ -33,10 +38,9 @@
           ];
         };
         copernicus = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          inherit system;
           specialArgs = {
-            inherit inputs;
-            machines = import ./common/machines.nix;
+            inherit inputs ppkgs machines;
           };
           modules = [
             ./boxes/copernicus
@@ -52,10 +56,9 @@
           ];
         };
         hammurabi = nixpkgs.lib.nixosSystem {
-          system = "x86_64-linux";
+          inherit system;
           specialArgs = {
-            inherit inputs;
-            machines = import ./common/machines.nix;
+            inherit inputs ppkgs machines;
           };
           modules = [
             ./boxes/hammurabi

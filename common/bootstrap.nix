@@ -5,7 +5,9 @@
     git
     neovim
 
-    (pkgs.callPackage ../builds/rebuild.nix {})
+    # don't replace with ppkgs construction, as this config needs to function
+    # without flakes
+    (pkgs.callPackage ../ppkgs/rebuild.nix {})
   ];
 
   nix.settings = {

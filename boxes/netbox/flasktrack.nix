@@ -1,6 +1,6 @@
-{ pkgs, ... }:
+{ pkgs, ppkgs, ... }:
 let
-  flasktrack = (pkgs.callPackage ../../builds/flasktrack.nix {});
+  flasktrack = ppkgs.flasktrack;
   appEnv = pkgs.python3.withPackages (p: with p; [
     waitress
     flask

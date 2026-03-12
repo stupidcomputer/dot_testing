@@ -12,15 +12,15 @@ options:
 	@echo sssg - install sssg
 
 st:
-	-cd ../../../builds/st/ && CFLAGS="-DIS_PHONE" CC=clang make && cp st ~/.local/bin/st
+	-cd ../../../ppkgs/st/ && CFLAGS="-DIS_PHONE" CC=clang make && cp st ~/.local/bin/st
 
 utils-sh:
 	mkdir -p ~/.local/bin
-	cp ../../../builds/utils/* ~/.local/bin
+	cp ../../../ppkgs/utils/* ~/.local/bin
 
 rebuild-sh:
 	mkdir -p ~/.local/bin
-	cp ../../../builds/rebuild/* ~/.local/bin
+	cp ../../../ppkgs/rebuild/* ~/.local/bin
 pip-pkgs:
 	pip3 install vdirsyncer
 	pip3 install khal
@@ -30,7 +30,7 @@ termux-pkgs:
 	pkg install -y \
 		tur-repo \
 		x11-repo
-		
+
 	pkg install -y \
 		neovim \
 		python-pip \
@@ -87,4 +87,4 @@ sssg:
 	-chmod +x ~/.local/bin/sssg
 
 statusbar-polyfill:
-	cp ~/dot_testing/builds/statusbar/termux-statusbar-polyfill ~/.local/bin
+	cp ~/dot_testing/ppkgs/statusbar/termux-statusbar-polyfill ~/.local/bin
