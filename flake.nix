@@ -37,6 +37,19 @@
             }
           ];
         };
+        theseus = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs ppkgs machines;
+          };
+          modules = [
+            ./boxes/theseus
+            agenix.nixosModules.default
+            {
+              environment.systemPackages = [ agenix.packages."x86_64-linux".default ];
+            }
+          ];
+        };
         copernicus = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {

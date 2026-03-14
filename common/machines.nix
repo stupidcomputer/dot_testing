@@ -50,6 +50,9 @@
       Just a tiny VPS, nothing much.
     '';
   };
+  theseus = {
+    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHNOmlULaILeL5QOAuKqMbhV6vXOWjxgsN3wpvFRvarz usr";
+  };
   plato = {
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIABAuisY7QufTrcPkBvHcPTtCLg4/SY+r4nCh3fqdua7 usr";
     syncthing-id = "A6LQULQ-AVUHHN5-EAT3JWW-O6VZATV-LAHQB6X-RLEGWMD-NQJKT6L-WUAOJAZ";

@@ -1,6 +1,5 @@
 let
-  machines = import ../lib/machines.nix;
-  server-netbox = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOvinRGdd9GuiPnZYBQPzraXeBxeStwakzmtfzNNpDxy";
+  machines = import ../common/machines.nix;
 
   userfacing = with machines; [
     aristotle.pubkey
@@ -8,7 +7,7 @@ let
     hammurabi.pubkey
     plato.pubkey
   ];
-  all = [ server-netbox ] ++ userfacing;
+  all = [ machines.theseus.pubkey ] ++ userfacing;
 in {
   # mailserver
   "mailaccount.age".publicKeys = all;
@@ -28,4 +27,7 @@ in {
 
   # aerc
   "aerc-account-config.age".publicKeys = userfacing;
+
+  # flasktrack secret
+  "flasktrack-secret.age".publicKeys = all;
 }
