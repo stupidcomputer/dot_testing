@@ -63,7 +63,7 @@
       text = ''
         ${pkgs.coreutils}/bin/cp /home/usr/dot_testing/config/bash/bashrc /home/usr/.bashrc
         ${pkgs.coreutils}/bin/cp /home/usr/dot_testing/config/bash/profile /home/usr/.bash_profile
-        ${pkgs.coreutils}/bin/mkdir -p /home/usr/config/nvim
+        ${pkgs.coreutils}/bin/mkdir -p /home/usr/.config/nvim
         ${pkgs.coreutils}/bin/cp /home/usr/dot_testing/config/nvim/init.min.lua /home/usr/.config/nvim/init.lua
       '';
       deps = [];
