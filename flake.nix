@@ -2,6 +2,10 @@
   description = "stupidcomputer's nixos flake";
 
   inputs = {
+    flagman = {
+      url = "git+ssh://git@github.com/stupidcomputer/flagman.git";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
     agenix.url = "github:ryantm/agenix";
     home-manager = {
@@ -12,9 +16,10 @@
 
   outputs = {
       self,
-      nixpkgs,
-      home-manager,
       agenix,
+      flagman,
+      home-manager,
+      nixpkgs,
       ...
   }@inputs:
   let

@@ -4,6 +4,7 @@
     ./hardware-configuration.nix
     ../../common/bootstrap.nix
 
+    ./flagman.nix
     ./flasktrack.nix
     ./nginx.nix
     ./ssh.nix

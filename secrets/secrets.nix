@@ -30,4 +30,7 @@ in {
 
   # flasktrack secret
   "flasktrack-secret.age".publicKeys = all;
+
+  # flagman settings
+  "flagman-env.age".publicKeys = all;
 }
