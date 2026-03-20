@@ -51,11 +51,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773533935,
-        "narHash": "sha256-BMyOfU0RJwD/75L3u2hpCfTUOIWKwhNblTaDaTonwvo=",
+        "lastModified": 1774052388,
+        "narHash": "sha256-+MjUWdmpHuzkWrOVfnP2CyazWFh5/UITdItsUdTFKyA=",
         "ref": "refs/heads/main",
-        "rev": "1c45ab219cfb26b105439a98bad6827034326a72",
-        "revCount": 60,
+        "rev": "d21a9067dd69e7950c4897d902cd17a99c929fb3",
+        "revCount": 81,
         "type": "git",
         "url": "ssh://git@github.com/stupidcomputer/flagman.git"
       },
@@ -110,11 +110,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1773607598,
-        "narHash": "sha256-nPV/IE0NwQjYcXkEGOmCIEsX9i8HFMeq2RupYzfVdiI=",
+        "lastModified": 1773963144,
+        "narHash": "sha256-WzBOBfSay3GYilUfKaUa1Mbf8/jtuAiJIedx7fWuIX4=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "1f8f9e001235652cf54f9c1f7983f9c0e920944a",
+        "rev": "a91b3ea73a765614d90360580b689c48102d1d33",
         "type": "github"
       },
       "original": {
@@ -142,11 +142,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1773524153,
-        "narHash": "sha256-Jms57zzlFf64ayKzzBWSE2SGvJmK+NGt8Gli71d9kmY=",
+        "lastModified": 1773814637,
+        "narHash": "sha256-GNU+ooRmrHLfjlMsKdn0prEKVa0faVanm0jrgu1J/gY=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "e9f278faa1d0c2fc835bd331d4666b59b505a410",
+        "rev": "fea3b367d61c1a6592bc47c72f40a9f3e6a53e96",
         "type": "github"
       },
       "original": {
