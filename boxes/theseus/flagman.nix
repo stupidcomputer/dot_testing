@@ -18,5 +18,6 @@
     databaseUser = "flagman";
     internalPort = 3032;
     acmeEmail = "nickforanick@protonmail.com";
+    enableSignups = false;
   };
 }
