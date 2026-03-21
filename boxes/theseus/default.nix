@@ -4,6 +4,7 @@
     ./hardware-configuration.nix
     ../../common/bootstrap.nix
 
+    ./calendar-sync.nix
     ./flagman.nix
     ./flasktrack.nix
     ./nginx.nix
@@ -66,14 +67,6 @@
         ${pkgs.coreutils}/bin/cp /home/usr/dot_testing/config/bash/profile /home/usr/.bash_profile
         ${pkgs.coreutils}/bin/mkdir -p /home/usr/.config/nvim
         ${pkgs.coreutils}/bin/cp /home/usr/dot_testing/config/nvim/init.min.lua /home/usr/.config/nvim/init.lua
-      '';
-      deps = [];
-    };
-  };
-
-  system.activationScripts = {
-    copyEssentialConfiguration = {
-      text = ''
         ${pkgs.coreutils}/bin/cp /home/usr/dot_testing/config/bash/bashrc /root/.bashrc
         ${pkgs.coreutils}/bin/cp /home/usr/dot_testing/config/bash/profile /root/.bash_profile
         ${pkgs.coreutils}/bin/mkdir -p /root/.config/nvim

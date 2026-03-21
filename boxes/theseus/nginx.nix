@@ -16,6 +16,17 @@
     '';
 
     virtualHosts = {
+      "beepboop.systems" = {
+        forceSSL = true;
+        enableACME = true;
+        locations."/" = {
+          extraConfig = ''
+            port_in_redirect off;
+            absolute_redirect off;
+          '';
+          proxyPass = "https://stupidcomputer.github.io/stupidcomputer/";
+        };
+      };
       "tools.beepboop.systems" = {
         forceSSL = true;
         enableACME = true;
@@ -30,6 +41,8 @@
     };
   };
 
+  systemd.services.nginx.serviceConfig.ProtectHome = false;
+
   security.acme = {
     acceptTerms = true;
     defaults.email = "nickforanick@protonmail.com";
@@ -37,6 +50,6 @@
 
   users.groups.nginx-data = {
     name = "nginx-data";
-    members = [ "nginx" "ryan" ];
+    members = [ "nginx" ];
   };
 }
