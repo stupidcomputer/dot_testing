@@ -162,7 +162,9 @@
   (require 'evil-org-agenda)
   (evil-org-agenda-set-keys)
   (evil-org-set-key-theme '(navigation insert textobjects additional calendar)))
-  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'org-mode-hook (lambda () 
+                           (unless noninteractive 
+                             (evil-org-mode))))
   (add-hook 'org-mode-hook (lambda () (company-mode -1)))
 (use-package gnuplot :ensure t)
 (use-package org-contacts
