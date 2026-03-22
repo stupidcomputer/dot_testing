@@ -29,19 +29,6 @@
     machines = import ./common/machines.nix;
   in {
       nixosConfigurations = {
-        netbox = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs ppkgs machines;
-          };
-          modules = [
-            ./boxes/netbox
-            agenix.nixosModules.default
-            {
-              environment.systemPackages = [ agenix.packages."x86_64-linux".default ];
-            }
-          ];
-        };
         theseus = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {
