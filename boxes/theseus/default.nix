@@ -10,6 +10,7 @@
     ./nginx.nix
     ./ssh.nix
     ./sslh.nix
+    ./syncthing.nix
     ./vaultwarden.nix
   ];
 
