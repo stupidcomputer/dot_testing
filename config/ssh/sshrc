@@ -1,9 +1,14 @@
 Host *
      Compression yes
 
-Host netbox
+Host theseus
      HostName beepboop.systems
-     User ryan
+     User usr
+     Port 443
+
+Host sshuttle_target
+     HostName beepboop.systems
+     User usr
      Port 443
 
 Host copernicus
@@ -11,4 +16,3 @@ Host copernicus
      User usr
      Port 2222
      ForwardX11 yes
-
