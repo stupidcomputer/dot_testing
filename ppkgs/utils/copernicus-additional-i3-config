@@ -1,0 +1,10 @@
+[ "$(hostname)" != "copernicus" ] && exit 1
+
+xrandr --output HDMI-0 --mode 1920x1080 --pos 1920x0 --rotate left \
+       --output DP-0 --primary --mode 1920x1080 --pos 0x420 --rotate normal
+
+feh \
+    --bg-fill /home/usr/media/wallpapers/wallhaven-0j2epy.jpg \
+    --bg-fill /home/usr/media/wallpapers/background.jpg
+
+i3-msg gaps inner all set 10
