@@ -1,3 +1,4 @@
+{ pkgs, ... }:
 {
   services.nginx = {
     enable = true;
@@ -27,6 +28,17 @@
           proxyPass = "https://stupidcomputer.github.io/stupidcomputer/";
         };
       };
+      "tsa-webmaster-26.beepboop.systems" = {
+        forceSSL = true;
+        enableACME = true;
+        root = "/var/www/tsa-webmaster-26-placeholder.beepboop.systems";
+        locations."/" = {
+          extraConfig = ''
+            port_in_redirect off;
+            absolute_redirect off;
+          '';
+        };
+      };
       "tools.beepboop.systems" = {
         forceSSL = true;
         enableACME = true;
@@ -38,6 +50,21 @@
           '';
         };
       };
+    };
+  };
+
+  system.activationScripts = {
+    "ensureWebDirectories" = {
+      text = ''
+        ${pkgs.coreutils}/bin/mkdir -p /var/www/tools.beepboop.systems
+        ${pkgs.coreutils}/bin/mkdir -p /var/www/tsa-webmaster-26-placeholder.beepboop.systems
+        ${pkgs.coreutils}/bin/chown nginx:nginx-data /var/www/tools.beepboop.systems
+        ${pkgs.coreutils}/bin/chown nginx:nginx-data /var/www/tsa-webmaster-26-placeholder.beepboop.systems
+        ${pkgs.coreutils}/bin/chmod -R u=rwX,g=rwX,o=r /var/www/tools.beepboop.systems
+        ${pkgs.coreutils}/bin/chmod -R u=rwX,g=rwX,o=r /var/www/tsa-webmaster-26-placeholder.beepboop.systems
+        ${pkgs.coreutils}/bin/chmod g+s /var/www/tools.beepboop.systems
+        ${pkgs.coreutils}/bin/chmod g+s /var/www/tsa-webmaster-26-placeholder.beepboop.systems
+      ''; 
     };
   };
 
