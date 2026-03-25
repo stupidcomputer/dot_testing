@@ -1,15 +1,20 @@
 #!/bin/sh
 
+if [ "$(whoami)" != "usr" ]; then
+    printf "run this utility as usr\n"
+    exit 1
+fi
+
 if [ -d "$HOME/dot_testing" ]; then
-	cd ~/dot_testing
+    cd ~/dot_testing
 elif [ -d "$HOME/dots" ]; then
-	cd ~/dots
+    cd ~/dots
 fi
 
 machine=$(hostname)
 
 if [ "$machine" = "localhost" ]; then
-	machine="phone"
+    machine="phone"
 fi
 
 sh boxes/$machine/custom_command $@
