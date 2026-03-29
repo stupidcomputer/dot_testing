@@ -2,18 +2,27 @@
 
 st -c st_floating -e rbw list
 
-if [ "$1" == "2fa" ]; then
-	resp=$(rbw list | dmenu)
-else
-	resp=$(rbw list | dmenu)
+resp=$(rbw list | dmenu)
+
+if [ -z "$resp" ]; then
+    exit 1
 fi
 
-if [ "$1" == "2fa" ]; then
+case "$1" in
+    "username")
+	rbw get "$resp" --full | \
+    	    grep "Username: " | \
+    	    awk -F': ' '{print $2}' | \
+    	    xclip -in -selection clipboard
+	;;
+    "2fa")
 	rbw code "$resp" | xclip -in -selection clipboard
-else
+	;;
+    *)
 	rbw get "$resp" | xclip -in -selection clipboard
-fi
-
+	;;
+esac
+	
 # if we don't, then for some reason it'll just continue running and eat up 100% of CPU
 # that's bad software design, so we'll answer with something worse
 pkill pinentry
