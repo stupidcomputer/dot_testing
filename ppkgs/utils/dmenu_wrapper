@@ -50,6 +50,7 @@ hammurabi: rotate screen right
 hammurabi: disable trackpad
 hammurabi: enable trackpad
 syncthing: view logs
+view receipt directory
 second_cmus
 bluetooth
 volume"
@@ -231,6 +232,9 @@ case "$response" in
 	;;
     "syncthing: view logs")
 	st -c st_floating -e journalctl -xefu syncthing
+	;;
+    "view receipt directory")
+	sxiv ~/org/ledger/receipts/
 	;;
     "calc:"*)
 	command="${response#*:}"
