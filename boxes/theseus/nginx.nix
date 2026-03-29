@@ -31,8 +31,8 @@
       "tsa-webmaster-26.beepboop.systems" = {
         forceSSL = true;
         enableACME = true;
-        root = "/var/www/tsa-webmaster-26-placeholder.beepboop.systems";
         locations."/" = {
+          proxyPass = "http://68.84.80.81:9194";
           extraConfig = ''
             port_in_redirect off;
             absolute_redirect off;
