@@ -6,7 +6,7 @@
     ../../common/bootstrap.nix
     ./agenix.nix
     ./sshd.nix
-    ./sunshine.nix
+#    ./sunshine.nix
   ];
 
   services.ryande.enable = true;
