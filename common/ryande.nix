@@ -158,6 +158,7 @@ in {
       extraGroups = [
         "adbusers"
         "audio"
+        "i2c"
         "networkmanager"
         "vboxusers"
         "video"

@@ -21,6 +21,7 @@
     soundwireserver
     vscode
     moonlight-qt
+    ddcutil
   ];
 
   virtualisation.virtualbox.host.enable = true;

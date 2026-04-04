@@ -4,9 +4,21 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-  boot.initrd.availableKernelModules = [ "vmd" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+  boot.initrd.availableKernelModules = [
+    "ahci"
+    "sd_mod"
+    "usbhid"
+    "usb_storage"
+    "vmd"
+    "xhci_pci"
+  ];
   boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-intel" "psmouse" "wacom" ];
+  boot.kernelModules = [
+    "i2c-dev"
+    "kvm-intel"
+    "psmouse"
+    "wacom"
+  ];
   boot.extraModulePackages = [ ];
 
   fileSystems."/" =
@@ -24,6 +36,7 @@
     [ { device = "/dev/disk/by-uuid/fc5366cc-2cec-415e-85dd-7c01a4e4fb4f"; }
     ];
 
+  hardware.i2c.enable = true;
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   services.hardware.bolt.enable = true;
