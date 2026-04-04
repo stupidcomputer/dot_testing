@@ -113,6 +113,7 @@ for_window [title="Bluetooth"] floating enable
 for_window [class="st_floating"] floating enable
 for_window [class="desktop10"] move container to workspace number $ws10, workspace number $ws10
 for_window [class=".arandr-wrapped"] floating enable
+for_window [class="zoom"] floating enable
 
 #exec --no-startup-id i3-msg 'workspace "10"; append_layout ~/workspace.json'
 #exec st -c bluetuith-autostart -e "bash -c 'bluetuith; exec bash'"
