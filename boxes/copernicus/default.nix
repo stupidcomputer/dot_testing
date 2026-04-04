@@ -7,7 +7,6 @@
     ./agenix.nix
     ./sshd.nix
     ./sunshine.nix
-    ./tsa-webapp.nix
   ];
 
   services.ryande.enable = true;

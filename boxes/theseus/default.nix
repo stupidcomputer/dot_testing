@@ -11,6 +11,7 @@
     ./ssh.nix
     ./sslh.nix
     ./syncthing.nix
+    ./tsa-webmaster-26.nix
     ./vaultwarden.nix
   ];
 

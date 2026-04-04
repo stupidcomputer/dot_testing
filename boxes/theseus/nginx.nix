@@ -28,17 +28,6 @@
           proxyPass = "https://stupidcomputer.github.io/stupidcomputer/";
         };
       };
-      "tsa-webmaster-26.beepboop.systems" = {
-        forceSSL = true;
-        enableACME = true;
-        locations."/" = {
-          proxyPass = "http://68.84.80.81:9194";
-          extraConfig = ''
-            port_in_redirect off;
-            absolute_redirect off;
-          '';
-        };
-      };
       "tools.beepboop.systems" = {
         forceSSL = true;
         enableACME = true;
