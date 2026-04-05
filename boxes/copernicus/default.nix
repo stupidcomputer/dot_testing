@@ -1,4 +1,4 @@
-{ pkgs, lib, machines, ...}:
+{ pkgs, unstable, lib, machines, ...}:
 {
   imports = [
     ./hardware-configuration.nix
@@ -98,7 +98,7 @@
 
   services.ollama = {
     enable = true;
-    package = pkgs.ollama-cuda;
+    package = unstable.ollama-cuda;
   };
 
   # don't touch these
