@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, machines, ... }:
 {
   services.nginx = {
     enable = true;
@@ -38,6 +38,10 @@
             absolute_redirect off;
           '';
         };
+      };
+      "intnet.beepboop.systems" = {
+        root = "/var/www/intnet.beepboop.systems";
+        listen = [ { addr = machines.theseus.ip-addrs.intnet; port = 80; ssl = false; } ];
       };
     };
   };

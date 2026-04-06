@@ -4,6 +4,7 @@
     ./hardware-configuration.nix
     ../../common/bootstrap.nix
 
+    ./bind.nix
     ./calendar-sync.nix
     ./flagman.nix
     ./flasktrack.nix
@@ -14,6 +15,7 @@
     ./syncthing.nix
     ./tsa-webmaster-26.nix
     ./vaultwarden.nix
+    ./wireguard.nix
   ];
 
   age.identityPaths = [ "/home/usr/.ssh/id_ed25519" ];
@@ -111,8 +113,7 @@
       };
     };
     hosts = lib.attrsets.mergeAttrsList [
-      (machines.mkHosts machines "copernicus" "wgnet")
-      (machines.mkHosts machines "aristotle" "wgnet")
+      (machines.mkHosts machines "copernicus" "intnet")
     ];
   };
 }

@@ -11,8 +11,12 @@
     };
     listenAddresses = [
       {
-        addr = "192.168.1.201";
+        addr = machines.copernicus.ip-addrs.localnet;
         port = 2222;
+      }
+      {
+        addr = machines.copernicus.ip-addrs.intnet;
+        port = 22;
       }
     ];
   };
@@ -21,10 +25,14 @@
     allowedTCPPorts = [ 2222 ];
   };
 
+  networking.firewall.interfaces.wg0 = {
+    allowedTCPPorts = [ 22 ];
+  };
+
   users.users.usr.openssh.authorizedKeys.keys = [
-    machines.aristotle.pubkey
     machines.copernicus.pubkey
-    machines.phone.pubkey
     machines.hammurabi.pubkey
+    machines.phone.pubkey
+    machines.theseus.pubkey
   ];
 }

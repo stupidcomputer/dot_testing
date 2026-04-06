@@ -372,6 +372,10 @@ set status_display_program=cmus-status-update
         recursive = true;
       };
 
+      home.file.".config/picom/shader.glsl" = {
+        source = ./shader.glsl;
+      };
+
       programs.aerc = {
         enable = true;
         extraConfig = builtins.readFile ../config/aerc/aerc.conf;

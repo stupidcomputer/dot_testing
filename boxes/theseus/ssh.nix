@@ -12,10 +12,8 @@
   };
 
   users.users.usr.openssh.authorizedKeys.keys = [
-    machines.aristotle.pubkey
     machines.copernicus.pubkey
     machines.hammurabi.pubkey
     machines.phone.pubkey
-    machines.plato.pubkey
   ];
 }

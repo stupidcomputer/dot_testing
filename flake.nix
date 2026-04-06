@@ -17,6 +17,7 @@
 
   outputs = {
       self,
+
       agenix,
       flagman,
       home-manager,

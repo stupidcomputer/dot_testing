@@ -187,6 +187,9 @@ case "$response" in
 		;;
 	esac
 	;;
+    "clear all wallpapers")
+	xwallpaper --clear
+	;;
     "i3: enable gaps")
 	i3-msg gaps inner all set 10
 	;;

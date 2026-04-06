@@ -42,6 +42,7 @@
   networking = {
     hostName = "hammurabi";
     networkmanager.enable = true;
+    firewall.checkReversePath = false;
   };
 
   hardware = {

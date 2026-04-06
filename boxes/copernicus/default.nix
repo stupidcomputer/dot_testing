@@ -6,6 +6,7 @@
     ../../common/bootstrap.nix
     ./agenix.nix
     ./sshd.nix
+    ./wireguard.nix
 #    ./sunshine.nix
   ];
 
@@ -69,6 +70,7 @@
 
   networking = {
     hostName = "copernicus";
+    nameservers = [ "10.100.0.1" "1.1.1.1" ];
     interfaces.eno1 = {
       useDHCP = true;
       wakeOnLan = {
@@ -99,6 +101,9 @@
   services.ollama = {
     enable = true;
     package = unstable.ollama-cuda;
+  };
+  services.open-webui = {
+    enable = true;
   };
 
   # don't touch these
