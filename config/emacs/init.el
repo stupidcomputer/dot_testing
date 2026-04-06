@@ -277,14 +277,20 @@
 (add-to-list 'warning-suppress-types '(t))
 (setq warning-minimum-level :error)
 
-(set-frame-font "Fantasque Sans Mono-13" nil t)
-(cond
- ((string-equal (system-name) "copernicus")
-  (set-face-attribute 'default nil :height 100))
- ((string-equal (system-name) "hammurabi")
-  (set-face-attribute 'default nil :height 110))
- (t
-  (set-face-attribute 'default nil :height 130)))
+(defun u:apply-system-fonts (&rest _)
+  "apply fonts based on system name"
+  (set-frame-font "Fantasque Sans Mono-13" nil t)
+  (cond
+   ((string-equal (system-name) "copernicus")
+    (set-face-attribute 'default nil :height 100))
+   ((string-equal (system-name) "hammurabi")
+    (set-face-attribute 'default nil :height 110))
+   (t
+    (set-face-attribute 'default nil :height 130))))
+
+(u:apply-system-fonts)
+(advice-add 'load-theme :after #'u:apply-system-fonts)
+
 ;; prevent the simulated terminal bell from ringing
 (setq visible-bell t)
 (setq ring-bell-function 'ignore)
