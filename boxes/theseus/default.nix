@@ -7,6 +7,7 @@
     ./calendar-sync.nix
     ./flagman.nix
     ./flasktrack.nix
+    ./guacamole.nix
     ./nginx.nix
     ./ssh.nix
     ./sslh.nix
