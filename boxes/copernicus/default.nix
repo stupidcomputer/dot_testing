@@ -104,6 +104,9 @@
   };
   services.open-webui = {
     enable = true;
+    environment = {
+      WEBUI_AUTH = "False";
+    };
   };
 
   # don't touch these
