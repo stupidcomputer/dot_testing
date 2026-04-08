@@ -6,7 +6,7 @@ stdenv.mkDerivation rec {
 
   src = builtins.fetchGit {
     url = "https://github.com/stupidcomputer/dmenu.git";
-    rev = "bc3aad5943208972ff1bee43f8e732e0c355c8fd";
+    rev = "21404c3688a9bb6904e8924c757e8ea22ca2a219";
   };
 
   buildInputs = [ libX11 libXinerama zlib libXft ];
