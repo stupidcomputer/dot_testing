@@ -1,19 +1,54 @@
-# check if firefox is focused
-targeted_class=${BROWSER:-librewolf}
-current_class=$(xdotool getactivewindow getwindowclassname)
+set -x
 
+# if librefox isn't on the desktop, then make it so
+# if it is, focus to it
+targeted_class=${BROWSER:-librewolf}
 if [ "$current_class" != "$targeted_class" ]; then
-    # check if there is a librewolf currently visible. if so, switch
-    # to it.
-    search=$(xdotool search --onlyvisible --class "$targeted_class")
-    if [ -z "$search" ]; then
-	printf "exiting early since we're not in or near librewolf\n ";
-	exit
+    query=$(i3-msg -t get_tree | jq -r --arg window_class "$targeted_class" '
+        def walk_nodes:
+            ((.nodes // []) + (.floating_nodes // []))[] | (., walk_nodes);
+        
+        def focus_scores(root):
+            root |
+            [
+                .. | objects | . as $node |
+                (.focus // []) | to_entries[] |
+                { id: .value, score: .key, parent: $node.id }
+            ];
+        
+        [ walk_nodes | select(.type == "workspace") ] as $workspaces |
+        
+        ( $workspaces[] |
+            . as $ws |
+            [ $ws | walk_nodes | select(.focused == true) ] |
+            if length > 0 then $ws else empty end
+        ) as $focused_ws |
+        
+        focus_scores($focused_ws) as $scores |
+        
+        [ $focused_ws | walk_nodes |
+            select(
+            (.window_properties.class // "" | ascii_downcase) == ($window_class | ascii_downcase)
+            )
+        ] |
+        if length > 0 then
+            map(. as $n |
+                { node: $n, score: ([$scores[] | select(.id == $n.id) | .score] | min // 9999) }
+            ) |
+            sort_by(.score) | .[0].node.window | "\(.)"
+        else
+            ""
+        end')
+    
+    if [ -z "$query" ]; then
+    "$targeted_class" -new-window
+    else 
+    i3-msg "[id=\"$query\"] focus"
     fi
-    i3-msg "[class=\"$targeted_class\"] focus"
 fi
 
 temp_file="/tmp/i3-ctrl-t-handler-tmp-$RANDOM"
+trep "rm $temp_file" EXIT
 
 # prepare options
 choice=$(cat ~/org/bookmarks | \
@@ -29,37 +64,54 @@ fi
 insert_into_clipboard_and_type () {
     old=$(xclip -out selection clipboard)
     echo "$1" | xclip -in -selection clipboard
-    xdotool key ctrl+v enter enter
+    xdotool key ctrl+l ctrl+v enter enter
     echo "$old" | xclip -in -selection clipboard
 }
 
 handle_query () {
-    case "$choice" in
-	",d"*)
+    case "$1" in
+	",d "*)
 	    target="https://duckduckgo.com/?q="
+	    xdotool key ctrl+t
 	    ;;
-	",g"*)
+	",g "*)
 	    target="https://google.com/search?q="
+	    xdotool key ctrl+t
 	    ;;
-	",gai"*)
+	",gai "*)
 	    target="https://google.com/search?udm=50&q="
+	    xdotool key ctrl+t
 	    ;;
-	",sd"*)
+	",sd "*)
 	    target="https://drive.google.com/drive/search?q="
-	    xdotool key ctrl+shift+1
+	    xdotool key ctrl+shift+1 ctrl+l
 	    ;;
-	",pd"*)
+	",pd "*)
 	    target="https://drive.google.com/drive/search?q="
-	    xdotool key ctrl+shift+2
+	    xdotool key ctrl+shift+2 ctrl+l
+	    ;;
+	",pkgs "*)
+	    target="https://search.nixos.org/packages?query="
+	    xdotool key ctrl+t
+	    ;;
+	",opts "*)
+	    target="https://search.nixos.org/options?query="
+	    xdotool key ctrl+t
 	    ;;
     esac
-    urlencoded=$(echo "${choice#* }" | jq -Rr @uri)
-    xdotool key ctrl+t
+    urlencoded=$(echo "${1#* }" | jq -Rr @uri)
+    xdotool key ctrl+l
     insert_into_clipboard_and_type "${target}${urlencoded}"
 }
 
 handle_bookmark () {
-    choice=$(cat "$temp_file" | grep "^$choice|")
+    choice=$(cat "$temp_file" | grep "^$1|")
+
+    if [ -z "$choice" ]; then
+	handle_query ",g $1"
+	exit
+    fi
+
     IFS='|' read -r human_name url handler <<EOF
 $choice
 EOF
@@ -72,11 +124,11 @@ EOF
     
     xdotool key "$triggering_keybind" ctrl+l
     echo "$url" | xclip -in -selection clipboard
-    xdotool key ctrl+v enter
+    xdotool key ctrl+l ctrl+v enter enter
 }
 
 if [ "${choice:0:1}" = "," ]; then
-    handle_query
+    handle_query "$choice"
 else
-    handle_bookmark
+    handle_bookmark "$choice"
 fi
