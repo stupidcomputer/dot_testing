@@ -24,7 +24,7 @@ bindsym $mod+Ctrl+z exec --no-startup-id rbw-dmenu-list username
 # requires that full-screen-api.ignore-widgets be true
 # TODO: put all of this into a home-manager configuration
 bindsym $mod+c exec librewolf --new-window --kiosk https://desmos.com/calculator
-bindsym $mod+g exec sh /home/usr/dots/ppkgs/utils/i3-ctrl-t-handler
+bindsym $mod+g exec i3-ctrl-t-handler
 
 bindsym $mod+h focus left
 bindsym $mod+j focus down

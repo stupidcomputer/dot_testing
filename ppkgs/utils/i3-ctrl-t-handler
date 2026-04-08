@@ -1,11 +1,16 @@
-set -x
 # check if firefox is focused
 targeted_class=${BROWSER:-librewolf}
 current_class=$(xdotool getactivewindow getwindowclassname)
 
 if [ "$current_class" != "$targeted_class" ]; then
-    printf "exiting early since we're not in librewolf";
-    exit
+    # check if there is a librewolf currently visible. if so, switch
+    # to it.
+    search=$(xdotool search --onlyvisible --class "$targeted_class")
+    if [ -z "$search" ]; then
+	printf "exiting early since we're not in or near librewolf\n ";
+	exit
+    fi
+    i3-msg "[class=\"$targeted_class\"] focus"
 fi
 
 temp_file="/tmp/i3-ctrl-t-handler-tmp-$RANDOM"
@@ -16,8 +21,6 @@ choice=$(cat ~/org/bookmarks | \
 	     tee "$temp_file" | \
 	     awk -F'|' '{print $1}' | \
 	     dmenu)
-
-choice=$(cat "$temp_file" | grep "^$choice|")
 
 if [ -z "$choice" ]; then
     exit 1
@@ -56,6 +59,7 @@ handle_query () {
 }
 
 handle_bookmark () {
+    choice=$(cat "$temp_file" | grep "^$choice|")
     IFS='|' read -r human_name url handler <<EOF
 $choice
 EOF
