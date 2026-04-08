@@ -1,6 +1,7 @@
 { config, lib, pkgs, ppkgs, ... }:
 let
   cfg = config.services.ryande;
+  pflaskPythonEnv = pkgs.python3.withPackages (ps: with ps; [ flask orgparse ]);
 in {
   imports = [];
 
@@ -62,6 +63,22 @@ in {
       unitConfig.conditionUser = "usr";
       serviceConfig = {
         ExecStart = "${pkgs.hledger-web}/bin/hledger-web -f /home/usr/org/ledger/main.ledger --serve";
+        Restart = "on-failure";
+        RestartSec = "3";
+      };
+    };
+
+    systemd.services.pflask = {
+      description = "pflask development web server";
+      after = [ "network.target" ];
+      wantedBy = [ "multi-user.target" ];
+
+      serviceConfig = {
+        Type = "simple";
+        User = cfg.username;
+        WorkingDirectory = "/home/${cfg.username}/org/pflask";
+        Path = [ pkgs.hledger pflaskPythonEnv ];
+        ExecStart = "${pflaskPythonEnv}/bin/flask --debug run --port 10000";
         Restart = "on-failure";
         RestartSec = "3";
       };
