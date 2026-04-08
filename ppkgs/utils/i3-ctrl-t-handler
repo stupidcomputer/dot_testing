@@ -1,0 +1,78 @@
+set -x
+# check if firefox is focused
+targeted_class=${BROWSER:-librewolf}
+current_class=$(xdotool getactivewindow getwindowclassname)
+
+if [ "$current_class" != "$targeted_class" ]; then
+    printf "exiting early since we're not in librewolf";
+    exit
+fi
+
+temp_file="/tmp/i3-ctrl-t-handler-tmp-$RANDOM"
+
+# prepare options
+choice=$(cat ~/org/bookmarks | \
+	     grep --invert-match '^#' | \
+	     tee "$temp_file" | \
+	     awk -F'|' '{print $1}' | \
+	     dmenu)
+
+choice=$(cat "$temp_file" | grep "^$choice|")
+
+if [ -z "$choice" ]; then
+    exit 1
+fi
+
+insert_into_clipboard_and_type () {
+    old=$(xclip -out selection clipboard)
+    echo "$1" | xclip -in -selection clipboard
+    xdotool key ctrl+v enter enter
+    echo "$old" | xclip -in -selection clipboard
+}
+
+handle_query () {
+    case "$choice" in
+	",d"*)
+	    target="https://duckduckgo.com/?q="
+	    ;;
+	",g"*)
+	    target="https://google.com/search?q="
+	    ;;
+	",gai"*)
+	    target="https://google.com/search?udm=50&q="
+	    ;;
+	",sd"*)
+	    target="https://drive.google.com/drive/search?q="
+	    xdotool key ctrl+shift+1
+	    ;;
+	",pd"*)
+	    target="https://drive.google.com/drive/search?q="
+	    xdotool key ctrl+shift+2
+	    ;;
+    esac
+    urlencoded=$(echo "${choice#* }" | jq -Rr @uri)
+    xdotool key ctrl+t
+    insert_into_clipboard_and_type "${target}${urlencoded}"
+}
+
+handle_bookmark () {
+    IFS='|' read -r human_name url handler <<EOF
+$choice
+EOF
+
+    if [ "$handler" = "school" ]; then
+	triggering_keybind="ctrl+shift+1"
+    elif [ "$handler" = "personal" ]; then
+	triggering_keybind="ctrl+shift+2"
+    fi
+    
+    xdotool key "$triggering_keybind" ctrl+l
+    echo "$url" | xclip -in -selection clipboard
+    xdotool key ctrl+v enter
+}
+
+if [ "${choice:0:1}" = "," ]; then
+    handle_query
+else
+    handle_bookmark
+fi
