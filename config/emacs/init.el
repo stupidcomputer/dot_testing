@@ -85,7 +85,7 @@
   :config
   (add-to-list 'org-modules 'org-habit)
   (define-key global-map "\C-cl" 'org-store-link)
-  (define-key global-map "\C-ca" 'org-agenda)
+  (define-key global-map "\C-ca" (lambda () (interactive) (org-ql-view "Overview: Agenda-like")))
   (define-key global-map "\C-cc" 'org-capture)
   (define-key global-map "\C-cc" 'org-capture)
   (define-key global-map "\C-cs" 'org-todo-yesterday)
@@ -151,9 +151,13 @@
   :bind
    (("C-c o" . (lambda () (interactive) (find-file "~/org/main.org")))
     ("M-x" . 'helm-M-x)
-    (:map org-mode-map ("<C-tab>" . u:helm-org-jump))))
+    (:map org-agenda-mode-map
+	  ("C-c C-y" . org-todo-yesterday))
+    (:map org-mode-map
+	  ("<C-tab>" . u:helm-org-jump))))
 
 (use-package org-drill :ensure t)
+(use-package anki-editor :ensure t)
 (use-package org-journal :ensure t)
 (use-package evil-org
   :ensure t

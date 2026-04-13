@@ -290,6 +290,7 @@ in {
       programs.emacs = {
         enable = true;
         extraPackages = epkgs: with epkgs; [
+          anki-editor
           auctex
           company
           elfeed
