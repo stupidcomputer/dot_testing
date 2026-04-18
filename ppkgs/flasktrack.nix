@@ -3,11 +3,11 @@ with python3Packages;
 let
   repo = fetchgit {
     url = "https://github.com/stupidcomputer/flasktrack";
-    hash = "sha256-KzX5BhFcrv+LUxYnkiQg5ooJLKa08etJ5x2aUqy2d5E=";
+    hash = "sha256-3rFrdW2N1hLm1KwchX15eFPOB+QV1sFiux99ENfH0Rw=";
   };
 in buildPythonApplication rec {
   pname = "flasktrack";
-  version = "0.01";
+  version = "0.02";
 
   propagatedBuildInputs = [ flask ];
   installPhase = ''
