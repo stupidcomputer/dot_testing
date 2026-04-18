@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ppkgs, ... }:
+{ config, inputs, lib, pkgs, ppkgs, ... }:
 let
   cfg = config.services.ryande;
   pflaskPythonEnv = pkgs.python3.withPackages (ps: with ps; [ flask orgparse ]);
@@ -82,11 +82,6 @@ in {
         Restart = "on-failure";
         RestartSec = "3";
       };
-    };
-
-    programs.firefox = {
-      enable = true;
-      package = pkgs.librewolf;
     };
 
     security.rtkit.enable = true;
@@ -285,6 +280,21 @@ in {
         configuration = builtins.readFile ../config/i3pystatus/config.py;
       };
       xdg.configFile."i3/config".text = builtins.readFile ../config/i3/config;
+
+      programs.librewolf = {
+        enable = true;
+        profiles.default = {
+          id = 0;
+          extensions.packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
+            multi-account-containers
+            tree-style-tab
+            tridactyl
+            ublock-origin
+          ];
+        };
+
+        nativeMessagingHosts = with pkgs; [ tridactyl-native ];
+      };
 
       programs.htop.enable = true;
       programs.emacs = {
