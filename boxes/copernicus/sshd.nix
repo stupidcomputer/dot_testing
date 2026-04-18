@@ -29,6 +29,11 @@
     allowedTCPPorts = [ 22 ];
   };
 
+  systemd.services.sshd = {
+    requires = [ "wg-quick-wg0.service" ];
+    after = [ "wg-quick-wg0.service" ];
+  };
+
   users.users.usr.openssh.authorizedKeys.keys = [
     machines.copernicus.pubkey
     machines.hammurabi.pubkey
