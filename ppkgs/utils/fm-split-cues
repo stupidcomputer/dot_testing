@@ -1,3 +1,5 @@
+# -*- mode: shell-script -*-
+
 # fm-split-cues
 # split a media file based on timestamps
 

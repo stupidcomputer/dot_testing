@@ -1,3 +1,5 @@
+# -*- mode: shell-script -*-
+
 case "$1" in
 	"normal")
 		xinput set-prop 'Wacom Pen and multitouch sensor Finger' 'Coordinate Transformation Matrix' 1 0 0 0 1 0 0 0 1

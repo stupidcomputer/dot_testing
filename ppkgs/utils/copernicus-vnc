@@ -1,3 +1,5 @@
+# -*- mode: shell-script -*-
+
 xrandr --addmode HDMI-1 1920x1080
 xrandr --output HDMI-1 --mode 1920x1080 --above eDP-1
 while true; do ssh copernicus "sh -c \"echo $(cat /sys/class/power_supply/BAT0/capacity) > /tmp/aristotle_battery\""; sleep 15; done &

@@ -1,3 +1,5 @@
+# -*- mode: shell-script -*-
+
 choice=$(cat "${HOME}/.config/BraveSoftware/Brave-Browser/Local State" | \
   jq -r '.profile.info_cache | to_entries[] | "\(.value.name) (\(.key))"' | \
   dmenu | \

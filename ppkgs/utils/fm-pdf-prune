@@ -1,3 +1,5 @@
+# -*- mode: shell-script -*-
+
 set -x
 # assume we need to open the pdf in $1 with zathura
 our_window=$(xdotool getactivewindow)

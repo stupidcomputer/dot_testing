@@ -1,3 +1,5 @@
+# -*- mode: shell-script -*-
+
 set -x
 
 # if librefox isn't on the desktop, then make it so

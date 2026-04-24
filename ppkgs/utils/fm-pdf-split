@@ -1,3 +1,5 @@
+# -*- mode: shell-script -*-
+
 print_help_text () {
     cat <<EOF
 fm-pdf-split: interactive tool for splitting multi-document PDFs

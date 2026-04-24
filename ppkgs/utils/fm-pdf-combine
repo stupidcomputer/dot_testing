@@ -1,1 +1,3 @@
+# -*- mode: shell-script -*-
+
 qpdf --empty --pages "$@" -- "${RANDOM}-combined.pdf"

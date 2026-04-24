@@ -1,3 +1,5 @@
+# -*- mode: shell-script -*-
+
 set -x
 POMODORO_LOCK="${HOME}/.cache/pomodoro-lock"
 POMODORO_DB="${HOME}/org/pomodoro.csv"

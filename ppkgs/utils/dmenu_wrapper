@@ -1,3 +1,5 @@
+# -*- mode: shell-script -*-
+
 cachedir="${XDG_CACHE_HOME:-"$HOME/.cache"}"
 cache="$cachedir/dmenu_run"
 

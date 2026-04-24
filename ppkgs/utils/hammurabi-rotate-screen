@@ -1,3 +1,5 @@
+# -*- mode: shell-script -*-
+
 SCREEN="eDP-1"
 TOUCH="Wacom Pen and multitouch sensor Finger"
 STYLUS="Wacom Pen and multitouch sensor Pen Pen (0xb34f41f1)"

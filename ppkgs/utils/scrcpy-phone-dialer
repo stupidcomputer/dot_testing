@@ -1,3 +1,5 @@
+# -*- mode: shell-script -*-
+
 phone_number=$(emacsclient --eval '
   (mapconcat
    (lambda (contact)
