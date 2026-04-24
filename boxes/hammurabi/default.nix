@@ -17,6 +17,7 @@
     sshuttle
     vscode
     styluslabs-write
+    ungoogled-chromium
   ];
 
   programs.steam.enable = true;
@@ -39,6 +40,8 @@
       "net.ipv4.tcp_ecn" = 0;
     };
   };
+
+  services.gnome.gnome-keyring.enable = true;
 
   networking = {
     hostName = "hammurabi";
