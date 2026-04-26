@@ -321,6 +321,17 @@ in {
       home.file.".emacs.d/init.el".source =  ../config/emacs/init.el;
       home.file.".emacs.d/early-init.el".source =  ../config/emacs/early-init.el;
 
+      home.file.".config/user-dirs.dirs".text = ''
+XDG_DESKTOP_DIR="$HOME/temp"
+XDG_PUBLICSHARE_DIR="$HOME/temp"
+XDG_DOCUMENTS_DIR="$HOME/org"
+XDG_MUSIC_DIR="$HOME/media/music"
+XDG_PICTURES_DIR="$HOME/media/photos"
+XDG_VIDEOS_DIR="$HOME/media/videos"
+XDG_DOWNLOAD_DIR="$HOME/down"
+XDG_TEMPLATES_DIR="$HOME/temp"
+'';
+
       programs.rbw = {
         enable = true;
         settings = {
