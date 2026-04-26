@@ -25,6 +25,12 @@ function cd() {
 	builtin cd "$@" && ls --color=auto --group-directories-first
 }
 
+function timelapser() {
+    ffmpeg -f x11grab -framerate 30 -video_size 1920x1080 -i :0.0 -vf \
+        "scale=640:-1,setpts=0.25*PTS" -r 30 -crf 35 -preset ultrafast \
+        timelapser_output.mp4
+}
+
 # history
 HISTCONTROL=ignorespace:ignoredups:erasedups
 HISTFILESIZE=9999999999
