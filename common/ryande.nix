@@ -216,7 +216,7 @@ in {
         curl
         dig
         dmidecode
-        ffmpeg
+        ffmpeg-full
         fzy
         htop
         imagemagick
