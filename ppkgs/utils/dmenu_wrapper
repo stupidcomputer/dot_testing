@@ -51,7 +51,7 @@ volume"
 
 case "$HOSTNAME" in
     "hammurabi")
-	EXTRA_CHOICESS="$EXTRA_CHOICES
+	extra_choices="$extra_choices
 hammurabi: desk monitor setup
 hammurabi: one screen
 hammurabi: brightness
@@ -62,7 +62,7 @@ hammurabi: disable trackpad
 hammurabi: enable trackpad"
 	;;
     "copernicus")
-	EXTRA_CHOICES="$EXTRA_CHOICES
+	extra_choices="$extra_choices
 copernicus: brightness"
 	;;
 esac
