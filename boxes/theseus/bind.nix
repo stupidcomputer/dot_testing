@@ -40,6 +40,7 @@
           ns1          IN A 10.100.0.1
           router       IN A 192.168.1.1
           copernicus   IN A 192.168.1.201
+          hue          IN A 192.168.1.210
         '';
       };
       "0.100.10.in-addr.arpa" = {
