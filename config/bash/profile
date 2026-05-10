@@ -9,7 +9,7 @@ fi
 export MANPATH="$(manpath -q):$HOME/.local/share/man"
 export EDITOR="emacsclient"
 export BROWSER="librewolf"
-mkdir -p "$HOME/.local/bin" "$HOME/.share/man"
+mkdir -p "$HOME/.local/bin" "$HOME/.local/share/man" "$HOME/.cache/bash"
 
 # program exports to keep the $HOME neat and tidy
 # bash
