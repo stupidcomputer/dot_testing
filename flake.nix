@@ -17,6 +17,10 @@
       url = "gitlab:rycee/nur-expressions?dir=pkgs/firefox-addons";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
   };
 
   outputs = {
@@ -26,6 +30,7 @@
       firefox-addons,
       flagman,
       home-manager,
+      llm-agents,
       nixpkgs,
       nixpkgs-unstable,
       ...

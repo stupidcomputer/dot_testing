@@ -1,4 +1,4 @@
-{ pkgs, ppkgs, ... }:
+{ pkgs, ppkgs, inputs, ... }:
 
 {
   imports = [
@@ -18,6 +18,7 @@
     vscode
     styluslabs-write
     ungoogled-chromium
+    inputs.llm-agents.packages."x86_64-linux".pi
   ];
 
   programs.steam.enable = true;
