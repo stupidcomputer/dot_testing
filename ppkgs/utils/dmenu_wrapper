@@ -39,9 +39,9 @@ phone: vibrate notifications
 phone: sound notifications
 phone: place phone call
 phone: compose message
-select a wallpaper
-i3: enable gaps
-i3: disable gaps
+wallpaper
+i3: gaps on
+i3: gaps off
 i3: rename workspace
 syncthing: view logs
 view receipt directory
@@ -58,8 +58,8 @@ hammurabi: brightness
 hammurabi: rotate screen normal
 hammurabi: rotate screen left
 hammurabi: rotate screen right
-hammurabi: disable trackpad
-hammurabi: enable trackpad"
+hammurabi: trackpad off 
+hammurabi: trackpad on"
 	;;
     "copernicus")
 	extra_choices="$extra_choices
@@ -175,7 +175,7 @@ case "$response" in
     "phone: compose message")
 	scrcpy-phone-dialer messaging
 	;;
-    "select a wallpaper")
+    "wallpaper")
 	wallpapers=$(ls ~/media/wallpapers)
 	choice=$(printf "random\nrandom per monitor\n${wallpapers}" | dmenu)
 	case "${choice}" in
@@ -201,10 +201,10 @@ case "$response" in
     "clear all wallpapers")
 	xwallpaper --clear
 	;;
-    "i3: enable gaps")
+    "i3: gaps on")
 	i3-msg gaps inner all set 10
 	;;
-    "i3: disable gaps")
+    "i3: gaps off")
 	i3-msg gaps inner all set 0
 	;;
     "i3: rename workspace")
@@ -239,11 +239,11 @@ case "$response" in
     "hammurabi: rotate screen right")
 	hammurabi-rotate-screen right
 	;;
-    "hammurabi: disable trackpad")
-	xinput set-prop 11 188 0
+    "hammurabi: trackpad off")
+	xinput set-prop "Elan Touchpad" 188 0
 	;;
-    "hammurabi: enable trackpad")
-	xinput set-prop 11 188 1
+    "hammurabi: trackpad on")
+	xinput set-prop "Elan Touchpad" 188 1
 	;;
     "copernicus: brightness")
 	choice=$(printf "10\n20\n30\n40\n50\n60\n70\n80\n90\n100" | dmenu)
