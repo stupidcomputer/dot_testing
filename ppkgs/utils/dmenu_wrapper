@@ -217,9 +217,9 @@ case "$response" in
 	fi
 	;;
     "hammurabi: desk monitor setup")
-	xrandr --output eDP-1 --primary --mode 1920x1080 --pos 653x900 \
-	       --output HDMI-1 --mode 1600x900 --pos 1600x0 \
-	       --output DP-2 --mode 1600x900 --pos 0x0
+	xrandr --output eDP-1 --off \
+	       --output HDMI-1 --primary --mode 1920x1080 --pos 0x420 --rotate normal \
+	       --output DP-2 --mode 1920x1080 --pos 1920x0 --rotate left
 	;;
     "hammurabi: one screen")
 	xrandr --output eDP-1 --auto --primary \
