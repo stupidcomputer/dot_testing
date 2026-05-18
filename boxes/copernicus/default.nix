@@ -1,4 +1,4 @@
-{ pkgs, unstable, lib, machines, ...}:
+{ pkgs, ppkgs, unstable, lib, machines, ...}:
 {
   imports = [
     ./hardware-configuration.nix
@@ -23,6 +23,8 @@
     vscode
     moonlight-qt
     ddcutil
+
+    ppkgs.input-forward
   ];
 
   virtualisation.virtualbox.host.enable = true;

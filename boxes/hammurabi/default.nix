@@ -19,6 +19,8 @@
     styluslabs-write
     ungoogled-chromium
     inputs.llm-agents.packages."x86_64-linux".pi
+
+    ppkgs.input-forward
   ];
 
   programs.steam.enable = true;

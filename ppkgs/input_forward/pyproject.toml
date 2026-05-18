@@ -1,0 +1,13 @@
+[build-system]
+requires = ["hatchling>=1.26"]
+build-backend = "hatchling.build"
+
+[project]
+name = "input-forward"
+version = "0.1.0"
+description = "Forward local evdev keyboard and mouse devices over SSH to remote uinput"
+requires-python = ">=3.11"
+dependencies = ["evdev"]
+
+[project.scripts]
+input-forward = "input_forward.cli:main"
