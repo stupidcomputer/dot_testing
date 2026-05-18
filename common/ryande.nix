@@ -40,6 +40,12 @@ in {
     # this is required for home-manager to share window managers to ly
     environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
 
+    # make /dev/uinput available to users with group input
+    boot.kernelModules = [ "uinput" ];
+    services.udev.extraRules = ''
+      KERNEL=="uinput", GROUP="input", MODE="0660"
+    '';
+
     # enable syncthing
     systemd.user.services.syncthing = {
       enable = true;
@@ -154,6 +160,7 @@ in {
         "adbusers"
         "audio"
         "i2c"
+        "input"
         "networkmanager"
         "vboxusers"
         "video"
