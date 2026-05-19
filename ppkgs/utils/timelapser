@@ -1,0 +1,27 @@
+#!/bin/bash
+
+SPEED=${1:-10}
+
+GEOM=$(xrandr | grep "primary" | grep -oP '\d+x\d+\+\d+\+\d+')
+WIDTH=$(echo $GEOM | cut -d'x' -f1)
+HEIGHT=$(echo $GEOM | cut -d'x' -f2 | cut -d'+' -f1)
+X_OFF=$(echo $GEOM | cut -d'+' -f2)
+Y_OFF=$(echo $GEOM | cut -d'+' -f3)
+
+WEBCAM_DEV="/dev/video0"
+OUTPUT_FILE="$(date +%Y%m%d_%H%M%S).mp4"
+
+echo "Recording at ${SPEED}x speed using internal FFmpeg math..."
+
+ffmpeg -f x11grab -video_size "${WIDTH}x${HEIGHT}" -i ":0.0+${X_OFF},${Y_OFF}" \
+    -f v4l2 -video_size 640x480 -i "$WEBCAM_DEV" \
+    -filter_complex \
+    "[1:v]scale=320:-1[cam]; \
+     [0:v][cam]overlay=10:10[out]; \
+     [out]setpts=(1/${SPEED})*PTS[v]" \
+    -map "[v]" \
+    -r 30 \
+    -vcodec libx264 \
+    -crf 45 \
+    -preset ultrafast \
+    -an "$OUTPUT_FILE"
