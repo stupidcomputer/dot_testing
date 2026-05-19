@@ -32,6 +32,10 @@ function timelapser() {
         timelapser_output.mp4
 }
 
+function ollama-tunnel() {
+    ssh -J theseus copernicus.intnet.beepboop.systems -L 11434:localhost:11434 -N
+}
+
 # history
 HISTCONTROL=ignorespace:ignoredups:erasedups
 HISTFILESIZE=9999999999

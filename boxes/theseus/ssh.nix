@@ -14,7 +14,21 @@
     ];
     settings = {
       X11Forwarding = false;
+
+      # Required for ProxyJump (-J) and stdio forwarding (-W), as well as
+      # ssh -L / -R style forwards.
       AllowTcpForwarding = true;
+      AllowStreamLocalForwarding = true;
+
+      # Be explicit: allow forwarding destinations and remote-listen ports.
+      # (Useful if we later add restrictive defaults.)
+      PermitOpen = "any";
+      PermitListen = "any";
+
+      # Allow remote forwards (-R) to bind beyond localhost *when requested*.
+      # (Does not expose anything unless a client sets up -R.)
+      GatewayPorts = "clientspecified";
+
       PermitRootLogin = "no";
       PasswordAuthentication = false;
     };
