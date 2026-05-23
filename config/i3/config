@@ -106,6 +106,7 @@ bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
 bindsym $mod+Shift+parenleft move container to workspace number $ws9
 bindsym $mod+Shift+parenright move container to workspace number $ws10
+bindsym $mod+Shift+p move container to workspace $phonews
 
 # move entire desktops from one output to another
 bindsym $mod+Left move workspace to output left
