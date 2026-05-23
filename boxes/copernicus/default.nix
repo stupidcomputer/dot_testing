@@ -1,4 +1,4 @@
-{ pkgs, ppkgs, unstable, lib, machines, ...}:
+{ pkgs, ppkgs, inputs, unstable, lib, machines, ...}:
 {
   imports = [
     ./hardware-configuration.nix
@@ -23,6 +23,7 @@
     vscode
     moonlight-qt
     ddcutil
+    inputs.llm-agents.packages."x86_64-linux".pi
 
     ppkgs.input-forward
   ];
