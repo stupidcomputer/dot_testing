@@ -109,11 +109,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1780286561,
-        "narHash": "sha256-73UvAlulbn6cSaoq+Wllj7WxKrhti8wkT+zYKvFD9d0=",
+        "lastModified": 1780545772,
+        "narHash": "sha256-U+9vHXr8IitVuQ78yhZclUGgmwLnaBIRAPQlw44y8bU=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "2838055f920c314b0731f71a53a6b878de0309cc",
+        "rev": "89c5264d8ee0d69abc87723ae238563e5c3355c0",
         "type": "gitlab"
       },
       "original": {
@@ -131,11 +131,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1780337761,
-        "narHash": "sha256-u7xbkH3gGRlfYnSZ4T9EQ3UC76IIYSSXM/sKxvZvgpw=",
+        "lastModified": 1780354398,
+        "narHash": "sha256-r9rufpucIl9a6ynWIaGumyhnL+KO+St4vvhwZ4OP45Q=",
         "ref": "refs/heads/main",
-        "rev": "59fae32dac56df623fa84982585c64515fe64d1b",
-        "revCount": 88,
+        "rev": "12099107de80b880e901c096d60781858cf71f02",
+        "revCount": 93,
         "type": "git",
         "url": "ssh://git@github.com/stupidcomputer/flagman.git"
       },
@@ -237,11 +237,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1780336909,
-        "narHash": "sha256-oImIjseTTAevypeKKVZCqDuQCBV9wIgA7H+JiYRRnAA=",
+        "lastModified": 1780556826,
+        "narHash": "sha256-jIIa+5nPnhny882wYeq8SOa2WRMjhDU0ls6cgyC1D7k=",
         "owner": "numtide",
         "repo": "llm-agents.nix",
-        "rev": "b6ed2dab949b5ff15d5ce802ffe8bf12acc0229f",
+        "rev": "d0a147485f849ab4f20c1a61a6ea1c312cd0a229",
         "type": "github"
       },
       "original": {
@@ -268,11 +268,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1780337439,
-        "narHash": "sha256-P4cH1UMUDKuozsbD6juHiOSQ3NL1vO2vjLTcoP4TK7o=",
+        "lastModified": 1780598170,
+        "narHash": "sha256-ueWQKi5Sq2qCX1wKITivD7yu3wnX/uWPj6JESqe0BZo=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "2bfeef3dd6986d69d09ef28fda4abc6522559afb",
+        "rev": "7412b6cd3d6aae9ec849b48cf65f06dc2a83a89a",
         "type": "github"
       },
       "original": {
