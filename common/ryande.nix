@@ -189,7 +189,9 @@ in {
         gimp
 
         # minecraft
-        prismlauncher
+        (prismlauncher.override {
+          additionalPrograms = [ pkgs.libnotify ];
+        })
 
         # xorg utilities
         xorg.xset
