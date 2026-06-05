@@ -88,8 +88,9 @@
   (define-key global-map "\C-ca" (lambda () (interactive) (org-ql-view "Overview: Agenda-like")))
   (define-key global-map "\C-cc" 'org-capture)
   (define-key global-map "\C-cc" 'org-capture)
-  (define-key global-map "\C-cs" 'org-todo-yesterday)
-  (define-key global-map "\C-cS" (lambda () (interactive) (org-agenda-schedule nil "+1d")))
+  (define-key global-map "\C-cs" (lambda () (interactive) (org-agenda-schedule nil "+1d")))
+  (define-key global-map "\C-cy" 'org-todo-yesterday)
+  (define-key global-map "\C-cO" 'org-journal-open-current-journal-file)
   (org-babel-do-load-languages
    'org-babel-load-languages
    '((shell . t)
