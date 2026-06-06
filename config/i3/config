@@ -9,6 +9,8 @@ exec_always --no-startup-id xset r rate 200 80
 exec_always --no-startup-id setxkbmap -option caps:super
 exec_always --no-startup-id pkill xcape
 exec_always --no-startup-id xcape -e 'Super_L=Escape'
+exec systemctl --user start activitywatch-watcher-aw-watcher-afk.service
+exec systemctl --user start activitywatch-watcher-aw-watcher-window.service
 exec emacs --daemon
 
 exec copernicus-additional-i3-config
