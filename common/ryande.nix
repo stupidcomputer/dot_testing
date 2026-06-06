@@ -264,6 +264,17 @@ in {
         temperature.day = 6500;
         temperature.night = 2200;
       };
+      services.activitywatch = {
+        enable = true;
+        watchers = {
+          aw-watcher-afk = {
+            package = pkgs.activitywatch;
+          };
+          aw-watcher-window = {
+            package = pkgs.activitywatch;
+          };
+        };
+      };
       programs.mpv.enable = true;
       programs.feh.enable = true;
 

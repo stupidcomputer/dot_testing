@@ -275,7 +275,7 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (setq custom-safe-themes t)
-(load-theme 'gruvbox)
+(add-hook 'after-init-hook (lambda () (load-theme 'gruvbox-dark-hard-theme)))
 ;; make warnings not force the warning box open
 (add-to-list 'warning-suppress-types '(t))
 (setq warning-minimum-level :error)
@@ -287,7 +287,7 @@
       (set-frame-font "Fantasque Sans Mono-13" nil t)
       (cond
        ((string-equal (system-name) "copernicus")
-        (set-face-attribute 'default nil :height 100))
+        (set-face-attribute 'default nil :height 140))
        ((string-equal (system-name) "hammurabi")
         (set-face-attribute 'default nil :height 110))
        (t
@@ -313,6 +313,7 @@
                              (horizontal-scroll-bars . nil))))
 (add-hook 'after-make-frame-functions 'u:disable-scroll-bars)
 (which-key-mode)
+(setq frame-title-format '("emacs(" mode-name ") - %b - %f"))
 
 ;; custom commands
 (defun u:init:edit ()
