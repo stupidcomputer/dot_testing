@@ -6,6 +6,7 @@
     extraGroups = [ "nginx-data" ];
     openssh.authorizedKeys.keys = [
       machines.hammurabi.pubkey
+      machines.copernicus.pubkey
     ];
   };
 
