@@ -85,7 +85,9 @@
   :config
   (add-to-list 'org-modules 'org-habit)
   (define-key global-map "\C-cl" 'org-store-link)
-  (define-key global-map "\C-ca" (lambda () (interactive) (org-ql-view "Overview: Agenda-like")))
+  (define-key global-map "\C-ca" (lambda () (interactive) (org-ql-view "Daily agenda")))
+  (define-key global-map "\C-cA" (lambda () (interactive) (org-ql-view "Weekly agenda")))
+  (define-key global-map "\C-ch" (lambda () (interactive) (org-ql-view "Habits")))
   (define-key global-map "\C-cc" 'org-capture)
   (define-key global-map "\C-cc" 'org-capture)
   (define-key global-map "\C-cs" (lambda () (interactive) (org-agenda-schedule nil "+1d")))
@@ -275,7 +277,6 @@
 (menu-bar-mode -1)
 (tool-bar-mode -1)
 (setq custom-safe-themes t)
-(add-hook 'after-init-hook (lambda () (load-theme 'gruvbox-dark-hard-theme)))
 ;; make warnings not force the warning box open
 (add-to-list 'warning-suppress-types '(t))
 (setq warning-minimum-level :error)
