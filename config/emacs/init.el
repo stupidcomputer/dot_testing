@@ -180,6 +180,52 @@
 
 ;; elfeed
 (use-package elfeed :ensure t)
+(defun u:elfeed-download-with-ytdlp (&optional watch adb)
+  "download the current elfeed entry with yt-dlp"
+  (interactive "P")
+  (let* ((entry (if (eq major-mode 'elfeed-show-mode)
+		    elfeed-show-entry
+		  (elfeed-search-selected :ignore-region)))
+	 (url (elfeed-entry-link entry))
+	 (outdir (expand-file-name "~/down/youtube"))
+	 (template (concat outdir "/%(title)s.%(ext)s"))
+	 (proc (start-process
+		"yt-dlp" "*yt-dlp*"
+		"yt-dlp"
+		"--format" "bestvideo[height<=720]+bestaudio[abr<=120]/best[height<=720]"
+		"--audio-quality" "5"
+		"--merge-output-format" "mp4"
+		"--newline" "--embed-metadata"
+		"--print" "after_move:filepath"
+		"-o" template
+		url)))
+    (unless (file-directory-p outdir)
+      (make-directory outdir :parents))
+    (message "downloading: %s" url)
+    (when watch
+      (set-process-filter
+       proc
+       (lambda (_proc output)
+	 (with-current-buffer "*yt-dlp*"
+	   (insert output))
+	 (when (string-match "^\\/.*\\.mp4$" (string-trim output))
+	   (start-process "mpv" "*mpv*" "mpv" (string-trim output))
+	   (message "opening in mpv: %s" (string-trim output))))))
+    (when adb
+      (set-process-filter
+       proc
+       (lambda (_proc output)
+	 (with-current-buffer "*yt-dlp*"
+	   (insert output))
+	 (when (string-match "^\\/.*\\.mp4$" (string-trim output))
+	   (start-process "adb" "*adb-transfer*" "adb" "push" (string-trim output) "/storage/emulated/0/Movies/youtube-transfers")
+	   (message "transfering via adb: %s" (string-trim output))))))
+    (message "progress in *yt-dlp* buffer")))
+	 
+
+(define-key elfeed-show-mode-map (kbd "C-c d") #'u:elfeed-download-with-ytdlp)
+(define-key elfeed-show-mode-map (kbd "C-c D") (lambda () (interactive) (u:elfeed-download-with-ytdlp t)))
+(define-key elfeed-show-mode-map (kbd "C-c f") (lambda () (interactive) (u:elfeed-download-with-ytdlp nil t)))
 
 ;; latex
 (use-package auctex
