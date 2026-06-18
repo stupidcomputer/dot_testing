@@ -12,6 +12,13 @@
 
   services.ryande.enable = true;
 
+  programs.nix-ld.enable = true;
+  programs.steam.enable = true;
+  programs.alvr = {
+    enable = true;
+    openFirewall = true;
+  };
+
   nix.settings = {
     cores = 16;
     max-jobs = 24;
@@ -24,6 +31,7 @@
     moonlight-qt
     ddcutil
     inputs.llm-agents.packages."x86_64-linux".pi
+    zoom-us
 
     ppkgs.input-forward
   ];
