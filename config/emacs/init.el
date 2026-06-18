@@ -370,7 +370,6 @@
   (interactive)
   (load-file "~/.emacs.d/init.el"))
 
-;; load private additions in org directory
-;; (but if we fail -- it's no problem; that's
-;; what all the t symbols are for)
-(load "~/org/private.el" t t t)
+(let ((private-config "~/org/private.org"))
+  (when (file-exists-p private-config)
+    (org-babel-load-file private-config)))
