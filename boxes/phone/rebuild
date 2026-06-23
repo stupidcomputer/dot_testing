@@ -1,3 +1,41 @@
 # rebuild - manage termux environment
 
-getEmacsPackages
+set -x
+REPO_ROOT="${HOME}/dot_testing"
+
+# packages: ensure that certain packages are installed
+mod_ensureAptPackages () {
+    pkg install -y \
+	neovim \
+	emacs \
+	man \
+	fzy \
+	jq \
+	termux-api
+}
+
+# configuration: ensure that configuration files are properly placed
+mod_bashConfiguration () {
+    ln -sf "$REPO_ROOT/config/bash/bashrc" "$HOME/.bashrc"
+    ln -sf "$REPO_ROOT/config/bash/profile" "$HOME/.bash_profile"
+}
+
+mod_emacsConfiguration () {
+    mkdir -p "$HOME/.emacs.d"
+    ln -sf "$REPO_ROOT/config/emacs/init.el" "$HOME/.emacs.d/init.el"
+    ln -sf "$REPO_ROOT/config/emacs/early-init.el" "$HOME/.emacs.d/early-init.el"
+}
+
+# install termux-specific executables
+mod_termuxSpecificExecutables () {
+    mkdir -p "$HOME/.local/bin"
+
+    for i in $(ls "$REPO_ROOT/boxes/phone/bin"); do
+	ln -sf "$REPO_ROOT/boxes/phone/bin/$i" "$HOME/.local/bin/$i"
+    done
+} 
+
+mod_ensureAptPacakges
+mod_bashConfiguration
+mod_emacsConfiguration
+mod_termuxSpecificExecutables
