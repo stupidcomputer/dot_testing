@@ -33,6 +33,7 @@ mod_termuxSpecificExecutables () {
     for i in $(ls "$REPO_ROOT/boxes/phone/bin"); do
 	ln -sf "$REPO_ROOT/boxes/phone/bin/$i" "$HOME/.local/bin/$i"
     done
+    ln -sf "$REPO_ROOT/boxes/phone/rebuild" "$HOME/.local/bin/rebuild"
 } 
 
 mod_ensureAptPacakges
