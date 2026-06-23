@@ -85,8 +85,10 @@
   :config
   (add-to-list 'org-modules 'org-habit)
   (define-key global-map "\C-cl" 'org-store-link)
-  (define-key global-map "\C-ca" (lambda () (interactive) (org-ql-view "Daily agenda")))
-  (define-key global-map "\C-cA" (lambda () (interactive) (org-ql-view "Weekly agenda")))
+  (define-key global-map "\C-ca" (lambda () (interactive) (org-agenda nil "a")))
+  (define-key global-map "\C-cA" (lambda () (interactive) (org-agenda nil "w")))
+  (define-key global-map "\C-c\C-a" (lambda () (interactive) (org-ql-view "Daily agenda")))
+  (define-key global-map "\C-c\C-A" (lambda () (interactive) (org-ql-view "Weekly agenda")))
   (define-key global-map "\C-ch" (lambda () (interactive) (org-ql-view "Habits")))
   (define-key global-map "\C-cc" 'org-capture)
   (define-key global-map "\C-cc" 'org-capture)
