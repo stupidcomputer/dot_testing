@@ -284,7 +284,7 @@ in {
       };
       xdg.configFile."i3/config".text = builtins.readFile ../config/i3/config;
 
-      programs.librewolf = {
+      programs.firefox = {
         enable = true;
         profiles.default = {
           id = 0;
