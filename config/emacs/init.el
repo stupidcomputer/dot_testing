@@ -2,6 +2,9 @@
 (setq use-package-verbose t
       gc-cons-threshold (* 50 1024 1024))
 
+(when (string-equal (system-name) "localhost")
+  (setq use-package-always-ensure t))
+
 (use-package evil
   :ensure t
   :init
