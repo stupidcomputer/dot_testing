@@ -12,6 +12,7 @@ in {
     };
   };
 
+
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       ppkgs.st
@@ -22,6 +23,13 @@ in {
       scrcpy
     ];
     nix.settings.download-buffer-size = 10000000000;
+
+    # FIXME: librewolf seems to be not very well maintained
+    # follow up on this and perhaps throw my hat in the ring
+    nixpkgs.config.permittedInsecurePackages = [
+      "librewolf-151.0.2-1"
+      "librewolf-unwrapped-151.0.2-1"
+    ];
 
     fonts.packages = with pkgs; [
       corefonts
@@ -284,7 +292,7 @@ in {
       };
       xdg.configFile."i3/config".text = builtins.readFile ../config/i3/config;
 
-      programs.firefox = {
+      programs.librewolf = {
         enable = true;
         profiles.default = {
           id = 0;

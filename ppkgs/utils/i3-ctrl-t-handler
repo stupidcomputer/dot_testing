@@ -4,7 +4,7 @@ set -x
 
 # if librefox isn't on the desktop, then make it so
 # if it is, focus to it
-targeted_class=${BROWSER:-firefox}
+targeted_class=${BROWSER:-librewolf}
 if [ "$current_class" != "$targeted_class" ]; then
     query=$(i3-msg -t get_tree | jq -r --arg window_class "$targeted_class" '
         def walk_nodes:

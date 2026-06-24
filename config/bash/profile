@@ -8,7 +8,7 @@ if [ $(hostname) = "localhost" ]; then # this is phone
 fi
 export MANPATH="$(manpath -q):$HOME/.local/share/man"
 export EDITOR="emacsclient"
-export BROWSER="firefox"
+export BROWSER="librewolf"
 mkdir -p "$HOME/.local/bin" "$HOME/.local/share/man" "$HOME/.cache/bash"
 
 # program exports to keep the $HOME neat and tidy
