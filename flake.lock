@@ -109,11 +109,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1782187366,
-        "narHash": "sha256-tmdFRrxqDkj5sMrB+XRKzJHj3a0IiRxtJF+6LsMa2Rw=",
+        "lastModified": 1782360145,
+        "narHash": "sha256-OpJ69mLITTnnkmZH/3Qk0x8vVbARo9v/0YF+48CLOWo=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "445d075b13bee5a8ee7ef32ec828a995bb1cb09e",
+        "rev": "5962873b682c47d5a2eae247af908bdd6da48580",
         "type": "gitlab"
       },
       "original": {
@@ -131,11 +131,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1782253546,
-        "narHash": "sha256-ElIaN9QvvLMeYviqAYd+uh0JMr3cbKHk19gUSGk1tTc=",
+        "lastModified": 1782426947,
+        "narHash": "sha256-UB64VpSKLUE5g+rvWmlhH5oAI0P8ort27oPBTt0vpsM=",
         "ref": "refs/heads/main",
-        "rev": "0cfb0c683f8e76ddf8eca99716abb05996fadb74",
-        "revCount": 108,
+        "rev": "d6f860111f98496fb2bf4e921d1a0fdb04b8f6ba",
+        "revCount": 109,
         "type": "git",
         "url": "ssh://git@github.com/stupidcomputer/flagman.git"
       },
@@ -237,11 +237,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1782253243,
-        "narHash": "sha256-YV23Ols+CzZcQRFuljq5Kd/XvBHP9Z9sJctZPxzkGqU=",
+        "lastModified": 1782366663,
+        "narHash": "sha256-hcxEl/eWQQaYkUqygP4ca8S7WlX9c6vqgvQCqtV3vuw=",
         "owner": "numtide",
         "repo": "llm-agents.nix",
-        "rev": "6fa84ac1103ebed388ba1c6229668b1fc2575d64",
+        "rev": "5f9d86061f538b3f5f3568583c001fb9c0705b71",
         "type": "github"
       },
       "original": {
@@ -268,11 +268,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1782252806,
-        "narHash": "sha256-8QJhNXXCIdzVvBvchjX0Xl0SuRWIp+w5XvJZrLtV8jM=",
+        "lastModified": 1782425481,
+        "narHash": "sha256-K5JwaztTajpl6pmK6ReC9nT+nQVuvIHJFqfAdDYPv+s=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "d49702903bbc1df3a9a0a814c3bb7b78f1697efe",
+        "rev": "d37741a3dfa55ebe1085ecbbb180d1c751d29769",
         "type": "github"
       },
       "original": {
@@ -283,11 +283,11 @@
     },
     "nixpkgs_2": {
       "locked": {
-        "lastModified": 1781509190,
-        "narHash": "sha256-uJZs9Di8I6ciTp6jiojj0HzlNpBkud8ax5aT/O5aJkw=",
+        "lastModified": 1782188297,
+        "narHash": "sha256-imdcA5fgbHK259bhHlyiiSr7bMY1AZ6onOWDdAcydc4=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "d6df3513510aa548c83868fd22bfddd0a8c0a0d4",
+        "rev": "9a1a7dbb18f0eb31c49b031babb8def7eab0af54",
         "type": "github"
       },
       "original": {

@@ -27,8 +27,8 @@ in {
     # FIXME: librewolf seems to be not very well maintained
     # follow up on this and perhaps throw my hat in the ring
     nixpkgs.config.permittedInsecurePackages = [
-      "librewolf-151.0.2-1"
-      "librewolf-unwrapped-151.0.2-1"
+      "librewolf-152.0.1-2"
+      "librewolf-unwrapped-152.0.1-2"
     ];
 
     fonts.packages = with pkgs; [
