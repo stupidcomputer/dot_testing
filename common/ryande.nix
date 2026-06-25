@@ -360,6 +360,18 @@ XDG_DOWNLOAD_DIR="$HOME/down"
 XDG_TEMPLATES_DIR="$HOME/temp"
 '';
 
+      xdg.mimeApps = {
+        enable = true;
+        defaultApplications = {
+          "text/html" = "librewolf.desktop";
+          "text/xml" = "librewolf.desktop";
+          "x-scheme-handler/http" = "librewolf.desktop";
+          "x-scheme-handler/https" = "librewolf.desktop";
+          "x-scheme-handler/about" = "librewolf.desktop";
+          "x-scheme-handler/unknown" = "librewolf.desktop";
+        };
+      };
+
       programs.rbw = {
         enable = true;
         settings = {
@@ -435,6 +447,10 @@ set status_display_program=cmus-status-update
       programs.zathura = {
         enable = true;
         extraConfig = builtins.readFile ../config/zathura/zathurarc;
+      };
+
+      programs.sioyek = {
+        enable = true;
       };
 
       home.file.".config/python/pythonrc.py".text = builtins.readFile ../config/python/pythonrc.py;
