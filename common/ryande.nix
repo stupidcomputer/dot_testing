@@ -22,13 +22,19 @@ in {
       anki-bin
       scrcpy
     ];
-    nix.settings.download-buffer-size = 10000000000;
+    nix.settings = {
+      trusted-users = [
+        "usr"
+      ];
+      download-buffer-size = 10000000000;
+    };
 
     # FIXME: librewolf seems to be not very well maintained
     # follow up on this and perhaps throw my hat in the ring
     nixpkgs.config.permittedInsecurePackages = [
-      "librewolf-152.0.1-2"
-      "librewolf-unwrapped-152.0.1-2"
+      "librewolf-152.0-1"
+      "librewolf-bin-152.0-1"
+      "librewolf-bin-unwrapped-152.0-1"
     ];
 
     fonts.packages = with pkgs; [
@@ -294,6 +300,7 @@ in {
 
       programs.librewolf = {
         enable = true;
+        package = pkgs.librewolf-bin;
         profiles.default = {
           id = 0;
           extensions.packages = with inputs.firefox-addons.packages.${pkgs.stdenv.hostPlatform.system}; [
