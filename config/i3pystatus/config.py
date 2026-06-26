@@ -171,6 +171,15 @@ status = Status(logfile="$HOME/.cache/i3status.log")
 status.register("clock",
     format="%a%-d%b%m/%H%M%S",)
 
+status.register("file",
+    format="{task}",
+    components={
+        "task": (str, ".cache/emacs-clock-status"),
+    },
+    base_path="/home/usr/",
+    interval=2,
+)
+
 status.register(ClassMonitor)
 
 if gethostname() == "hammurabi":

@@ -180,6 +180,39 @@
   :custom (org-contacts-files '("~/org/contacts.org")))
 (setq calendar-week-start-day 1)
 
+;; org-clock status -> i3 statusbar
+(defvar u:clock-status-file "~/.cache/emacs-clock-status"
+  "file i3pystatus reads to display the current org-clock task")
+
+(defvar u:clock-status-timer nil
+  "timer that periodically refreshes u:clock-status-file when clocked in")
+
+(defun u:write-clock-status ()
+  "write the current clock status to u:clock-status-file"
+  (with-temp-file u:clock-status-file
+    (insert (if (org-clocking-p)
+		(org-clock-get-clock-string)
+	      ""))))
+
+(defun u:start-clock-status-timer ()
+  "start refreshing the clock status file every 30 seconds"
+  (u:write-clock-status)
+  (unless u:clock-status-timer
+    (setq u:clock-status-timer
+	  (run-with-timer 30 30 #'u:write-clock-status))))
+
+(defun u:stop-clock-status-timer ()
+  "stop refreshing the timer; clear clock status file"
+  (when u:clock-status-timer
+    (cancel-timer u:clock-status-timer)
+    (setq u:clock-status-timer nil))
+  (u:write-clock-status))
+
+(add-hook 'org-clock-in-hook #'u:start-clock-status-timer)
+(add-hook 'org-clock-out-hook #'u:stop-clock-status-timer)
+(add-hook 'org-clock-cancel-hook #'u:stop-clock-status-timer)
+(add-hook 'org-clock-after-resume-hook #'u:start-clock-status-timer)
+
 ;; elfeed
 (use-package elfeed :ensure t)
 (defun u:elfeed-download-with-ytdlp (&optional watch adb)
