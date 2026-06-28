@@ -30,7 +30,6 @@
     vscode
     moonlight-qt
     ddcutil
-    inputs.llm-agents.packages."x86_64-linux".pi
     zoom-us
 
     ppkgs.input-forward

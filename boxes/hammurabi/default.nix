@@ -17,8 +17,6 @@
     sshuttle
     vscode
     styluslabs-write
-    inputs.llm-agents.packages."x86_64-linux".pi
-
     ppkgs.input-forward
   ];
 

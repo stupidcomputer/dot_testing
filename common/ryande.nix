@@ -21,6 +21,8 @@ in {
       ppkgs.rebuild
       anki-bin
       scrcpy
+      inputs.llm-agents.packages."x86_64-linux".pi
+      inputs.llm-agents.packages."x86_64-linux".claude-code
     ];
     nix.settings = {
       trusted-users = [
