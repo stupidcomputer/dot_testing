@@ -19,13 +19,15 @@ bindsym $mod+Return exec st
 bindsym $mod+Shift+Return exec emacsclient -n -e '(u:new-frame-with-vterm)'
 bindsym $mod+e exec emacsclient -c -a ""
 bindsym $mod+q kill
+bindsym $mod+w exec emacsclient -n -e '(org-clock-out)'; exec xscreensaver-command --lock
 bindsym $mod+d exec --no-startup-id dmenu_wrapper
 bindsym $mod+z exec --no-startup-id rbw-dmenu-list
 bindsym $mod+Shift+z exec --no-startup-id rbw-dmenu-list 2fa
 bindsym $mod+Ctrl+z exec --no-startup-id rbw-dmenu-list username
 # requires that full-screen-api.ignore-widgets be true
 # TODO: put all of this into a home-manager configuration
-bindsym $mod+c exec librewolf --new-window --kiosk https://desmos.com/calculator
+bindsym $mod+c exec emacsclient -n -e '(u:make-capture-frame)'
+for_window [title="org-capture-frame"] floating enable
 bindsym $mod+g exec i3-ctrl-t-handler
 
 bindsym $mod+h focus left
@@ -48,7 +50,6 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
 
 bindsym $mod+b exec librewolf
 
