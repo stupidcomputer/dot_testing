@@ -335,7 +335,6 @@ in {
           lsp-ui
           magit
           nix-mode
-          noflet
           org-drill
           org-evil
           org-journal

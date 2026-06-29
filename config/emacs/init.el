@@ -172,8 +172,9 @@
                 (height . 25)))
   (select-frame-by-name "org-capture-frame")
   (delete-other-windows)
-  (noflet ((switch-to-buffer-other-window (buf) (switch-to-buffer buf)))
-          (org-capture)))
+  (cl-letf (((symbol-function 'switch-to-buffer-other-window)
+	     (lambda (buf) (switch-to-buffer buf))))
+    (org-capture)))
 
 (defadvice org-capture-finalize
     (after delete-capture-frame activate)
@@ -209,7 +210,6 @@
   :ensure t
   :after org
   :custom (org-contacts-files '("~/org/contacts.org")))
-(require 'noflet)
 (setq calendar-week-start-day 1)
 
 ;; org-clock status -> i3 statusbar
