@@ -190,6 +190,7 @@ in {
       enableSSHSupport = true;
     };
 
+    home-manager.backupFileExtension = "hm-bak";
     home-manager.users."${cfg.username}" = {
       imports = [
         ./i3pystatus.nix
