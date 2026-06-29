@@ -75,6 +75,8 @@
 	org-agenda-show-future-repeats 'next
 	org-agenda-dim-blocked-tasks nil
 	org-agenda-inhibit-startup t
+	org-log-redeadline 'time
+	org-log-reschedule 'time
 	org-agenda-ignore-properties '(stats)
 	org-todo-keywords '((sequence "TODO(t!)" "PLANNING(p!)" "IN-PROGRESS(i@/!)"
 				      "VERIFYING(v!)" "BLOCKED(b@)"  "|" "DONE(d!)"
@@ -159,8 +161,37 @@
     (:map org-mode-map
 	  ("<C-tab>" . u:helm-org-jump))))
 
+;; thanks: https://macowners.club/posts/org-capture-from-everywhere-macos/
+(defun u:make-capture-frame ()
+  "Create a new frame and run `org-capture'."
+  (interactive)
+  (make-frame '((name . "org-capture-frame")
+                (top . 300)
+                (left . 700)
+                (width . 80)
+                (height . 25)))
+  (select-frame-by-name "org-capture-frame")
+  (delete-other-windows)
+  (noflet ((switch-to-buffer-other-window (buf) (switch-to-buffer buf)))
+          (org-capture)))
+
+(defadvice org-capture-finalize
+    (after delete-capture-frame activate)
+  "Advise capture-finalize to close the frame."
+  (if (equal "capture" (frame-parameter nil 'name))
+      (delete-frame)))
+
+(defadvice org-capture-destroy
+    (after delete-capture-frame activate)
+  "Advise capture-destroy to close the frame."
+  (if (equal "capture" (frame-parameter nil 'name))
+      (delete-frame)))
+
 (use-package org-drill :ensure t)
-(use-package anki-editor :ensure t)
+(use-package anki-editor
+  :ensure t
+  :config
+  (setq anki-editor-create-decks t))
 (use-package org-journal :ensure t)
 (use-package evil-org
   :ensure t
@@ -178,6 +209,7 @@
   :ensure t
   :after org
   :custom (org-contacts-files '("~/org/contacts.org")))
+(require 'noflet)
 (setq calendar-week-start-day 1)
 
 ;; org-clock status -> i3 statusbar

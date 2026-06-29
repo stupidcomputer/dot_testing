@@ -19,7 +19,6 @@ in {
       ppkgs.dmenu
       ppkgs.utils
       ppkgs.rebuild
-      anki-bin
       scrcpy
       inputs.llm-agents.packages."x86_64-linux".pi
       inputs.llm-agents.packages."x86_64-linux".claude-code
@@ -335,6 +334,7 @@ in {
           lsp-ui
           magit
           nix-mode
+          noflet
           org-drill
           org-evil
           org-journal
@@ -426,6 +426,13 @@ set status_display_program=cmus-status-update
       programs.gh = {
         enable = true;
         gitCredentialHelper.enable = false;
+      };
+
+      programs.anki = {
+        enable = true;
+        addons = with pkgs.ankiAddons; [
+          anki-connect
+        ];
       };
 
       programs.neovim = {
