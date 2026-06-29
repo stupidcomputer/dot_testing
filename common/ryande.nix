@@ -30,6 +30,8 @@ in {
       download-buffer-size = 10000000000;
     };
 
+    security.pam.services.xscreensaver.enable = true;
+
     # FIXME: librewolf seems to be not very well maintained
     # follow up on this and perhaps throw my hat in the ring
     nixpkgs.config.permittedInsecurePackages = [
@@ -159,8 +161,6 @@ in {
         };
       };
     };
-
-    services.xscreensaver.enable = true;
 
     system.userActivationScripts.copyAercConfiguration = {
       text = ''
@@ -468,6 +468,8 @@ set status_display_program=cmus-status-update
       programs.sioyek = {
         enable = true;
       };
+
+      services.xscreensaver.enable = true;
 
       home.file.".config/python/pythonrc.py".text = builtins.readFile ../config/python/pythonrc.py;
     };
