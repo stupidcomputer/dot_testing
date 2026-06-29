@@ -446,9 +446,9 @@ set status_display_program=cmus-status-update
           nixd
         ];
       };
-      home.file.".config/nvim/colors" = {
-        source = ../config/nvim/colors;
-        recursive = true;
+
+      home.file.".config/nvim/colors/earth.vim" = {
+        source = ../config/nvim/colors/earth.vim;
       };
 
       home.file.".config/picom/shader.glsl" = {
