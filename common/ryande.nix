@@ -54,6 +54,8 @@ in {
       vista-fonts
     ];
 
+    services.gnome.at-spi2-core.enable = true;
+
     # this is required for home-manager to share window managers to ly
     environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
 
@@ -91,7 +93,6 @@ in {
     };
 
     security.rtkit.enable = true;
-    programs.adb.enable = true;
     services = {
       pulseaudio.enable = false;
       pipewire = {
@@ -265,6 +266,7 @@ in {
         yt-dlp
         ical2orgpy
         texliveFull
+        android-tools
       ];
 
       fonts.fontconfig = {

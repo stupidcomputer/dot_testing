@@ -11,6 +11,7 @@ exec_always --no-startup-id pkill xcape
 exec_always --no-startup-id xcape -e 'Super_L=Escape'
 exec systemctl --user start activitywatch-watcher-aw-watcher-afk.service
 exec systemctl --user start activitywatch-watcher-aw-watcher-window.service
+exec --no-startup-id /run/current-system/sw/libexec/at-spi-bus-launcher --launch-immediately
 exec emacs --daemon
 
 exec copernicus-additional-i3-config
