@@ -36,6 +36,7 @@
   ];
 
   virtualisation.virtualbox.host.enable = true;
+  virtualisation.virtualbox.host.package = unstable.virtualbox;
   boot.kernelParams = [ "kvm.enable_virt_at_load=0" ]; # virtualbox doesn't like kvm
 
   hardware.bluetooth = {
@@ -105,17 +106,6 @@
           allowedTCPPorts = [ 59010 2342 ];
         };
       };
-    };
-  };
-
-  services.ollama = {
-    enable = true;
-    package = unstable.ollama-cuda;
-  };
-  services.open-webui = {
-    enable = true;
-    environment = {
-      WEBUI_AUTH = "False";
     };
   };
 
