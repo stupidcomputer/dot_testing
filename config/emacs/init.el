@@ -2,6 +2,11 @@
 (setq use-package-verbose t
       gc-cons-threshold (* 50 1024 1024))
 
+(defvar on-phone-p
+  (or (getenv "TERMUX_VERSION")
+      (getenv "ANDROID_ROOT"))
+  "non-nil in termux/android")
+
 (use-package evil
   :ensure t
   :init
@@ -93,7 +98,7 @@
   (define-key global-map "\C-c\C-A" (lambda () (interactive) (org-ql-view "Weekly agenda")))
   (define-key global-map "\C-ch" (lambda () (interactive) (org-ql-view "Habits")))
   (define-key global-map "\C-cc" 'org-capture)
-  (define-key global-map "\C-cc" 'org-capture)
+  (define-key global-map "\C-cL" 'org-capture)
   (define-key global-map "\C-cs" (lambda () (interactive) (org-agenda-schedule nil "+1d")))
   (define-key global-map "\C-cy" 'org-todo-yesterday)
   (define-key global-map "\C-cO" 'org-journal-open-current-journal-file)
@@ -302,6 +307,7 @@
 ;; pdf-tools
 (use-package pdf-tools
   :ensure t
+  :if (not on-phone-p)
   :config
   (pdf-tools-install))
 
@@ -370,6 +376,7 @@
 
 (use-package projectile
   :ensure t
+  :if (not on-phone-p)
   :init
   (setq projectile-project-search-path '("~/git/" "~/dots/"))
   :config
@@ -378,6 +385,7 @@
 
 (use-package helm-projectile
   :ensure t
+  :if (not on-phone-p)
   :config
   (define-key projectile-mode-map (kbd "C-c p f") 'helm-projectile-find-file)
   (define-key projectile-mode-map (kbd "C-c p p") 'helm-projectile-switch-project))
