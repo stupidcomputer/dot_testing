@@ -25,6 +25,12 @@
   };
 #  nixpkgs.config.cudaSupport = true;
 
+  services.sunshine = {
+    enable = true;
+    autoStart = true;
+    openFirewall = true;
+  };
+
   environment.systemPackages = with pkgs; [
     soundwireserver
     vscode
