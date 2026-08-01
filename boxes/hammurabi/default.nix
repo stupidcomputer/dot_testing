@@ -18,6 +18,7 @@
     vscode
     styluslabs-write
     ppkgs.input-forward
+    moonlight-qt
   ];
 
   programs.steam.enable = true;
