@@ -6,6 +6,7 @@
     ../../common/ryande.nix
     ../../common/bootstrap.nix
     ./agenix.nix
+    ./sshd.nix
   ];
 
   virtualisation.virtualbox.guest.enable = true;
