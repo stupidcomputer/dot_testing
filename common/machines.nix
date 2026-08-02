@@ -1,8 +1,11 @@
-{
+rec {
   router = {
     ip-addrs = {
       localnet = "192.168.1.1";
     };
+    description = ''
+      Router for home network.
+    '';
   };
   copernicus = {
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILBGh1FHPneg7PCDkhMs2BCJPTIRVJkRTKpOj1w02ydD usr";
@@ -32,19 +35,17 @@
       A Lenovo Thinkpad Yoga 260. Power supply seems to have died.
     '';
   };
-  netbox = {
-    syncthing-id = "O7K4VBQ-N5ENCDW-YMGMQP7-MADCKHK-T5OBSNH-4B3BE7W-Z3DK2G5-DH22NQQ";
-    description = ''
-      Just a tiny VPS, nothing much.
-    '';
-  };
   theseus = {
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHNOmlULaILeL5QOAuKqMbhV6vXOWjxgsN3wpvFRvarz usr";
+    syncthing-id = "O7K4VBQ-N5ENCDW-YMGMQP7-MADCKHK-T5OBSNH-4B3BE7W-Z3DK2G5-DH22NQQ";
     wg-privkey = ../secrets/theseus.privkey.age;
     wg-pubkey = "IMCkYrhYgki6Qjo7SLlU2yNWqo7qCGVwLGs7nv7ZyVI=";
     ip-addrs = {
       intnet = "10.100.0.1";
     };
+    description = ''
+      Just a tiny VPS, nothing much.
+    '';
   };
   plato = {
     description = ''

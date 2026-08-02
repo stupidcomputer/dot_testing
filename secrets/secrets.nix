@@ -6,6 +6,13 @@ let
     hammurabi.pubkey
     theseus.pubkey
   ];
+
+  descartes-shared = [
+    descartes.pubkey
+    copernicus.pubkey
+    hammurabi.pubkey
+    theseus.pubkey
+  ];
 in {
   # mailserver
   "mailaccount.age".publicKeys = all;

@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ../../common/ryande.nix
     ../../common/bootstrap.nix
+    ./agenix.nix
   ];
 
   virtualisation.virtualbox.guest.enable = true;
