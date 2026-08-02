@@ -30,6 +30,7 @@
       dates = "03:15";
       options = "-d";
     };
+    settings.trusted-users = [ "@wheel" ];
   };
   services.journald.extraConfig = ''
     SystemMaxUse=200M
