@@ -7,6 +7,14 @@ rec {
       Router for home network.
     '';
   };
+  hue = {
+    ip-addrs = {
+      localnet = "192.168.1.210";
+    };
+    description = ''
+      Hue bridge
+    '';
+  };
   copernicus = {
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILBGh1FHPneg7PCDkhMs2BCJPTIRVJkRTKpOj1w02ydD usr";
     wg-privkey = ../secrets/copernicus.privkey.age;

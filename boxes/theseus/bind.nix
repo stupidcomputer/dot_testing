@@ -22,11 +22,11 @@
           @ IN SOA ns1.intnet.beepboop.systems. admin.intnet.beepboop.systems. ( 1 3h 1h 1w 1h )
           @ IN NS ns1.intnet.beepboop.systems.
 
-          @            IN A 10.100.0.1
-          ns1          IN A 10.100.0.1
-          theseus      IN A 10.100.0.1
-          copernicus   IN A 10.100.0.2
-          hammurabi    IN A 10.100.0.3
+          @            IN A ${machines.theseus.ip-addrs.intnet}
+          ns1          IN A ${machines.theseus.ip-addrs.intnet}
+          theseus      IN A ${machines.theseus.ip-addrs.intnet}
+          copernicus   IN A ${machines.copernicus.ip-addrs.intnet}
+          hammurabi    IN A ${machines.hammurabi.ip-addrs.intnet}
         '';
       };
       "localnet.beepboop.systems" = {
@@ -38,9 +38,9 @@
           @ IN NS ns1.localnet.beepboop.systems.
 
           ns1          IN A 10.100.0.1
-          router       IN A 192.168.1.1
-          copernicus   IN A 192.168.1.201
-          hue          IN A 192.168.1.210
+          router       IN A ${machines.router.ip-addrs.localnet}
+          copernicus   IN A ${machines.copernicus.ip-addrs.localnet}
+          hue          IN A ${machines.hue.ip-addrs.localnet}
         '';
       };
       "0.100.10.in-addr.arpa" = {
