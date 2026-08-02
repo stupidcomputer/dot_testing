@@ -34,10 +34,5 @@
     after = [ "wg-quick-wg0.service" ];
   };
 
-  users.users.usr.openssh.authorizedKeys.keys = [
-    machines.copernicus.pubkey
-    machines.hammurabi.pubkey
-    machines.phone.pubkey
-    machines.theseus.pubkey
-  ];
+  users.users.usr.openssh.authorizedKeys.keys = machines.copernicus.allowed-ssh-access;
 }

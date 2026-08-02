@@ -19,6 +19,12 @@ rec {
     description = ''
       The main desktop PC.
     '';
+    allowed-ssh-access = [
+      copernicus.pubkey
+      hammurabi.pubkey
+      phone.pubkey
+      theseus.pubkey
+    ];
   };
   phone = {
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAImPZp8/B6taPvrOgrodVbc7WbWoQWnrwV+1DlV/vgi u0_a340";
@@ -43,6 +49,11 @@ rec {
     ip-addrs = {
       intnet = "10.100.0.1";
     };
+    allowed-ssh-access = [
+      copernicus.pubkey
+      hammurabi.pubkey
+      phone.pubkey
+    ];
     description = ''
       Just a tiny VPS, nothing much.
     '';
@@ -60,6 +71,12 @@ rec {
     ip-addrs = {
       intnet = "10.100.0.3";
     };
+    allowed-ssh-access = [
+      copernicus.pubkey
+      hammurabi.pubkey
+      phone.pubkey
+      theseus.pubkey
+    ];
     description = ''
       A Lenovo Thinkpad L13 Yoga.
     '';
@@ -69,6 +86,11 @@ rec {
     description = ''
       A VirtualBox guest running NixOS.
     '';
+    allowed-ssh-access = [
+      copernicus.pubkey
+      hammurabi.pubkey
+      theseus.pubkey
+    ];
   };
 
   mkHosts = machines: hostname: network:

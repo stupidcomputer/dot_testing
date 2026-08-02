@@ -17,10 +17,5 @@
 
   systemd.services.sshd.wantedBy = lib.mkForce [ ];
 
-  users.users.usr.openssh.authorizedKeys.keys = [
-    machines.copernicus.pubkey
-    machines.hammurabi.pubkey
-    machines.phone.pubkey
-    machines.theseus.pubkey
-  ];
+  users.users.usr.openssh.authorizedKeys.keys = machines.descartes.allowed-ssh-access;
 }
