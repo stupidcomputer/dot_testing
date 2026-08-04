@@ -6,9 +6,9 @@ PPKGS       := $(REPO_ROOT)/ppkgs
 BIN_DIR     := $(HOME)/.local/bin
 
 .PHONY: all help utils-sh rebuild-sh pip-pkgs pip-pkgs-upgrade \
-        termux-pkgs termux-dots shortcuts boot
+        termux-pkgs termux-dots shortcuts boot phone-routine
 
-all: termux-pkgs termux-dots utils-sh rebuild-sh pip-pkgs
+all: termux-pkgs termux-dots utils-sh rebuild-sh pip-pkgs phone-routine
 
 ## help: list targets with descriptions
 help:
@@ -49,7 +49,7 @@ TERMUX_PKGS  := neovim emacs python-pip git tig \
                 clang elinks tmux fontconfig fzy man \
                 firefox mupdf texlive-bin htop rbw pkg-config \
                 termux-api jq isync neomutt \
-                pandoc wget which rsync openssl chromium
+                pandoc wget which rsync openssl chromium espeak
 
 termux-pkgs:
 	@wanted="$(TERMUX_REPOS) $(TERMUX_PKGS)"; \
@@ -65,7 +65,17 @@ termux-pkgs:
 ## termux-dots: symlink dotfiles into place
 termux-dots: $(HOME)/.ssh/config $(HOME)/.bashrc $(HOME)/.bash_profile \
              $(HOME)/.emacs.d/init.el \
-             $(HOME)/.termux/termux.properties shortcuts boot
+             $(HOME)/.config/nvim/init.lua $(HOME)/.config/nvim/colors/earth.vim \
+             $(HOME)/.termux/termux.properties $(HOME)/.config shortcuts boot
+
+## config-dir: ensure ~/.config is a real directory, healing it if something
+## (unidentified so far) has left it as a broken symlink
+$(HOME)/.config:
+	@if [ -L "$(HOME)/.config" ] && [ ! -e "$(HOME)/.config" ]; then \
+		echo "removing broken symlink at $(HOME)/.config -> $$(readlink $(HOME)/.config)"; \
+		rm -f "$(HOME)/.config"; \
+	fi
+	mkdir -p "$(HOME)/.config"
 
 ## ssh-config: symlink ssh config
 $(HOME)/.ssh/config:
@@ -85,6 +95,17 @@ $(HOME)/.emacs.d/init.el:
 	mkdir -p $(HOME)/.emacs.d
 	ln -sf $(REPO_ROOT)/config/emacs/init.el $(HOME)/.emacs.d/init.el
 
+## nvim-init: symlink neovim config (mirrors what home-manager's
+## common/ryande.nix wires up on the NixOS boxes, since that doesn't apply
+## to Termux)
+$(HOME)/.config/nvim/init.lua: $(HOME)/.config
+	mkdir -p $(HOME)/.config/nvim
+	ln -sf $(REPO_ROOT)/config/nvim/init.lua $(HOME)/.config/nvim/init.lua
+
+$(HOME)/.config/nvim/colors/earth.vim: $(HOME)/.config/nvim/init.lua
+	mkdir -p $(HOME)/.config/nvim/colors
+	ln -sf $(REPO_ROOT)/config/nvim/colors/earth.vim $(HOME)/.config/nvim/colors/earth.vim
+
 ## shortcuts: symlink termux shortcuts
 shortcuts:
 	mkdir -p $(HOME)/.shortcuts
@@ -99,3 +120,8 @@ boot:
 $(HOME)/.termux/termux.properties:
 	mkdir -p $(HOME)/.termux
 	ln -sf $(CURDIR)/termux.properties $(HOME)/.termux/termux.properties
+
+## phone-routine: install the morning alarm / procedure runner
+phone-routine:
+	install -Dm755 $(CURDIR)/phone_routine.py $(BIN_DIR)/phone-routine
+	ln -sf phone-routine $(BIN_DIR)/phone-routine-wakeup-check
