@@ -7,7 +7,7 @@ let
     theseus.pubkey
   ];
 
-  descartes-shared = [
+  descartes-shared = with machines; [
     descartes.pubkey
     copernicus.pubkey
     hammurabi.pubkey
