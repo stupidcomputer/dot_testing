@@ -1,4 +1,4 @@
-{ config, machines, ... }:
+{ config, pkgs, machines, ... }:
 {
   age.secrets.copernicus-wg = {
     file = ../../secrets/copernicus.privkey.age;
@@ -14,6 +14,14 @@
     wg0 = {
       address = [ "${machines.copernicus.ip-addrs.intnet}/32" ];
       privateKeyFile = config.age.secrets.copernicus-wg.path;
+
+      postUp = ''
+        ${pkgs.systemd}/bin/resolvectl dns wg0 10.100.0.1
+        ${pkgs.systemd}/bin/resolvectl domain wg0 "~intnet.beepboop.systems" "~localnet.beepboop.systems"
+      '';
+      preDown = ''
+        ${pkgs.systemd}/bin/resolvectl revert wg0
+      '';
 
       peers = [
         {

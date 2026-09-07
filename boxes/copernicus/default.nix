@@ -69,9 +69,14 @@
 
   powerManagement.cpuFreqGovernor = "performance";
 
+  services.resolved = {
+    enable = true;
+    fallbackDns = [ "1.0.0.1" ];
+  };
+
   networking = {
     hostName = "copernicus";
-    nameservers = [ "10.100.0.1" "1.1.1.1" ];
+    nameservers = [ "1.1.1.1" ];
     interfaces.eno1 = {
       useDHCP = true;
       wakeOnLan = {
