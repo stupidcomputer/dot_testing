@@ -8,12 +8,10 @@
     ./calendar-sync.nix
     ./flagman.nix
     ./flasktrack.nix
-    ./guacamole.nix
     ./nginx.nix
     ./ssh.nix
     ./sslh.nix
     ./syncthing.nix
-    ./tsa-webmaster-26.nix
     ./vaultwarden.nix
     ./wireguard.nix
   ];
@@ -44,8 +42,6 @@
     keyMap = "us";
   };
 
-  services.tailscale.enable = true;
-
   environment.systemPackages = with pkgs; [
     python3
     curl
@@ -53,7 +49,6 @@
     git
     tree
     dig
-    htop
     neovim
     tmux
 

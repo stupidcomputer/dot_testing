@@ -5,13 +5,6 @@
     clientMaxBodySize = "100m";
     defaultSSLListenPort = 442;
     appendHttpConfig = ''
-      proxy_cache_path /tmp/proxy_cache levels=1:2 keys_zone=cachecache:100m max_size=1g inactive=365d use_temp_path=off;
-      map $status $cache_header {
-        200     "public";
-        302     "public";
-        default "no-cache";
-      }
-
       error_log stderr;
       access_log syslog:server=unix:/dev/log combined;
     '';
@@ -50,13 +43,9 @@
     "ensureWebDirectories" = {
       text = ''
         ${pkgs.coreutils}/bin/mkdir -p /var/www/tools.beepboop.systems
-        ${pkgs.coreutils}/bin/mkdir -p /var/www/tsa-webmaster-26-placeholder.beepboop.systems
         ${pkgs.coreutils}/bin/chown nginx:nginx-data /var/www/tools.beepboop.systems
-        ${pkgs.coreutils}/bin/chown nginx:nginx-data /var/www/tsa-webmaster-26-placeholder.beepboop.systems
         ${pkgs.coreutils}/bin/chmod -R u=rwX,g=rwX,o=r /var/www/tools.beepboop.systems
-        ${pkgs.coreutils}/bin/chmod -R u=rwX,g=rwX,o=r /var/www/tsa-webmaster-26-placeholder.beepboop.systems
         ${pkgs.coreutils}/bin/chmod g+s /var/www/tools.beepboop.systems
-        ${pkgs.coreutils}/bin/chmod g+s /var/www/tsa-webmaster-26-placeholder.beepboop.systems
       ''; 
     };
   };

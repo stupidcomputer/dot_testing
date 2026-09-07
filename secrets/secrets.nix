@@ -46,6 +46,4 @@ in {
   # flagman settings
   "flagman-env.age".publicKeys = all;
 
-  # guacamole user mapping
-  "guac-user-mapping.xml.age".publicKeys = all;
 }
