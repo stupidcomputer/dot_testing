@@ -71,7 +71,7 @@
 
   services.resolved = {
     enable = true;
-    fallbackDns = [ "1.0.0.1" ];
+    settings.Resolve.FallbackDNS = [ "1.0.0.1" ];
   };
 
   networking = {

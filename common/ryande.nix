@@ -207,8 +207,8 @@ in {
         })
 
         # xorg utilities
-        xorg.xset
-        xorg.setxkbmap
+        xset
+        setxkbmap
         xcape
         xclip
         x11vnc
@@ -379,6 +379,8 @@ XDG_TEMPLATES_DIR="$HOME/temp"
 
       programs.ssh = {
         enable = true;
+        enableDefaultConfig = false;
+        settings."*" = { };
         extraConfig = builtins.readFile ../config/ssh/sshrc;
       };
 
@@ -424,7 +426,9 @@ set status_display_program=cmus-status-update
 
       programs.neovim = {
         enable = true;
-        extraLuaConfig = builtins.readFile ../config/nvim/init.lua;
+        withRuby = true;
+        withPython3 = true;
+        initLua = builtins.readFile ../config/nvim/init.lua;
         extraPackages = with pkgs; [
           lua-language-server
           texlab
