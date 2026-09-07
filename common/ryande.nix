@@ -20,7 +20,6 @@ in {
       ppkgs.utils
       ppkgs.rebuild
       scrcpy
-      inputs.llm-agents.packages."x86_64-linux".pi
       inputs.llm-agents.packages."x86_64-linux".claude-code
     ];
     nix.settings = {
@@ -53,8 +52,6 @@ in {
       proggyfonts
       vista-fonts
     ];
-
-    services.gnome.at-spi2-core.enable = true;
 
     # this is required for home-manager to share window managers to ly
     environment.pathsToLink = [ "/share/applications" "/share/xdg-desktop-portal" ];
@@ -101,7 +98,6 @@ in {
         alsa.support32Bit = true;
         pulse.enable = true;
       };
-      tailscale.enable = true;
 
       # configure printing
       printing.enable = true;
@@ -163,7 +159,7 @@ in {
       };
     };
 
-    system.userActivationScripts.copyAercConfiguration = {
+    system.userActivationScripts.copyAercAuthentication = {
       text = ''
         mkdir -p /home/${cfg.username}/.config/aerc
         ${pkgs.coreutils}/bin/ln -sf ${config.age.secrets.aerc-account-config.path} /home/${cfg.username}/.config/aerc/accounts.conf
@@ -281,17 +277,6 @@ in {
         longitude = -86.9;
         temperature.day = 6500;
         temperature.night = 2200;
-      };
-      services.activitywatch = {
-        enable = true;
-        watchers = {
-          aw-watcher-afk = {
-            package = pkgs.activitywatch;
-          };
-          aw-watcher-window = {
-            package = pkgs.activitywatch;
-          };
-        };
       };
       programs.mpv.enable = true;
       programs.feh.enable = true;
@@ -460,11 +445,6 @@ set status_display_program=cmus-status-update
         enable = true;
         extraConfig = builtins.readFile ../config/aerc/aerc.conf;
         extraBinds = builtins.readFile ../config/aerc/binds.conf;
-      };
-
-      programs.zathura = {
-        enable = true;
-        extraConfig = builtins.readFile ../config/zathura/zathurarc;
       };
 
       programs.sioyek = {

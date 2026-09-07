@@ -13,11 +13,6 @@
   services.ryande.enable = true;
 
   programs.nix-ld.enable = true;
-  programs.steam.enable = true;
-  programs.alvr = {
-    enable = true;
-    openFirewall = true;
-  };
 
   nix.settings = {
     cores = 16;
@@ -25,20 +20,9 @@
   };
 #  nixpkgs.config.cudaSupport = true;
 
-  services.sunshine = {
-    enable = true;
-    autoStart = true;
-    openFirewall = true;
-  };
-
   environment.systemPackages = with pkgs; [
-    soundwireserver
-    vscode
     moonlight-qt
     ddcutil
-    zoom-us
-
-    ppkgs.input-forward
   ];
 
   virtualisation.virtualbox.host.enable = true;
