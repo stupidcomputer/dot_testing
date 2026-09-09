@@ -18,6 +18,8 @@ downstairs: turn off
 downstairs: turn on
 hallway: turn off
 hallway: turn on
+bed: turn off
+bed: turn on
 bonus room: turn off
 bonue room: turn on
 scrcpy: default
@@ -97,13 +99,13 @@ case "$response" in
 	openhue set light f0258cd9-40bf-486d-ba17-0f3452ed534e --on
 	;;
     "downstairs: turn off")
-	openhue set room 34942881-b3be-4065-b604-bf3068cc182e --off
-	openhue set room 726deff6-2b56-4010-a714-454d4bc2fb7c --off
+	openhue set room 34942881-b3be-4065-b604-bf3068cc182e --off &
+	openhue set room 726deff6-2b56-4010-a714-454d4bc2fb7c --off &
 	openhue set room bce91c38-adbc-4b6c-9097-1385be01dd64 --off
 	;;
     "downstairs: turn on")
-	openhue set room 34942881-b3be-4065-b604-bf3068cc182e --on
-	openhue set room 726deff6-2b56-4010-a714-454d4bc2fb7c --on
+	openhue set room 34942881-b3be-4065-b604-bf3068cc182e --on &
+	openhue set room 726deff6-2b56-4010-a714-454d4bc2fb7c --on &
 	openhue set room bce91c38-adbc-4b6c-9097-1385be01dd64 --on
 	;;
     "hallway: turn off")
@@ -111,6 +113,12 @@ case "$response" in
 	;;
     "hallway: turn on")
 	openhue set room 363cfd62-b30d-43a1-b92a-cf24aa3e01de --on
+	;;
+    "bed: turn off")
+	openhue set light 3bcbdec2-7000-4bac-8a30-33d4d8529e2d --off
+	;;
+    "bed: turn on")
+	openhue set light 3bcbdec2-7000-4bac-8a30-33d4d8529e2d --on
 	;;
     "bonus room: turn off")
 	openhue set room 9c8611de-8b22-41cd-81fc-cae3345c51c8 --off
