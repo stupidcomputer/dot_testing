@@ -41,6 +41,8 @@ phone: vibrate notifications
 phone: sound notifications
 phone: place phone call
 phone: compose message
+org-mode: stop current task
+org-mode: resume last task
 wallpaper
 i3: gaps on
 i3: gaps off
@@ -182,6 +184,15 @@ case "$response" in
 	;;
     "phone: compose message")
 	scrcpy-phone-dialer messaging
+	;;
+    "org-mode: stop current task")
+        emacsclient -e '(progn (require (quote org-clock))
+                               (if (org-clocking-p) (progn (org-clock-out) "clocked out")
+                                 "no active clock"))'
+	;;
+
+    "org-mode: resume last task")
+        emacsclient -e '(progn (require (quote org-clock)) (org-clock-in-last))'
 	;;
     "wallpaper")
 	wallpapers=$(ls ~/media/wallpapers)
