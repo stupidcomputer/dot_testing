@@ -23,6 +23,7 @@
   environment.systemPackages = with pkgs; [
     moonlight-qt
     ddcutil
+    audio-sharing
   ];
 
   virtualisation.virtualbox.host.enable = true;
@@ -97,8 +98,8 @@
           allowedTCPPortRanges = [
             { from = 10000; to = 10100; } # temp stuff
           ];
-          allowedUDPPorts = [ 59010 ];
-          allowedTCPPorts = [ 59010 2342 ];
+          allowedUDPPorts = [ 59010 65530 ];
+          allowedTCPPorts = [ 59010 2342 65530 ];
         };
       };
     };

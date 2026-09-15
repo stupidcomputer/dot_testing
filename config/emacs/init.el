@@ -250,6 +250,8 @@
 (add-hook 'org-clock-cancel-hook #'u:stop-clock-status-timer)
 (add-hook 'org-clock-after-resume-hook #'u:start-clock-status-timer)
 
+(setq-default indent-tabs-mode nil)
+
 ;; elfeed
 (use-package elfeed :ensure t)
 (defun u:elfeed-download-with-ytdlp (&optional watch adb)
