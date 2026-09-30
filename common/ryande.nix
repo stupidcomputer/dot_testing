@@ -20,6 +20,7 @@ in {
       ppkgs.utils
       ppkgs.rebuild
       scrcpy
+      sox
       inputs.llm-agents.packages."x86_64-linux".claude-code
     ];
     nix.settings = {
