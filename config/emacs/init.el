@@ -224,11 +224,32 @@
 (defvar u:clock-status-timer nil
   "timer that periodically refreshes u:clock-status-file when clocked in")
 
+(defun u:clock-status-string ()
+  "session/today/total minutes on the clocked-in task, plus its heading.
+org-clock-sum skips the running CLOCK line, so the current session is
+added to today and total by hand."
+  (let* ((midnight (float-time (apply #'encode-time
+					     (append '(0 0 0) (nthcdr 3 (decode-time))))))
+	 (session (floor (float-time (time-since org-clock-start-time)) 60))
+	 (since-midnight (floor (- (float-time) midnight) 60))
+	 (sums (with-current-buffer (marker-buffer org-clock-hd-marker)
+		 (org-with-wide-buffer
+		  (goto-char org-clock-hd-marker)
+		  (cons (org-clock-sum-current-item midnight)
+			(org-clock-sum-current-item)))))
+	 (today (+ (car sums) (min session since-midnight)))
+	 (total (+ (cdr sums) session)))
+    (format "%s/%s/%s (%s)"
+	    (org-duration-from-minutes session)
+	    (org-duration-from-minutes today)
+	    (org-duration-from-minutes total)
+	    org-clock-current-task)))
+
 (defun u:write-clock-status ()
   "write the current clock status to u:clock-status-file"
   (with-temp-file u:clock-status-file
     (insert (if (org-clocking-p)
-		(org-clock-get-clock-string)
+		(u:clock-status-string)
 	      ""))))
 
 (defun u:start-clock-status-timer ()
