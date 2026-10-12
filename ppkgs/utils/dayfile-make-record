@@ -1,0 +1,32 @@
+#!/bin/sh
+
+# $1 - name/nature of record
+# stdin - the content of the record, if any
+# $time - the current time in HHMM
+#         can be overridden via environment variable
+# $date - YYYYMMDD - same deal with environment variables
+
+
+helptext() {
+    printf "\$1 - name/nature of record
+stdin - the content of the record, if any
+\$dayfile_time - the current time in HHMM
+        can be overridden via environment variable
+\$dayfile_date - YYYYMMDD - same deal with environment variables
+"
+
+exit
+}
+
+[ -z "$1" ] && helptext
+
+if [ -z "$dayfile_time" ]; then
+    dayfile_time="$(date '+%H%M%S')"
+fi
+
+if [ -z "$dayfile_date" ]; then
+    dayfile_date="$(date '+%Y%m%d')"
+fi
+
+mkdir -p "${HOME}/org/dayfile/${dayfile_date}"
+cat > "${HOME}/org/dayfile/${dayfile_date}/${dayfile_time} - $1"

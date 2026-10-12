@@ -1,0 +1,72 @@
+#!/bin/sh
+
+# interactive program to manage dayfiles
+
+MENU="dmenu"
+menu_prompt () {
+    [ "$MENU" = "dmenu" ] && dmenu $@
+}
+
+if [ -z "$dayfile_date" ]; then
+    dayfile_date="$(date '+%Y%m%d')"
+fi
+
+new_item () {
+    type="$(printf 'food\nwater bottle\ndefecation\nurination\n' |
+            menu_prompt -p 'itemtype?')"
+
+    case "$type" in
+        "food")
+            further_comments="$(menu_prompt -p 'comments?' < /dev/null)"
+            echo "$further_comments" | dayfile-make-record "$type"
+            ;;
+        *)
+            dayfile-make-record "$type" < /dev/null
+            ;;
+    esac
+}
+
+item_menu () { # $1 - item file name
+    if [ ! -f "$HOME/org/dayfile/$dayfile_date/$1" ]; then
+        return
+    fi
+
+    no_spaces="$(echo $1 | tr -d ' ')"
+    selection="$(printf 'adjtime\ndelete\n' | menu_prompt -p "${no_spaces}")"
+
+    case "$selection" in
+        "delete")
+            rm "$HOME/org/dayfile/$dayfile_date/$1"
+            ;;
+        "adjtime")
+            new_time="$(menu_prompt -p "time?" < /dev/null)"
+            item_type="$(echo "$1" | awk -F ' - ' '{print $2}')"
+
+            mv "$HOME/org/dayfile/$dayfile_date/$1" "$HOME/org/dayfile/$dayfile_date/$new_time - $item_type"
+            ;;
+    esac
+    return
+}
+
+main_menu () {
+    menu_items="$(printf "new")
+$(ls ~/org/dayfile/$dayfile_date)"
+    response="$(printf "$menu_items" | menu_prompt -p 'dayfile')"
+
+    case "$response" in
+        "new"*)
+            new_item
+            ;;
+        "")
+            exit
+            ;;
+        *)
+            item_menu "$response"
+            ;;
+    esac
+}
+
+while true; do
+    main_menu
+done
+
