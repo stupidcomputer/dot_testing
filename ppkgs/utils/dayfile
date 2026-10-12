@@ -12,11 +12,11 @@ if [ -z "$dayfile_date" ]; then
 fi
 
 new_item () {
-    type="$(printf 'food\nwater bottle\ndefecation\nurination\n' |
+    type="$(printf 'food\nweight\nwater bottle\ndefecation\nurination\n' |
             menu_prompt -p 'itemtype?')"
 
     case "$type" in
-        "food")
+        "food"|"weight")
             further_comments="$(menu_prompt -p 'comments?' < /dev/null)"
             echo "$further_comments" | dayfile-make-record "$type"
             ;;
