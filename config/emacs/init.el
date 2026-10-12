@@ -86,6 +86,8 @@
 	org-todo-keywords '((sequence "TODO(t!)" "PLANNING(p!)" "IN-PROGRESS(i@/!)"
 				      "VERIFYING(v!)" "BLOCKED(b@)"  "|" "DONE(d!)"
 				      "OBE(o@!)" "WONT-DO(w@/!)" "DUE-PASSED(a@!)" ))
+        org-tags-exclude-from-inheritance '("project" "monolith")
+
 	org-confirm-babel-evaluate nil
 	org-element-use-cache t
 	org-read-date-force-compatible-dates nil)
