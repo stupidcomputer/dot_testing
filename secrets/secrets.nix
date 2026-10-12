@@ -46,4 +46,7 @@ in {
   # flagman settings
   "flagman-env.age".publicKeys = all;
 
+  # home/school wifi network names
+  "school-wifi-network-name.age".publicKeys = all;
+  "home-wifi-network-name.age".publicKeys = all;
 }

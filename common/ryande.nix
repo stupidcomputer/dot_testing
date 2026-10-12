@@ -12,7 +12,6 @@ in {
     };
   };
 
-
   config = lib.mkIf cfg.enable {
     environment.systemPackages = with pkgs; [
       ppkgs.st
@@ -28,6 +27,18 @@ in {
         "usr"
       ];
       download-buffer-size = 10000000000;
+    };
+
+    age.secrets.school-wifi-network-name = {
+      file = ./../secrets/school-wifi-network-name.age;
+      path = "/etc/network-information/school-wifi-network-name";
+      mode = "0444"; 
+    };
+
+    age.secrets.home-wifi-network-name = {
+      file = ./../secrets/home-wifi-network-name.age;
+      path = "/etc/network-information/home-wifi-network-name";
+      mode = "0444"; 
     };
 
     security.pam.services.xscreensaver.enable = true;

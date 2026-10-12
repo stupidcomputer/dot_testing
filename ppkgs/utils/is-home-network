@@ -1,0 +1,3 @@
+#!/bin/sh
+
+[ "$(cat /etc/network-information/home-wifi-network-name)" = "$(nmcli -t -f active,ssid device wifi | grep '^yes' | cut -d: -f2)" ] || exit 1
