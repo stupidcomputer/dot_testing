@@ -311,12 +311,10 @@ in {
           anki-editor
           auctex
           company
-          elfeed
           evil
           evil-collection
           gruvbox-theme
           helm
-          helm-projectile
           htmlize
           ledger-mode
           lsp-mode

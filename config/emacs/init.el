@@ -133,67 +133,11 @@
   (advice-add #'org-agenda-finalize :before #'u:org-agenda-mark-habits)
   (add-hook 'org-mode-hook 'visual-line-mode)
 
-  (defun u:helm-org-jump ()
-    "Jump to an Org-mode heading or Babel source block in the current buffer."
-    (interactive)
-    (unless (derived-mode-p 'org-mode)
-      (user-error "This function only works in Org-mode buffers."))
-    (let* ((ast (org-element-parse-buffer))
-           (candidates
-            (org-element-map ast '(headline src-block)
-              (lambda (el)
-		(let* ((type (org-element-type el))
-                       (pos (org-element-property :begin el))
-                       (title (cond
-                               ((eq type 'headline)
-				(org-element-property :raw-value el))
-                               ((eq type 'src-block)
-				(let ((name (org-element-property :name el))
-                                      (lang (org-element-property :language el)))
-                                  (if name 
-                                      (format "SRC: %s [%s]" name lang)
-                                    (format "SRC: (%s block)" lang)))))))
-                  (cons title pos))))))
-      (helm :sources (helm-build-sync-source "Org Jump"
-                       :candidates candidates
-                       :action (lambda (candidate)
-				 (goto-char candidate)
-				 (org-show-entry)
-				 (recenter)))
-            :buffer "*helm org jump*")))
-
   :bind
    (("C-c o" . (lambda () (interactive) (find-file "~/org/main.org")))
     ("M-x" . 'helm-M-x)
     (:map org-mode-map
 	  ("<C-tab>" . u:helm-org-jump))))
-
-;; thanks: https://macowners.club/posts/org-capture-from-everywhere-macos/
-(defun u:make-capture-frame ()
-  "Create a new frame and run `org-capture'."
-  (interactive)
-  (make-frame '((name . "org-capture-frame")
-                (top . 300)
-                (left . 700)
-                (width . 80)
-                (height . 25)))
-  (select-frame-by-name "org-capture-frame")
-  (delete-other-windows)
-  (cl-letf (((symbol-function 'switch-to-buffer-other-window)
-	     (lambda (buf) (switch-to-buffer buf))))
-    (org-capture)))
-
-(defadvice org-capture-finalize
-    (after delete-capture-frame activate)
-  "Advise capture-finalize to close the frame."
-  (if (equal "capture" (frame-parameter nil 'name))
-      (delete-frame)))
-
-(defadvice org-capture-destroy
-    (after delete-capture-frame activate)
-  "Advise capture-destroy to close the frame."
-  (if (equal "capture" (frame-parameter nil 'name))
-      (delete-frame)))
 
 (use-package org-drill :ensure t)
 (use-package anki-editor
@@ -275,55 +219,6 @@ added to today and total by hand."
 
 (setq-default indent-tabs-mode nil)
 
-;; elfeed
-(use-package elfeed :ensure t)
-(defun u:elfeed-download-with-ytdlp (&optional watch adb)
-  "download the current elfeed entry with yt-dlp"
-  (interactive "P")
-  (let* ((entry (if (eq major-mode 'elfeed-show-mode)
-		    elfeed-show-entry
-		  (elfeed-search-selected :ignore-region)))
-	 (url (elfeed-entry-link entry))
-	 (outdir (expand-file-name "~/down/youtube"))
-	 (template (concat outdir "/%(title)s.%(ext)s"))
-	 (proc (start-process
-		"yt-dlp" "*yt-dlp*"
-		"yt-dlp"
-		"--format" "bestvideo[height<=720]+bestaudio[abr<=120]/best[height<=720]"
-		"--audio-quality" "5"
-		"--merge-output-format" "mp4"
-		"--newline" "--embed-metadata"
-		"--print" "after_move:filepath"
-		"-o" template
-		url)))
-    (unless (file-directory-p outdir)
-      (make-directory outdir :parents))
-    (message "downloading: %s" url)
-    (when watch
-      (set-process-filter
-       proc
-       (lambda (_proc output)
-	 (with-current-buffer "*yt-dlp*"
-	   (insert output))
-	 (when (string-match "^\\/.*\\.mp4$" (string-trim output))
-	   (start-process "mpv" "*mpv*" "mpv" (string-trim output))
-	   (message "opening in mpv: %s" (string-trim output))))))
-    (when adb
-      (set-process-filter
-       proc
-       (lambda (_proc output)
-	 (with-current-buffer "*yt-dlp*"
-	   (insert output))
-	 (when (string-match "^\\/.*\\.mp4$" (string-trim output))
-	   (start-process "adb" "*adb-transfer*" "adb" "push" (string-trim output) "/storage/emulated/0/Movies/youtube-transfers")
-	   (message "transfering via adb: %s" (string-trim output))))))
-    (message "progress in *yt-dlp* buffer")))
-	 
-
-(define-key elfeed-show-mode-map (kbd "C-c d") #'u:elfeed-download-with-ytdlp)
-(define-key elfeed-show-mode-map (kbd "C-c D") (lambda () (interactive) (u:elfeed-download-with-ytdlp t)))
-(define-key elfeed-show-mode-map (kbd "C-c f") (lambda () (interactive) (u:elfeed-download-with-ytdlp nil t)))
-
 ;; latex
 (use-package auctex
   :defer t
@@ -361,15 +256,8 @@ added to today and total by hand."
 	ledger-report-links-in-register nil
 	ledger-report-auto-width nil
 	ledger-default-date-format "%Y-%m-%d")
-  (defun u:start-hledger-web-interface ()
-    "Start the hledger web interface in a vterm."
-    (interactive)
-    (u:vterm-run-command "hledger-web -f /home/usr/org/ledger/main.ledger --serve"))
   :config
-  (add-to-list 'auto-mode-alist '("\\.ledger\\'" . ledger-mode))
-  :bind
-  (:map ledger-mode-map
-	("C-c h" . u:start-hledger-web-interface)))
+  (add-to-list 'auto-mode-alist '("\\.ledger\\'" . ledger-mode)))
 
 (use-package magit :ensure t)
 (use-package helm
@@ -399,76 +287,36 @@ added to today and total by hand."
    ("M-<SPC>" . u:helm-multi-configs)
    ("C-x C-f" . helm-find-files)))
 
-(use-package projectile
-  :ensure t
-  :if (not on-phone-p)
-  :init
-  (setq projectile-project-search-path '("~/git/" "~/dots/"))
-  :config
-  (global-set-key (kbd "C-c p") 'projectile-command-map)
-  (projectile-mode +1))
-
-(use-package helm-projectile
-  :ensure t
-  :if (not on-phone-p)
-  :config
-  (define-key projectile-mode-map (kbd "C-c p f") 'helm-projectile-find-file)
-  (define-key projectile-mode-map (kbd "C-c p p") 'helm-projectile-switch-project))
-
 ;; eye-candy and aesthetics
 (use-package gruvbox-theme :ensure t)
-(setq custom-file "~/.emacs.d/custom.el")
-(setq make-backup-files nil)
-(setq inhibit-splash-screen t)
+(setq custom-file "~/.emacs.d/custom.el"
+      make-backup-files nil
+      inhibit-splash-screen t
+      custom-safe-themes t
+      warning-minimum-level :error
+      visible-bell t
+      ring-bell-function 'ignore
+      linum-format "%d"
+      frame-title-format '("emacs(" mode-name ") - %b - %f"))
 (menu-bar-mode -1)
 (tool-bar-mode -1)
-(setq custom-safe-themes t)
-;; make warnings not force the warning box open
 (add-to-list 'warning-suppress-types '(t))
-(setq warning-minimum-level :error)
 
-(defun u:apply-system-fonts (&optional frame)
-  "Apply fonts based on system name. Optional FRAME is passed by hooks."
-  (let ((target-frame (or frame (selected-frame))))
-    (with-selected-frame target-frame
-      (set-frame-font "Fantasque Sans Mono-13" nil t)
-      (cond
-       ((string-equal (system-name) "copernicus")
-        (set-face-attribute 'default nil :height 140))
-       ((string-equal (system-name) "hammurabi")
-        (set-face-attribute 'default nil :height 110))
-       (t
-        (set-face-attribute 'default nil :height 130))))))
-
-(u:apply-system-fonts)
-(add-hook 'after-make-frame-functions #'u:apply-system-fonts)
-(advice-add 'load-theme :after #'u:apply-system-fonts)
+(add-to-list 'default-frame-alist '(font . "Fantasque Sans Mono-13"))
 
 ;; prevent the simulated terminal bell from ringing
-(setq visible-bell t)
-(setq ring-bell-function 'ignore)
 ;; display line numbers in programming modes
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (add-hook 'text-mode-hook 'display-line-numbers-mode)
 ;; I don't want line numbers in org-mode, though
 (add-hook 'org-mode-hook (lambda () (display-line-numbers-mode -1)))
 (add-hook 'pdf-view-mode-hook (lambda () (display-line-numbers-mode -1)))
-(setq linum-format "%d")
 (defun u:disable-scroll-bars (frame)
   (modify-frame-parameters frame
                            '((vertical-scroll-bars . nil)
                              (horizontal-scroll-bars . nil))))
 (add-hook 'after-make-frame-functions 'u:disable-scroll-bars)
 (which-key-mode)
-(setq frame-title-format '("emacs(" mode-name ") - %b - %f"))
-
-;; custom commands
-(defun u:init:edit ()
-  (interactive)
-  (find-file "~/.emacs.d/init.el"))
-(defun u:init:eval ()
-  (interactive)
-  (load-file "~/.emacs.d/init.el"))
 
 (let ((private-config "~/org/private.org"))
   (when (file-exists-p private-config)
