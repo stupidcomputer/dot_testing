@@ -1,0 +1,114 @@
+#!/bin/sh
+
+if [ -z "$1" ]; then
+	wake_up_time="03:00"
+else
+	wake_up_time="$1"
+fi
+
+lamp_id="3bcbdec2-7000-4bac-8a30-33d4d8529e2d"
+offset=180
+before=$(( 18 * offset ))
+
+light_set () {
+	openhue set light "$lamp_id" $@
+}
+
+future=$(date '+%s' --date "$wake_up_time")
+now=$(date '+%s')
+
+if [ $((future - now)) -lt 0 ]; then
+	future=$(date '+%s' --date "tomorrow $wake_up_time")
+fi
+light_set --off
+
+clear
+
+while true; do
+	now=$(date '+%s')
+	
+	diff=$(( future - now ))
+	hours=$(( diff / 3600 ))
+	minutes=$(( (diff % 3600) / 60 ))
+	seconds=$(( diff % 60 ))
+
+	printf "\r%02d:%02d:%02d" $hours $minutes $seconds
+
+	if [ "$before" -gt "$diff" ]; then
+		break
+	fi
+
+	sleep 1
+done
+
+light_set --off
+light_set --color white
+light_set --on -b 10.00 -t 500
+
+sleep "$offset"
+
+light_set --on -b 20.00 -t 500
+
+sleep "$offset"
+
+light_set --on -b 30.00 -t 500
+
+sleep "$offset"
+
+light_set --on -b 40.00 -t 500
+
+sleep "$offset"
+
+light_set --on -b 50.00 -t 500
+
+sleep "$offset"
+
+light_set --on -b 60.00 -t 500
+
+sleep "$offset"
+
+light_set --on -b 70.00 -t 500
+
+sleep "$offset"
+
+light_set --on -b 80.00 -t 500
+
+sleep "$offset"
+
+light_set --on -b 90.00 -t 500
+
+sleep "$offset"
+
+light_set --on -b 100.00 -t 500
+
+sleep "$offset"
+
+light_set --on -b 100.00 -t 450
+
+sleep "$offset"
+
+light_set --on -b 100.00 -t 400
+
+sleep "$offset"
+
+light_set --on -b 100.00 -t 350
+
+sleep "$offset"
+
+light_set --on -b 100.00 -t 300
+
+sleep "$offset"
+
+light_set --on -b 100.00 -t 250
+
+sleep "$offset"
+
+light_set --on -b 100.00 -t 200
+
+sleep "$offset"
+
+light_set --on -b 100.00 -t 153
+
+wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+wpctl set-volume @DEFAULT_AUDIO_SINK@ 0.5
+mpv --loop --volume=100 ~/media/music/Reveille\ Loud\ +\ FAST\ \[Alarm\ ringtone\ for\ mobiles].opus
