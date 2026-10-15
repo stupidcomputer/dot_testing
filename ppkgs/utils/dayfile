@@ -67,7 +67,7 @@ item_menu () { # $1 - item file name
 
 main_menu () {
     mkdir -p "$HOME/org/dayfile/$dayfile_date"
-    menu_items="$(printf "new with time\nnew")
+    menu_items="$(printf "at time\nnew")
 $(ls ~/org/dayfile/$dayfile_date)"
     response="$(printf "$menu_items" | menu_prompt -l 40 -p 'dayfile')"
 
