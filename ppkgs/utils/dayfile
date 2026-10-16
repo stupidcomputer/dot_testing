@@ -14,24 +14,22 @@ if [ -z "$dayfile_date" ]; then
 fi
 
 new_item () {
+    # $1 - should I prompt for time or not? (non-empty: yes)
     type="$(printf 'food\nmedication\nweight\nexercise\nwater bottle\ndefecation\nurination\n' |
             menu_prompt -p 'itemtype?')"
 
-    case "$type" in
-        "food"|"weight"|"exercise"|"medication")
-            further_comments="$(find "$HOME/org/dayfile/" | grep "$type" | xargs --delimiter='\n' cat | sort | uniq | menu_prompt -p 'comments?')"
-            echo "$further_comments" | dayfile-make-record "$type"
-            ;;
-        *)
-            dayfile-make-record "$type" < /dev/null
-            ;;
-    esac
-}
+    if [ -n "$1" ]; then
+        time="$(menu_prompt -p 'time?' < /dev/null)"
+        if [ -z "$time" ]; then
+            return
+        fi
 
-new_item_with_time () {
-    time="$(menu_prompt -p 'time?' < /dev/null)"
-    type="$(printf 'food\nmedication\nweight\nexercise\nwater bottle\ndefecation\nurination\n' |
-            menu_prompt -p 'itemtype?')"
+        if [ "${#time}" -eq 4 ]; then
+            time="${time}00"
+        fi
+    else
+        time=""
+    fi
 
     case "$type" in
         "food"|"weight"|"exercise"|"medication")
@@ -43,7 +41,6 @@ new_item_with_time () {
             ;;
     esac
 }
-
 
 item_menu () { # $1 - item file name
     if [ ! -f "$HOME/org/dayfile/$dayfile_date/$1" ]; then
@@ -75,7 +72,7 @@ $(ls ~/org/dayfile/$dayfile_date)"
 
     case "$response" in
         "at time"*)
-            new_item_with_time
+            new_item with_time
             ;;
         "new"*)
             new_item
