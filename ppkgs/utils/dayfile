@@ -19,7 +19,7 @@ new_item () {
 
     case "$type" in
         "food"|"weight"|"exercise"|"medication")
-            further_comments="$(find "$HOME/org/dayfile/" | grep "$type" | xargs --delimiter='\n' cat | menu_prompt -p 'comments?')"
+            further_comments="$(find "$HOME/org/dayfile/" | grep "$type" | xargs --delimiter='\n' cat | sort | uniq | menu_prompt -p 'comments?')"
             echo "$further_comments" | dayfile-make-record "$type"
             ;;
         *)
@@ -35,7 +35,7 @@ new_item_with_time () {
 
     case "$type" in
         "food"|"weight"|"exercise"|"medication")
-            further_comments="$(find "$HOME/org/dayfile/" | grep "$type" | xargs --delimiter='\n' cat | menu_prompt -p 'comments?')"
+            further_comments="$(find "$HOME/org/dayfile/" | grep "$type" | xargs --delimiter='\n' cat | sort | uniq | menu_prompt -p 'comments?')"
             echo "$further_comments" | dayfile_time="$time" dayfile-make-record "$type"
             ;;
         *)
