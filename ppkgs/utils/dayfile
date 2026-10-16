@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -x
+
 # interactive program to manage dayfiles
 
 MENU="dmenu"
@@ -12,11 +14,11 @@ if [ -z "$dayfile_date" ]; then
 fi
 
 new_item () {
-    type="$(printf 'food\nweight\nexercise\nwater bottle\ndefecation\nurination\n' |
+    type="$(printf 'food\nmedication\nweight\nexercise\nwater bottle\ndefecation\nurination\n' |
             menu_prompt -p 'itemtype?')"
 
     case "$type" in
-        "food"|"weight"|"exercise")
+        "food"|"weight"|"exercise"|"medication")
             further_comments="$(find "$HOME/org/dayfile/" | grep "$type" | xargs --delimiter='\n' cat | menu_prompt -p 'comments?')"
             echo "$further_comments" | dayfile-make-record "$type"
             ;;
@@ -28,11 +30,11 @@ new_item () {
 
 new_item_with_time () {
     time="$(menu_prompt -p 'time?' < /dev/null)"
-    type="$(printf 'food\nweight\nexercise\nwater bottle\ndefecation\nurination\n' |
+    type="$(printf 'food\nmedication\nweight\nexercise\nwater bottle\ndefecation\nurination\n' |
             menu_prompt -p 'itemtype?')"
 
     case "$type" in
-        "food"|"weight"|"exercise")
+        "food"|"weight"|"exercise"|"medication")
             further_comments="$(find "$HOME/org/dayfile/" | grep "$type" | xargs --delimiter='\n' cat | menu_prompt -p 'comments?')"
             echo "$further_comments" | dayfile_time="$time" dayfile-make-record "$type"
             ;;
@@ -72,7 +74,7 @@ $(ls ~/org/dayfile/$dayfile_date)"
     response="$(printf "$menu_items" | menu_prompt -l 40 -p 'dayfile')"
 
     case "$response" in
-        "new with time"*)
+        "at time"*)
             new_item_with_time
             ;;
         "new"*)
