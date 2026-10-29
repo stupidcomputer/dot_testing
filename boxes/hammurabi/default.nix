@@ -19,6 +19,7 @@
     styluslabs-write
     ppkgs.input-forward
     moonlight-qt
+    rclone
   ];
 
   programs.steam.enable = true;

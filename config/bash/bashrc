@@ -18,6 +18,16 @@ alias shuttle="sshuttle -r sshuttle_target 0/0 --dns"
 alias synctunnel="ssh -N -L localhost:22001:localhost:22000 -R localhost:22001:localhost:22000 netbox & syncthing"
 alias e="emacsclient"
 
+function orgsync() {
+	if [ -z "$1" ]; then
+		rclone bisync ~/org fastmail:/org/ --conflict-resolve newer --exclude 'tfb/*.mp4' --exclude '.#*' --exclude '**/.#*' -v
+	else
+		ssh -f -N -D 1080 -o ExitOnForwardFailure=yes -M -S /tmp/org-sock theseus
+		HTTPS_PROXY=socks5://localhost:1080 rclone bisync ~/org fastmail:/org/ --conflict-resolve newer --exclude 'tfb/*.mp4' --exclude '.#*' --exclude '**/.#*' -v
+		ssh -S /tmp/org-sock -O exit theseus
+	fi
+}
+
 function buildpkg() {
 	nix-build -E "with import <nixpkgs> {}; callPackage ./$1 {}"
 }

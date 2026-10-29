@@ -24,6 +24,7 @@
     moonlight-qt
     ddcutil
     audio-sharing
+    rclone
   ];
 
   virtualisation.virtualbox.host.enable = true;

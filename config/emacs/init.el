@@ -7,6 +7,8 @@
       (getenv "ANDROID_ROOT"))
   "non-nil in termux/android")
 
+(global-auto-revert-mode)
+
 (use-package evil
   :ensure t
   :init
