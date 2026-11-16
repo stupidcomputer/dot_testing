@@ -44,6 +44,13 @@ rec {
       A Pixel 8a running termux and some other things.
     '';
   };
+  homepage-android = {
+    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILGbh0BlABELAh/pOgBJLFH23WBE/kHKRb2RrCUKsOgm homepage-android";
+    description = ''
+      The homepage Android app on the phone (~/git/homepage/android): its
+      own key, for pulling and pushing ~/org.
+    '';
+  };
   aristotle = {
     description = ''
       A Lenovo Thinkpad Yoga 260. Power supply seems to have died.
@@ -61,6 +68,7 @@ rec {
       copernicus.pubkey
       hammurabi.pubkey
       phone.pubkey
+      homepage-android.pubkey
     ];
     description = ''
       Just a tiny VPS, nothing much.
