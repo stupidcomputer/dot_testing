@@ -30,6 +30,12 @@
     };
     settings.trusted-users = [ "@wheel" ];
   };
+  services.nginx.virtualHosts = lib.genAttrs [
+    "beepboop.systems" "tools.beepboop.systems" "intnet.beepboop.systems"
+    "bit.beepboop.systems" "bitwarden.beepboop.systems" "calendars.beepboop.systems"
+    "flagmanager.net" "flasktrack.beepboop.systems"
+  ] (_: { http2 = false; });
+
   services.journald.extraConfig = ''
     SystemMaxUse=200M
   '';
