@@ -48,7 +48,10 @@
   networking = {
     hostName = "hammurabi";
     networkmanager.enable = true;
-    firewall.checkReversePath = false;
+    firewall = {
+      checkReversePath = false;
+      allowedTCPPorts = [ 12099 ];
+    };
   };
 
   hardware = {
