@@ -45,11 +45,7 @@ rec {
     '';
   };
   homepage-android = {
-    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAILGbh0BlABELAh/pOgBJLFH23WBE/kHKRb2RrCUKsOgm homepage-android";
-    description = ''
-      The homepage Android app on the phone (~/git/homepage/android): its
-      own key, for pulling and pushing ~/org.
-    '';
+    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEJwUQDNM7RGl6MZ3rehiK2he3VyEhOZEaTrsmcFBg/R homepage-android";
   };
   aristotle = {
     description = ''
