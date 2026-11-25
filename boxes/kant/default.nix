@@ -8,7 +8,6 @@
     ../../common/vnc.nix
     ./agenix.nix
     ./sshd.nix
-    ./vnc.nix
     ./claude.nix
   ];
 
