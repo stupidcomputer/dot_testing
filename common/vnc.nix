@@ -32,6 +32,12 @@ in
     after = [ "graphical-session.target" ];
 
     unitConfig = {
+      # the defaults order sockets before basic.target, which is before
+      # graphical-session.target, making a cycle
+      DefaultDependencies = false;
+      Conflicts = [ "shutdown.target" ];
+      Before = [ "shutdown.target" ];
+
       ConditionUser = "usr";
       # never listen without a password
       ConditionPathExists = passwdFile;
