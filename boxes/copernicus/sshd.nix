@@ -25,13 +25,8 @@
     allowedTCPPorts = [ 2222 ];
   };
 
-  networking.firewall.interfaces.wg0 = {
+  networking.firewall.interfaces.tailscale0 = {
     allowedTCPPorts = [ 22 ];
-  };
-
-  systemd.services.sshd = {
-    requires = [ "wg-quick-wg0.service" ];
-    after = [ "wg-quick-wg0.service" ];
   };
 
   users.users.usr.openssh.authorizedKeys.keys = machines.copernicus.allowed-ssh-access;

@@ -17,15 +17,6 @@ in {
   # mailserver
   "mailaccount.age".publicKeys = all;
 
-  # wireguard
-  "theseus.privkey.age".publicKeys = all;
-  "copernicus.privkey.age".publicKeys = all;
-  "hammurabi.privkey.age".publicKeys = all;
-
-  "thesus-copernicus.psk.age".publicKeys = all;
-  "copernicus-hammurabi.psk.age".publicKeys = all;
-  "hammurabi-thesus.psk.age".publicKeys = all;
-
   "hammurabi-configuration.age".publicKeys = all;
 
   # networkmanager

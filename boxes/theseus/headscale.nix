@@ -11,11 +11,6 @@
         # must not be a parent of server_url's host
         base_domain = "ts.beepboop.systems";
         override_local_dns = false;
-        # theseus must enroll first, so that it gets this address
-        nameservers.split = {
-          "intnet.beepboop.systems" = [ "100.64.0.1" ];
-          "localnet.beepboop.systems" = [ "100.64.0.1" ];
-        };
       };
     };
   };
@@ -33,6 +28,6 @@
     };
   };
 
-  # let tailnet peers reach theseus (and its BIND); wg0 stays up for now
+  # let tailnet peers reach everything on theseus
   networking.firewall.trustedInterfaces = [ "tailscale0" ];
 }

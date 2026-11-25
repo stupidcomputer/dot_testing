@@ -1,4 +1,4 @@
-{ lib, machines, ... }:
+{ machines, ... }:
 
 {
   services.openssh = {
@@ -17,11 +17,9 @@
     ];
   };
 
-  networking.firewall.interfaces.wg0 = {
+  networking.firewall.interfaces.tailscale0 = {
     allowedTCPPorts = [ 22 ];
   };
-
-  systemd.services.sshd.wantedBy = lib.mkForce [ ];
 
   users.users.usr.openssh.authorizedKeys.keys = machines.hammurabi.allowed-ssh-access;
 }

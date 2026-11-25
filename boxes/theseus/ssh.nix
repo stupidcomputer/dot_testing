@@ -12,7 +12,7 @@
         port = 55555;
       }
       {
-        addr = "10.100.0.1";
+        addr = machines.theseus.ip-addrs.intnet;
         port = 22;
       }
     ];
@@ -36,11 +36,6 @@
       PermitRootLogin = "no";
       PasswordAuthentication = false;
     };
-  };
-
-  systemd.services.sshd = {
-    requires = [ "wg-quick-wg0.service" ];
-    after = [ "wg-quick-wg0.service" ];
   };
 
   users.users.usr.openssh.authorizedKeys.keys = machines.theseus.allowed-ssh-access;

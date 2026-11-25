@@ -33,6 +33,7 @@
         };
       };
       "intnet.beepboop.systems" = {
+        serverAliases = [ "theseus.ts.beepboop.systems" ];
         root = "/var/www/intnet.beepboop.systems";
         listen = [ { addr = machines.theseus.ip-addrs.intnet; port = 80; ssl = false; } ];
       };

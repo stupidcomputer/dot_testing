@@ -5,7 +5,6 @@
     ../../common/bootstrap.nix
     ../../common/tailscale.nix
 
-    ./bind.nix
     ./calendar-sync.nix
     ./flagman.nix
     ./flasktrack.nix
@@ -15,7 +14,6 @@
     ./sslh.nix
     ./syncthing.nix
     ./vaultwarden.nix
-    ./wireguard.nix
   ];
 
   age.identityPaths = [ "/home/usr/.ssh/id_ed25519" ];
@@ -105,19 +103,14 @@
         eth0 = {
           allowedTCPPorts = [ 80 443 ];
         };
-        wg0 = {
-          # allow everything bound to the wg0 interface
-          allowedTCPPortRanges = [
-            { from = 1; to = 35565; }
-          ];
-          allowedUDPPortRanges = [
-            { from = 1; to = 35565; }
-          ];
-        };
       };
     };
-    hosts = lib.attrsets.mergeAttrsList [
-      (machines.mkHosts machines "copernicus" "intnet")
-    ];
+    nameservers = [ "1.1.1.1" "1.0.0.1" ];
+
+    # theseus doesn't use MagicDNS, but needs these for ssh -J
+    hosts = {
+      ${machines.copernicus.ip-addrs.intnet} = [ "copernicus" "copernicus.ts.beepboop.systems" ];
+      ${machines.hammurabi.ip-addrs.intnet} = [ "hammurabi" "hammurabi.ts.beepboop.systems" ];
+    };
   };
 }

@@ -11,10 +11,6 @@
     };
   };
 
-  networking.firewall.interfaces.wg0 = {
-    allowedTCPPorts = [ 22 ];
-  };
-
   systemd.services.sshd.wantedBy = lib.mkForce [ ];
 
   users.users.usr.openssh.authorizedKeys.keys = machines.descartes.allowed-ssh-access;

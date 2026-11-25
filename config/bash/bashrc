@@ -27,7 +27,7 @@ function cd() {
 }
 
 function ollama-tunnel() {
-    ssh -J theseus copernicus.intnet.beepboop.systems -L 11434:localhost:11434 -N
+    ssh -J theseus copernicus.ts.beepboop.systems -L 11434:localhost:11434 -N
 }
 
 # history

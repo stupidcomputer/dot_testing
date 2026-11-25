@@ -7,7 +7,6 @@
     ../../common/tailscale.nix
     ./agenix.nix
     ./sshd.nix
-    ./wireguard.nix
 #    ./sunshine.nix
   ];
 
