@@ -99,17 +99,6 @@ rec {
       theseus.pubkey
     ];
   };
-  descartes = {
-    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOdic7JAVd69kQ1PjjDNu7ZRghBIj7Uh/ongNAxsddbh usr";
-    description = ''
-      A VirtualBox guest running NixOS.
-    '';
-    allowed-ssh-access = [
-      copernicus.pubkey
-      hammurabi.pubkey
-      theseus.pubkey
-    ];
-  };
 
   mkHosts = machines: hostname: network:
     builtins.listToAttrs [

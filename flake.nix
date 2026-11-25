@@ -30,6 +30,18 @@
       url = "github:numtide/llm-agents.nix";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
+    liborg = {
+      url = "git+ssh://usr@theseus/home/usr/repos/liborg.git?ref=main";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    liborg-lsp = {
+      url = "git+ssh://usr@theseus/home/usr/repos/liborg-lsp.git?ref=main";
+      inputs.liborg.follows = "liborg";
+    };
+    liborg-nvim = {
+      url = "git+ssh://usr@theseus/home/usr/repos/liborg.nvim.git?ref=main";
+      inputs.liborg-lsp.follows = "liborg-lsp";
+    };
   };
 
   outputs = {
@@ -111,24 +123,6 @@
           };
           modules = [
             ./boxes/hammurabi
-            agenix.nixosModules.default
-            {
-              environment.systemPackages = [ agenix.packages."x86_64-linux".default ];
-            }
-            home-manager.nixosModules.home-manager
-            {
-              home-manager.useGlobalPkgs = true;
-              home-manager.useUserPackages = true;
-            }
-          ];
-        };
-        descartes = nixpkgs.lib.nixosSystem {
-          inherit system;
-          specialArgs = {
-            inherit inputs ppkgs machines;
-          };
-          modules = [
-            ./boxes/descartes
             agenix.nixosModules.default
             {
               environment.systemPackages = [ agenix.packages."x86_64-linux".default ];

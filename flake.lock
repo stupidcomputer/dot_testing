@@ -60,11 +60,11 @@
       },
       "locked": {
         "dir": "pkgs/firefox-addons",
-        "lastModified": 1795320161,
-        "narHash": "sha256-1cVr0CyXUbvjSA6awXv3B9UNn38/s2jri1yqQH3LDCY=",
+        "lastModified": 1795603447,
+        "narHash": "sha256-jr22Koa5st3EoDs2BgnVTCLCILz0PNIRxv1jdhKGheo=",
         "owner": "rycee",
         "repo": "nur-expressions",
-        "rev": "c83f1fa2548ad34b88ad7ebc0dff52be8c909ebd",
+        "rev": "116ef18d400f41ecefeb2d378588503847aec1cf",
         "type": "gitlab"
       },
       "original": {
@@ -155,6 +155,80 @@
         "type": "github"
       }
     },
+    "liborg": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ],
+        "org-mode": "org-mode"
+      },
+      "locked": {
+        "lastModified": 1795630018,
+        "narHash": "sha256-EUBfH2fOOiJYY3/l3WMStRyODkScuRzzaoRvGHh1234=",
+        "ref": "main",
+        "rev": "abfddb9cee87e4fb6723ec40ad67aa745055fcf2",
+        "revCount": 15,
+        "type": "git",
+        "url": "ssh://usr@theseus/home/usr/repos/liborg.git"
+      },
+      "original": {
+        "ref": "main",
+        "type": "git",
+        "url": "ssh://usr@theseus/home/usr/repos/liborg.git"
+      }
+    },
+    "liborg-lsp": {
+      "inputs": {
+        "liborg": [
+          "liborg"
+        ],
+        "nixpkgs": [
+          "liborg-lsp",
+          "liborg",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1795630128,
+        "narHash": "sha256-35TDiAwCFmaIPr5uSbiRdw3IvIu+3jW1iAXrb3Nc5OM=",
+        "ref": "main",
+        "rev": "4d2d751d2b152b988f3c035a8e40389bc8fd9752",
+        "revCount": 7,
+        "type": "git",
+        "url": "ssh://usr@theseus/home/usr/repos/liborg-lsp.git"
+      },
+      "original": {
+        "ref": "main",
+        "type": "git",
+        "url": "ssh://usr@theseus/home/usr/repos/liborg-lsp.git"
+      }
+    },
+    "liborg-nvim": {
+      "inputs": {
+        "liborg-lsp": [
+          "liborg-lsp"
+        ],
+        "nixpkgs": [
+          "liborg-nvim",
+          "liborg-lsp",
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1795630172,
+        "narHash": "sha256-dYhwOOq0GEBhYbTI0XQO4PiSH92pc4F68azg9h1b8mQ=",
+        "ref": "main",
+        "rev": "6db7140b0add9d79ff9b144df59fc25764d500f9",
+        "revCount": 8,
+        "type": "git",
+        "url": "ssh://usr@theseus/home/usr/repos/liborg.nvim.git"
+      },
+      "original": {
+        "ref": "main",
+        "type": "git",
+        "url": "ssh://usr@theseus/home/usr/repos/liborg.nvim.git"
+      }
+    },
     "llm-agents": {
       "inputs": {
         "bun2nix": "bun2nix",
@@ -166,11 +240,11 @@
         "treefmt-nix": "treefmt-nix"
       },
       "locked": {
-        "lastModified": 1795416666,
-        "narHash": "sha256-b1GmfrMPoZ2ANkR0we9Q9KQN6n1e+vNyDqt1p4CNEAY=",
+        "lastModified": 1795618549,
+        "narHash": "sha256-irsXSZxVVCEUqmL9lV+XeliXPcafj+U1rsckYP4lg0M=",
         "owner": "numtide",
         "repo": "llm-agents.nix",
-        "rev": "5330ee115c06d2b43f49e902130125eab579b22f",
+        "rev": "0ce72a431c555e4db17520ce8ba70bb07a5747e1",
         "type": "github"
       },
       "original": {
@@ -197,11 +271,11 @@
     },
     "nixpkgs-unstable": {
       "locked": {
-        "lastModified": 1795477173,
-        "narHash": "sha256-MZ0Vp91Q2Jaaxd2DafZ3qle6w5RAJb39VbynZQOL9p8=",
+        "lastModified": 1795629701,
+        "narHash": "sha256-1d+IbzMjcsGkfiyw71YrnDWYdwBoJEg/62Az6oCaG5s=",
         "owner": "NixOS",
         "repo": "nixpkgs",
-        "rev": "b25594d191fbfc0c42b2f128817a07c9ad9d1347",
+        "rev": "2c6a10c790cb7a200837d0efb29003082d4d5691",
         "type": "github"
       },
       "original": {
@@ -226,12 +300,33 @@
         "type": "github"
       }
     },
+    "org-mode": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1794678127,
+        "narHash": "sha256-F/AymaBmBQiR6v3hcbCZvB71GZGX+P3Dq615e1MgEkQ=",
+        "ref": "refs/tags/release_9.8.13",
+        "rev": "e24d7f830679bdedc4f00757753f02ae6aca87be",
+        "shallow": true,
+        "type": "git",
+        "url": "https://git.savannah.gnu.org/git/emacs/org-mode.git"
+      },
+      "original": {
+        "ref": "refs/tags/release_9.8.13",
+        "shallow": true,
+        "type": "git",
+        "url": "https://git.savannah.gnu.org/git/emacs/org-mode.git"
+      }
+    },
     "root": {
       "inputs": {
         "agenix": "agenix",
         "firefox-addons": "firefox-addons",
         "flagman": "flagman",
         "home-manager": "home-manager",
+        "liborg": "liborg",
+        "liborg-lsp": "liborg-lsp",
+        "liborg-nvim": "liborg-nvim",
         "llm-agents": "llm-agents",
         "nixpkgs": "nixpkgs_2",
         "nixpkgs-unstable": "nixpkgs-unstable"
@@ -275,11 +370,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1795173499,
-        "narHash": "sha256-J8IYl3oEdctyvBgWr+/L01MY5Xm0TU4WXwZDccN5jjk=",
+        "lastModified": 1795615686,
+        "narHash": "sha256-/C0FK2Fwq0aWE/GADYyYbAIdQeGfYBbWMin3tfks1NA=",
         "owner": "numtide",
         "repo": "treefmt-nix",
-        "rev": "a0a97e31a897a3537eea5c49df4f8adaa83b3b37",
+        "rev": "b7b56d3c8833016c650ca542b1230e6130299741",
         "type": "github"
       },
       "original": {

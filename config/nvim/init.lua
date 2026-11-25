@@ -164,6 +164,17 @@ require("lazy").setup({
 		{ "saadparwaiz1/cmp_luasnip" },
 		{ "lervag/vimtex" },
 		{ "https://github.com/protex/better-digraphs.nvim" },
+		{
+			dir = globals.liborg_path,
+			name = "liborg.nvim",
+			enabled = globals.liborg_path ~= nil,
+			lazy = false,
+			config = function()
+				require("liborg").setup({
+					config = { log_done = "time" },
+				})
+			end,
+		},
 	},
 })
 -- }}}

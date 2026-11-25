@@ -7,18 +7,10 @@ let
     theseus.pubkey
   ];
 
-  descartes-shared = with machines; [
-    descartes.pubkey
-    copernicus.pubkey
-    hammurabi.pubkey
-    theseus.pubkey
-  ];
-
   vnc = with machines; [
     copernicus.pubkey
     hammurabi.pubkey
     kant.pubkey
-    descartes.pubkey
   ];
 in {
   # mailserver

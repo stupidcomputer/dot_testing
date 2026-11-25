@@ -21,6 +21,7 @@ in {
       scrcpy
       sox
       inputs.llm-agents.packages."x86_64-linux".claude-code
+      inputs.liborg.packages.${pkgs.stdenv.hostPlatform.system}.default
     ];
     nix.settings = {
       trusted-users = [
@@ -438,7 +439,9 @@ set status_display_program=cmus-status-update
         enable = true;
         withRuby = true;
         withPython3 = true;
-        initLua = builtins.readFile ../config/nvim/init.lua;
+        initLua = ''
+          vim.g.liborg_path = "${inputs.liborg-nvim.packages.${pkgs.stdenv.hostPlatform.system}.default}"
+        '' + builtins.readFile ../config/nvim/init.lua;
         extraPackages = with pkgs; [
           lua-language-server
           texlab
@@ -446,6 +449,13 @@ set status_display_program=cmus-status-update
           nixd
         ];
       };
+
+      home.file.".config/liborg/config.toml".text = ''
+        agenda_files = ["~/org"]
+
+        [config]
+        todo_sequences = [["TODO(t)", "IN-PROGRESS(i)", "|", "DONE(d)", "WONT-DO(w)", "OBE(o)", "DUE-PASSED(p)"]]
+      '';
 
       home.file.".config/nvim/colors/earth.vim" = {
         source = ../config/nvim/colors/earth.vim;
