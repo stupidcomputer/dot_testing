@@ -1,6 +1,12 @@
 from i3pystatus import IntervalModule, Status
 from dataclasses import dataclass
 from socket import gethostname
+import socket
+import subprocess
+import threading
+import time
+import urllib.parse
+import urllib.request
 from enum import Enum, auto
 from datetime import date, datetime
 from typing import Optional
@@ -166,6 +172,76 @@ class ClassMonitor(IntervalModule):
 
         self._current_secs_left -= 1
 
+class HomepageMusic(IntervalModule):
+    interval = 5
+    output = ""
+    on_leftclick = "open_music"
+
+    _port = 12099
+    _url = f"http://localhost:{_port}/music"
+    _repo = "/home/usr/git/homepage"
+    _log = "/home/usr/.cache/homepage.log"
+    _rotation = "left"  # normal, left, right or inverted
+
+    def _is_running(self):
+        try:
+            with socket.create_connection(("localhost", self._port), timeout=0.5):
+                return True
+        except OSError:
+            return False
+
+    def _rotate(self):
+        # the app rotates the screen and makes the touchscreen/pen follow;
+        # its CSRF guard wants a same-origin Origin and X-Homepage: 1
+        origin = f"http://localhost:{self._port}"
+        request = urllib.request.Request(
+            f"{origin}/api/music/rotate",
+            data=urllib.parse.urlencode({"rotation": self._rotation}).encode(),
+            headers={"Origin": origin, "X-Homepage": "1"},
+        )
+        try:
+            urllib.request.urlopen(request, timeout=10).close()
+        except OSError:
+            pass
+
+    def _launch(self):
+        if not self._is_running():
+            with open(self._log, "a") as log:
+                subprocess.Popen(
+                    ["nix", "develop", "-c", "python3", "-m", "homepage"],
+                    cwd=self._repo,
+                    stdout=log,
+                    stderr=subprocess.STDOUT,
+                    stdin=subprocess.DEVNULL,
+                    start_new_session=True,
+                )
+            # nix develop can take a while; wait up to a minute for the port
+            for _ in range(120):
+                if self._is_running():
+                    break
+                time.sleep(0.5)
+            else:
+                return
+
+        self._rotate()
+
+        subprocess.Popen(
+            ["brave", self._url],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+            start_new_session=True,
+        )
+
+    def open_music(self):
+        # run in a thread so waiting on startup doesn't block the bar
+        threading.Thread(target=self._launch, daemon=True).start()
+
+    def run(self):
+        self.output = {
+            "full_text": "music",
+            "color": "#ffffff" if self._is_running() else "#666666",
+        }
+
 status = Status(logfile="$HOME/.cache/i3status.log")
 
 status.register("clock",
@@ -198,6 +274,8 @@ if gethostname() == "hammurabi":
         on_leftclick="st -c st_floating -e nmtui",
         format_up="{essid} {quality:02.0f}",
         format_down="",)
+
+status.register(HomepageMusic)
 
 status.register("cmus",
     format="{status} {song_elapsed}/{song_length} {title}",
