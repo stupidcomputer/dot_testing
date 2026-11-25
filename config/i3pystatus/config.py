@@ -1,6 +1,8 @@
 from i3pystatus import IntervalModule, Status
+from i3pystatus.file import File
 from dataclasses import dataclass
 from socket import gethostname
+import logging
 import socket
 import subprocess
 import threading
@@ -53,6 +55,11 @@ class ScheduleItem:
         elif now_unix > end_unix:
             return ScheduleItemState.AFTER
 
+# the logfile is attached to the i3pystatus logger, which modules defined in
+# this file don't inherit from
+log = logging.getLogger("i3pystatus.config")
+log.setLevel(logging.WARNING)
+
 class ClassMonitor(IntervalModule):
     interval = 1
     output = ""
@@ -64,6 +71,7 @@ class ClassMonitor(IntervalModule):
     _before_class = None
     _end_of_classes = False
     _first_run: bool = True
+    _logged_missing: bool = False
 
     def _parse_schedule_line(self, line):
         # remove headline prefix
@@ -129,7 +137,13 @@ class ClassMonitor(IntervalModule):
 
     def run(self):
         if self._first_run:
-            self._generate_schedule_specification()
+            try:
+                self._generate_schedule_specification()
+            except OSError as e:
+                if not self._logged_missing:
+                    log.warning("ClassMonitor: hiding: %s", e)
+                    self._logged_missing = True
+                return
             self._first_run = False
 
         if self._end_of_classes:
@@ -171,6 +185,19 @@ class ClassMonitor(IntervalModule):
         }
 
         self._current_secs_left -= 1
+
+class EmacsClock(File):
+    _logged_missing: bool = False
+
+    def run(self):
+        try:
+            super().run()
+            self._logged_missing = False
+        except OSError as e:
+            self.output = None
+            if not self._logged_missing:
+                log.warning("EmacsClock: hiding: %s", e)
+                self._logged_missing = True
 
 class HomepageMusic(IntervalModule):
     interval = 5
@@ -247,7 +274,7 @@ status = Status(logfile="$HOME/.cache/i3status.log")
 status.register("clock",
     format="%a%-d%b%m/%H%M%S",)
 
-status.register("file",
+status.register(EmacsClock,
     format="{task}",
     components={
         "task": (str, ".cache/emacs-clock-status"),
