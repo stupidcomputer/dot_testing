@@ -45,13 +45,6 @@ rec {
   homepage-android = {
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEJwUQDNM7RGl6MZ3rehiK2he3VyEhOZEaTrsmcFBg/R homepage-android";
   };
-  avnc = {
-    # FIXME: paste the key generated for avnc here
-    pubkey = null;
-    description = ''
-      AVNC on the phone. Only allowed to forward to the vnc port; see vnc.nix.
-    '';
-  };
   aristotle = {
     description = ''
       A Lenovo Thinkpad Yoga 260. Power supply seems to have died.

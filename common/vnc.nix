@@ -1,4 +1,4 @@
-{ lib, pkgs, machines, ... }:
+{ lib, pkgs, ... }:
 
 let
   secretFile = ../secrets/vnc-passwd.age;
@@ -12,9 +12,7 @@ in
   #
   # connect with: vncviewer -via <host> -passwd /run/agenix/vnc-passwd localhost:0
   #
-  # the password is created by hand, once, from secrets/:
-  #   x11vnc -storepasswd <tmpfile>
-  #   agenix -e vnc-passwd.age < <tmpfile>
+  # the password is created once, by secrets/gen-vnc-passwd
   warnings = lib.optional (!haveSecret)
     "secrets/vnc-passwd.age doesn't exist, so x11vnc won't listen";
 
@@ -60,13 +58,4 @@ in
       StandardError = "journal";
     };
   };
-
-  # permitopen doesn't cover unix sockets, so the avnc key could otherwise
-  # reach e.g. the user dbus socket
-  services.openssh.settings.AllowStreamLocalForwarding = "no";
-
-  # the phone's vnc client can only forward to the vnc port
-  users.users.usr.openssh.authorizedKeys.keys =
-    lib.optional (machines.avnc.pubkey != null)
-      ''restrict,port-forwarding,permitopen="localhost:5900",permitopen="127.0.0.1:5900",command="false" ${machines.avnc.pubkey}'';
 }
