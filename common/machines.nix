@@ -89,6 +89,9 @@ rec {
   };
   kant = {
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2xUbQw9+RCPVw7qCFm4NNCP/MpS2BIArcwMv0KdKOI usr";
+    ip-addrs = {
+      intnet = "100.64.0.5";
+    };
     allowed-ssh-access = [
       copernicus.pubkey
       hammurabi.pubkey
