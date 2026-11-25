@@ -5,9 +5,9 @@
     ../../common/ryande.nix
     ../../common/bootstrap.nix
     ../../common/tailscale.nix
+    ../../common/vnc.nix
     ./agenix.nix
     ./sshd.nix
-    ./vnc.nix
 #    ./sunshine.nix
   ];
 

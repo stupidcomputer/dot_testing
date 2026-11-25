@@ -13,6 +13,13 @@ let
     hammurabi.pubkey
     theseus.pubkey
   ];
+
+  vnc = with machines; [
+    copernicus.pubkey
+    hammurabi.pubkey
+    kant.pubkey
+    descartes.pubkey
+  ];
 in {
   # mailserver
   "mailaccount.age".publicKeys = all;
@@ -40,4 +47,7 @@ in {
   # home/school wifi network names
   "school-wifi-network-name.age".publicKeys = all;
   "home-wifi-network-name.age".publicKeys = all;
+
+  # x11vnc password (vnc.nix)
+  "vnc-passwd.age".publicKeys = vnc;
 }

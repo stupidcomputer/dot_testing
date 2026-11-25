@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ../../common/ryande.nix
     ../../common/bootstrap.nix
+    ../../common/vnc.nix
     ./agenix.nix
     ./sshd.nix
     ./tmux.nix
