@@ -10,6 +10,12 @@
 #    ./sunshine.nix
   ];
 
+  # exit node; "both" because it may also use theseus as one
+  services.tailscale = {
+    useRoutingFeatures = "both";
+    extraSetFlags = [ "--advertise-exit-node" ];
+  };
+
   services.ryande.enable = true;
 
   programs.nix-ld.enable = true;

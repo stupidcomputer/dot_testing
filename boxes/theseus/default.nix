@@ -36,6 +36,12 @@
     "flagmanager.net" "flasktrack.beepboop.systems" "hs.beepboop.systems"
   ] (_: { http2 = false; });
 
+  # exit node
+  services.tailscale = {
+    useRoutingFeatures = "server";
+    extraSetFlags = [ "--advertise-exit-node" ];
+  };
+
   services.journald.extraConfig = ''
     SystemMaxUse=200M
   '';
