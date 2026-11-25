@@ -8,7 +8,8 @@
     ../../common/vnc.nix
     ./agenix.nix
     ./sshd.nix
-#    ./sunshine.nix
+    ./vnc.nix
+    ./claude.nix
   ];
 
   services.ryande.enable = true;
