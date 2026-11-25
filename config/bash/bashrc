@@ -30,6 +30,10 @@ function ollama-tunnel() {
     ssh -J theseus copernicus.ts.beepboop.systems -L 11434:localhost:11434 -N
 }
 
+function vnc() {
+	vncviewer -via "$1.ts.beepboop.systems" -passwd /run/agenix/vnc-passwd localhost:0
+}
+
 # history
 HISTCONTROL=ignorespace:ignoredups:erasedups
 HISTFILESIZE=9999999999
