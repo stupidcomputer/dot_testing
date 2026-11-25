@@ -86,6 +86,24 @@
             }
           ];
         };
+        kant = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = {
+            inherit inputs unstable ppkgs machines;
+          };
+          modules = [
+            ./boxes/kant
+            agenix.nixosModules.default
+            {
+              environment.systemPackages = [ agenix.packages."x86_64-linux".default ];
+            }
+            home-manager.nixosModules.home-manager
+            {
+              home-manager.useGlobalPkgs = true;
+              home-manager.useUserPackages = true;
+            }
+          ];
+        };
         hammurabi = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = {

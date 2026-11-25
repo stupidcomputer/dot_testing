@@ -5,10 +5,10 @@ if [ "$(whoami)" != "usr" ]; then
     exit 1
 fi
 
-if [ -d "$HOME/dot_testing" ]; then
-    cd ~/dot_testing
-elif [ -d "$HOME/dots" ]; then
+if [ -d "$HOME/dots" ]; then
     cd ~/dots
+elif [ -d "$HOME/dot_testing" ]; then
+    cd ~/dot_testing
 fi
 
 machine=$(hostname)

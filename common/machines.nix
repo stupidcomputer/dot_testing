@@ -87,6 +87,15 @@ rec {
       A Lenovo Thinkpad L13 Yoga.
     '';
   };
+  kant = {
+    pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIB2xUbQw9+RCPVw7qCFm4NNCP/MpS2BIArcwMv0KdKOI usr";
+    allowed-ssh-access = [
+      copernicus.pubkey
+      hammurabi.pubkey
+      phone.pubkey
+      theseus.pubkey
+    ];
+  };
   descartes = {
     pubkey = "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIOdic7JAVd69kQ1PjjDNu7ZRghBIj7Uh/ongNAxsddbh usr";
     description = ''

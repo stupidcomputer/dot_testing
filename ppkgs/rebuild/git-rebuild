@@ -1,7 +1,11 @@
 #!/bin/sh
 
-# make sure we're in dot_testing
-cd ~/dot_testing
+# make sure we're in the dotfiles (older machines still use dot_testing)
+if [ -d "$HOME/dots" ]; then
+    cd ~/dots || exit 1
+else
+    cd ~/dot_testing || exit 1
+fi
 
 git pull
 git stash

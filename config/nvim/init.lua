@@ -36,7 +36,11 @@ nnoremap('<leader>rr', function()
 end)
 -- edit init.vim
 nnoremap('<leader>re', function()
-	cmd.edit('~/dot_testing/config/nvim/init.lua')
+	local dots = vim.fn.expand('~/dots')
+	if vim.fn.isdirectory(dots) == 0 then -- not every machine has moved
+		dots = vim.fn.expand('~/dot_testing')
+	end
+	cmd.edit(dots .. '/config/nvim/init.lua')
 end)
 -- openup netrw
 nnoremap('<leader>fs', function()
