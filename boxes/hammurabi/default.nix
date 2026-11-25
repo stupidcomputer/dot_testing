@@ -5,6 +5,7 @@
     ./hardware-configuration.nix
     ../../common/ryande.nix
     ../../common/bootstrap.nix
+    ../../common/tailscale.nix
     ./agenix.nix
     ./sshd.nix
   ];

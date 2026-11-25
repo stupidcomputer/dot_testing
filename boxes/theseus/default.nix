@@ -3,11 +3,13 @@
   imports = [
     ./hardware-configuration.nix
     ../../common/bootstrap.nix
+    ../../common/tailscale.nix
 
     ./bind.nix
     ./calendar-sync.nix
     ./flagman.nix
     ./flasktrack.nix
+    ./headscale.nix
     ./nginx.nix
     ./ssh.nix
     ./sslh.nix
@@ -33,7 +35,7 @@
   services.nginx.virtualHosts = lib.genAttrs [
     "beepboop.systems" "tools.beepboop.systems" "intnet.beepboop.systems"
     "bit.beepboop.systems" "bitwarden.beepboop.systems" "calendars.beepboop.systems"
-    "flagmanager.net" "flasktrack.beepboop.systems"
+    "flagmanager.net" "flasktrack.beepboop.systems" "hs.beepboop.systems"
   ] (_: { http2 = false; });
 
   services.journald.extraConfig = ''

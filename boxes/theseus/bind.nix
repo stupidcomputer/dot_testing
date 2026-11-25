@@ -11,7 +11,7 @@
       recursion yes;
     '';
 
-    cacheNetworks = [ "127.0.0.0/8" "10.100.0.0/24" ];
+    cacheNetworks = [ "127.0.0.0/8" "10.100.0.0/24" "100.64.0.0/10" ];
 
     zones = {
       "intnet.beepboop.systems" = {
